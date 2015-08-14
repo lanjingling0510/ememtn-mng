@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="page-header">管理帐号管理</h1>
+    </div>
+
+    <div class="row">
+        <a class="btn btn-success" ui-sref="admin_register">注册管理帐号</a>
+    </div>
+
+    <div class="row hidden">
+        <div class="col-sm-4">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">状态</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" ng-model="scope.querystring.status" ng-change="scope.fetchAdmin(scope.querystring)">
+                            <option value="enabled">冻结用户</option>
+                            <option value="disabled">非冻结用户</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>用户帐号</th>
+                <th>注册时间</th>
+                <th> 操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat='admin in scope.admins'>
+                <td>{{ admin.username }}</td>
+                <td>{{ admin.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
+                <td>
+                    <button class="btn btn-warning btn-xs hidden" ng-click="scope.disableAdmin(admin)"
+                            ng-show="!admin.status || admin.status === 'enabled'">冻结管理员
+                    </button>
+                    <button class="btn btn-success btn-xs hidden" ng-click="scope.enableAdmin(admin)"
+                            ng-show="admin.status === 'disabled'">解冻管理员
+                    </button>
+                    <button class="btn btn-danger btn-xs" ng-click="scope.removeAdmin(admin, $index)">删除管理员</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

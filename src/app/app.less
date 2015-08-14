@@ -1,0 +1,46 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+@left-sidebar-width: 15%;
+@footer-height: 5%;
+
+html, body {
+    // overflow-y: hidden;
+    background-color: hsl(0, 0%, 94%);
+    min-height: 100%;
+    height: 100%;
+}
+
+.page-header {
+    text-align: center;
+}
+
+aside.menu-bar {
+    float: left;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: @left-sidebar-width;
+    background-color: hsl(222, 16%, 31%);
+    min-height: 100%;
+
+    .panel-body {
+        div {
+            padding: 0.5em;
+
+            .menu-link {
+                background-color: hsla(100, 100%, 99%, 0.85);
+                padding: 0.5em;
+                color: hsla(0, 0%, 0%, 0.8);
+
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+main.hero {
+    margin-left: @left-sidebar-width;
+    height: 100%;
+}

@@ -1,0 +1,11 @@
+node_modules
+*.log
+public/plugin
+upload
+config.json
+pm2.json
+.idea
+src/app/bundle.js
+src/app/bundle.js.map
+src/app/vendor.bundle.js
+src/app/vendor.bundle.js.map

@@ -1,0 +1,128 @@
+<div class="col-md-12">
+  <h1 class="page-header">抽奖轮盘配置 </h1>
+</div>
+
+<div class="col-md-12">
+    <form class="form-horizontal" role="form" ng-submit="scope.setupGame(scope.game)">
+        <h2 class="text-center">抽奖基本信息</h2>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">轮盘名称</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">轮盘介绍</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" ng-model="scope.game.description"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">轮盘开关</label>
+            <div class="col-sm-6">
+                <label class="toggle">
+                    <input type="checkbox" ng-model="scope.game.offswitch">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">抽奖消耗积分</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.cost" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">每日抽奖游客数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.maxPlayer" />
+                <span class="help-block">平均每日参与抽奖的游客数量</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">平均抽奖次数</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.avgPlaying" />
+                <span class="help-block">预计参与抽奖的游客每日平均抽奖次数</span>
+            </div>
+        </div>
+
+        <h2 class="text-center">奖品设置</h2>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">一等奖</label>
+            <div class="col-sm-6">
+                <select class="form-control" ng-model="scope.game.firstClass.prizeTypeId" ng-options="prizeType._id as prizeType.name for prizeType in scope.prizeTypes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            <label class="col-sm-3 control-label">奖励数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.firstClass.prizeAmount" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">每日总出奖数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.firstClass.maxPrize" />
+                <span class="help-block">每日最多产出数量</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">二等奖</label>
+            <div class="col-sm-6">
+                <select class="form-control" ng-model="scope.game.secondClass.prizeTypeId" ng-options="prizeType._id as prizeType.name for prizeType in scope.prizeTypes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            <label class="col-sm-3 control-label">奖励数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.secondClass.prizeAmount" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">每日总出奖数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.secondClass.maxPrize" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">三等奖</label>
+            <div class="col-sm-6">
+                <select class="form-control" ng-model="scope.game.thirdClass.prizeTypeId" ng-options="prizeType._id as prizeType.name for prizeType in scope.prizeTypes">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            <label class="col-sm-3 control-label">奖励数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.thirdClass.prizeAmount" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">每日总出奖数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="scope.game.thirdClass.maxPrize" />
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+    </form>
+</div>

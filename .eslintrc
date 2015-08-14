@@ -1,0 +1,7 @@
+{
+    "extends": "eslint-config-airbnb",
+    "rules": {
+        "indent": [2, 4],                // http://eslint.org/docs/rules/
+        "no-use-before-define": 0,       // http://eslint.org/docs/rules/no-use-before-define
+    }
+}

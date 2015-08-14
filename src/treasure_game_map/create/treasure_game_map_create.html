@@ -1,0 +1,48 @@
+<div class="col-sm-12">
+    <div class="form-group text-center">
+        <a ui-sref="treasure_game_map_list" class="btn btn-info">返回列表</a>
+    </div>
+</div>
+
+<div class="col-sm-12">
+    <form class="form-horizontal" ng-submit="scope.createTreasureGameMap(scope.treasureGameMap)">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+                <input class="form-control" ng-model="scope.treasureGameMap.name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">描述</label>
+            <div class="col-sm-9">
+                <input class="form-control" ng-model="scope.treasureGameMap.description">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">关联地图区域</label>
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="scope.treasureGameMap.areaId" ng-options="area._id as area.name for area in scope.areas">
+                    <option value="" disabled="">-- 选择一个区域 --</option>
+                </select>
+                <span class="help-block">表示可以玩寻宝游戏的区域</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">关联宝藏类型</label>
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="scope.treasureGameMap.treasureTypeId" ng-options="treasureType._id as treasureType.name for treasureType in scope.treasureTypes">
+                    <option value="" disabled="">-- 选择一种宝藏 --</option>
+                </select>
+                <span class="help-block">表示在此区域玩寻宝游戏有机会发现的宝藏</span>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">创建</button>
+            <a ui-sref="treasure_game_map_list" class="btn btn-info">取消</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,17 @@
+<form class="form-horizontal" ng-submit="scope.login(scope.admin)">
+    <div class="form-group">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" ng-model="scope.admin.username" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label"></label>
+        <div class="col-sm-6">
+            <input type="password" class="form-control" ng-model="scope.admin.password" />
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">登陆</button>
+    </div>
+</form>

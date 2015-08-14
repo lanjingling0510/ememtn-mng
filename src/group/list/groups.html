@@ -1,0 +1,28 @@
+<div class="col-md-12">
+    <h1 class="page-header">群组管理</h1>
+</div>
+
+<div class="col-md-12">
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th> logo </th>
+                <th>群名称</th>
+                <th>群主</th>
+                <th>注册时间</th>
+                <th> 操作 </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='group in scope.groups'>
+                <td> <img ng-src="/apis/groups/{{ group._id }}/icon?bearer={{ auth.accessToken }}" alt="群Logo" /> </td>
+                <td>{{ group.name }}</td>
+                <td>{{ group.creator.nickname}}</td>
+                <td>{{ group.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
+                <td>
+                    <button class="btn btn-danger btn-xs" ng-click="scope.disbandGroup(group)">解散群</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{ modal.texts.title }}</h3>
+</div>
+<div class="modal-body">
+    {{ modal.texts.body }}
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="modal.actions.close()">{{ modal.texts.closeButton }}</button>
+    <button class="btn btn-danger" ng-click="modal.actions.dismiss()" ng-hide="modal.texts.noDismiss">{{ modal.texts.dismissButton }}</button>
+</div>

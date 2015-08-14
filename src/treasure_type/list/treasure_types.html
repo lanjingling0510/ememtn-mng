@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="page-header">宝藏类型管理</h1>
+    </div>
+
+    <div class="row">
+        <a class="btn btn-success btn-sm" ui-sref="treasure_types_create">创建分类</a>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <label class="col-sm-3 control-label">状态</label>
+            <div class="col-sm-9">
+                <select class="form-control" ng-model="vm.querystring.status" ng-change="vm.fetchTreasureTypes(vm.querystring, 0)">
+                    <option value="valid">启用状态</option>
+                    <option value="invalid">禁用状态</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <label class="col-sm-3 control-label">名称</label>
+            <div class="col-sm-9">
+                <input class="form-control" ng-model="vm.querystring.name" ng-change="vm.fetchTreasureTypes(vm.querystring)">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th> 图标 </th>
+                    <th>分类名</th>
+                    <th>注册时间</th>
+                    <th> 操作 </th>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <pagination total-items="vm.querystring.total"
+                                    ng-model="vm.querystring.page"
+                                    items-per-page="vm.querystring.pageSize"
+                                    max-size="7"
+                                    class="pagination-sm"
+                                    boundary-links="true"
+                                    direction-links="true"
+                                    ng-change="vm.fetchTreasureTypes(vm.querystring, 0)"
+                        ></pagination>
+                    </td>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                <tr ng-repeat='treasureType in vm.treasureTypes'>
+                    <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="/apis/treasure-types/{{ ::treasureType._id }}/icon?bearer={{ ::auth.accessToken }}&timestamp={{ vm.timestamp }}" alt="图标" /></td>
+                    <td>{{ ::treasureType.name }}</td>
+                    <td>{{ ::treasureType.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
+                    <td>
+                        <a class="btn btn-info btn-xs" ui-sref="treasure-type-edit({ treasureTypeId: treasureType._id })">编辑</a>
+                        <button class="btn btn-warning btn-xs" ng-click="vm.disableCouponCategory(treasureType)" ng-show="treasureType.status === 'valid'">禁用此分类</button>
+                        <button class="btn btn-warning btn-xs" ng-click="vm.enableCouponCategory(treasureType)" ng-show="treasureType.status === 'invalid'">启用此分类</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

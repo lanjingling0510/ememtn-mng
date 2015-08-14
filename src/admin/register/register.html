@@ -1,0 +1,26 @@
+<div class="col-md-12">
+  <h1 class="page-header">注册管理帐号</h1>
+</div>
+
+<div class="col-md-12">
+    <form class="form-horizontal" ng-submit="scope.registerClick(scope.user)">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="scope.user.username">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">密码</label>
+            <div class="col-sm-6">
+                <input type="password" class="form-control" ng-model="scope.user.password">
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary">注册</button>
+            <a class="btn btn-info" ui-sref="admins">返回</a>
+        </div>
+    </form>
+</div>
