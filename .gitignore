@@ -5,7 +5,12 @@ upload
 config.json
 pm2.json
 .idea
-src/app/bundle.js
-src/app/bundle.js.map
-src/app/vendor.bundle.js
-src/app/vendor.bundle.js.map
+dist/bundle.js
+dist/bundle.js.map
+dist/vendor.bundle.js
+dist/vendor.bundle.js.map
+dist/*.woff
+dist/*.woff2
+dist/*.svg
+dist/*.ttf
+dist/*.eot
