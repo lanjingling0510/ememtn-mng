@@ -8,6 +8,7 @@
     "build": "./node_modules/.bin/webpack -p"
   },
   "dependencies": {
+    "amazeui": "^2.4.2",
     "angular": "^1.4.3",
     "angular-resource": "^1.4.3",
     "angular-storage": "0.0.11",
@@ -16,7 +17,8 @@
     "bootstrap": "^3.3.5",
     "d3": "^3.5.6",
     "jquery": "^2.1.4",
-    "ng-file-upload": "^5.0.9"
+    "ng-file-upload": "^5.0.9",
+    "restangular": "^1.5.1"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",

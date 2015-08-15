@@ -1,5 +1,3 @@
-'use strict';
-
 require('./app.less');
 
 const angular = require('angular');
@@ -79,7 +77,7 @@ module.exports = angular.module('sanya', [
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',
     'sanya.feedback_edit',
-    'sanya.roulette_game'
+    'sanya.roulette_game',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
@@ -95,7 +93,7 @@ function moduleRun($rootScope, $location, store) {
         if (store.get('auth.profile') && store.get('auth.accessToken')) {
             $rootScope.auth = {
                 profile: store.get('auth.profile'),
-                accessToken: store.get('auth.accessToken')
+                accessToken: store.get('auth.accessToken'),
             };
             return null;
         }
