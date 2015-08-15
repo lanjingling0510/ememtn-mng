@@ -29,9 +29,8 @@ module.exports = {
             { test: /\.json$/, loader: 'json' },
 
             { test: /\.html$/, exclude: /node_modules/, loader: 'html!html-minify' },
-
-            { test: /\.(ttf|eot|svg|otf)$/, loader: 'file' },
-            { test: /\.woff(2)?$/, loader: 'url?limit=10000&minetype=application/font-woff'},
+            { test: /\.(ttf|eot|svg|otf)(\?v=\d(\.\d){2})?$/, loader: 'file' },
+            { test: /\.woff(2)?(\?v=\d(\.\d){2})?$/, loader: 'url?limit=10000&minetype=application/font-woff'},
         ],
     },
     plugins: [

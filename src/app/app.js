@@ -21,7 +21,9 @@ require('../feedback_category/edit/categories_edit.js');
 require('../feedback/list/feedbacks.js');
 require('../feedback/edit/feedback_edit.js');
 
-require('../broadcast/broadcast.js');
+require('../platform/list/platform.js');
+require('../platform/detail/platform_detail.js');
+
 require('../poi/poi.js');
 require('../beacon/list/beacons.js');
 require('../beacon/create/beacons.js');
@@ -60,7 +62,8 @@ module.exports = angular.module('sanya', [
     'sanya.feedback_categories',
     'sanya.feedback_category',
     'sanya.feedback_categories_edit',
-    'sanya.broadcast',
+    'ememtn.platform',
+    'ememtn.platform.detail',
     'sanya.poi',
     'sanya.beacons',
     'sanya.beacon.create',
@@ -80,9 +83,10 @@ module.exports = angular.module('sanya', [
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
-function moduleConfig($urlRouterProvider, $locationProvider) {
+function moduleConfig($urlRouterProvider, $locationProvider, RestangularProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
+    RestangularProvider.setBaseUrl('/apis');
 }
 
 /* @ngInject */
