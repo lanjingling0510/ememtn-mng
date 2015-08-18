@@ -11,16 +11,18 @@ require('../admin/register/register.js');
 
 require('../tourist/list/tourists.js');
 require('../group/list/groups.js');
+//=====================================================
 
-require('../feedback_category/list/feedback_categories.js');
-require('../feedback_category/create/feedback_category.js');
-require('../feedback_category/edit/categories_edit.js');
-
-require('../feedback/list/feedbacks.js');
-require('../feedback/edit/feedback_edit.js');
+require('../news/list/news.js');
+require('../news/create/news_create.js');
 
 require('../platform/list/platform.js');
 require('../platform/detail/platform_detail.js');
+
+require('../suggest/suggest.js');
+//=====================================================
+require('../feedback/list/feedbacks.js');
+require('../feedback/edit/feedback_edit.js');
 
 require('../poi/poi.js');
 require('../beacon/list/beacons.js');
@@ -31,14 +33,7 @@ require('../area/list/areas_list.js');
 require('../area/create/area_create.js');
 require('../area/edit/area_edit.js');
 
-require('../prize_type/list/prize_types.js');
-require('../prize_type/create/prize_types_create.js');
-require('../prize_type/edit/prize_types_edit.js');
-require('../prize/exchange/prize_exchange.js');
 
-require('../treasure_type/list/treasure_types.js');
-// require('../treasure_type/create/treasure_types_create.js');
-// require('../treasure_type/edit/treasure_type_edit.js');
 
 require('../treasure_game_map/list/treasure_game_map_list.js');
 require('../treasure_game_map/create/treasure_game_map_create.js');
@@ -46,7 +41,7 @@ require('../treasure_game/config/treasury_game.js');
 
 require('../roulette_game/config/roulette_game.js');
 
-module.exports = angular.module('sanya', [
+module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
     'angular-storage',
@@ -57,11 +52,11 @@ module.exports = angular.module('sanya', [
     'sanya.tourists',
     'sanya.groups',
     'sanya.feedbacks',
-    'sanya.feedback_categories',
-    'sanya.feedback_category',
-    'sanya.feedback_categories_edit',
     'ememtn.platform',
     'ememtn.platform.detail',
+    'ememtn.suggest',
+    'ememtn.news',
+    'ememtn.news.create',
     'sanya.poi',
     'sanya.beacons',
     'sanya.beacon.create',
@@ -69,11 +64,6 @@ module.exports = angular.module('sanya', [
     'sanya.areas_list',
     'sanya.area_create',
     'sanya.treasury_game',
-    'sanya.prize_types',
-    'sanya.prize_types_create',
-    'sanya.prize_types_edit',
-    'sanya.prize.exchange',
-    'sanya.treasure_types',
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',
     'sanya.feedback_edit',

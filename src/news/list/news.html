@@ -1,0 +1,72 @@
+<div class="am-g">
+    <ol class="am-breadcrumb ng-scope">
+        <li><a  class="am-text-lg am-icon-star am-active">新闻管理</a></li>
+    </ol>
+    <hr>
+
+    <form class="am-form-inline am-u-sm-12 am-text-right am-fr" role="form">
+        <div class="am-radio am-margin-right-sm">
+            <label for="news-radio3">
+                全部
+                <input id="news-radio3" name="news-radio" type="radio">
+            </label>
+        </div>
+        <div class="am-radio am-margin-right-sm">
+            <label for="news-radio1">
+                显示
+                <input id="news-radio1" name="news-radio" type="radio">
+            </label>
+        </div>
+        <div class="am-radio am-margin-right-sm">
+            <label for="news-radio2">
+                隐藏
+                <input id="news-radio2" name="news-radio" type="radio">
+            </label>
+        </div>
+
+        <a type="submit" class="am-btn am-btn-primary am-radius am-btn-sm am-margin-left" role="button" ui-sref="news-create">添加</a>
+    </form>
+
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover">
+            <thead>
+            <tr>
+                <th class="table-check"><input  ng-checked="scope.allChecked" ng-model="scope.allChecked" ng-change="scope.allCheckedChange()" type="checkbox"></th>
+                <th>ID</th>
+                <th>标题</th>
+                <th>摘要</th>
+                <th>管理人ID</th>
+                <th>图片</th>
+                <th class=" am-hide-sm-only">日期</th>
+                <th class=" am-hide-sm-only">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="news in scope.newsList">
+                <td><input type="checkbox"  ng-checked="news.checked" ng-model="news.checked"></td>
+                <td>{{news._id}}</td>
+                <td>{{news.subject}}</td>
+                <td>{{news.content}}</td>
+                <td>{{news.adminId}}</td>
+                <td>
+                    <a href="javascript:void(0)">浏览</a>
+                </td>
+                <td class="am-hide-sm-only">2012-44-12</td>
+                <td>
+                    <div class="am-btn-toolbar">
+                        <button
+                                class="am-btn am-text-danger am-btn-default am-btn-xs" style="background:#fff"></i> 正在显示</button>
+                        <button class="am-btn am-text-warning am-btn-default am-btn-xs" style="background:#fff">顶</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8"><a href="javascript:void(0)" class="delete-btn am-btn am-btn-danger am-btn-sm"><i
+                        class="am-icon-trash-o"></i> 删除</a></td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
