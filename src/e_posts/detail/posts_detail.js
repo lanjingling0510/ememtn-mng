@@ -1,9 +1,9 @@
 "use strict";
 
-require('./platform_detail.less');
+require('./posts_detail.less');
 let angular = require('angular');
 
-module.exports = angular.module('ememtn.platform.detail', [
+module.exports = angular.module('ememtn.posts.detail', [
     'restangular',
 ])
     .config(moduleConfig)
@@ -11,9 +11,9 @@ module.exports = angular.module('ememtn.platform.detail', [
 
 /* @Inject*/
 function moduleConfig($stateProvider) {
-    $stateProvider.state('platform_detail', {
-        url: '/platform/:_id',
-        template: require('./platform_detail.html'),
+    $stateProvider.state('posts_detail', {
+        url: '/posts/:_id',
+        template: require('./posts_detail.html'),
         controller: PlatformDetailController,
         controllerAs: 'scope',
     });

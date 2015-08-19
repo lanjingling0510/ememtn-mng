@@ -3,7 +3,7 @@
 require('../../common/service.js');
 let angular = require('angular');
 
-module.exports = angular.module('ememtn.platform', [
+module.exports = angular.module('ememtn.posts', [
     'restangular',
     'ui.router',
     'sanya.common.services',
@@ -12,9 +12,9 @@ module.exports = angular.module('ememtn.platform', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('platform', {
-        url: '/platform',
-        template: require('./platform.html'),
+    $stateProvider.state('posts', {
+        url: '/posts',
+        template: require('./posts.html'),
         controller: 'PlatformController as scope',
     });
 }
