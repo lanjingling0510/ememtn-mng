@@ -3,7 +3,8 @@ let angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibitionAct', [
     'ui.router',
-    'restangular'
+    'restangular',
+    'common.dropDown.directive',
 ])
     .config(moduleConfig)
     .controller('ExhibitionActController', ExhibitionActController);

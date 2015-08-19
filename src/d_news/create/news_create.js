@@ -47,7 +47,7 @@ function NewsCreateController(AlertService, UploadService) {
     }
 
     function submitNews() {
-        UploadService('/newses', vm.files, 'pictures', vm.fields)
+        UploadService('/apis/newses', vm.files, 'pictures', vm.fields)
             .then(function () {
                 vm.fields = {
                     subject: '',

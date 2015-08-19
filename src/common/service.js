@@ -17,3 +17,4 @@ require('./upload.service.js');
 
 require('./modal/modal.service.js');
 require('./slideBox/slideBox.directive.js');
+require('./dropDown/dropDown.directive.js');
