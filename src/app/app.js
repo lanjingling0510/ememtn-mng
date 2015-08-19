@@ -1,7 +1,8 @@
 require('./app.less');
 
 const angular = require('angular');
-
+require('../../node_modules/amazeui/js/ui.dropdown.js');
+require('../../node_modules/amazeui/js/ui.collapse.js');
 require('../common/service.js');
 require('../login/login.js');
 require('../home/home.js');
@@ -12,14 +13,15 @@ require('../admin/register/register.js');
 require('../tourist/list/tourists.js');
 require('../group/list/groups.js');
 //=====================================================
+require('../a_sponsor/sponsor.js');
+require('../a_stadium/intro/stadium_intro.js');
+require('../b_exhibitionAct/list/exhibitionAct_list.js');
+require('../d_news/list/news.js');
+require('../d_news/create/news_create.js');
 
-require('../news/list/news.js');
-require('../news/create/news_create.js');
-
-require('../platform/list/platform.js');
-require('../platform/detail/platform_detail.js');
-
-require('../suggest/suggest.js');
+require('../e_posts/list/posts.js');
+require('../e_posts/detail/posts_detail.js');
+require('../e_suggest/suggest.js');
 //=====================================================
 require('../feedback/list/feedbacks.js');
 require('../feedback/edit/feedback_edit.js');
@@ -52,8 +54,11 @@ module.exports = angular.module('ememtn', [
     'sanya.tourists',
     'sanya.groups',
     'sanya.feedbacks',
-    'ememtn.platform',
-    'ememtn.platform.detail',
+    'ememtn.sponsor',
+    'ememtn.stadium',
+    'ememtn.exhibitionAct',
+    'ememtn.posts',
+    'ememtn.posts.detail',
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',

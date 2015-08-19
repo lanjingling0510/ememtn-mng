@@ -4,6 +4,8 @@ let angular = require('angular');
 module.exports = angular.module('ememtn.news', [
     'ui.router',
     'restangular',
+    'common.modal.service',
+    'common.slideBox.directive'
 ])
     .config(moduleConfig)
     .controller('NewsController', NewsController);
@@ -18,7 +20,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function NewsController(Restangular, AlertService, $scope) {
+function NewsController(Restangular, AlertService, $scope, commonModal) {
 
     let list = [
         {
@@ -77,6 +79,7 @@ function NewsController(Restangular, AlertService, $scope) {
     vm.checkList = [];
     vm.allCheckedChange = allCheckedChange;
 
+
     initController();
 
 
@@ -89,6 +92,21 @@ function NewsController(Restangular, AlertService, $scope) {
         }).catch(function (error) {
             AlertService.warning(error.data);
         });
+
+        commonModal.fromTemplateUrl("./modal_news_list.html", {
+            scope: $scope
+        })
+            .then(function (modal) {
+                vm.modal = modal;
+            });
+
+        vm.closeModal = function () {
+            vm.modal.hide();
+        };
+
+        vm.showModal = function () {
+            vm.modal.show();
+        };
     }
 
     /**

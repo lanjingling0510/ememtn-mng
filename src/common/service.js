@@ -14,3 +14,6 @@ require('./polygon_edit.service.js');
 require('./polygon.service.js');
 require('./map.service.js');
 require('./upload.service.js');
+
+require('./modal/modal.service.js');
+require('./slideBox/slideBox.directive.js');
