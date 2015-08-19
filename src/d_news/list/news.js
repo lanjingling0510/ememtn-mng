@@ -1,5 +1,6 @@
 "use strict";
 let angular = require('angular');
+let template_news = require('./modal.html');
 
 module.exports = angular.module('ememtn.news', [
     'ui.router',
@@ -93,7 +94,7 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
             AlertService.warning(error.data);
         });
 
-        commonModal.fromTemplateUrl("./modal_news_list.html", {
+        commonModal.fromTemplateUrl(template_news, {
             scope: $scope
         })
             .then(function (modal) {

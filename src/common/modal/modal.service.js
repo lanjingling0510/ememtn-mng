@@ -14,7 +14,7 @@ module.exports = angular.module("common.modal.service", [])
     .factory("commonModal", commonModal);
 
 /* @ngInject*/
-function commonModal($q, $document, $compile, $rootScope) {
+function commonModal($q, $document, $compile, $rootScope, $http) {
     return {
         fromTemplateUrl: fromTemplateUrl
     };
@@ -41,7 +41,7 @@ function commonModal($q, $document, $compile, $rootScope) {
     function createModal(url, options, defer) {
         // Create a new scope for the modal
         var scope = options.scope && options.scope.$new() || $rootScope.$new(true);
-        var element = $compile(require(url))(scope);
+        var element = $compile(url)(scope);
         var modal = new Modal(element, scope, $document);
         defer.resolve(modal);
     }

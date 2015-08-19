@@ -22,7 +22,7 @@ function dropDownDirective() {
     return directive;
 
     function link($scope, $ele, $attrs) {
-        $ele.children()[0].addClass($attrs.toggle);
-        $ele.dropdown({});
+        $ele.children()[0].classList.add($attrs.toggle);
+        $($ele[0]).dropdown({});
     }
 }

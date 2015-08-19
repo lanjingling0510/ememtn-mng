@@ -1,45 +1,44 @@
-<drop-down title="下拉框" toggle="am-btn-success">
-        <h2>I am what I am</h2>
-        <p>
-            多么高兴 在琉璃屋中快乐生活
-            对世界说 甚么是光明和磊落
-            我就是我 是颜色不一样的烟火
-        </p>
-</drop-down>
+<style>
+    .am-panel ul{
+        display: flex;
+        flex-flow: row nowrap;
+    }
+    .am-panel ul li{
+        list-style-type: none;
+        flex:4;
+    }
+    .am-panel ul li:last-child{
+        flex:1;
+    }
+</style>
+<div class="am-container exhibitionAct-list">
+    <hr/>
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">
+            <input type="checkbox"/>
+            <drop-down title="操作" toggle="am-btn-danger" class="am-margin-left">
+                <button class="am-btn am-btn-block">显示</button>
+                <button class="am-btn am-btn-block">隐藏</button>
+                <button class="am-btn am-btn-block">顶</button>
+                <button class="am-btn am-btn-block">删除</button>
+            </drop-down>
+            <button class="am-btn am-btn-danger am-fr">添加活动</button>
+        </div>
+    </div>
 
-<div class="am-panel-group" id="accordion">
-    <div class="am-panel am-panel-default">
-        <div class="am-panel-hd">
-            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
-                ...
-            </h4>
-        </div>
-        <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
-            <div class="am-panel-bd">
-                ...
+    <div class="am-panel-group" id="accordion">
+        <div class="am-panel am-panel-default">
+            <ul class="am-panel-hd">
+                <li><input type="checkbox"/></li>
+                <li>展会活动名字</li>
+                <li>展会活动摘要</li>
+                <li>2012-22-22</li>
+                <li>正在推送</li>
+                <li class="am-icon-sort-desc" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}"></li>
+            </ul>
+            <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
             </div>
         </div>
-    </div>
-    <div class="am-panel am-panel-default">
-        <div class="am-panel-hd">
-            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
-                ...
-            </h4>
-        </div>
-        <div id="do-not-say-2" class="am-panel-collapse am-collapse">
-            <div class="am-panel-bd">
-                ...
-            </div>
-        </div>
-    </div>
-    <div class="am-panel am-panel-default">
-        <div class="am-panel-hd">
-            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">...</h4>
-        </div>
-        <div id="do-not-say-3" class="am-panel-collapse am-collapse">
-            <div class="am-panel-bd">
-                ...
-            </div>
-        </div>
+
     </div>
 </div>
