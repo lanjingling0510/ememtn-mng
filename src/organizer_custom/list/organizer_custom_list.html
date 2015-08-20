@@ -1,0 +1,90 @@
+<!--主办方介绍 >> 主办商品列表-->
+
+<div class="am-container stadium-list">
+
+    <ol class="am-breadcrumb">
+        <li><a class="am-icon-star" ui-sref="stadium">主办方介绍</a></li>
+        <li class="  am-active">主办商品列表</li>
+    </ol>
+    <hr>
+
+
+    <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">版块名称</label>
+
+            <div class="am-u-sm-7">
+                <input type="text" placeholder="主办方商品列表">
+            </div>
+            <div class="am-u-sm-3">
+                <a class="am-btn am-btn-block am-btn-danger" ui-sref="stadium_list">保存名称</a>
+            </div>
+        </div>
+    </form>
+
+    <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+            <div class="am-u-sm-2 text-right">
+                <drop-down title="操作" toggle="am-btn-danger">
+                    <button class="am-btn am-btn-block">显示</button>
+                    <button class="am-btn am-btn-block">隐藏</button>
+                    <button class="am-btn am-btn-block">顶</button>
+                    <button class="am-btn am-btn-block">删除</button>
+                </drop-down>
+            </div>
+
+            <div class="am-u-sm-5">
+                <input type="text" placeholder="">
+            </div>
+            <div class="am-u-sm-2 am-u-end">
+                <a class="am-btn am-btn-block am-btn-secondary" ui-sref="stadium_list">添加</a>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover text-center">
+                <thead>
+                <tr>
+                    <td class="table-check"><input  ng-checked="scope.allChecked" ng-model="scope.allChecked" ng-change="scope.allCheckedChange()" type="checkbox"></td>
+                    <td><button class="am-btn am-btn-secondary am-btn-block">名称</button></td>
+                    <td><button class="am-btn am-btn-secondary am-btn-block">文字描述摘要</button></td>
+                    <td>
+                        <drop-down title="全部状态" toggle="am-btn-secondary">
+                            <button class="am-btn am-btn-block">正在显示</button>
+                            <button class="am-btn am-btn-block">正在隐藏</button>
+                        </drop-down>
+                    </td>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td><a ui-sref="stadium_detail">展品名称</a></td>
+                    <td>文字描述摘要</td>
+                    <td>正在显示</td>
+                    <td><button class="am-btn am-btn-danger am-btn-xs">顶</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>展品名称</td>
+                    <td>文字描述摘要</td>
+                    <td>正在显示</td>
+                    <td><button class="am-btn am-btn-danger am-btn-xs">顶</button></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>展品名称</td>
+                    <td>文字描述摘要</td>
+                    <td>正在显示</td>
+                    <td><button class="am-btn am-btn-danger am-btn-xs">顶</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

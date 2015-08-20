@@ -1,7 +1,7 @@
-<div class="am-container news">
+<div class="am-container information">
 
     <ol class="am-breadcrumb">
-        <li><a class="am-icon-star am-active">新闻管理</a></li>
+        <li><a class="am-icon-star am-active">展会资讯管理</a></li>
     </ol>
     <hr>
 
@@ -13,25 +13,27 @@
                     <td></td>
                     <td>
                         <drop-down title="操作" toggle="am-btn-danger">
-                            <button class="am-btn am-btn-block">开始推送</button>
-                            <button class="am-btn am-btn-block">停止推送</button>
+                            <button class="am-btn am-btn-block">顶</button>
+                            <button class="am-btn am-btn-block">显示</button>
+                            <button class="am-btn am-btn-block">隐藏</button>
+                            <button class="am-btn am-btn-block">移动到新闻</button>
                             <button class="am-btn am-btn-block">删除</button>
                         </drop-down>
                     </td>
                     <td></td>
                     <td></td>
                     <td>
-                        <a class="am-btn am-btn-secondary am-btn-block" ui-sref="news-create">添加新闻</a>
+                        <a class="am-btn am-btn-secondary am-btn-block" ui-sref="news-create">添加资讯</a>
                     </td>
                 </tr>
                 <tr>
                     <td class="table-check"><input ng-checked="scope.allChecked" ng-model="scope.allChecked"
                                                    ng-change="scope.allCheckedChange()" type="checkbox"></td>
                     <td>
-                        <button class="am-btn am-btn-secondary am-btn-block">新闻标题</button>
+                        <button class="am-btn am-btn-secondary am-btn-block">资讯标题</button>
                     </td>
                     <td>
-                        <button class="am-btn am-btn-secondary am-btn-block">新闻摘要</button>
+                        <button class="am-btn am-btn-secondary am-btn-block">资讯摘要</button>
                     </td>
                     <td>
                         <button class="am-btn am-btn-secondary am-btn-block">编辑时间</button>

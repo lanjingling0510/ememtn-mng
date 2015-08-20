@@ -1,12 +1,11 @@
-"use strict";
-let angular = require('angular');
-let template_news = require('./modal.html');
+const angular = require('angular');
+const templateNews = require('./modal.html');
 
 module.exports = angular.module('ememtn.news', [
     'ui.router',
     'restangular',
     'common.modal.service',
-    'common.slideBox.directive'
+    'common.slideBox.directive',
 ])
     .config(moduleConfig)
     .controller('NewsController', NewsController);
@@ -22,8 +21,7 @@ function moduleConfig($stateProvider) {
 
 /* @ngInject */
 function NewsController(Restangular, AlertService, $scope, commonModal) {
-
-    let list = [
+    const list = [
         {
             _id: '1', // 新闻Id
             adminId: 'news userId', // 发布新闻的管理员Id
@@ -38,7 +36,7 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
             sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
             stickedAt: 'ytbuhnim', // 置顶时间
             createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm' // 新闻更新时间
+            updatedAt: 'tygbhunjm', // 新闻更新时间
         },
         {
             _id: '2', // 新闻Id
@@ -54,9 +52,8 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
             sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
             stickedAt: 'ytbuhnim', // 置顶时间
             createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm' // 新闻更新时间
-        },
-        {
+            updatedAt: 'tygbhunjm', // 新闻更新时间
+        }, {
             _id: '3', // 新闻Id
             adminId: 'news userId', // 发布新闻的管理员Id
             subject: 'news subject', // 新闻主题
@@ -70,12 +67,12 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
             sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
             stickedAt: 'ytbuhnim', // 置顶时间
             createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm' // 新闻更新时间
-        }
+            updatedAt: 'tygbhunjm', // 新闻更新时间
+        },
     ];
 
 
-    let vm = this;
+    const vm = this;
     vm.allChecked = false;
     vm.checkList = [];
     vm.allCheckedChange = allCheckedChange;
@@ -85,17 +82,17 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
 
 
     function initController() {
-        Restangular.all('newses').getList().then(function (response) {
+        Restangular.all('newses').getList().then(() => {
             vm.newsList = list;
-            vm.newsList.forEach(function (value) {
+            vm.newsList.forEach((value) => {
                 value.checked = false;
             });
-        }).catch(function (error) {
+        }).catch((error) => {
             AlertService.warning(error.data);
         });
 
-        commonModal.fromTemplateUrl(template_news, {
-            scope: $scope
+        commonModal.fromTemplateUrl(templateNews, {
+            scope: $scope,
         })
             .then(function (modal) {
                 vm.modal = modal;
@@ -130,13 +127,13 @@ function NewsController(Restangular, AlertService, $scope, commonModal) {
      *  @ngdoc   $watch
      *  @desc   改变单个复选框的监听程序
      */
-    $scope.$watch('scope.newsList', function ($new, $old) {
+    $scope.$watch('scope.newsList', function (newVal) {
         let arr;
-        if ($new !== $old) {
+        if (!!newVal) {
             arr = vm.newsList.filter(function (item) {
                 return item.checked;
             });
-            vm.allChecked = arr.length === 0 ? false : true;
+            vm.allChecked = !!arr.length;
         }
     }, true);
 }

@@ -1,0 +1,17 @@
+.am-panel-hd ul{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin:0;
+  user-select:none;
+}
+.am-panel-hd ul li{
+  flex:4;
+}
+.am-panel-hd ul li:last-child{
+  flex:1;
+  text-align:center;
+  &:before{
+    transform: translate(0px, -5px);
+  }
+}

@@ -31,7 +31,11 @@
                 <ul class="am-avg-sm-6 am-thumbnails">
                     <li class="img-wrap" ng-repeat="file in scope.files">
                         <span class="am-icon-times img-close" ng-click="scope.deleteFile(file)"></span>
-                        <img class="am-thumbnail"  ngf-src="file" />
+                        <div class="img-content">
+                            <div class="img am-vertical-align text-center">
+                                <img class="am-vertical-align-middle"  ngf-src="file" />
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

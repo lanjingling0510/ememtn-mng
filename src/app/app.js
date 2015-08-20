@@ -16,8 +16,11 @@ require('../group/list/groups.js');
 require('../organizer/setting/organizer_setting.js');
 require('../exhibition_hall/setting/exhibition_hall_setting.js');
 require('../b_exhibitionAct/list/exhibitionAct_list.js');
+require('../b_exhibitionAct/create/exhibitionAct_create.js');
+require('../b_exhibitionDist/exhibitionDist.js');
 require('../d_news/list/news.js');
 require('../d_news/create/news_create.js');
+require('../d_information/list/information_list.js');
 
 require('../e_posts/list/posts.js');
 require('../e_posts/detail/posts_detail.js');
@@ -60,6 +63,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.organizer.setting',
     'ememtn.exhibition-hall.setting',
     'ememtn.exhibitionAct',
+    'ememtn.exhibitionAct.create',
+    'ememtn.exhibitionDist',
     'ememtn.posts',
     'ememtn.posts.detail',
     'ememtn.suggest',
