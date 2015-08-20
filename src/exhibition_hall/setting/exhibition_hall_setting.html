@@ -1,0 +1,40 @@
+<div class="am-container exhibition-hall-setting" >
+    <div class="am-g am-margin-bottom">
+        <div class="am-u-sm-2">
+           <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '1F' })">1楼</a>
+           <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '2F' })">2楼</a>
+           <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '3F' })">3楼</a>
+           <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '4F' })">4楼</a>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <form class="am-form">
+                <div class="am-form-group">
+                    <label>正文内容</label>
+                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.sponsor.content"></textarea>
+                </div>
+
+                <div class="am-form-group">
+                    <label>图片</label>
+                    <div class="btn btn-primary am-margin-horizontal" ngf-change="vm.uploadChange($file)" ngf-select ng-model="vm.pictureFiles" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                    <small class="text-danger">仅一张</small>
+                </div>
+
+                <div class="am-form-group" ng-show="vm.pictureFiles.length > 0">
+                    <span class="am-icon-times img-close" ng-click="vm.pictureFiles.length = 0"></span>
+                    <img class="am-thumbnail"  ngf-src="vm.pictureFiles[0]" />
+                    <input ng-model="vm.pictureDescription" placeholder="图片描述信息">
+                </div>
+
+                <div class="am-form-group am-text-right">
+                    <button type="button" class="am-btn am-btn-primary" ng-click="vm.submitNews()">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>

@@ -17,9 +17,9 @@
         <![endif]-->
 
         <aside class="col-sm-2 menu-bar">
-          <div class="user">
+          <!-- <div class="user">
             登录用户： {{ auth.profile.username }}
-          </div>
+          </div> -->
 
           <accordion close-others="true">
               <div class="panel panel-default">
@@ -31,8 +31,8 @@
               </div>
 
               <accordion-group heading="a场馆介绍">
-                <div><a class="menu-link" ui-sref="sponsor">场馆介绍</a></div>
-                <div><a class="menu-link" ui-sref="stadium">主办方介绍</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall-setting({ floor: '1F' })">场馆介绍</a></div>
+                <div><a class="menu-link" ui-sref="organizer-setting">主办方介绍</a></div>
               </accordion-group>
 
               <accordion-group heading="b展会指南管理">

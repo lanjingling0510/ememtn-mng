@@ -13,8 +13,8 @@ require('../admin/register/register.js');
 require('../tourist/list/tourists.js');
 require('../group/list/groups.js');
 //=====================================================
-require('../a_sponsor/sponsor.js');
-require('../a_stadium/intro/stadium_intro.js');
+require('../organizer/setting/organizer_setting.js');
+require('../exhibition_hall/setting/exhibition_hall_setting.js');
 require('../b_exhibitionAct/list/exhibitionAct_list.js');
 require('../d_news/list/news.js');
 require('../d_news/create/news_create.js');
@@ -32,7 +32,7 @@ require('../treasure_game/config/treasury_game.js');
 
 require('../roulette_game/config/roulette_game.js');
 
-require('../exhibition_hall/exhibition_hall.js');
+require('../exhibition_hall/map/exhibition_hall_map.js');
 
 require('../beacon/list/beacon_list.js');
 require('../beacon/create/beacon_create.js');
@@ -57,15 +57,15 @@ module.exports = angular.module('ememtn', [
     'sanya.tourists',
     'sanya.groups',
     'sanya.feedbacks',
-    'ememtn.sponsor',
-    'ememtn.stadium',
+    'ememtn.organizer.setting',
+    'ememtn.exhibition-hall.setting',
     'ememtn.exhibitionAct',
     'ememtn.posts',
     'ememtn.posts.detail',
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',
-    'ememtn.exhibition-hall',
+    'ememtn.exhibition-hall.map',
     'ememtn.beacon.list',
     'ememtn.beacon.create',
     'ememtn.beacon.edit',

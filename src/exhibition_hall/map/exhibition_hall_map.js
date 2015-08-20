@@ -1,25 +1,25 @@
-require('./exhibition_hall.less');
-require('../common/service.js');
-require('./exhibition_hall.service.js');
+require('./exhibition_hall_map.less');
+require('../../common/service.js');
+require('./exhibition_hall_map.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-hall', [
+module.exports = angular.module('ememtn.exhibition-hall.map', [
         'ui.router',
         'sanya.common.services',
     ]).config(moduleConfig)
-    .controller('POIController', POIController);
+    .controller('ExhibitionHallMapController', ExhibitionHallMapController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall', {
-        url: '/exhibition-hall/:floor',
-        template: require('./exhibition_hall.html'),
-        controller: 'POIController as vm',
+    $stateProvider.state('exhibition-hall-map', {
+        url: '/exhibition-hall/:floor/map',
+        template: require('./exhibition_hall_map.html'),
+        controller: 'ExhibitionHallMapController as vm',
     });
 }
 
-/*@ngInject*/
-function POIController(Restangular, AlertService) {
+/* @ngInject */
+function ExhibitionHallMapController(Restangular, AlertService) {
     const vm = this;
     vm.fetchMapProfiles = fetchMapProfiles;
     vm.fetchMap = fetchMap;
