@@ -2,7 +2,6 @@
 /* global AMap */
 
 require('../../common/service.js');
-require('../../area/list/areas_list.service.js');
 require('../../treasure_type/list/treasure_types.service.js');
 require('./treasure_game_map_create.service.js');
 let angular = require('angular');
@@ -10,9 +9,7 @@ let angular = require('angular');
 module.exports = angular.module('sanya.treasure_game_map_create', [
     'ui.router',
     'sanya.common.services',
-    'sanya.areas_list.service',
     'sanya.treasure_types.service',
-    'sanya.treasure_game_map_create.service'
 ]).config(moduleConfig)
     .controller('TreasureGameMapCreateController', TreasureGameMapCreateController);
 
