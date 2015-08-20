@@ -3,7 +3,7 @@ let angular = require('angular');
 
 module.exports = angular.module('ememtn.sponsor', [
     'ui.router',
-    'restangular'
+    'restangular',
 ])
     .config(moduleConfig)
     .controller('SponsorController', SponsorController);

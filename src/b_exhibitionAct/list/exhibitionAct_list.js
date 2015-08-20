@@ -5,6 +5,7 @@ module.exports = angular.module('ememtn.exhibitionAct', [
     'ui.router',
     'restangular',
     'common.dropDown.directive',
+    'common.collapse.directive',
 ])
     .config(moduleConfig)
     .controller('ExhibitionActController', ExhibitionActController);

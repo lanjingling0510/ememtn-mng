@@ -15,9 +15,14 @@ require('../group/list/groups.js');
 //=====================================================
 require('../a_sponsor/sponsor.js');
 require('../a_stadium/intro/stadium_intro.js');
+require('../a_stadium/list/stadium_list.js');
+require('../a_stadium/detail/stadium_detail.js');
 require('../b_exhibitionAct/list/exhibitionAct_list.js');
+require('../b_exhibitionAct/create/exhibitionAct_create.js');
+require('../b_exhibitionDist/exhibitionDist.js');
 require('../d_news/list/news.js');
 require('../d_news/create/news_create.js');
+require('../d_information/list/information_list.js');
 
 require('../e_posts/list/posts.js');
 require('../e_posts/detail/posts_detail.js');
@@ -56,12 +61,17 @@ module.exports = angular.module('ememtn', [
     'sanya.feedbacks',
     'ememtn.sponsor',
     'ememtn.stadium',
+    'ememtn.stadium.list',
+    'ememtn.stadium.detail',
     'ememtn.exhibitionAct',
+    'ememtn.exhibitionAct.create',
+    'ememtn.exhibitionDist',
     'ememtn.posts',
     'ememtn.posts.detail',
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',
+    'ememtn.information',
     'sanya.poi',
     'sanya.beacons',
     'sanya.beacon.create',

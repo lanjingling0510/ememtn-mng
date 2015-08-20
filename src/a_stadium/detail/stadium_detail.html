@@ -1,0 +1,57 @@
+ <div class="am-container stadium-detail">
+     <div class="am-g" >
+         <ol class="am-breadcrumb" class="am-text-lg">
+             <li><a class="am-icon-star" ui-sref="stadium">主办方介绍</a></li>
+             <li><a  ui-sref="stadium_list">主办商品列表</a></li>
+             <li class="am-active">商品详情</li>
+         </ol>
+         <hr>
+
+         <div class="am-u-sm-12 am-margin-bottom">
+             <div class="am-form-inline" role="form">
+                 <div class="am-form-group">
+                     <label class="am-form-label">名字</label>
+                     <input type="text" ng-model="scope.fields.subject" class="am-form-field" placeholder="请输入标题">
+                 </div>
+             </div>
+         </div>
+
+         <div class="am-u-sm-12">
+             <form class="am-form">
+                 <div class="am-form-group">
+                     <label>正文内容</label>
+                     <textarea placeholder="输入文字介绍" rows="12" ng-model="scope.fields.content"></textarea>
+                 </div>
+
+                 <div class="am-form-group">
+                     <label>缩略图</label>
+                     <div class="ion-thumbnail"> </div>
+                 </div>
+
+                 <div class="am-form-group">
+                     <label>详情图</label>
+                     <div class="btn btn-primary am-margin-horizontal" ngf-change="scope.uploadChange($file)" ngf-select ng-model="scope.file" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                     <small class="text-danger">最多添加6张</small>
+                 </div>
+
+
+                 <div class="am-form-group">
+                     <ul class="am-avg-sm-6 am-thumbnails">
+                         <li class="img-wrap" ng-repeat="file in scope.files">
+                             <span class="am-icon-times img-close" ng-click="scope.deleteFile(file)"></span>
+                             <img class="am-thumbnail"  ngf-src="file" />
+                         </li>
+                     </ul>
+                 </div>
+             </form>
+         </div>
+     </div>
+     <div class="am-g">
+         <div class="am-u-sm-2">
+             <button type="button" class="am-btn am-btn-danger am-btn-xl am-btn-block" ng-click="scope.submitNews()">保存</button>
+         </div>
+     </div>
+ </div>
+
+
+
