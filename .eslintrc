@@ -3,5 +3,6 @@
     "rules": {
         "indent": [2, 4],                // http://eslint.org/docs/rules/
         "no-use-before-define": 0,       // http://eslint.org/docs/rules/no-use-before-define
+        "block-scoped-var": 0,           // http://eslint.org/docs/rules/block-scoped-var
     }
 }

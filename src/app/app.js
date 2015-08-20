@@ -26,22 +26,25 @@ require('../e_suggest/suggest.js');
 require('../feedback/list/feedbacks.js');
 require('../feedback/edit/feedback_edit.js');
 
-require('../poi/poi.js');
-require('../beacon/list/beacons.js');
-require('../beacon/create/beacons.js');
-require('../beacon/edit/beacons.js');
-
-require('../area/list/areas_list.js');
-require('../area/create/area_create.js');
-require('../area/edit/area_edit.js');
-
-
-
 require('../treasure_game_map/list/treasure_game_map_list.js');
 require('../treasure_game_map/create/treasure_game_map_create.js');
 require('../treasure_game/config/treasury_game.js');
 
 require('../roulette_game/config/roulette_game.js');
+
+require('../exhibition_hall/exhibition_hall.js');
+
+require('../beacon/list/beacon_list.js');
+require('../beacon/create/beacon_create.js');
+require('../beacon/edit/beacon_edit.js');
+
+require('../area/list/area_list.js');
+require('../area/create/area_create.js');
+require('../area/edit/area_edit.js');
+
+require('../infrastructure/list/infrastructure_list.js');
+require('../infrastructure/create/infrastructure_create.js');
+require('../infrastructure/edit/infrastructure_edit.js');
 
 module.exports = angular.module('ememtn', [
     'ui.router',
@@ -62,12 +65,12 @@ module.exports = angular.module('ememtn', [
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',
-    'sanya.poi',
-    'sanya.beacons',
-    'sanya.beacon.create',
-    'sanya.beacon.edit',
-    'sanya.areas_list',
-    'sanya.area_create',
+    'ememtn.exhibition-hall',
+    'ememtn.beacon.list',
+    'ememtn.beacon.create',
+    'ememtn.beacon.edit',
+    'ememtn.area.list',
+    'ememtn.area.create',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',
