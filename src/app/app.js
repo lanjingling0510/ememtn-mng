@@ -88,6 +88,7 @@ function moduleConfig($urlRouterProvider, $locationProvider, RestangularProvider
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
     RestangularProvider.setBaseUrl('/apis');
+    RestangularProvider.setRestangularFields({ id: "_id" });
 }
 
 /* @ngInject */

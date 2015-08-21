@@ -10,26 +10,30 @@
 
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form">
+            <form class="am-form" ng-submit="vm.savePavilion(vm.pavilion)">
                 <div class="am-form-group">
                     <label>正文内容</label>
-                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.sponsor.content"></textarea>
+                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.pavilion.description"></textarea>
                 </div>
 
                 <div class="am-form-group">
                     <label>图片</label>
-                    <div class="btn btn-primary am-margin-horizontal" ngf-change="vm.uploadChange($file)" ngf-select ng-model="vm.pictureFiles" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                    <div class="btn btn-primary am-margin-horizontal"
+                        ngf-change="vm.uploadPicture($file)"
+                        ngf-select ng-model="vm.pictureFile"
+                        ngf-multiple="false" ngf-accept="'image/*'"
+                        accept="image/*" ng-disabled="{{ vm.pavilion.pictures >= 0 }}"> 添加 </div>
                     <small class="text-danger">仅一张</small>
                 </div>
 
-                <div class="am-form-group" ng-show="vm.pictureFiles.length > 0">
-                    <span class="am-icon-times img-close" ng-click="vm.pictureFiles.length = 0"></span>
-                    <img class="am-thumbnail"  ngf-src="vm.pictureFiles[0]" />
-                    <input ng-model="vm.pictureDescription" placeholder="图片描述信息">
+                <div class="am-form-group" ng-repeat="picture in vm.pavilion.pictures">
+                    <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
+                    <img class="am-thumbnail"  ngf-src="vm.pictureFile || {{ picture.fileUrl }}" />
+                    <input ng-model="picture.description">
                 </div>
 
                 <div class="am-form-group am-text-right">
-                    <button type="button" class="am-btn am-btn-primary" ng-click="vm.submitNews()">提交</button>
+                    <button type="submit" class="am-btn am-btn-primary">提交</button>
                 </div>
             </form>
         </div>
