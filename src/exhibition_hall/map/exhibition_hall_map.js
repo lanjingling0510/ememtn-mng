@@ -6,6 +6,7 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.exhibition-hall.map', [
         'ui.router',
         'sanya.common.services',
+        'ememtn.exhibition_hall.map.service',
     ]).config(moduleConfig)
     .controller('ExhibitionHallMapController', ExhibitionHallMapController);
 
@@ -15,198 +16,96 @@ function moduleConfig($stateProvider) {
         url: '/exhibition-hall/:floor/map',
         template: require('./exhibition_hall_map.html'),
         controller: 'ExhibitionHallMapController as vm',
+        resolve: {
+            maps: fetchMapProfiles,
+        },
     });
 }
 
 /* @ngInject */
-function ExhibitionHallMapController(Restangular, AlertService) {
+function fetchMapProfiles(MapService) {
+    return MapService.MapProfile.query().$promise;
+}
+
+function getProfileId(map) {
+    return map.JCObjId + ':' + map.JCObjMask;
+}
+
+// function destructureProfileId(profileId) {
+//     const [JCObjId, JCObjMask] = profileId.split(':');
+//     return {
+//         JCObjId: JCObjId,
+//         JCObjMask: JCObjMask,
+//     };
+// }
+
+/* @ngInject */
+function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
     const vm = this;
-    vm.fetchMapProfiles = fetchMapProfiles;
+    vm.maps = maps;
+    vm.map = maps[0];
+    fetchMap(vm.map);
+
     vm.fetchMap = fetchMap;
-    vm.saveProfile = saveProfile;
-    vm.deleteProfile = deleteProfile;
 
     vm.fetchLayers = fetchLayers;
     vm.fetchLayer = fetchLayer;
-    vm.createLayer = createLayer;
 
     vm.fetchFeatures = fetchFeatures;
-    vm.saveFeature = saveFeature;
-    vm.deleteFeature = deleteFeature;
-
-    initController();
-
-    function fetchMapProfiles() {
-        MapService.MapProfile.query().$promise
-        .then((maps) => {
-            $scope.maps = maps;
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
-    }
-
-    function saveProfile(profile) {
-        profile.profileId = profile.JCObjId + ':' + profile.JCObjMask;
-
-        if (profile.JC_Id) {
-            MapService.MapProfile.update(profile).$promise
-            .then(() => {
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data);
-            });
-        } else {
-            MapService.MapProfile.$save(profile).$promise
-            .then(() => {
-                $scope.fetchBase($routeParams.profileId);
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data || err.statusText);
-            });
-        }
-    }
-
-    function deleteProfile() { // profile
-        const condition = {
-            profileId: $routeParams.profileId,
-        };
-
-        MapService.MapProfile.remove(condition).$promise
-        .then(() => {
-            AlertService.success('操作成功');
-            $location.path('/maps');
-        }).catch((err) => {
-            AlertService.warning(err.data || err.statusText);
-        });
-    }
 
     function fetchLayers(profileId) {
         MapService.MapLayer.query({
             profileId: profileId,
-        }).$promise
-        .then((layers) => {
+        }).$promise.then(function (layers) {
             $scope.map.layers = layers;
-        }).catch((err) => {
+        }).catch(function (err) {
             AlertService.warning(err.data || err.statusText);
         });
     }
 
     function fetchLayer(JCLayerName) {
         MapService.MapLayer.get({
-            profileId: $scope.params.profileId,
+            profileId: vm.params.profileId,
             JCLayerName: JCLayerName,
-        }).$promise
-        .then((layer) => {
+        }).$promise.then(function (layer) {
             $scope.map.layers[layer.JCLayerName] = layer;
-        }).catch((err) => {
+        }).catch(function (err) {
             AlertService.warning(err.data || err.statusText);
         });
-    }
-
-    function createLayer(layer) {
-        layer.JCObjId = $scope.map.JCObjId;
-        layer.JCObjMask = $scope.map.JCObjMask;
-
-        if (layer.JC_Id) {
-            MapService.Base.update(layer).$promise
-            .then(() => {
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data || err.statusText);
-            });
-        } else {
-            MapService.Base.$save(layer).$promise
-            .then(() => {
-                $scope.fetchBase($routeParams.profileId);
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data || err.statusText);
-            });
-        }
     }
 
     function fetchFeatures(profileId, JCLayerName) {
         MapService.Beacon.query({
             profileId: profileId,
             JCLayerName: JCLayerName,
-        }).$promise
-        .then((features) => {
+        }).$promise.then(function (features) {
             $scope.map.layers[JCLayerName].features = features;
-        }).catch( (err) => {
+        }).catch(function (err) {
             AlertService.warning(err.data || err.statusText);
         });
     }
 
-    function saveFeature(layer, feature) {
-        const updates = {
-            profileId: $routeParams.profileId,
-            featureId: feature.JCGUID,
-            layer: layer,
-            feature: feature,
-        };
-
-        if (feature.JC_Id) {
-            MapService.MapFeature.update(updates).$promise
-            .then(() => {
-                // var index = _.findIndex($scope.map.layers[layer.JCName].features, function (bc) {
-                //     return bc.JC_Id === feature.JC_Id;
-                // });
-                // $scope.map.layers[layer.JCName].features[index] = feature;
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data || err.statusText);
-            });
-        } else {
-            MapService.MapFeature.$save(updates).$promise
-            .then(() => {
-                $scope.fetchFeatures($routeParams.profileId);
-                AlertService.success('操作成功');
-            }).catch((err) => {
-                AlertService.warning(err.data || err.statusText);
-            });
-        }
-    }
-
-    function deleteFeature(layer, feature) {
-        const deletion = {
-            profileId: $routeParams.profileId,
-            featureId: feature.JCGUID,
-            JCLayerName: layer.JCName,
-        };
-
-        MapService.MapFeature.remove(deletion).$promise
-        .then(() => {
-            const index = _.findIndex($scope.map.layers[layer.JCName].features, (item) => {
-                return item.JCGUID === feature.JCGUID;
-            });
-            $scope.map.layers[layer.JCName].features.splice(index, 1);
-            delete $scope.map.layers[layer.JCName].features[feature.jcguid];
-            $scope.currentFeature = undefined;
-            AlertService.success('删除成功');
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
-    }
-
-    function fetchMap(profileId) {
+    function fetchMap(mapProfile) {
+        const profileId = getProfileId(mapProfile);
         const map = {};
         const parts = profileId.split(':');
         const JCObjId = parts[0];
         const JCObjMask = parts[1];
 
-        MapService.MapProfile.get({ profileId: profileId }).$promise
-        .then((profile) => {
+        MapService.MapProfile.get({
+            profileId: profileId,
+        }).$promise.then(function (profile) {
             map.profile = profile;
             return MapService.MapLayer.query({
                 profileId: profileId,
                 JCObjId: JCObjId,
                 JCObjMask: JCObjMask,
             }).$promise;
-        }).then((layers) => {
-            layers.forEach((layer) => {
+        }).then(function (layers) {
+            layers.forEach(function (layer) {
                 const JCLayerName = layer.JCName;
 
-                layer.BKFields = layer.JCFields.split(' ').map((field) => {
+                layer.BKFields = layer.JCFields.split(' ').map(function (field) {
                     const pats = field.split(',');
                     return {
                         name: pats[0],
@@ -215,46 +114,32 @@ function ExhibitionHallMapController(Restangular, AlertService) {
                 });
 
                 layers[JCLayerName] = layer;
+            });
+            map.layers = layers;
 
-                MapService.MapFeature.query({
+            const fetchFeaturesArray = layers.map(function (layer) {
+                return MapService.MapFeature.query({
                     profileId: profileId,
                     JCObjId: JCObjId,
                     JCObjMask: JCObjMask,
-                    JCLayerName: JCLayerName,
-                }).$promise
-                .then((features) => {
-                    features.forEach((feature) => {
-                        features[feature.JCGUID] = feature;
-                    });
-
-                    layer.features = features;
-                }).catch((err) => {
-                    AlertService.warning(err.data || err.statusText);
-                });
+                    JCLayerName: layer.JCName,
+                }).$promise;
             });
 
-            map.layers = layers;
-            $scope.map = map;
-        }).catch((err) => {
-            AlertService.warning(err.data || err.statusText);
+            return $q.all(fetchFeaturesArray);
+        }).then(function (featuresArray) {
+            map.layers = map.layers.map(function (layer, index) {
+                const features = featuresArray[index];
+                features.forEach(function (feature) {
+                    features[feature.JCGUID] = feature;
+                });
+
+                layer.features = features;
+                return layer;
+            });
+            MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
+        }).catch(function (err) {
+            AlertService.warning(err.data);
         });
-    }
-
-    function initController() {
-        if ($routeParams.profileId) {
-            if ($routeParams.profileId !== 'new') {
-                const MapCanvas = MapPreviewService.MapCanvas;
-
-                $scope.$watch('map', (newValue) => {
-                    if (newValue) { MapCanvas.init('.map-preview', newValue, $scope.$root.wormhole_token); }
-                }, true);
-
-                $scope.fetchMap($routeParams.profileId);
-            } else {
-                $scope.map = {};
-            }
-        } else {
-            $scope.fetchMapProfiles();
-        }
     }
 }

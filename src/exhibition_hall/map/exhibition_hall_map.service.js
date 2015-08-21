@@ -2,7 +2,7 @@ const angular = require('angular');
 const API_URL = '/apis/v1';
 
 
-module.exports = angular.module('beaconSystem.services', [
+module.exports = angular.module('ememtn.exhibition_hall.map.service', [
     'ngResource',
 ]).factory('MapService', MapService)
     .factory('MapPreviewService', MapPreviewService);
@@ -37,12 +37,13 @@ function MapService($resource) {
 /* @ngInject */
 function MapPreviewService() {
     const MapCanvas = {
-        init: function init(container, map, token) {
+        init: function init(map, token) {
             if (!map) { return false; }
-            d3.select(container).select('svg').remove();
+            d3.select('.map-container').select('svg').remove();
 
             const profile = map.profile;
-            this.canvas = d3.select(container).append('svg').attr({
+            this.profile = map.profile;
+            this.canvas = d3.select('.map-container').append('svg').attr({
                 width: profile.JCRight,
                 height: profile.JCBottom,
                 viewBox: '0 0 ' + profile.JCRight + ' ' + profile.JCBottom,
@@ -62,7 +63,7 @@ function MapPreviewService() {
             return parseInt(layer.JCARGB / 0x1000000, 10) / 0xFF;
         },
         draw: function draw(layers, token) {
-            layers.forEach((layer) => {
+            layers.forEach(function (layer) {
                 this.canvas.append('g').attr({
                     id: layer.JCName,
                 });
@@ -89,7 +90,8 @@ function MapPreviewService() {
                         this.drawBaseLayer(layer, token);
                     }
                 } else {
-                    console.log('not implement yet!');
+                    // TODO:
+                    return false;
                 }
 
                 this.drawTexts(layer);
@@ -112,14 +114,10 @@ function MapPreviewService() {
                     class: layerName,
                     x: 0,
                     y: 0,
-                    width: (d) => {
-                        return d.JCRight;
-                    },
-                    height: (d) => {
-                        return d.JCBottom;
-                    },
+                    width: this.profile.JCRight,
+                    height: this.profile.JCBottom,
                     'xlink:href': (d) => {
-                        return 'http://map-warehouse.jcbel.com/v1/maps/' + d.JCImage + '?wormhole_token=' + token;
+                        return 'http://map-warehouse.jcbel.com/v1/maps/' + d.JCImage + '?bearer=' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI2MiwiZW1haWwiOiJmaXNoZWFkQGZpc2hlYWQuaW8iLCJpYXQiOjE0NDAxNDAwMjcsImV4cCI6MTQ0MDc0NDgyNywiYXVkIjoiZmlzaGVhZEBmaXNoZWFkLmlvIiwiaXNzIjoid29ybWhvbGUiLCJzdWIiOiJibGFoIGJsYWgifQ.Vwuipbo_A9ZSux09uRdurmvBuYlKlCFTYCet3M6t2rc';
                     },
                 });
         },

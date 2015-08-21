@@ -17,10 +17,6 @@
         <![endif]-->
 
         <aside class="col-sm-2 menu-bar">
-          <!-- <div class="user">
-            登录用户： {{ auth.profile.username }}
-          </div> -->
-
           <accordion close-others="true">
               <div class="panel panel-default">
                 <div class="panel-heading">
@@ -42,10 +38,10 @@
               </accordion-group>
 
               <accordion-group heading="c展区导航管理">
-                <div><a class="menu-link" ui-sref="poi.beacons">信标管理</a></div>
-                <div><a class="menu-link" ui-sref="poi.areas">展区管理</a></div>
-                <div><a class="menu-link" ui-sref="poi.areas">展商管理</a></div>
-                <div><a class="menu-link" ui-sref="poi.areas">设施管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall-map({ floor: '1F' })">信标管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">展区管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">展商管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">设施管理</a></div>
               </accordion-group>
 
               <accordion-group heading="e新闻资讯管理">
@@ -75,10 +71,6 @@
                 <div><a class="menu-link" ui-sref="news">首页版块名字修改</a></div>
               </accordion-group>
             </accordion>
-
-          <div class="hidden">
-            <<
-          </div>
         </aside>
 
         <main class="col-sm-10 hero" ui-view>
