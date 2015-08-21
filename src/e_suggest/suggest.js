@@ -20,20 +20,20 @@ function moduleConfig($stateProvider) {
 
 
 /* @ngInject */
-function SuggestController(Restangular, AlertService) {
+function SuggestController(Restangular, AlertService, $scope) {
     let vm = this;
     vm.allChecked = false;
     vm.checkList = [];
     vm.allCheckedChange = allCheckedChange;
-    vm.filterChange = filterChange;
-    vm.deletePosts = deletePosts;
+    //vm.filterChange = filterChange;
+    //vm.deletePosts = deletePosts;
 
 
     initController();
 
     /**
      * @ngdoc   function
-     * @desc    µã»÷Ñ¡ÔñÈ«²¿µÄ¶àÑ¡¿ò
+     * @desc  ï¿½
      */
     function allCheckedChange() {
         if (vm.allChecked) {
@@ -50,7 +50,7 @@ function SuggestController(Restangular, AlertService) {
 
     /**
      *  @ngdoc   function
-     *  @desc    ¿ØÖÆÆ÷³õÊ¼»¯º¯Êý
+     *  @desc    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     function initController() {
         Restangular.all('suggests').getList().then(function (response) {
@@ -65,7 +65,7 @@ function SuggestController(Restangular, AlertService) {
 
     /**
      *  @ngdoc   $watch
-     *  @desc   ¸Ä±äµ¥¸ö¸´Ñ¡¿òµÄ¼àÌý³ÌÐò
+     *  @desc   ï¿½Ä±äµ¥ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     $scope.$watch('scope.suggests', function ($new, $old) {
         let arr;

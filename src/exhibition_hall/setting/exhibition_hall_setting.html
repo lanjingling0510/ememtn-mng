@@ -18,18 +18,29 @@
 
                 <div class="am-form-group">
                     <label>图片</label>
-                    <div class="btn btn-primary am-margin-horizontal" ngf-change="vm.uploadChange($file)" ngf-select ng-model="vm.pictureFiles" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                    <div class="btn btn-primary am-margin-horizontal"  ngf-select ng-model="vm.pictureFiles" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
                     <small class="text-danger">仅一张</small>
                 </div>
 
-                <div class="am-form-group" ng-show="vm.pictureFiles.length > 0">
-                    <span class="am-icon-times img-close" ng-click="vm.pictureFiles.length = 0"></span>
-                    <img class="am-thumbnail"  ngf-src="vm.pictureFiles[0]" />
-                    <input ng-model="vm.pictureDescription" placeholder="图片描述信息">
+                <div class="am-form-group" >
+                    <ul class="am-avg-sm-6 am-thumbnails">
+                        <li class="img-wrap" ng-show="vm.pictureFiles.length > 0">
+                            <span class="am-icon-times img-close" ng-click="vm.pictureFiles.length = 0"></span>
+                            <div class="img-content">
+                                <div class="img am-vertical-align text-center">
+                                    <img class="am-vertical-align-middle"  ngf-src="vm.pictureFiles[0]" />
+                                </div>
+                            </div>
+                            <input class="am-form-field" ng-model="vm.pictureDescription" placeholder="图片描述信息">
+                        </li>
+                    </ul>
+
                 </div>
 
+
+
                 <div class="am-form-group am-text-right">
-                    <button type="button" class="am-btn am-btn-primary" ng-click="vm.submitNews()">提交</button>
+                    <button type="button" class="am-btn am-btn-primary">提交</button>
                 </div>
             </form>
         </div>

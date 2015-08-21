@@ -1,7 +1,4 @@
-"use strict";
-require('./news_create.less');
-
-let angular = require('angular');
+const angular = require('angular');
 
 module.exports = angular.module('ememtn.news.create', [
     'ui.router',
@@ -16,20 +13,20 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('news-create', {
         url: '/news/create',
         template: require('./news_create.html'),
-        controller: 'NewsCreateController as scope',
+        controller: 'NewsCreateController as vm',
     });
 }
 
 /* @ngInject */
 function NewsCreateController(AlertService, UploadService) {
-    let vm = this;
+    const vm = this;
     vm.files = [];
     vm.uploadChange = uploadChange;
     vm.deleteFile = deleteFile;
     vm.submitNews = submitNews;
     vm.fields = {
         subject: '',
-        content: ''
+        content: '',
     };
 
     function uploadChange(file) {
@@ -42,7 +39,7 @@ function NewsCreateController(AlertService, UploadService) {
     }
 
     function deleteFile(file) {
-        let index = vm.files.indexOf(file);
+        const index = vm.files.indexOf(file);
         vm.files.splice(index, 1);
     }
 
@@ -51,10 +48,10 @@ function NewsCreateController(AlertService, UploadService) {
             .then(function () {
                 vm.fields = {
                     subject: '',
-                    content: ''
+                    content: '',
                 };
                 vm.files = [];
-            }).catch(function(err) {
+            }).catch((err) => {
                 AlertService.warning(err.data);
             });
     }

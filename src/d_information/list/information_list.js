@@ -13,7 +13,7 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('information', {
         url: '/information',
         template: require('./information_list.html'),
-        controller: 'InformationController as scope',
+        controller: 'InformationController as vm',
     });
 }
 

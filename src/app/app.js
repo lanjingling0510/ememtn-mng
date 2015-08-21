@@ -21,6 +21,7 @@ require('../b_exhibitionDist/exhibitionDist.js');
 require('../d_news/list/news.js');
 require('../d_news/create/news_create.js');
 require('../d_information/list/information_list.js');
+require('../d_information/create/information_create.js');
 
 require('../e_posts/list/posts.js');
 require('../e_posts/detail/posts_detail.js');
@@ -70,6 +71,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',
+    'ememtn.information',
+    'ememtn.information.create',
     'ememtn.exhibition-hall.map',
     'ememtn.beacon.list',
     'ememtn.beacon.create',

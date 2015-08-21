@@ -15,7 +15,7 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('posts', {
         url: '/posts',
         template: require('./posts.html'),
-        controller: 'PlatformController as scope',
+        controller: 'PlatformController as vm',
     });
 }
 
