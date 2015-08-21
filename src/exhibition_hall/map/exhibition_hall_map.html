@@ -1,12 +1,12 @@
 <div class="container-fluid exhibition-hall">
-    <div class="">
-        <select ng-model="vm.map" ng-options="map as map.JCProjectName for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
-
-        </select>
-    </div>
     <div class="row">
-        <div class="col-sm-3" ui-view>
+        <div class="col-sm-3">
+            <div class="col-sm-12">
+                <select ng-model="vm.map" ng-options="map as map.JCProjectName for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
+                </select>
+            </div>
 
+            <div class="col-sm-12" ui-view> </div>
         </div>
 
         <div class="col-sm-9 col-map">
