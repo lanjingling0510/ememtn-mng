@@ -1,31 +1,49 @@
-<div class="col-sm-12">
-    <div class="form-group text-center">
-        <label class="btn btn-info" ng-click="scope.showAllBeacons()" ng-hide="scope.beacons._shown">
-            <input type="checkbox" ng-checked="scope.beacons._shown"> 显示所有信标
-        </label>
-        <label class="btn btn-info" ng-click="scope.hideAllBeacons()" ng-show="scope.beacons._shown">
-            <input type="checkbox" ng-checked="scope.beacons._shown"> 隐藏所有信标
-        </label>
-        <a class="btn btn-success" ui-sref="poi.beacons_new">创建信标</a>
-    </div>
+<div class="row">
+    <select class="" name="">
+        <option>全部区域</option>
+    </select>
 </div>
 
-<div class="col-sm-12">
+<div class="row">
+    共多少个信标
+    <button type="button" name="button">批处理</button>
+</div>
+
+<div class="row">
     <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>信标名称</th>
-                <th>创建时间</th>
-                <th> 操作 </th>
-            </tr>
-        </thead>
         <tbody>
-            <tr ng-repeat='beacon in scope.beacons'>
+            <tr ng-repeat='beacon in vm.beacons'>
                 <td>{{ beacon.name }}</td>
-                <td>{{ beacon.createdAt | date : 'yyyy-MM-dd' }}</td>
                 <td>
-                    <a class="btn btn-info btn-xs" ui-sref="poi.beacons_edit({ beaconId: beacon._id })">编辑</a>
-                    <!-- <button class="btn btn-danger btn-xs" ng-click="scope.removeBeacon(beacon, $index)">删除</button> -->
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-5">UUID: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">Major: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">Minor: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">位置: </label>
+                            <div class="col-xs-7">
+                                <input />
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>

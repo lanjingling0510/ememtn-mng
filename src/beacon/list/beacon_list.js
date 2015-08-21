@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.beacon.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall.beacon-list', {
+    $stateProvider.state('exhibition-hall-map.beacon-list', {
         url: '/beacons',
         template: require('./beacon_list.html'),
         controller: 'BeaconListController as vm',
@@ -19,5 +19,6 @@ function moduleConfig($stateProvider) {
 
 /*@ngInject*/
 function BeaconListController(AlertService) {
-
+    const vm = this;
+    vm.beacons = [{}];
 }
