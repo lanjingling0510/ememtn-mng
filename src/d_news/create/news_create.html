@@ -9,42 +9,45 @@
         <div class="am-form-inline" role="form">
             <div class="am-form-group">
                 <label class="am-form-label">新闻标题</label>
-                <input type="text" ng-model="scope.fields.subject" class="am-form-field" placeholder="请输入标题">
+                <input type="text" ng-model="vm.news.subject" class="am-form-field" placeholder="请输入标题">
             </div>
         </div>
     </div>
 
     <div class="am-u-sm-12">
-        <form class="am-form">
+        <form class="am-form" ng-submit="vm.submitNews(vm.news)">
             <div class="am-form-group">
                 <label>正文内容</label>
-                <textarea placeholder="输入文字介绍" rows="12" ng-model="scope.fields.content"></textarea>
+                <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.news.content"></textarea>
             </div>
 
             <div class="am-form-group">
                 <label>图片</label>
-                <div class="btn btn-primary am-margin-horizontal" ngf-change="scope.uploadChange($file)" ngf-select ng-model="scope.file" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                <div class="btn btn-primary am-margin-horizontal"
+                    ngf-change="vm.uploadFile($files)" ngf-select
+                    ngf-multiple="true" ngf-accept="'image/*'" accept="image/*">添加</div>
                 <small class="text-danger">最多添加6张</small>
             </div>
 
             <div class="am-form-group">
                 <ul class="am-avg-sm-6 am-thumbnails">
-                    <li class="img-wrap" ng-repeat="file in scope.files">
-                        <span class="am-icon-times img-close" ng-click="scope.deleteFile(file)"></span>
+                    <li class="img-wrap" ng-repeat="picture in vm.news.pictures">
+                        <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)" ng-show="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
-                                <img class="am-vertical-align-middle"  ngf-src="file" />
+                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
+                        <input ng-model="vm.news.pictures[$index].description">
                     </li>
                 </ul>
             </div>
 
             <div class="am-form-group am-text-right">
-                <button type="button" class="am-btn am-btn-primary" ng-click="scope.submitNews()">提交</button>
+                <button class="am-btn am-btn-primary">提交</button>
             </div>
         </form>
     </div>
 
 </div>
-

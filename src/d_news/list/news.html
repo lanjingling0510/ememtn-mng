@@ -13,9 +13,11 @@
                     <td></td>
                     <td>
                         <drop-down title="操作" toggle="am-btn-danger">
-                            <button class="am-btn am-btn-block">开始推送</button>
-                            <button class="am-btn am-btn-block">停止推送</button>
-                            <button class="am-btn am-btn-block">删除</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.stickyCheckedNews()">顶</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.showCheckedNews()">显示</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.hideCheckedNews()">隐藏</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.transferCheckedNewsToInfo()">移动到资讯</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.removeCheckedNews()">删除</button>
                         </drop-down>
                     </td>
                     <td></td>
@@ -25,8 +27,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="table-check"><input ng-checked="scope.allChecked" ng-model="scope.allChecked"
-                                                   ng-change="scope.allCheckedChange()" type="checkbox"></td>
+                    <td class="table-check">
+                        <input ng-checked="vm.newses.checked" ng-model="vm.newses.checked" ng-change="vm.toggleCheckAll(vm.newses.checked)" type="checkbox"></td>
                     <td>
                         <button class="am-btn am-btn-secondary am-btn-block">新闻标题</button>
                     </td>
@@ -45,24 +47,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="news in scope.newsList">
+                <tr ng-repeat="news in vm.newses | orderBy: '-stickedAt'">
                     <td><input type="checkbox" ng-checked="news.checked" ng-model="news.checked"></td>
                     <td>{{news.subject}}</td>
                     <td>{{news.content}}</td>
-                    <td>{{news.adminId}}</td>
+                    <td>{{ news.createdAt | date }}</td>
                     <!--<td>-->
-                    <!--<a href="javascript:void(0)" ng-click="scope.showModal()">浏览</a>-->
+                    <!--<a href="javascript:void(0)" ng-click="vm.showModal()">浏览</a>-->
                     <!--</td>-->
                     <!--<td class="am-hide-sm-only">2012-44-12</td>-->
                     <td>
                         <div class="am-btn-toolbar">
                             <button class="am-btn am-text-danger am-btn-default am-btn-xs" style="background:#fff">
-                                正在显示
+                                <span ng-show="news.visible">正在显示</span>
+                                <span ng-hide="news.visible">隐藏</span>
                             </button>
                         </div>
                     </td>
                     <td>
-                        <button class="am-btn am-text-warning am-btn-default am-btn-xs" style="background:#fff">顶
+                        <button class="am-btn am-text-warning am-btn-default am-btn-xs" style="background:#fff" ng-click="vm.stickyNews(news)">顶
                         </button>
                     </td>
                 </tr>
@@ -71,4 +74,3 @@
         </div>
     </div>
 </div>
-

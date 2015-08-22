@@ -6,8 +6,7 @@ module.exports = angular.module('ememtn.news', [
     'restangular',
     'common.modal.service',
     'common.slideBox.directive',
-])
-    .config(moduleConfig)
+]).config(moduleConfig)
     .controller('NewsController', NewsController);
 
 /* @ngInject */
@@ -15,125 +14,122 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('news', {
         url: '/news',
         template: require('./news.html'),
-        controller: 'NewsController as scope',
+        controller: 'NewsController as vm',
     });
 }
 
 /* @ngInject */
-function NewsController(Restangular, AlertService, $scope, commonModal) {
-    const list = [
-        {
-            _id: '1', // 新闻Id
-            adminId: 'news userId', // 发布新闻的管理员Id
-            subject: 'news subject', // 新闻主题
-            content: 'news content', // 新闻内容
-            pictures: [// 新闻相关图片Url
-                'http://example.com/newsa/pic1.jpg',
-                'http://example.com/newsa/pic2.png',
-                // ...
-            ],
-            visiable: 1, // 表示新闻未被管理员隐藏，
-            sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
-            stickedAt: 'ytbuhnim', // 置顶时间
-            createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm', // 新闻更新时间
-        },
-        {
-            _id: '2', // 新闻Id
-            adminId: 'news userId', // 发布新闻的管理员Id
-            subject: 'news subject', // 新闻主题
-            content: 'news content', // 新闻内容
-            pictures: [// 新闻相关图片Url
-                'http://example.com/newsa/pic1.jpg',
-                'http://example.com/newsa/pic2.png',
-                // ...
-            ],
-            visiable: 1, // 表示新闻未被管理员隐藏，
-            sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
-            stickedAt: 'ytbuhnim', // 置顶时间
-            createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm', // 新闻更新时间
-        }, {
-            _id: '3', // 新闻Id
-            adminId: 'news userId', // 发布新闻的管理员Id
-            subject: 'news subject', // 新闻主题
-            content: 'news content', // 新闻内容
-            pictures: [// 新闻相关图片Url
-                'http://example.com/newsa/pic1.jpg',
-                'http://example.com/newsa/pic2.png',
-                // ...
-            ],
-            visiable: 1, // 表示新闻未被管理员隐藏，
-            sticky: 1, // 0表示不置顶，1表示置顶，按照数组顺序显示即可
-            stickedAt: 'ytbuhnim', // 置顶时间
-            createdAt: 'tyghunmj', // 新闻发布时间
-            updatedAt: 'tygbhunjm', // 新闻更新时间
-        },
-    ];
-
-
+function NewsController($q, Restangular, AlertService, $scope, commonModal) {
     const vm = this;
-    vm.allChecked = false;
-    vm.checkList = [];
-    vm.allCheckedChange = allCheckedChange;
+    const News = Restangular.all('newses');
+    vm.query = {
+        page: 1,
+        pageSize: 30,
+        count: 0,
+    };
+    // vm.allChecked = false;
+    // vm.checkList = [];
+    // vm.allCheckedChange = allCheckedChange;
+    // vm.searchNewses = searchNewses;
+    vm.toggleCheckAll = toggleCheckAll;
+    vm.showCheckedNews = showCheckedNews;
+    vm.hideCheckedNews = hideCheckedNews;
+    vm.stickyNews = stickyNews;
+    vm.stickyCheckedNews = stickyCheckedNews;
+    vm.transferCheckedNewsToInfo = transferCheckedNewsToInfo;
 
+    // initController();
+    searchNewses(vm.query);
 
-    initController();
+    function searchNewses(query) {
+        vm.newses = News.getList(query).$object;
+    }
 
-
-    function initController() {
-        Restangular.all('newses').getList().then(() => {
-            vm.newsList = list;
-            vm.newsList.forEach((value) => {
-                value.checked = false;
-            });
-        }).catch((error) => {
-            AlertService.warning(error.data);
+    function toggleCheckAll(checked) {
+        vm.newses.forEach(function (news) {
+            news.checked = checked;
         });
-
-        commonModal.fromTemplateUrl(templateNews, {
-            scope: $scope,
-        })
-            .then(function (modal) {
-                vm.modal = modal;
-            });
-
-        vm.closeModal = function () {
-            vm.modal.hide();
-        };
-
-        vm.showModal = function () {
-            vm.modal.show();
-        };
     }
 
-    /**
-     * @ngdoc   function
-     * @desc    点击选择全部的多选框
-     */
-    function allCheckedChange() {
-        if (vm.allChecked) {
-            vm.newsList.forEach(function (value) {
-                value.checked = true;
-            });
-        } else {
-            vm.newsList.forEach(function (value) {
-                value.checked = false;
-            });
-        }
+    function getCheckedNewses() {
+        return vm.newses.filter((news) => news.checked);
     }
 
-    /**
-     *  @ngdoc   $watch
-     *  @desc   改变单个复选框的监听程序
-     */
-    $scope.$watch('scope.newsList', function (newVal) {
-        let arr;
-        if (!!newVal) {
-            arr = vm.newsList.filter(function (item) {
-                return item.checked;
+    function hideCheckedNews() {
+        const checkedNewses = getCheckedNewses();
+        checkedNewses.forEach(function (news) {
+            News.one(news._id).doPUT({}, 'hide').then(function () {
+                news.visible = 0;
+                news.updatedAt = Date.now();
+            }).catch(function (err) {
+                AlertService.warning(err.data);
             });
-            vm.allChecked = !!arr.length;
-        }
-    }, true);
+        });
+    }
+
+    function showCheckedNews() {
+        const checkedNewses = getCheckedNewses();
+        checkedNewses.forEach(function (news) {
+            News.one(news._id).doPUT({}, 'show').then(function () {
+                news.visible = 1;
+                news.updatedAt = Date.now();
+            }).catch(function (err) {
+                AlertService.warning(err.data);
+            });
+        });
+    }
+
+    function stickyNews(news) {
+        News.one(news._id).doPUT({}, 'sticky').then(function () {
+            news.sticky = 1;
+            news.stickedAt = Date.now();
+            news.updatedAt = Date.now();
+        }).catch(function (err) {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function stickyCheckedNews() {
+        const checkedNewses = getCheckedNewses();
+        checkedNewses.forEach(stickyNews);
+    }
+
+    function transferCheckedNewsToInfo() {
+        const checkedNewses = getCheckedNewses();
+        checkedNewses.forEach(function (news) {
+            News.one(news._id).doPUT({}, 'transformation').then(function () {
+                const newsIndex = vm.newses[news];
+                vm.newses.splice(newsIndex, 1);
+            }).catch(function (err) {
+                AlertService.warning(err.data);
+            });
+        });
+    }
+
+
+    // function initController() {
+    //     Restangular.all('newses').getList().then(() => {
+    //         vm.newsList = list;
+    //         vm.newsList.forEach((value) => {
+    //             value.checked = false;
+    //         });
+    //     }).catch((error) => {
+    //         AlertService.warning(error.data);
+    //     });
+    //
+    //     commonModal.fromTemplateUrl(templateNews, {
+    //         scope: $scope,
+    //     })
+    //         .then(function (modal) {
+    //             vm.modal = modal;
+    //         });
+    //
+    //     vm.closeModal = function () {
+    //         vm.modal.hide();
+    //     };
+    //
+    //     vm.showModal = function () {
+    //         vm.modal.show();
+    //     };
+    // }
 }
