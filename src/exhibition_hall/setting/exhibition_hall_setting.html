@@ -28,8 +28,8 @@
 
                 <div class="am-form-group" ng-repeat="picture in vm.pavilion.pictures">
                     <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
-                    <img class="am-thumbnail"  ngf-src="vm.pictureFile || {{ picture.fileUrl }}" />
-                    <input ng-model="picture.description">
+                    <img class="am-thumbnail" ng-src="{{ picture.fileUrl }}" ngf-src="vm.pictureFile" />
+                    <input ng-model="vm.pavilion.pictures[$index].description">
                 </div>
 
                 <div class="am-form-group am-text-right">

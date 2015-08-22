@@ -22,11 +22,11 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
     const vm = this;
     const Pavilion = Restangular.all('pavilions');
     vm.fetchPavilionByFloor = fetchPavilionByFloor;
-    vm.savePavilion = savePavilion;
-    vm.pictureFiles = [];
-    fetchPavilionByFloor($stateParams.floor);
     vm.uploadPicture = uploadPicture;
     vm.removePicture = removePicture;
+    vm.savePavilion = savePavilion;
+
+    fetchPavilionByFloor($stateParams.floor);
 
     function fetchPavilionByFloor() {
         vm.pavilion = Pavilion.one($stateParams.floor).get().$object;
@@ -34,7 +34,7 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
 
     function uploadPicture(picture) {
         if (!picture) { return false; }
-        const url = `/apis/pavilions/${$stateParams.floor}/pictures`;//'/api/pavilions/' + $stateParams.floor + '';
+        const url = `/apis/pavilions/${$stateParams.floor}/pictures`;
         UploadService(url, picture, 'pictures', {}).then((result) => { // eslint-disable-line new-cap
             const pictures = result.data.map(function (picUrl) {
                 return {
@@ -49,17 +49,15 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
     }
 
     function removePicture(pictureIndex) {
-        vm.pavilion.doDELETE(`pictures/${pictureIndex}`).then(() => {
-            vm.pavilion.pictures.splice(pictureIndex, 0);
+        Pavilion.one(vm.pavilion.floor).one('pictures', pictureIndex).remove().then(() => {
+            vm.pavilion.pictures.splice(pictureIndex, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
     function savePavilion(pavilion) {
-        // url, files, fileFieldName, fields, method='POST') {
-        const url = '/apis/pavilions/' + $stateParams.floor;
-        UploadService(url, vm.pictureFiles, 'pictures', pavilion).then(() => { // eslint-disable-line new-cap
+        Pavilion.one(pavilion.floor).doPUT(pavilion).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);
