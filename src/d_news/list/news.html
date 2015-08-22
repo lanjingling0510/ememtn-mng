@@ -47,11 +47,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="news in vm.newses | orderBy: '-stickedAt'">
+                <tr ng-repeat="news in vm.newses | orderBy: '-sticky' | orderBy: '-stickedAt'">
                     <td><input type="checkbox" ng-checked="news.checked" ng-model="news.checked"></td>
                     <td>{{news.subject}}</td>
                     <td>{{news.content}}</td>
-                    <td>{{ news.createdAt | date }}</td>
+                    <td>{{ news.stickedAt }}</td>
                     <!--<td>-->
                     <!--<a href="javascript:void(0)" ng-click="vm.showModal()">浏览</a>-->
                     <!--</td>-->

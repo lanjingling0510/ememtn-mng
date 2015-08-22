@@ -1,5 +1,5 @@
 const angular = require('angular');
-const templateNews = require('./modal.html');
+// const templateNews = require('./modal.html');
 
 module.exports = angular.module('ememtn.news', [
     'ui.router',
@@ -19,7 +19,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function NewsController($q, Restangular, AlertService, $scope, commonModal) {
+function NewsController($q, Restangular, AlertService, $scope, commonModal) { // eslint-disable-line no-unused-vars
     const vm = this;
     const News = Restangular.all('newses');
     vm.query = {
@@ -37,6 +37,7 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
     vm.stickyNews = stickyNews;
     vm.stickyCheckedNews = stickyCheckedNews;
     vm.transferCheckedNewsToInfo = transferCheckedNewsToInfo;
+    vm.removeCheckedNews = removeCheckedNews;
 
     // initController();
     searchNewses(vm.query);
@@ -60,7 +61,7 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
         checkedNewses.forEach(function (news) {
             News.one(news._id).doPUT({}, 'hide').then(function () {
                 news.visible = 0;
-                news.updatedAt = Date.now();
+                news.updatedAt = new Date().toISOString();
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });
@@ -72,7 +73,7 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
         checkedNewses.forEach(function (news) {
             News.one(news._id).doPUT({}, 'show').then(function () {
                 news.visible = 1;
-                news.updatedAt = Date.now();
+                news.updatedAt = new Date().toISOString();
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });
@@ -82,8 +83,8 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
     function stickyNews(news) {
         News.one(news._id).doPUT({}, 'sticky').then(function () {
             news.sticky = 1;
-            news.stickedAt = Date.now();
-            news.updatedAt = Date.now();
+            news.stickedAt = new Date().toISOString();
+            news.updatedAt = new Date().toISOString();
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
@@ -97,8 +98,8 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
     function transferCheckedNewsToInfo() {
         const checkedNewses = getCheckedNewses();
         checkedNewses.forEach(function (news) {
-            News.one(news._id).doPUT({}, 'transformation').then(function () {
-                const newsIndex = vm.newses[news];
+            News.one(news._id).doPUT({}, 'transfer').then(function () {
+                const newsIndex = vm.newses.indexOf(news);
                 vm.newses.splice(newsIndex, 1);
             }).catch(function (err) {
                 AlertService.warning(err.data);
@@ -106,6 +107,17 @@ function NewsController($q, Restangular, AlertService, $scope, commonModal) {
         });
     }
 
+    function removeCheckedNews() {
+        const checkedNewses = getCheckedNewses();
+        checkedNewses.forEach(function (news) {
+            News.one(news._id).remove().then(function () {
+                const newsIndex = vm.newses.indexOf(news);
+                vm.newses.splice(newsIndex, 1);
+            }).catch(function (err) {
+                AlertService.warning(err.data);
+            });
+        });
+    }
 
     // function initController() {
     //     Restangular.all('newses').getList().then(() => {
