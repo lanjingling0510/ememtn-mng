@@ -3,7 +3,7 @@
         <form class="form-inline pull-right">
             <div class="form-group">
                 <label for="platform-search">搜索</label>
-                <input type="text" class="form-control" ng-model="scope.filters.subject" id="platform-search" placeholder="请输入主题搜索帖子" ng-change="scope.filterChange(scope.filters)">
+                <input type="text" class="form-control" ng-model="vm.filters.subject" id="platform-search" placeholder="请输入主题搜索帖子" ng-change="vm.filterChange(vm.filters)">
             </div>
         </form>
     </div>
@@ -16,7 +16,7 @@
             <thead>
             <tr>
                 <th class="table-check text-center">
-                    <input type="checkbox" ng-checked="scope.allChecked" ng-model="scope.allChecked" ng-change="scope.allCheckedChange()">
+                    <input type="checkbox" ng-checked="vm.allChecked" ng-model="vm.allChecked" ng-change="vm.allCheckedChange()">
                 </th>
                 <th>ID</th>
                 <th>主题</th>
@@ -27,7 +27,7 @@
             </thead>
 
             <tbody>
-                <tr ng-repeat="post in scope.posts">
+                <tr ng-repeat="post in vm.posts">
                     <td class="text-center"><input type="checkbox" ng-checked="post.checked" ng-model="post.checked"></td>
                     <td>{{post._id}}</td>
                     <td>{{post.subject}}</td>
@@ -39,13 +39,10 @@
 
             <tfoot>
                 <th colspan="1">
-                    <button class="btn btn-danger btn-block" ng-click="scope.deletePosts()">删除</button>
+                    <button class="btn btn-danger btn-block" ng-click="vm.deletePosts()">删除</button>
                 </th>
             </tfoot>
 
         </table>
     </div>
 </div>
-
-
-

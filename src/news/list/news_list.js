@@ -1,25 +1,25 @@
 const angular = require('angular');
 // const templateNews = require('./modal.html');
 
-module.exports = angular.module('ememtn.news', [
+module.exports = angular.module('ememtn.news.list', [
     'ui.router',
     'restangular',
     'common.modal.service',
     'common.slideBox.directive',
 ]).config(moduleConfig)
-    .controller('NewsController', NewsController);
+    .controller('NewsListController', NewsListController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('news', {
-        url: '/news',
-        template: require('./news.html'),
-        controller: 'NewsController as vm',
+    $stateProvider.state('news-list', {
+        url: '/newses',
+        template: require('./news_list.html'),
+        controller: 'NewsListController as vm',
     });
 }
 
 /* @ngInject */
-function NewsController($q, Restangular, AlertService, $scope, commonModal) { // eslint-disable-line no-unused-vars
+function NewsListController($q, Restangular, AlertService, $scope, commonModal) { // eslint-disable-line no-unused-vars
     const vm = this;
     const News = Restangular.all('newses');
     vm.query = {

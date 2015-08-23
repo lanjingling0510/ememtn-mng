@@ -16,25 +16,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>48</td>
-                <td>数据结构与算法</td>
-                <td class="am-hide-sm-only">2012-44-12</td>
+            <tr ng-repeat="feedback in vm.feedbacks">
+                <td><input type="checkbox" ng-checked="feedback._checked" ng-model="vm.feedbacks[$index]._checked"></td>
+                <td>{{ ::feedback.user.username }}</td>
+                <td>{{ ::feedback.content }}</td>
+                <td class="am-hide-sm-only">{{ ::feedback.createdAt }}</td>
 
                 <td>
                     <div class="am-btn-toolbar">
-                        <button
-                           class="am-btn am-text-danger am-btn-default am-btn-xs" style="background:#fff"><i
-                                class="am-icon-pencil-square-o"></i> 删除</button>
+                        <button class="am-btn am-text-danger am-btn-xs" style="background:#fff">
+                            <i class="am-icon-pencil-square-o"></i> 删除
+                        </button>
                     </div>
                 </td>
             </tr>
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="8"><a href="javascript:void(0)" class="delete-btn am-btn am-btn-danger am-btn-sm"><i
-                        class="am-icon-trash-o"></i> 删除</a></td>
+                <td colspan="8">
+                    <button class="delete-btn am-btn am-btn-danger am-btn-sm" ng-click="vm.removeCheckedFeedbacks()">
+                        <i class="am-icon-trash-o"></i> 删除
+                    </button>
+                </td>
             </tr>
             </tfoot>
         </table>

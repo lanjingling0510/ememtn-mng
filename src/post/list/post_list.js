@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.post.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('posts', {
+    $stateProvider.state('post-list', {
         url: '/posts',
         template: require('./post_list.html'),
         controller: 'PostListController as vm',

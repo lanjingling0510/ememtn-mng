@@ -21,16 +21,16 @@ require('../exhibition/list/exhibition_list.js');
 require('../exhibition/create/exhibition_create.js');
 
 require('../b_exhibitionDist/exhibitionDist.js');
-require('../d_news/list/news.js');
-require('../d_news/create/news_create.js');
+
+require('../news/list/news_list.js');
+require('../news/create/news_create.js');
+
 require('../d_information/list/information_list.js');
 
 require('../post/list/post_list.js');
 require('../post/detail/post_detail.js');
 
-require('../e_suggest/suggest.js');
-//=====================================================
-require('../feedback/list/feedbacks.js');
+require('../feedback/list/feedback_list.js');
 require('../feedback/edit/feedback_edit.js');
 
 require('../treasure_game_map/list/treasure_game_map_list.js');
@@ -66,7 +66,8 @@ module.exports = angular.module('ememtn', [
     'sanya.admins.register',
     'sanya.tourists',
     'sanya.groups',
-    'sanya.feedbacks',
+    'ememtn.feedback.list',
+    // 'ememtn.feedback.edit',
     'ememtn.organizer.setting',
     'ememtn.exhibition-hall.setting',
     'ememtn.exhibition.list',
@@ -74,8 +75,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibitionDist',
     'ememtn.post.list',
     'ememtn.post.detail',
-    'ememtn.suggest',
-    'ememtn.news',
+    'ememtn.news.list',
     'ememtn.news.create',
     'ememtn.exhibition-hall.map',
     'ememtn.beacon.list',
@@ -88,7 +88,6 @@ module.exports = angular.module('ememtn', [
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',
-    'sanya.feedback_edit',
     'sanya.roulette_game',
 ]).config(moduleConfig).run(moduleRun);
 
@@ -97,7 +96,7 @@ function moduleConfig($urlRouterProvider, $locationProvider, RestangularProvider
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
     RestangularProvider.setBaseUrl('/apis');
-    RestangularProvider.setRestangularFields({ id: "_id" });
+    RestangularProvider.setRestangularFields({ id: '_id' });
 }
 
 /* @ngInject */
