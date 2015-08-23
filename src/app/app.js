@@ -49,6 +49,9 @@ require('../infrastructure/list/infrastructure_list.js');
 require('../infrastructure/create/infrastructure_create.js');
 require('../infrastructure/edit/infrastructure_edit.js');
 
+require('../info/list/info_list.js');
+require('../info/create/info_create.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -76,6 +79,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.beacon.edit',
     'ememtn.area.list',
     'ememtn.area.create',
+    'ememtn.info.list',
+    'ememtn.info.create',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',

@@ -1,0 +1,76 @@
+<div class="am-container info">
+
+    <ol class="am-breadcrumb">
+        <li><a class="am-icon-star am-active">资讯管理</a></li>
+    </ol>
+    <hr>
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover text-center">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <drop-down title="操作" toggle="am-btn-danger">
+                            <button class="am-btn am-btn-block" ng-click="vm.stickyCheckedInfo()">顶</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.showCheckedInfo()">显示</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.hideCheckedInfo()">隐藏</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.transferCheckedInfoToInfo()">移动到资讯</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.removeCheckedInfo()">删除</button>
+                        </drop-down>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="am-btn am-btn-secondary am-btn-block" ui-sref="info-create">添加资讯</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-check">
+                        <input ng-checked="vm.infoes.checked" ng-model="vm.infoes.checked" ng-change="vm.toggleCheckAll(vm.infoes.checked)" type="checkbox"></td>
+                    <td>
+                        <button class="am-btn am-btn-secondary am-btn-block">资讯标题</button>
+                    </td>
+                    <td>
+                        <button class="am-btn am-btn-secondary am-btn-block">资讯摘要</button>
+                    </td>
+                    <td>
+                        <button class="am-btn am-btn-secondary am-btn-block">编辑时间</button>
+                    </td>
+                    <td>
+                        <drop-down title="全部状态" toggle="am-btn-secondary">
+                            <button class="am-btn am-btn-block">正在显示</button>
+                            <button class="am-btn am-btn-block">正在隐藏</button>
+                        </drop-down>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="info in vm.infoes | orderBy: '-sticky' | orderBy: '-stickedAt'">
+                    <td><input type="checkbox" ng-checked="info.checked" ng-model="info.checked"></td>
+                    <td>{{info.subject}}</td>
+                    <td>{{info.content}}</td>
+                    <td>{{ info.stickedAt }}</td>
+                    <!--<td>-->
+                    <!--<a href="javascript:void(0)" ng-click="vm.showModal()">浏览</a>-->
+                    <!--</td>-->
+                    <!--<td class="am-hide-sm-only">2012-44-12</td>-->
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <button class="am-btn am-text-danger am-btn-default am-btn-xs" style="background:#fff">
+                                <span ng-show="info.visible">正在显示</span>
+                                <span ng-hide="info.visible">隐藏</span>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="am-btn am-text-warning am-btn-default am-btn-xs" style="background:#fff" ng-click="vm.stickyInfo(info)">顶
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
