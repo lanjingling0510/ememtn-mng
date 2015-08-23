@@ -1,7 +1,7 @@
 <div class="am-container organizer-setting">
     <div class="am-g" >
         <ol class="am-breadcrumb" class="am-text-lg">
-            <li><a class="am-icon-star" ui-sref="stadium">主办方介绍</a></li>
+            <li><a class="am-icon-star" ui-sref="organizer-setting">主办方介绍</a></li>
             <li><a  ui-sref="stadium_list">主办商品列表</a></li>
             <li class="am-active">商品详情</li>
         </ol>
@@ -11,7 +11,7 @@
             <div class="am-form-inline" role="form">
                 <div class="am-form-group">
                     <label class="am-form-label">名字</label>
-                    <input type="text" ng-model="scope.fields.subject" class="am-form-field" placeholder="请输入标题">
+                    <input type="text" ng-model="vm.organizer.subject" class="am-form-field" placeholder="请输入标题">
                 </div>
             </div>
         </div>
@@ -20,26 +20,31 @@
             <form class="am-form">
                 <div class="am-form-group">
                     <label>正文内容</label>
-                    <textarea placeholder="输入文字介绍" rows="12" ng-model="scope.fields.content"></textarea>
+                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.organizer.content"></textarea>
                 </div>
 
-                <div class="am-form-group">
+                <div class="am-form-group hidden">
                     <label>缩略图</label>
                     <div class="ion-thumbnail"> </div>
                 </div>
 
                 <div class="am-form-group">
                     <label>详情图</label>
-                    <div class="btn btn-primary am-margin-horizontal" ngf-change="scope.uploadChange($file)" ngf-select ng-model="scope.file" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                    <div class="btn btn-primary am-margin-horizontal"
+                    ngf-change="vm.uploadFile($files)" ngf-select
+                    ng-model="vm.pictureFile" ngf-multiple="true"
+                    ngf-accept="'image/*'" accept="image/*">添加</div>
                     <small class="text-danger">最多添加6张</small>
                 </div>
 
 
                 <div class="am-form-group">
                     <ul class="am-avg-sm-6 am-thumbnails">
-                        <li class="img-wrap" ng-repeat="file in scope.files">
-                            <span class="am-icon-times img-close" ng-click="scope.deleteFile(file)"></span>
-                            <img class="am-thumbnail"  ngf-src="file" />
+                        <li class="img-wrap" ng-repeat="file in vm.organizer.pictures">
+                            <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(file, $index)" ng-show="file.isNew"></span>
+                            <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(file, $index)" ng-hide="file.isNew"></span>
+                            <img class="am-thumbnail" ng-src="{{ file.fileUrl }}" />
+                            <input ng-model="vm.organizer.pictures[$index].description">
                         </li>
                     </ul>
                 </div>
@@ -48,7 +53,7 @@
     </div>
     <div class="am-g">
         <div class="am-u-sm-2">
-            <button type="button" class="am-btn am-btn-danger am-btn-xl am-btn-block" ng-click="scope.submitNews()">保存</button>
+            <button type="button" class="am-btn am-btn-danger am-btn-xl am-btn-block" ng-click="vm.setOrganizer(vm.organizer)">保存</button>
         </div>
     </div>
 </div>
