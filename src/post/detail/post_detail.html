@@ -5,7 +5,7 @@
 
             <ul class="am-breadcrumb">
                 <li><a class="am-icon-home" ui-sref="platform">信息中心管理</a></li>
-                <li class="am-active">{{scope.post._id}}</li>
+                <li class="am-active">{{vm.post._id}}</li>
             </ul>
 
         </div>
@@ -20,12 +20,12 @@
 
             <div class="am-article-bd">
                <blockquote>
-                   {{scope.post.content}}
-                   <small>来自：{{scope.post.userId}}</small>
+                   {{vm.post.content}}
+                   <small>来自：{{vm.post.userId}}</small>
                    <span class="am-text-xs text-muted pull-right">
-                       发布时间:{{scope.post.createdAt}}
+                       发布时间:{{vm.post.createdAt}}
                        <br/>
-                       更新时间:{{scope.post.createdAt}}
+                       更新时间:{{vm.post.createdAt}}
                    </span>
 
                </blockquote>
@@ -36,7 +36,7 @@
     <!--评价模块-->
     <div class="am-container">
         <div class="am-comments-list">
-            <article class="am-comment" ng-repeat="comment in scope.post.comments"> <!-- 评论容器 -->
+            <article class="am-comment" ng-repeat="comment in vm.post.comments"> <!-- 评论容器 -->
                 <a>
                     <img class="am-comment-avatar"  alt=""/> <!-- 评论者头像 -->
                 </a>

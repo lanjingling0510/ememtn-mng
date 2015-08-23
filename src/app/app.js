@@ -25,8 +25,9 @@ require('../d_news/list/news.js');
 require('../d_news/create/news_create.js');
 require('../d_information/list/information_list.js');
 
-require('../e_posts/list/posts.js');
-require('../e_posts/detail/posts_detail.js');
+require('../post/list/post_list.js');
+require('../post/detail/post_detail.js');
+
 require('../e_suggest/suggest.js');
 //=====================================================
 require('../feedback/list/feedbacks.js');
@@ -71,8 +72,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibition.list',
     'ememtn.exhibition.create',
     'ememtn.exhibitionDist',
-    'ememtn.posts',
-    'ememtn.posts.detail',
+    'ememtn.post.list',
+    'ememtn.post.detail',
     'ememtn.suggest',
     'ememtn.news',
     'ememtn.news.create',
