@@ -64,6 +64,7 @@ require('../page_structure/setting/page_structure_setting.js');
 require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
+require('../exhibitor/guide/exhibitor_guide.js');
 
 module.exports = angular.module('ememtn', [
     'ui.router',
@@ -99,6 +100,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',
     'ememtn.exhibitor.list',
+    'ememtn.exhibitor.guide',
     'sanya.prize.exchange',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
