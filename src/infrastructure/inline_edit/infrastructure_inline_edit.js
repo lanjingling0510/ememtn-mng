@@ -1,23 +1,23 @@
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../../infrastructure/list/infrastructure_list.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.infrastructure.edit', [
+module.exports = angular.module('ememtn.infrastructure.inline-edit', [
     'ui.router',
-    'ememtn.common.services',
+    'sanya.common.services',
 ]).config(moduleConfig)
-    .controller('InfrastructureEditController', InfrastructureEditController);
+    .controller('InfrastructureInlineEditController', InfrastructureInlineEditController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall.infrastructure-edit', {
-        url: '/infrastructures/:infrastructureId',
+    $stateProvider.state('exhibition-hall-map.infrastructure-list.infrastructure-inline-edit', {
+        url: '/:infrastructureId',
         template: require('./infrastructure_inline_edit.html'),
-        controller: 'InfrastructureEditController as vm',
+        controller: 'InfrastructureInlineEditController as vm',
     });
 }
 
 /* @ngInject */
-function InfrastructureEditController(AlertService) {
+function InfrastructureInlineEditController(AlertService) {
 
 }
