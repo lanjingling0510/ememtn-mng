@@ -12,7 +12,7 @@ module.exports = angular.module('sanya.beacon.create', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('exhibition-hall.infrastructure-create', {
         url: '/infrastructures/new',
-        template: require('./infrastructure_create.html'),
+        template: require('./infrastructure_inline_create.html'),
         controller: 'InfrastructureCreateController as vm',
     });
 }

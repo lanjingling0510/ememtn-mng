@@ -1,0 +1,21 @@
+{
+    "floors": [
+        {
+            "name": "一楼",
+            "JCObjId": 4294959104,
+            "JCObjMask": 0
+        }, {
+            "name": "二楼",
+            "JCObjId": 4294961152,
+            "JCObjMask": 0
+        }, {
+            "name": "三楼",
+            "JCObjId": 4294963200,
+            "JCObjMask": 0
+        }, {
+            "name": "四楼",
+            "JCObjId": 4294965248,
+            "JCObjMask": 0
+        }
+    ]
+}

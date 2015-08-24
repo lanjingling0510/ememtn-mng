@@ -8,7 +8,6 @@ require('./tourist_register_directive/tourist_register.directive.js');
 module.exports = angular.module('sanya.home', [
     'ui.router',
     'sanya.common.services',
-    'sanya.groups.service',
     'sanya.home.directives'
 ]).config(moduleConfig)
     .controller('HomeController', HomeController);

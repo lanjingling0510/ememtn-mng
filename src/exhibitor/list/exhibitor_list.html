@@ -1,0 +1,51 @@
+<div class="row">
+    <select class="" name="">
+        <option>全部区域</option>
+    </select>
+</div>
+
+<div class="row">
+    共多少个信标
+    <button type="button" name="button">批处理</button>
+</div>
+
+<div class="row">
+    <table class="table table-responsive">
+        <tbody>
+            <tr ng-repeat='beacon in vm.beacons'>
+                <td>{{ beacon.name }}</td>
+                <td>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-5">UUID: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">Major: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">Minor: </label>
+                            <div class="col-xs-7">
+                                <input readonly="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-5">位置: </label>
+                            <div class="col-xs-7">
+                                <input />
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
