@@ -20,12 +20,12 @@ function moduleConfig($stateProvider) {
 /* @ngInject*/
 function MessageListController(Restangular, AlertService) {
     const vm = this;
-    const Exhibition = Restangular.all('exhibitions');
+    const Message = Restangular.all('messages');
     vm.query = {};
 
-    searchExhibitions(vm.query);
+    searchMessages(vm.query);
 
-    function searchExhibitions(query) {
-        vm.exhibitions = Exhibition.getList(query).$object;
+    function searchMessages(query) {
+        vm.messages = Message.getList(query).$object;
     }
 }

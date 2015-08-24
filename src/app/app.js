@@ -60,6 +60,9 @@ require('../organizer_custom/create/organizer_custom_create.js');
 require('../message/list/message_list.js');
 require('../message/push/message_push.js');
 
+require('../notification/list/notification_list.js');
+require('../notification/push/notification_push.js');
+
 require('../page_structure/setting/page_structure_setting.js');
 
 require('../prize/exchange/prize_exchange.js');
@@ -98,6 +101,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.info.create',
     'ememtn.message.list',
     'ememtn.message.push',
+    'ememtn.notification.list',
+    'ememtn.notification.push',
     'ememtn.organizer-custom.list',
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',

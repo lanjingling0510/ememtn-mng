@@ -1,4 +1,4 @@
-<div class="am-container message-list">
+<div class="am-container notification-list">
     <div class="am-g am-margin-bottom">
         <div class="am-u-sm-1 text-center">
             <input type="checkbox"/>
@@ -11,17 +11,17 @@
             </drop-down>
         </div>
         <div class="am-u-sm-2">
-            <a class="am-btn am-btn-danger am-fr" ui-sref="message-push">推送消息</a>
+            <a class="am-btn am-btn-danger am-fr" ui-sref="notification-push">推送系统消息</a>
         </div>
     </div>
 
     <my-collapse class="am-panel-default" content="heheheheheeeee">
-        <ul ng-repeat="message in vm.messages">
-            <li><input type="checkbox" ng-checked="message.checked" ng-model="vm.message[$index].checked"/></li>
-            <li>{{ message.subject }}</li>
-            <li>{{ message.content }}</li>
-            <li>{{ message.createdAt }}</li>
-            <li>{{ message.pushStatus }}</li>
+        <ul ng-repeat="notification in vm.notifications">
+            <li><input type="checkbox" ng-checked="notification.checked" ng-model="vm.notification[$index].checked"/></li>
+            <li>{{ notification.subject }}</li>
+            <li>{{ notification.content }}</li>
+            <li>{{ notification.createdAt }}</li>
+            <li>{{ notification.pushStatus }}</li>
             <li class="am-icon-sort-desc"></li>
         </ul>
     </my-collapse>

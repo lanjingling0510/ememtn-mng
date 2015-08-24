@@ -18,21 +18,16 @@ function moduleConfig($stateProvider) {
 /* @ngInject*/
 function MessagePushController(Restangular, AlertService) {
     const vm = this;
-    const Exhibition = Restangular.all('exhibitions');
-    vm.query = {};
-    vm.exhibition = {
-        startAt: new Date(),
-        endAt: new Date(),
-    };
-    vm.createExhibition = createExhibition;
+    const Message = Restangular.all('messages');
+    vm.createMessage = createMessage;
 
-    function pushExhibition(exhibition) {
-        return Exhibition.one(exhibition._id).doPOST({}, 'push');
+    function pushMessage(message) {
+        return Message.one(message._id).doPOST({}, 'push');
     }
 
-    function createExhibition(exhibition) {
-        Exhibition.post(exhibition).then(function (exh) {
-            return pushExhibition(exh);
+    function createMessage(message) {
+        Message.post(message).then(function (msg) {
+            return pushMessage(msg);
         }).then(function () {
             AlertService.success('开始推送');
         }).catch(function (err) {
