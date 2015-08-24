@@ -18,25 +18,6 @@
 
                 <div class="am-form-group">
                     <label>图片</label>
-<<<<<<< HEAD
-                    <div class="btn btn-primary am-margin-horizontal"  ngf-select ng-model="vm.pictureFiles" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
-                    <small class="text-danger">仅一张</small>
-                </div>
-
-                <div class="am-form-group" >
-                    <ul class="am-avg-sm-6 am-thumbnails">
-                        <li class="img-wrap" ng-show="vm.pictureFiles.length > 0">
-                            <span class="am-icon-times img-close" ng-click="vm.pictureFiles.length = 0"></span>
-                            <div class="img-content">
-                                <div class="img am-vertical-align text-center">
-                                    <img class="am-vertical-align-middle"  ngf-src="vm.pictureFiles[0]" />
-                                </div>
-                            </div>
-                            <input class="am-form-field" ng-model="vm.pictureDescription" placeholder="图片描述信息">
-                        </li>
-                    </ul>
-
-=======
                     <div class="btn btn-primary am-margin-horizontal"
                         ngf-change="vm.uploadPicture($file)"
                         ngf-select ng-model="vm.pictureFile"
@@ -49,17 +30,12 @@
                     <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
                     <img class="am-thumbnail" ng-src="{{ picture.fileUrl }}" ngf-src="vm.pictureFile" />
                     <input ng-model="vm.pavilion.pictures[$index].description">
->>>>>>> c21e217d768209e9f1bfe24ba6ba58b14c660af7
                 </div>
 
 
 
                 <div class="am-form-group am-text-right">
-<<<<<<< HEAD
-                    <button type="button" class="am-btn am-btn-primary">提交</button>
-=======
                     <button type="submit" class="am-btn am-btn-primary">提交</button>
->>>>>>> c21e217d768209e9f1bfe24ba6ba58b14c660af7
                 </div>
             </form>
         </div>

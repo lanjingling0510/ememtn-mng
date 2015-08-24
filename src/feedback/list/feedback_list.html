@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD:src/e_suggest/suggest.html
 <div class="am-container suggest">
 
         <div class="am-g am-margin-vertical">
@@ -49,44 +48,4 @@
     </div>
 </div>
 
-=======
-    <div class="am-u-sm-12">
-        <table class="am-table am-table-striped am-table-hover">
-            <thead>
-            <tr>
-                <th class="table-check"><input type="checkbox"></th>
-                <th class="table-id">用户ID</th>
-                <th class="table-title">建议摘要</th>
-                <th class=" am-hide-sm-only">日期</th>
-                <th class=" am-hide-sm-only">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="feedback in vm.feedbacks">
-                <td><input type="checkbox" ng-checked="feedback._checked" ng-model="vm.feedbacks[$index]._checked"></td>
-                <td>{{ ::feedback.user.username }}</td>
-                <td>{{ ::feedback.content }}</td>
-                <td class="am-hide-sm-only">{{ ::feedback.createdAt }}</td>
 
-                <td>
-                    <div class="am-btn-toolbar">
-                        <button class="am-btn am-text-danger am-btn-xs" style="background:#fff">
-                            <i class="am-icon-pencil-square-o"></i> 删除
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-            <tfoot>
-            <tr>
-                <td colspan="8">
-                    <button class="delete-btn am-btn am-btn-danger am-btn-sm" ng-click="vm.removeCheckedFeedbacks()">
-                        <i class="am-icon-trash-o"></i> 删除
-                    </button>
-                </td>
-            </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
->>>>>>> c21e217d768209e9f1bfe24ba6ba58b14c660af7:src/feedback/list/feedback_list.html

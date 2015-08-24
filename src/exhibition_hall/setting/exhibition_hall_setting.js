@@ -3,9 +3,9 @@ require('../../common/service.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.setting', [
-        'ui.router',
-        'sanya.common.services',
-    ]).config(moduleConfig)
+    'ui.router',
+    'sanya.common.services',
+]).config(moduleConfig)
     .controller('ExhibitionHallSettingController', ExhibitionHallSettingController);
 
 /* @ngInject */
@@ -33,7 +33,9 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
     }
 
     function uploadPicture(picture) {
-        if (!picture) { return false; }
+        if (!picture) {
+            return false;
+        }
         const url = `/apis/pavilions/${$stateParams.floor}/pictures`;
         UploadService(url, picture, 'pictures', {}).then((result) => { // eslint-disable-line new-cap
             const pictures = result.data.map(function (picUrl) {
