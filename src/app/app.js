@@ -10,9 +10,11 @@ require('../home/home.js');
 require('../admin/list/admins.js');
 require('../admin/register/register.js');
 
-require('../tourist/list/tourists.js');
-require('../group/list/groups.js');
-//=====================================================
+require('../attendant/list/attendant_list.js');
+require('../attendant/create/attendant_create.js');
+
+require('../tourist/list/tourist_list.js');
+
 require('../organizer/setting/organizer_setting.js');
 
 require('../exhibition_hall/setting/exhibition_hall_setting.js');
@@ -64,10 +66,10 @@ module.exports = angular.module('ememtn', [
     'sanya.home',
     'sanya.admins',
     'sanya.admins.register',
-    'sanya.tourists',
-    'sanya.groups',
+    'ememtn.tourist.list',
+    'ememtn.attendant.list',
+    'ememtn.attendant.create',
     'ememtn.feedback.list',
-    // 'ememtn.feedback.edit',
     'ememtn.organizer.setting',
     'ememtn.exhibition-hall.setting',
     'ememtn.exhibition.list',

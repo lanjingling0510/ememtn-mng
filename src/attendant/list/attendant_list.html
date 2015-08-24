@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <h1 class="page-header">在线客服管理</h1>
+</div>
+
+<div class="row">
+    <button ng-click="vm.removeCheckedAttendants()">删除</button>
+</div>
+
+<div class="col-sm-12 form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-1 control-label">状态</label>
+    <div class="col-sm-3">
+      <select class="form-control" ng-model="vm.querystring.status" ng-change="vm.fetchTourists(vm.querystring)">
+        <option value="enabled">冻结用户</option>
+        <option value="disabled">非冻结用户</option>
+      </select>
+    </div>
+
+    <label class="col-sm-1 control-label">电话</label>
+    <div class="col-sm-3">
+      <input type="search" class="form-control" ng-model="vm.querystring.phone" ng-change="vm.fetchTourists(vm.querystring, 200)">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><input type="checkbox" ng-model="vm.attendants._checked" ng-click="vm.checkAll()" /></th>
+          <th>帐号</th>
+          <th>名字</th>
+          <th>手机号</th>
+        </tr>
+      </thead>
+
+      <tfoot>
+          <tr>
+              <td colspan="4" class="text-center">
+                  <pagination total-items="vm.querystring.total"
+                              ng-model="vm.querystring.page"
+                              items-per-page="vm.querystring.pageSize"
+                              max-size="7"
+                              class="pagination-sm"
+                              boundary-links="true"
+                              direction-links="true"
+                              ng-change="vm.fetchTourists(vm.querystring)"
+                  ></pagination>
+              </td>
+          </tr>
+      </tfoot>
+
+      <tbody>
+        <tr ng-repeat='attendant in vm.attendants | orderBy: "-createdAt"'>
+          <td><input type="checkbox" ng-model="vm.attendants[$index]._checked"></td>
+          <td>{{ attendant.username }}</td>
+          <td>{{ attendant.nickname }}</td>
+          <td>{{ attendant.phone }}</td>
+        </tr>
+        <tr ui-view> </tr>
+      </tbody>
+    </table>
+</div>
