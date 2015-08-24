@@ -1,48 +1,57 @@
-<div class="row">
-    <div class="col-md-12 am-margin-top">
-        <form class="form-inline pull-right">
-            <div class="form-group">
-                <label for="platform-search">搜索</label>
-                <input type="text" class="form-control" ng-model="vm.filters.subject" id="platform-search" placeholder="请输入主题搜索帖子" ng-change="vm.filterChange(vm.filters)">
-            </div>
-        </form>
+
+<div class="am-container posts">
+    <div class="am-g am-margin-top">
+        <div class="am-u-sm-4">
+            <drop-down title="操作" toggle="am-btn-danger" class="am-margin-left">
+                <button class="am-btn am-btn-block">开始推送</button>
+                <button class="am-btn am-btn-block">停止推送</button>
+                <button class="am-btn am-btn-block">删除</button>
+            </drop-down>
+        </div>
+        <div class="am-u-sm-4">
+            <input type="text" class="am-form-field"  ng-model="vm.filters.subject" id="platform-search" placeholder="请输入主题搜索帖子" ng-change="vm.filterChange(vm.filters)">
+        </div>
+
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12 am-margin-vertical">
-        <table class="table table-striped table-hover">
+    <div class="row">
+        <div class="col-md-12 am-margin-vertical">
+            <table class="table table-striped table-hover">
 
-            <thead>
-            <tr>
-                <th class="table-check text-center">
-                    <input type="checkbox" ng-checked="vm.allChecked" ng-model="vm.allChecked" ng-change="vm.allCheckedChange()">
-                </th>
-                <th>ID</th>
-                <th>主题</th>
-                <th class="table-id">正文</th>
-                <th>发帖时间</th>
-                <th>帖子更新时间</th>
-            </tr>
-            </thead>
+                <thead>
+                <tr>
+                    <th class="table-check text-center">
+                        <input type="checkbox" ng-checked="vm.allChecked" ng-model="vm.allChecked" ng-change="vm.allCheckedChange()">
+                    </th>
+                    <th>ID</th>
+                    <th>主题</th>
+                    <th class="table-id">正文</th>
+                    <th>发帖时间</th>
+                    <th>帖子更新时间</th>
+                </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
+
                 <tr ng-repeat="post in vm.posts">
                     <td class="text-center"><input type="checkbox" ng-checked="post.checked" ng-model="post.checked"></td>
                     <td>{{post._id}}</td>
                     <td>{{post.subject}}</td>
-                    <td class="am-text-truncate"><a href="/posts/{{post._id}}">{{post.content}}</a></td>
+                    <td class="am-text-truncate"><a href="/posts/{{post.id}}">{{post.content}}</a></td>
                     <td class="am-hide-sm-only">{{post.createdAt}}</td>
                     <td class="am-hide-sm-only">{{post.updatedAt}}</td>
                 </tr>
-            </tbody>
-
-            <tfoot>
-                <th colspan="1">
-                    <button class="btn btn-danger btn-block" ng-click="vm.deletePosts()">删除</button>
-                </th>
-            </tfoot>
-
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+

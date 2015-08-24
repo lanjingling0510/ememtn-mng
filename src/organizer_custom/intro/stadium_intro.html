@@ -1,0 +1,51 @@
+<div class="am-container stadium-intro">
+    <hr/>
+    <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">版块名称</label>
+            <div class="am-u-sm-6">
+                <input type="text" placeholder="主办方介绍">
+            </div>
+            <div class="am-u-sm-3">
+                <a class="am-btn am-btn-block am-btn-danger" ui-sref="stadium_list">商品列表</a>
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">文字介绍</label>
+            <div class="am-u-sm-10">
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">电话</label>
+            <div class="am-u-sm-6">
+                <input type="tel"  placeholder="">
+            </div>
+            <div class="am-u-sm-4 am-text-danger">如有多个电话请用空格分离</div>
+        </div>
+
+        <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">图片</label>
+            <div class="am-u-sm-10">
+                <div class="btn btn-primary am-margin-horizontal am-margin-top-xs" ngf-change="scope.uploadChange($file)" ngf-select ng-model="scope.file" ngf-multiple="false" ngf-accept="'image/*'" accept="image/*">添加</div>
+                <small class="text-danger">最多添加六张</small>
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <ul class="am-avg-sm-6 am-thumbnails">
+                <li class="img-wrap" ng-repeat="file in scope.files">
+                    <span class="am-icon-times img-close" ng-click="scope.deleteFile(file)"></span>
+                    <img class="am-thumbnail"  ngf-src="file" />
+                </li>
+            </ul>
+        </div>
+
+        <div class="am-u-sm-2 am-u-sm-offset-2">
+                <button type="button" class="am-btn am-btn-danger am-btn-xl am-btn-block" ng-click="scope.submitNews()">保存</button>
+        </div>
+    </form>
+
+</div>

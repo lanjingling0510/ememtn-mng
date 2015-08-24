@@ -1,13 +1,15 @@
 require('./exhibition_hall_map.less');
 require('../../common/service.js');
 require('./exhibition_hall_map.service.js');
+require('./exhibition_hall_map.directive.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.map', [
-        'ui.router',
-        'sanya.common.services',
-        'ememtn.exhibition_hall.map.service',
-    ]).config(moduleConfig)
+    'ui.router',
+    'sanya.common.services',
+    'ememtn.exhibition_hall.map.service',
+    'ememtn.exhibition_hall.map.directive',
+]).config(moduleConfig)
     .controller('ExhibitionHallMapController', ExhibitionHallMapController);
 
 /* @ngInject */
@@ -44,23 +46,20 @@ function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService,
     const vm = this;
     vm.maps = maps;
     vm.map = maps[0];
+    vm.isSelect = false;
     fetchMap(vm.map);
-
     vm.fetchMap = fetchMap;
-
     vm.fetchLayers = fetchLayers;
     vm.fetchLayer = fetchLayer;
-
     vm.fetchFeatures = fetchFeatures;
-
     function fetchLayers(profileId) {
         MapService.MapLayer.query({
             profileId: profileId,
         }).$promise.then(function (layers) {
-            $scope.map.layers = layers;
-        }).catch(function (err) {
-            AlertService.warning(err.data || err.statusText);
-        });
+                $scope.map.layers = layers;
+            }).catch(function (err) {
+                AlertService.warning(err.data || err.statusText);
+            });
     }
 
     function fetchLayer(JCLayerName) {
@@ -68,10 +67,10 @@ function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService,
             profileId: vm.params.profileId,
             JCLayerName: JCLayerName,
         }).$promise.then(function (layer) {
-            $scope.map.layers[layer.JCLayerName] = layer;
-        }).catch(function (err) {
-            AlertService.warning(err.data || err.statusText);
-        });
+                $scope.map.layers[layer.JCLayerName] = layer;
+            }).catch(function (err) {
+                AlertService.warning(err.data || err.statusText);
+            });
     }
 
     function fetchFeatures(profileId, JCLayerName) {
@@ -79,10 +78,10 @@ function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService,
             profileId: profileId,
             JCLayerName: JCLayerName,
         }).$promise.then(function (features) {
-            $scope.map.layers[JCLayerName].features = features;
-        }).catch(function (err) {
-            AlertService.warning(err.data || err.statusText);
-        });
+                $scope.map.layers[JCLayerName].features = features;
+            }).catch(function (err) {
+                AlertService.warning(err.data || err.statusText);
+            });
     }
 
     function fetchMap(mapProfile) {
@@ -95,51 +94,51 @@ function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService,
         MapService.MapProfile.get({
             profileId: profileId,
         }).$promise.then(function (profile) {
-            map.profile = profile;
-            return MapService.MapLayer.query({
-                profileId: profileId,
-                JCObjId: JCObjId,
-                JCObjMask: JCObjMask,
-            }).$promise;
-        }).then(function (layers) {
-            layers.forEach(function (layer) {
-                const JCLayerName = layer.JCName;
-
-                layer.BKFields = layer.JCFields.split(' ').map(function (field) {
-                    const pats = field.split(',');
-                    return {
-                        name: pats[0],
-                        type: pats[1],
-                    };
-                });
-
-                layers[JCLayerName] = layer;
-            });
-            map.layers = layers;
-
-            const fetchFeaturesArray = layers.map(function (layer) {
-                return MapService.MapFeature.query({
+                map.profile = profile;
+                return MapService.MapLayer.query({
                     profileId: profileId,
                     JCObjId: JCObjId,
                     JCObjMask: JCObjMask,
-                    JCLayerName: layer.JCName,
                 }).$promise;
-            });
+            }).then(function (layers) {
+                layers.forEach(function (layer) {
+                    const JCLayerName = layer.JCName;
 
-            return $q.all(fetchFeaturesArray);
-        }).then(function (featuresArray) {
-            map.layers = map.layers.map(function (layer, index) {
-                const features = featuresArray[index];
-                features.forEach(function (feature) {
-                    features[feature.JCGUID] = feature;
+                    layer.BKFields = layer.JCFields.split(' ').map(function (field) {
+                        const pats = field.split(',');
+                        return {
+                            name: pats[0],
+                            type: pats[1],
+                        };
+                    });
+
+                    layers[JCLayerName] = layer;
+                });
+                map.layers = layers;
+
+                const fetchFeaturesArray = layers.map(function (layer) {
+                    return MapService.MapFeature.query({
+                        profileId: profileId,
+                        JCObjId: JCObjId,
+                        JCObjMask: JCObjMask,
+                        JCLayerName: layer.JCName,
+                    }).$promise;
                 });
 
-                layer.features = features;
-                return layer;
+                return $q.all(fetchFeaturesArray);
+            }).then(function (featuresArray) {
+                map.layers = map.layers.map(function (layer, index) {
+                    const features = featuresArray[index];
+                    features.forEach(function (feature) {
+                        features[feature.JCGUID] = feature;
+                    });
+
+                    layer.features = features;
+                    return layer;
+                });
+                MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
+            }).catch(function (err) {
+                AlertService.warning(err.data);
             });
-            MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
-        }).catch(function (err) {
-            AlertService.warning(err.data);
-        });
     }
 }

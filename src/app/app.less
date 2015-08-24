@@ -52,6 +52,36 @@ table tr td {
   }
 }
 
+.img-wrap {
+  position: relative;
+  .img-close {
+    position: absolute;
+    top: -9px;
+    right: -1px;
+    &:before {
+      background-color: #ff0000;
+      border-radius: 50%;
+      color: #fff;
+      padding: 3px 4px;
+    }
+    z-index: 1;
+  }
+  .img-content {
+    width: 100%;
+    position: relative;
+    padding-bottom: 70%;
+    overflow: hidden;
+    .img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #fff;
+    }
+  }
+}
+
 
 .page-header {
   text-align: center;
