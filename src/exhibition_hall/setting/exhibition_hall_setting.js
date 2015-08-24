@@ -18,18 +18,46 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionHallSettingController($stateParams, Restangular, AlertService) {
+function ExhibitionHallSettingController($stateParams, Restangular, UploadService, AlertService) {
     const vm = this;
-    vm.fetchExhibitionHallSettingByFloor = fetchExhibitionHallSettingByFloor;
-    vm.saveExhibitionHallSetting = saveExhibitionHallSetting;
-    fetchExhibitionHallSettingByFloor($stateParams.floor);
+    const Pavilion = Restangular.all('pavilions');
+    vm.fetchPavilionByFloor = fetchPavilionByFloor;
+    vm.uploadPicture = uploadPicture;
+    vm.removePicture = removePicture;
+    vm.savePavilion = savePavilion;
 
-    function fetchExhibitionHallSettingByFloor(floor) {
-        vm.exhibitionHallSetting = Restangular.one('exhibition-halls', floor).get().$object;
+    fetchPavilionByFloor($stateParams.floor);
+
+    function fetchPavilionByFloor() {
+        vm.pavilion = Pavilion.one($stateParams.floor).get().$object;
     }
 
-    function saveExhibitionHallSetting(setting) {
-        setting.save().then(() => {
+    function uploadPicture(picture) {
+        if (!picture) { return false; }
+        const url = `/apis/pavilions/${$stateParams.floor}/pictures`;
+        UploadService(url, picture, 'pictures', {}).then((result) => { // eslint-disable-line new-cap
+            const pictures = result.data.map(function (picUrl) {
+                return {
+                    fileUrl: picUrl,
+                    description: '',
+                };
+            });
+            Array.prototype.push.apply(vm.pavilion.pictures, pictures);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function removePicture(pictureIndex) {
+        Pavilion.one(vm.pavilion.floor).one('pictures', pictureIndex).remove().then(() => {
+            vm.pavilion.pictures.splice(pictureIndex, 1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function savePavilion(pavilion) {
+        Pavilion.one(pavilion.floor).doPUT(pavilion).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

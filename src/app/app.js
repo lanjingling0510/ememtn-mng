@@ -14,20 +14,24 @@ require('../tourist/list/tourists.js');
 require('../group/list/groups.js');
 //=====================================================
 require('../organizer/setting/organizer_setting.js');
+
 require('../exhibition_hall/setting/exhibition_hall_setting.js');
-require('../b_exhibitionAct/list/exhibitionAct_list.js');
-require('../b_exhibitionAct/create/exhibitionAct_create.js');
+
+require('../exhibition/list/exhibition_list.js');
+require('../exhibition/create/exhibition_create.js');
+
 require('../b_exhibitionDist/exhibitionDist.js');
-require('../d_news/list/news.js');
-require('../d_news/create/news_create.js');
+
+require('../news/list/news_list.js');
+require('../news/create/news_create.js');
+
 require('../d_information/list/information_list.js');
 require('../d_information/create/information_create.js');
 
-require('../e_posts/list/posts.js');
-require('../e_posts/detail/posts_detail.js');
-require('../e_suggest/suggest.js');
-//=====================================================
-require('../feedback/list/feedbacks.js');
+require('../post/list/post_list.js');
+require('../post/detail/post_detail.js');
+
+require('../feedback/list/feedback_list.js');
 require('../feedback/edit/feedback_edit.js');
 
 require('../treasure_game_map/list/treasure_game_map_list.js');
@@ -50,6 +54,9 @@ require('../infrastructure/list/infrastructure_list.js');
 require('../infrastructure/create/infrastructure_create.js');
 require('../infrastructure/edit/infrastructure_edit.js');
 
+require('../info/list/info_list.js');
+require('../info/create/info_create.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -60,16 +67,16 @@ module.exports = angular.module('ememtn', [
     'sanya.admins.register',
     'sanya.tourists',
     'sanya.groups',
-    'sanya.feedbacks',
+    'ememtn.feedback.list',
+    // 'ememtn.feedback.edit',
     'ememtn.organizer.setting',
     'ememtn.exhibition-hall.setting',
-    'ememtn.exhibitionAct',
-    'ememtn.exhibitionAct.create',
+    'ememtn.exhibition.list',
+    'ememtn.exhibition.create',
     'ememtn.exhibitionDist',
-    'ememtn.posts',
-    'ememtn.posts.detail',
-    'ememtn.suggest',
-    'ememtn.news',
+    'ememtn.post.list',
+    'ememtn.post.detail',
+    'ememtn.news.list',
     'ememtn.news.create',
     'ememtn.information',
     'ememtn.information.create',
@@ -79,10 +86,11 @@ module.exports = angular.module('ememtn', [
     'ememtn.beacon.edit',
     'ememtn.area.list',
     'ememtn.area.create',
+    'ememtn.info.list',
+    'ememtn.info.create',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
     'sanya.treasure_game_map_create',
-    'sanya.feedback_edit',
     'sanya.roulette_game',
 ]).config(moduleConfig).run(moduleRun);
 
@@ -91,6 +99,7 @@ function moduleConfig($urlRouterProvider, $locationProvider, RestangularProvider
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise('/');
     RestangularProvider.setBaseUrl('/apis');
+    RestangularProvider.setRestangularFields({ id: '_id' });
 }
 
 /* @ngInject */

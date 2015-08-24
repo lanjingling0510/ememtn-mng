@@ -1,36 +1,33 @@
+require('./news_create.less');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.organizer.setting', [
+module.exports = angular.module('ememtn.news.create', [
     'ui.router',
     'restangular',
+    'sanya.common.services',
 ]).config(moduleConfig)
-    .controller('OrganizerSettingController', OrganizerSettingController);
+    .controller('NewsCreateController', NewsCreateController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('organizer-setting', {
-        url: '/organizer',
-        template: require('./organizer_setting.html'),
-        controller: 'OrganizerSettingController as vm',
+    $stateProvider.state('news-create', {
+        url: '/news/create',
+        template: require('./news_create.html'),
+        controller: 'NewsCreateController as vm',
     });
 }
 
-/* @ngInject*/
-function OrganizerSettingController(Restangular, UploadToTempService, AlertService) {
+/* @ngInject */
+function NewsCreateController(AlertService, Restangular, UploadToTempService) {
     const vm = this;
-    const Organizer = Restangular.one('organizer');
-    vm.organizer = {
-        pictures: [],
-    };
+    const News = Restangular.all('newses');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
-    vm.setOrganizer = setOrganizer;
-    fetchSponsorConfig();
-
-    function fetchSponsorConfig() {
-        vm.organizer = Organizer.get().$object;
-    }
+    vm.submitNews = submitNews;
+    vm.news = {
+        pictures: [],
+    };
 
     function uploadFile(files) {
         if (!files || files.length === 0) { return false; }
@@ -42,7 +39,7 @@ function OrganizerSettingController(Restangular, UploadToTempService, AlertServi
                     isNew: true,
                 };
             });
-            vm.organizer.pictures = vm.organizer.pictures.concat(pictures);
+            vm.news.pictures = vm.news.pictures.concat(pictures);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
@@ -51,23 +48,23 @@ function OrganizerSettingController(Restangular, UploadToTempService, AlertServi
     function deleteNewFile(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
-            vm.organizer.pictures.splice(index, 1);
+            vm.news.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
     function deleteOldFile(picture, index) {
-        vm.organizer.one('pictures', index).remove().then(() => {
-            vm.organizer.pictures.splice(index, 1);
+        vm.news.one('pictures', index).remove().then(() => {
+            vm.news.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
-    function setOrganizer(organizer) {
-        Organizer.doPOST(organizer, '').then(() => {
-            AlertService.success('设置成功');
+    function submitNews(news) {
+        News.post(news).then(() => {
+            AlertService.success('发布成功');
         }).catch((err) => {
             AlertService.warning(err.data);
         });

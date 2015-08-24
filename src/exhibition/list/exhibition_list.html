@@ -1,0 +1,29 @@
+<div class="am-container exhibition-list">
+    <div class="am-g am-margin-bottom">
+        <div class="am-u-sm-1 text-center">
+            <input type="checkbox"/>
+        </div>
+        <div class="am-u-sm-3">
+            <drop-down title="操作" toggle="am-btn-danger" class="am-margin-left">
+                <button class="am-btn am-btn-block">开始推送</button>
+                <button class="am-btn am-btn-block">停止推送</button>
+                <button class="am-btn am-btn-block">删除</button>
+            </drop-down>
+        </div>
+        <div class="am-u-sm-2">
+            <a class="am-btn am-btn-danger am-fr" ui-sref="exhibition-create">添加活动</a>
+        </div>
+    </div>
+
+    <my-collapse class="am-panel-default" content="heheheheheeeee">
+        <ul ng-repeat="exhibition in vm.exhibitions">
+            <li><input type="checkbox" ng-checked="exhibition.checked" ng-model="vm.exhibition[$index].checked"/></li>
+            <li>{{ exhibition.subject }}</li>
+            <li>{{ exhibition.content }}</li>
+            <li>{{ exhibition.createdAt }}</li>
+            <li>{{ exhibition.pushStatus }}</li>
+            <li class="am-icon-sort-desc"></li>
+        </ul>
+    </my-collapse>
+
+</div>
