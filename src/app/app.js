@@ -22,6 +22,7 @@ require('../exhibition_hall/map/exhibition_hall_map.js');
 
 require('../exhibition/list/exhibition_list.js');
 require('../exhibition/create/exhibition_create.js');
+require('../exhibition/dist/exhibition_dist.js');
 
 require('../news/list/news_list.js');
 require('../news/create/news_create.js');
@@ -82,6 +83,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibition-hall.setting',
     'ememtn.exhibition-hall.map',
     'ememtn.exhibition.list',
+    'ememtn.exhibition.dist',
     'ememtn.exhibition.create',
     'ememtn.post.list',
     'ememtn.post.detail',
