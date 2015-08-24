@@ -1,12 +1,12 @@
 require('./exhibition_dist.less');
 require('../../common/service.js');
 const angular = require('angular');
-const config = require('../../config.json');
+//const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.exhibition.dist', [
-        'ui.router',
-        'sanya.common.services',
-    ]).config(moduleConfig)
+    'ui.router',
+    'sanya.common.services',
+]).config(moduleConfig)
     .controller('ExhibitionDistController', ExhibitionDistController)
     .controller('ExhibitionDistDetailController', ExhibitionDistDetailController);
 
@@ -58,7 +58,9 @@ function ExhibitionDistDetailController($stateParams, floors, Restangular, Uploa
     }
 
     function uploadFile(files) {
-        if (!files || files.length === 0) { return false; }
+        if (!files || files.length === 0) {
+            return false;
+        }
         UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
             const pictures = fileUrls.map(function (fileUrl) {
                 return {
