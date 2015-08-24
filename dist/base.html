@@ -32,33 +32,33 @@
               </accordion-group>
 
               <accordion-group heading="展会指南管理">
-                  <div><a class="menu-link" ui-sref="admins">展商信息</a></div>
+                  <div><a class="menu-link" ui-sref="exhibition-hall-map.exhibitor-list({ floor: '1F' })">展商信息</a></div>
                   <div><a class="menu-link" ui-sref="exhibition-list">展会活动</a></div>
                   <div><a class="menu-link" ui-sref="exhibitionDist">展会分布</a></div>
               </accordion-group>
 
               <accordion-group heading="展区导航管理">
                 <div><a class="menu-link" ui-sref="exhibition-hall-map.beacon-list({ floor: '1F' })">信标管理</a></div>
-                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">展区管理</a></div>
-                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">展商管理</a></div>
-                <div><a class="menu-link" ui-sref="exhibition-hall.area-list">设施管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall-map.exhibition-list">展区管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall-map.exhibitor-list">展商管理</a></div>
+                <div><a class="menu-link" ui-sref="exhibition-hall-map.infrastructure-list">设施管理</a></div>
               </accordion-group>
 
               <accordion-group heading="新闻资讯管理">
                 <div><a class="menu-link" ui-sref="news-list">新闻管理</a></div>
                 <div><a class="menu-link" ui-sref="info-list">展会资讯管理</a></div>
-                <!--<div><a class="menu-link" ui-sref="prize-exchange">用户信箱消息推送</a></div>-->
               </accordion-group>
 
-              <accordion-group heading="游戏管理">
-                <div><a class="menu-link" ui-sref="treasury_game">寻宝游戏管理</a></div>
-                <div><a class="menu-link" ui-sref="roulette_game">轮盘游戏管理</a></div>
+              <accordion-group heading="寻宝活动管理">
+                <div><a class="menu-link" ui-sref="treasury_game">活动参数</a></div>
+                <div><a class="menu-link" ui-sref="roulette_game">抽奖设置</a></div>
+                <div><a class="menu-link" ui-sref="prize-exchange">兑奖系统</a></div>
               </accordion-group>
 
               <accordion-group heading="信息中心管理">
                   <div><a class="menu-link" ui-sref="post-list">展会论坛</a></div>
                   <div><a class="menu-link" ui-sref="feedback-list">投诉建议</a></div>
-                  <div><a class="menu-link" ui-sref="platform">用户信箱消息推送</a></div>
+                  <div><a class="menu-link" ui-sref="message-push">用户信箱消息推送</a></div>
               </accordion-group>
 
               <accordion-group heading="用户管理">
@@ -67,8 +67,8 @@
               </accordion-group>
 
               <accordion-group heading="其它">
-                <div><a class="menu-link">系统消息</a></div>
-                <div><a class="menu-link" ui-sref="news">首页版块名字修改</a></div>
+                <div><a class="menu-link" ui-sref="message-list">系统消息</a></div>
+                <div><a class="menu-link" ui-sref="page-structure-setting">首页版块名字修改</a></div>
               </accordion-group>
             </accordion>
         </aside>

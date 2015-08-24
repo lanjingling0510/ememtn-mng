@@ -12,7 +12,7 @@ module.exports = angular.module('ememtn.infrastructure.edit', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('exhibition-hall.infrastructure-edit', {
         url: '/infrastructures/:infrastructureId',
-        template: require('./infrastructure_edit.html'),
+        template: require('./infrastructure_inline_edit.html'),
         controller: 'InfrastructureEditController as vm',
     });
 }
