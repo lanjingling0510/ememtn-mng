@@ -66,7 +66,6 @@ function mapContainer() {
         canvas.clearPolygons();
         vm.positionStr = '';
     }
-
 }
 
 

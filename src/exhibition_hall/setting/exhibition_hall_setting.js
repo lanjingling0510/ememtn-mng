@@ -59,6 +59,7 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
     }
 
     function savePavilion(pavilion) {
+        // PUT  /apis/pavilions/F1
         Pavilion.one(pavilion.floor).doPUT(pavilion).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {

@@ -16,23 +16,28 @@
 
     <form class="am-form am-form-horizontal">
         <div class="am-form-group">
-            <label class="am-u-sm-2 am-form-label">活动时间</label>
+            <label class="am-u-sm-offset-1 am-u-sm-2 am-form-label">活动时间</label>
 
             <div class="am-u-sm-4">
                 <input type="text" placeholder="请输入开始时间" ng-model="vm.exhibition.startAt">
             </div>
-            <div class="am-u-sm-1 text-center">至</div>
+            <div class="am-u-sm-1 text-center">
+                <label class="am-form-label">至</label>
+            </div>
             <div class="am-u-sm-4 am-u-end">
                 <input type="text" placeholder="请输入截止时间" ng-model="vm.exhibition.endAt">
             </div>
         </div>
+
+        <div class="am-form-group">
+            <label class="am-u-sm-offset-1 am-u-sm-2 am-form-label">展会主题</label>
+            <div class="am-u-sm-9 am-u-end">
+                <input class="am-form-field"  placeholder="输入文字介绍" ng-model="vm.exhibition.subject" />
+            </div>
+        </div>
     </form>
 
-    <form class="am-form am-form">
-        <div class="am-form-group">
-            <label>展会主题</label>
-            <input placeholder="输入文字介绍" ng-model="vm.exhibition.subject" />
-        </div>
+    <form class="am-form">
         <div class="am-form-group">
             <label>展会内容</label>
             <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.exhibition.content"></textarea>

@@ -15,13 +15,12 @@
         </div>
     </div>
 
-    <my-collapse class="am-panel-default" content="heheheheheeeee">
-        <ul ng-repeat="exhibition in vm.exhibitions">
+    <my-collapse class="am-panel-default" content="heheheheheeeee" ng-repeat="exhibition in vm.exhibitions">
+        <ul>
             <li><input type="checkbox" ng-checked="exhibition.checked" ng-model="vm.exhibition[$index].checked"/></li>
             <li>{{ exhibition.subject }}</li>
             <li>{{ exhibition.content }}</li>
             <li>{{ exhibition.createdAt }}</li>
-            <li>{{ exhibition.pushStatus }}</li>
             <li class="am-icon-sort-desc"></li>
         </ul>
     </my-collapse>
