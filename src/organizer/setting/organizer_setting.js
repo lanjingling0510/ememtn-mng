@@ -18,18 +18,15 @@ function moduleConfig($stateProvider) {
 /* @ngInject*/
 function OrganizerSettingController(Restangular, UploadToTempService, AlertService) {
     const vm = this;
-    const Organizer = Restangular.one('organizer');
-    vm.organizer = {
-        pictures: [],
-    };
+    const Organizer = Restangular.all('organizer');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
-    vm.setOrganizer = setOrganizer;
+    vm.updateOrganizer = updateOrganizer;
     fetchSponsorConfig();
 
     function fetchSponsorConfig() {
-        vm.organizer = Organizer.get().$object;
+        vm.organizer = Organizer.doGET().$object;
     }
 
     function uploadFile(files) {
@@ -42,7 +39,8 @@ function OrganizerSettingController(Restangular, UploadToTempService, AlertServi
                     isNew: true,
                 };
             });
-            vm.organizer.pictures = vm.organizer.pictures.concat(pictures);
+            if (!vm.organizer.pictures) { vm.organizer.pictures = []; }
+            Array.prototype.push.apply(vm.organizer.pictures, pictures);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
@@ -65,8 +63,10 @@ function OrganizerSettingController(Restangular, UploadToTempService, AlertServi
         });
     }
 
-    function setOrganizer(organizer) {
-        Organizer.doPOST(organizer, '').then(() => {
+    function updateOrganizer(organizer) {
+        console.log(organizer.pictures);
+        organizer.put().then(() => {
+            organizer.pictures.forEach((pic) => pic.isNew = false);
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);
