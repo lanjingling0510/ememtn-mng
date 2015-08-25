@@ -4,15 +4,16 @@ let isScale = false;
 const pointList = [];
 let currentPoint;
 let isBuildComplete = false;
-let scope;
-let vm;
+let getPositionListCallback;
 
-module.exports.init = function (container, sp) {
-    map = container;
+module.exports.init = init;
+module.exports.clearPolygons = clearPolygons;
+
+
+function init(options) {
+    map = options.map;
+    getPositionListCallback = options.getPositionList;
     ctx = map[0].getContext('2d');
-    scope = sp;
-    vm = scope.vm;
-    vm.clearPolygons = clearPolygons;
     background();
     map.on('mousedown', mousedown);
     map.on('mousemove', mousemove);
@@ -20,7 +21,7 @@ module.exports.init = function (container, sp) {
     $(document).on('contextmenu', function () {
         return false;
     });
-};
+}
 
 function background() {
     ctx.clearRect(0, 0, 3948, 3000);  //  擦除画面
@@ -38,18 +39,22 @@ function mousedown(e) {
             }
         });
     } else {        //  正在构建编辑框
-        background();
         if (e.which === 3) {     //    右击鼠标事件(结束编辑)
-            if (pointList.length < 3) {
-                pointList.length = 0;
-            } else {
+            background();
+            if (pointList.length === 1) {
                 isBuildComplete = true;
-                getpositionList();
+                getpositionList(getPositionListCallback);
+                pointList[0].draw();
+            } else if (pointList.length >= 3) {
+                isBuildComplete = true;
+                getpositionList(getPositionListCallback);
                 polygons(ctx, pointList);
                 buildAddPoints(pointList);
                 pointList.forEach(function (value) {
                     value.draw();
                 });
+            } else {
+                pointList.length = 0;
             }
         } else {
             const point = new Point(ctx);
@@ -77,7 +82,7 @@ function mousemove(e) {
             pointList.forEach(function (value) {
                 value.draw();
             });
-            getpositionList();
+            getpositionList(getPositionListCallback);
         }
     } else {        //  正在构建编辑框
         e.stopPropagation();
@@ -135,7 +140,7 @@ function buildAddPoints(list) {
     let y;
     let current;
     let next;
-    for (let i = list.length; i--;) {
+    for (let i = list.length; i--; ) {
         current = list[i];
         next = i === list.length - 1 ? list[0] : list[i + 1];
         x = (current.x + next.x) / 2;
@@ -151,15 +156,14 @@ function clearPolygons() {
     isBuildComplete = false;
 }
 
-function getpositionList() {
+function getpositionList(callback) {
     const positionList = [];
     pointList.forEach(function (value) {
         if (!value.isAddPoint) {
             positionList.push(value.x, value.y);
         }
     });
-    vm.positionStr = positionList.join(',');
-    scope.$apply();
+    callback(positionList);
 }
 
 
