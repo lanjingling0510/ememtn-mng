@@ -6,6 +6,7 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.exhibition-area.virtual', [
     'ui.router',
     'sanya.common.services',
+    'ememtn.exhibition-hall.map',
 ]).config(moduleConfig)
     .controller('ExhibitionAreaVirtualController', ExhibitionAreaVirtualController);
 
