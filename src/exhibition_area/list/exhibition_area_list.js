@@ -19,63 +19,27 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaListController($stateParams, Restangular, UploadToTempService, AlertService) {
+function ExhibitionAreaListController($scope, Restangular, UploadToTempService, AlertService) {
     const vm = this;
-    const ExhibitionArea = Restangular.one('exhibition-areas');
-    vm.floors = floors;
-    const floor = $stateParams.floor.split(':');
-    vm.exhibitionArea = {
-        JCObjId: floor.unshift(),
-        JCObjMask: floor.unshift(),
-        pictures: [],
-    };
-    vm.uploadFile = uploadFile;
-    vm.deleteNewFile = deleteNewFile;
-    vm.deleteOldFile = deleteOldFile;
+    const ExhibitionArea = Restangular.all('exhibition-areas');
     vm.setExhibitionArea = setExhibitionArea;
-    fetchExhibitionArea($stateParams.floor);
 
-    function fetchExhibitionArea(floorId) {
-        vm.exhibitionArea = ExhibitionArea.one(floorId).get().$object;
+    $scope.$on('floor-change', onFloorChange);
+
+    function fetchExhibitionAreas(map) {
+        vm.exhibitionAreas = ExhibitionArea.getList({
+            JCObjId: map.JCObjId,
+            JCObjMask: map.JCObjMask,
+        }).$object;
     }
 
-    function uploadFile(files) {
-        if (!files || files.length === 0) {
-            return false;
-        }
-        UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
-            const pictures = fileUrls.map(function (fileUrl) {
-                return {
-                    fileUrl: fileUrl,
-                    description: '',
-                    isNew: true,
-                };
-            });
-            vm.exhibitionArea.pictures = vm.exhibitionArea.pictures.concat(pictures);
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
-    }
-
-    function deleteNewFile(picture, index) {
-        const filename = picture.fileUrl.split('/').pop();
-        UploadToTempService.remove(filename).then(() => {
-            vm.exhibitionArea.pictures.splice(index, 1);
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
-    }
-
-    function deleteOldFile(picture, index) {
-        vm.exhibitionArea.one('pictures', index).remove().then(() => {
-            vm.exhibitionArea.pictures.splice(index, 1);
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
+    function onFloorChange(event, data) {
+        vm.map = data;
+        fetchExhibitionAreas(vm.map);
     }
 
     function setExhibitionArea(exhibitionArea) {
-        ExhibitionArea.doPUT(exhibitionArea, $stateParams.floor).then(() => {
+        ExhibitionArea.doPUT(exhibitionArea, vm.map).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

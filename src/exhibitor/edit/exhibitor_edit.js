@@ -12,7 +12,7 @@ module.exports = angular.module('ememtn.organizer-custom.create', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('organizer-custom-create', {
         url: '/organizer-customs/_create',
-        template: require('./organizer_custom_create.html'),
+        template: require('./exhibitor_edit.html'),
         controller: 'OrganizerCustomCreateController as vm',
     });
 }

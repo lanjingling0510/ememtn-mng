@@ -40,8 +40,7 @@ require('../treasure_game/config/treasury_game.js');
 require('../roulette_game/config/roulette_game.js');
 
 require('../beacon/list/beacon_list.js');
-require('../beacon/create/beacon_create.js');
-require('../beacon/edit/beacon_edit.js');
+require('../beacon/inline_edit/beacon_inline_edit.js');
 
 require('../area/list/area_list.js');
 require('../area/create/area_create.js');
@@ -68,9 +67,13 @@ require('../page_structure/setting/page_structure_setting.js');
 require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
+// require('../exhibitor/edit/exhibitor_edit.js');
+// require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
+// require('../exhibitor/import/exhibitor_import.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
+require('../exhibition_area/virtual/exhibition_area_virtual.js');
 
 module.exports = angular.module('ememtn', [
     'ui.router',
@@ -87,7 +90,6 @@ module.exports = angular.module('ememtn', [
     'ememtn.feedback.list',
     'ememtn.organizer.setting',
     'ememtn.exhibition-hall.setting',
-    'ememtn.exhibition-hall.map',
     'ememtn.exhibition.list',
     'ememtn.exhibition.dist',
     'ememtn.exhibition.create',
@@ -96,8 +98,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.news.list',
     'ememtn.news.create',
     'ememtn.beacon.list',
-    'ememtn.beacon.create',
-    'ememtn.beacon.edit',
+    'ememtn.beacon.inline-edit',
     'ememtn.area.list',
     'ememtn.area.create',
     'ememtn.info.list',
@@ -109,7 +110,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.organizer-custom.list',
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',
-    'ememtn.exhibitor.list',
+    'ememtn.exhibitor.listtests',
     'ememtn.exhibitor.guide',
     'ememtn.infrastructure.list',
     'ememtn.infrastructure.inline-edit',
