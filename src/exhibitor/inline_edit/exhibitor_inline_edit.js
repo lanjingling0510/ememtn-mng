@@ -20,5 +20,8 @@ function moduleConfig($stateProvider) {
 
 /* @ngInject */
 function ExhibitorInlineEditController(AlertService) {
-
+    const vm = this;
+    vm.exhibitor = {
+        _id: 'tgyhu',
+    };
 }

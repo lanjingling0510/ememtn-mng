@@ -1,15 +1,25 @@
 <div class="am-g news-create" >
     <ol class="am-breadcrumb ng-scope">
-        <li><a class="am-text-lg am-icon-star" ui-sref="organizer-custom-list">主办方自定义类型管理</a></li>
-        <li class="am-active">添加自定义类型</li>
+        <li><a class="am-text-lg am-icon-star" ui-sref="organizer-custom-list">参展商管理</a></li>
+        <li class="am-active">参展商信息查看</li>
     </ol>
     <hr>
 
     <div class="am-u-sm-12 am-margin-bottom">
         <div class="am-form-inline" role="form">
             <div class="am-form-group">
-                <label class="am-form-label">名字</label>
+                <label class="am-form-label">展商名字</label>
                 <input type="text" ng-model="vm.news.subject" class="am-form-field" placeholder="请输入标题">
+            </div>
+            <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品列表</a>
+        </div>
+    </div>
+
+    <div class="am-u-sm-12 am-margin-bottom">
+        <div class="am-form-inline" role="form">
+            <div class="am-form-group">
+                <label class="am-form-label">所属区域</label>
+                <span>{{ ::vm.exhibitor.area.name }}</span>
             </div>
         </div>
     </div>
@@ -17,7 +27,7 @@
     <div class="am-u-sm-12">
         <form class="am-form" ng-submit="vm.submitNews(vm.news)">
             <div class="am-form-group">
-                <label>正文内容</label>
+                <label>文字介绍</label>
                 <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.news.content"></textarea>
             </div>
 

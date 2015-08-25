@@ -67,13 +67,16 @@ require('../page_structure/setting/page_structure_setting.js');
 require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
-// require('../exhibitor/edit/exhibitor_edit.js');
-// require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
+require('../exhibitor/edit/exhibitor_edit.js');
+require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
 // require('../exhibitor/import/exhibitor_import.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
 require('../exhibition_area/virtual/exhibition_area_virtual.js');
+
+require('../exhibit/create/exhibit_create.js');
+require('../exhibit/list/exhibit_list.js');
 
 module.exports = angular.module('ememtn', [
     'ui.router',
@@ -110,11 +113,15 @@ module.exports = angular.module('ememtn', [
     'ememtn.organizer-custom.list',
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',
-    'ememtn.exhibitor.listtests',
+    'ememtn.exhibitor.list',
     'ememtn.exhibitor.guide',
+    'ememtn.exhibitor.inline-edit',
+    'ememtn.exhibitor.edit',
     'ememtn.infrastructure.list',
     'ememtn.infrastructure.inline-edit',
     'ememtn.infrastructure.inline-create',
+    'ememtn.exhibit.create',
+    'ememtn.exhibit.list',
     'sanya.prize.exchange',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
