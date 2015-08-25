@@ -15,7 +15,7 @@ module.exports = angular.module('ememtn.exhibition-hall.map', [
 /* @ngInject */
 function moduleConfig($stateProvider) {
     $stateProvider.state('exhibition-hall-map', {
-        url: '/exhibition-hall/:floor/map',
+        url: '/exhibition-hall_map',
         template: require('./exhibition_hall_map.html'),
         controller: 'ExhibitionHallMapController as vm',
         resolve: {
@@ -137,8 +137,15 @@ function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService,
                     return layer;
                 });
                 MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
+                floorChange(map);
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });
+    }
+
+    function floorChange(map) {
+        $scope.$broadcast('map-change', {
+            map: map,
+        });
     }
 }

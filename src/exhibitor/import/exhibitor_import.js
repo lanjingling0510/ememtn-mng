@@ -1,5 +1,5 @@
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../list/exhibitor_list.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.beacon.create', [
@@ -12,7 +12,7 @@ module.exports = angular.module('ememtn.beacon.create', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('exhibition-hall.beacon-create', {
         url: '/beacons/new',
-        template: require('./beacon_create.html'),
+        template: require('./exhibitor_import.html'),
         controller: 'BeaconCreateController as vm',
     });
 }

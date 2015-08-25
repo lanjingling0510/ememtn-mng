@@ -1,5 +1,5 @@
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../../exhibition_area/virtual/exhibition_area_virtual.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.beacon.list', [
@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.beacon.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.beacon-list', {
+    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.beacon-list', {
         url: '/beacons',
         template: require('./beacon_list.html'),
         controller: 'BeaconListController as vm',
