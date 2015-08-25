@@ -21,12 +21,21 @@ function mapContainer() {
     function link(scope, element) {
         map = $(element[0]);
         map.height(document.documentElement.clientHeight * 0.9);
-        canvas.init($('#mapCanvas'), scope);
         vm = scope.vm;
+        vm.positionStr = '';
+        vm.clearPolygons = clearPolygons;
+        canvas.init({
+            map: $('#mapCanvas'),
+            getPositionList: function (list) {
+                vm.positionStr = list.join(',');
+                scope.$apply();
+            },
+        });
         $(element[0]).on('mousedown', mousedown);
         $(document).on('mousemove', mousemove);
         $(document).on('mouseup', mouseup);
     }
+
     function mousedown(e) {
         e.preventDefault();
         point.nowX = e.pageX;
@@ -37,6 +46,7 @@ function mapContainer() {
     function mousemove(e) {
         if (!isMove) return;
         e.preventDefault();
+        map.css('cursor', 'pointer');
         let disX;
         let disY;
         disX = e.pageX - point.nowX;
@@ -49,5 +59,14 @@ function mapContainer() {
 
     function mouseup() {
         isMove = false;
+        map.css('cursor', 'auto');
     }
+
+    function clearPolygons() {
+        canvas.clearPolygons();
+        vm.positionStr = '';
+    }
+
 }
+
+
