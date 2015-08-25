@@ -19,16 +19,35 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function InfrastructureListController($scope, Restangular, AlertService) {
+function InfrastructureListController($scope, $state, Restangular, AlertService) {
     const vm = this;
     const Infrastructure = Restangular.all('infrastructures');
+    vm.editMode = editMode;
 
     $scope.$on('area-change', onAreaChange);
 
     function onAreaChange(event, data) {
         const exhibitionArea = data;
-        vm.infrastructures = Infrastructure.getList({
-            areaId: exhibitionArea._id,
-        }).$object;
+
+        /* fake data */
+        vm.infrastructures = [
+            { name: 'inf1' },
+            { name: 'inf2' },
+            { name: 'inf3' },
+            { name: 'inf4' },
+            { name: 'inf5' },
+            { name: 'inf6' },
+        ];
+        /* fake data */
+
+        // vm.infrastructures = Infrastructure.getList({
+        //     areaId: exhibitionArea._id,
+        // }).$object;
+    }
+
+    function editMode(infrastructure) {
+        $state.go('exhibition-hall-map.exhibition-area-virtual.infrastructure-list.infrastructure-inline-edit', {
+            infrastructureId: infrastructure.name,
+        });
     }
 }

@@ -1,6 +1,6 @@
 <div class="col-sm-12">
     <ul>
-        <li ng-repeat="infrastructure in vm.infrastructures">{{ infrastructure.name }}</li>
+        <li ng-repeat="infrastructure in vm.infrastructures" ng-click="vm.editMode(infrastructure)">{{ infrastructure.name }}</li>
     </ul>
 
     <ui-view />
