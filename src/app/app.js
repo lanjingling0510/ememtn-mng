@@ -73,6 +73,7 @@ require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
+require('../exhibition_area/inline_edit/exhibition_area_inline_edit.js');
 require('../exhibition_area/virtual/exhibition_area_virtual.js');
 
 require('../exhibit/create/exhibit_create.js');
@@ -88,6 +89,7 @@ module.exports = angular.module('ememtn', [
     'sanya.admins.register',
     'ememtn.tourist.list',
     'ememtn.exhibition-area.list',
+    'ememtn.exhibition-area.inline-edit',
     'ememtn.attendant.list',
     'ememtn.attendant.create',
     'ememtn.feedback.list',
