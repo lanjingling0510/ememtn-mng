@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.infrastructure.inline-create', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.infrastructure-list.infrastructure-inline-create', {
+    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.infrastructure-list.infrastructure-inline-create', {
         url: '/_create',
         template: require('./infrastructure_inline_create.html'),
         controller: 'InfrastructureInlineCreateController as vm',
