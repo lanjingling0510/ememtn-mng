@@ -1,0 +1,25 @@
+<div class="am-container notification-create">
+    <div class="am-g">
+        <div class="am-u-sm-6">
+            <ol class="am-breadcrumb">
+                <li><a class="am-icon-star" ui-sref="notification-list">推送通知</a></li>
+                <li class="  am-active">推送</li>
+            </ol>
+        </div>
+        <div class="am-u-sm-2">
+            <a class="am-btn am-btn-block am-btn-danger" ng-click="vm.createMessage(vm.notification)">确定并推送</a>
+        </div>
+    </div>
+    <hr>
+
+    <form class="am-form am-form">
+        <div class="am-form-group">
+            <label>通知主题</label>
+            <input ng-model="vm.notification.subject" />
+        </div>
+        <div class="am-form-group">
+            <label>通知内容</label>
+            <textarea rows="12" ng-model="vm.notification.content"></textarea>
+        </div>
+    </form>
+</div>

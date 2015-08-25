@@ -1,4 +1,4 @@
-require('./exhibition_dist.less');
+require('./exhibition_hall_area.less');
 require('../../common/service.js');
 const angular = require('angular');
 //const config = require('../../config.json');
@@ -8,7 +8,7 @@ module.exports = angular.module('ememtn.exhibition.dist', [
     'sanya.common.services',
 ]).config(moduleConfig)
     .controller('ExhibitionDistController', ExhibitionDistController)
-    .controller('ExhibitionDistDetailController', ExhibitionDistDetailController);
+    .controller('ExhibitionHallAreaController', ExhibitionHallAreaController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
@@ -23,8 +23,8 @@ function moduleConfig($stateProvider) {
         },
     }).state('exhibition-dist.detail', {
         url: '/:floor',
-        template: require('./exhibition_dist.html'),
-        controller: 'ExhibitionDistDetailController as vm',
+        template: require('./exhibition_hall_area.html'),
+        controller: 'ExhibitionHallAreaController as vm',
     });
 }
 
@@ -37,7 +37,7 @@ function ExhibitionDistController($state, floors) {
 }
 
 /* @ngInject */
-function ExhibitionDistDetailController($stateParams, floors, Restangular, UploadToTempService, AlertService) {
+function ExhibitionHallAreaController($stateParams, floors, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const ExhibitionDist = Restangular.one('exhibition-dists');
     vm.floors = floors;

@@ -19,10 +19,10 @@ require('../organizer/setting/organizer_setting.js');
 
 require('../exhibition_hall/setting/exhibition_hall_setting.js');
 require('../exhibition_hall/map/exhibition_hall_map.js');
+require('../exhibition_hall/area/exhibition_hall_area.js');
 
 require('../exhibition/list/exhibition_list.js');
 require('../exhibition/create/exhibition_create.js');
-require('../exhibition/dist/exhibition_dist.js');
 
 require('../news/list/news_list.js');
 require('../news/create/news_create.js');
@@ -60,12 +60,17 @@ require('../organizer_custom/create/organizer_custom_create.js');
 require('../message/list/message_list.js');
 require('../message/push/message_push.js');
 
+require('../notification/list/notification_list.js');
+require('../notification/push/notification_push.js');
+
 require('../page_structure/setting/page_structure_setting.js');
 
 require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
 require('../exhibitor/guide/exhibitor_guide.js');
+
+require('../exhibition_area/list/exhibition_area_list.js');
 
 module.exports = angular.module('ememtn', [
     'ui.router',
@@ -76,6 +81,7 @@ module.exports = angular.module('ememtn', [
     'sanya.admins',
     'sanya.admins.register',
     'ememtn.tourist.list',
+    'ememtn.exhibition-area.list',
     'ememtn.attendant.list',
     'ememtn.attendant.create',
     'ememtn.feedback.list',
@@ -98,11 +104,16 @@ module.exports = angular.module('ememtn', [
     'ememtn.info.create',
     'ememtn.message.list',
     'ememtn.message.push',
+    'ememtn.notification.list',
+    'ememtn.notification.push',
     'ememtn.organizer-custom.list',
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',
     'ememtn.exhibitor.list',
     'ememtn.exhibitor.guide',
+    'ememtn.infrastructure.list',
+    'ememtn.infrastructure.inline-edit',
+    'ememtn.infrastructure.inline-create',
     'sanya.prize.exchange',
     'sanya.treasury_game',
     'sanya.treasure_game_map_list',
