@@ -47,7 +47,11 @@
 
       <tbody>
         <tr ng-repeat='tourist in vm.tourists'>
-          <td>{{ tourist.nickname }}</td>
+          <td>
+              <a ui-sref="tourist-detail({ touristId: tourist._id })">
+                  {{ tourist.nickname }}
+              </a>
+          </td>
           <td>{{ tourist.phone }}</td>
           <td>{{ tourist.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
           <td>

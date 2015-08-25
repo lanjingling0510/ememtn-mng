@@ -14,6 +14,7 @@ require('../attendant/list/attendant_list.js');
 require('../attendant/create/attendant_create.js');
 
 require('../tourist/list/tourist_list.js');
+require('../tourist/detail/tourist_detail.js');
 
 require('../organizer/setting/organizer_setting.js');
 
@@ -88,6 +89,7 @@ module.exports = angular.module('ememtn', [
     'sanya.admins',
     'sanya.admins.register',
     'ememtn.tourist.list',
+    'ememtn.tourist.detail',
     'ememtn.exhibition-area.list',
     'ememtn.exhibition-area.inline-edit',
     'ememtn.attendant.list',

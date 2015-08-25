@@ -36,7 +36,11 @@
                 <tr ng-repeat="post in vm.posts">
                     <td class="text-center"><input type="checkbox" ng-checked="post.checked" ng-model="post.checked"></td>
                     <td>{{post._id}}</td>
-                    <td>{{post.subject}}</td>
+                    <td>
+                        <a ui-sref="post-detail({ postId: post._id })">
+                            {{post.subject}}
+                        </a>
+                    </td>
                     <td class="am-text-truncate"><a href="/posts/{{post.id}}">{{post.content}}</a></td>
                     <td class="am-hide-sm-only">{{post.createdAt}}</td>
                     <td class="am-hide-sm-only">{{post.updatedAt}}</td>
@@ -46,12 +50,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
