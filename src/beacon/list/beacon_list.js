@@ -18,7 +18,27 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function BeaconListController(AlertService) {
+function BeaconListController($state, AlertService) {
     const vm = this;
-    vm.beacons = [{}];
+    vm.editMode = editMode
+    vm.beacons = [
+        {
+            name: 'edrftgyh1',
+        },
+        {
+            name: 'edrftgyh2',
+        },
+        {
+            name: 'edrftgyh3',
+        },
+        {
+            name: 'edrftgyh4',
+        },
+    ];
+
+    function editMode(beacon) {
+        $state.go('exhibition-hall-map.exhibition-area-virtual.beacon-list.beacons-inline-edit', {
+            beaconId: beacon.name,
+        });
+    }
 }

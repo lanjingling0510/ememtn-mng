@@ -40,8 +40,7 @@ require('../treasure_game/config/treasury_game.js');
 require('../roulette_game/config/roulette_game.js');
 
 require('../beacon/list/beacon_list.js');
-require('../beacon/create/beacon_create.js');
-require('../beacon/edit/beacon_edit.js');
+require('../beacon/inline_edit/beacon_inline_edit.js');
 
 require('../area/list/area_list.js');
 require('../area/create/area_create.js');
@@ -99,8 +98,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.news.list',
     'ememtn.news.create',
     'ememtn.beacon.list',
-    'ememtn.beacon.create',
-    'ememtn.beacon.edit',
+    'ememtn.beacon.inline-edit',
     'ememtn.area.list',
     'ememtn.area.create',
     'ememtn.info.list',
