@@ -1,7 +1,7 @@
 require('./exhibition_hall_area.less');
 require('../../common/service.js');
 const angular = require('angular');
-//const config = require('../../config.json');
+const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.exhibition.dist', [
     'ui.router',
