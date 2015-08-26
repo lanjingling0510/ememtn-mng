@@ -1,12 +1,16 @@
-<td>
-    <button ng-click="vm.createAttendant(vm.attendant)">添加</button>
-</td>
-<td>
-    <input ng-model="vm.attendant.username" />
-</td>
-<td>
-    <input ng-model="vm.attendant.nickname" />
-</td>
-<td>
+<div class="am-form-group">
+    <label for="">手机号</label>
     <input ng-model="vm.attendant.phone" />
-</td>
+    <span>手机号即为登陆帐号</span>
+</div>
+<div class="am-form-group">
+    <label for="">姓名</label>
+    <input ng-model="vm.attendant.realname" />
+</div>
+    <label for="">密码</label>
+    <input ng-model="vm.attendant.password" placeholder="不输入即为手机号后六位" />
+</div>
+<div class="am-form-group">
+    <a ui-sref="attendant-list">取消</a>
+    <button ng-click="vm.createAttendant(vm.attendant)">添加</button>
+</div>
