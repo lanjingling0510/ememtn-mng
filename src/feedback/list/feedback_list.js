@@ -19,29 +19,33 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function FeedbackListController($q, Restangular, AlertService) {
+function FeedbackListController($q, $timeout, Restangular, AlertService) {
     const vm = this;
     const Feedback = Restangular.all('feedbacks');
     vm.searchFeedbacks = searchFeedbacks;
     vm.removeFeedback = removeFeedback;
     vm.removeCheckedFeedbacks = removeCheckedFeedbacks;
-    vm.querystring = {
+    vm.toggleCheckAll = toggleCheckAll;
+    vm.query = {
         status: 'opening',
-        feedbackCategoryId: '__all__',
         page: 1,
         pageSize: 15,
         total: 0,
     };
 
-    searchFeedbacks(vm.querystring);
+    searchFeedbacks(vm.query, 0);
 
-    function searchFeedbacks(query) {
-        Feedback.getList(query).then(function (feedbacks) {
-            vm.feedbacks = feedbacks.slice(1);
-            vm.querystring.total = feedbacks[0];
-        }).catch(function (err) {
-            AlertService.warning(err.data);
-        });
+    let searchTimer;
+    function searchFeedbacks(query, delay=200) {
+        $timeout.cancel(searchTimer);
+        searchTimer = $timeout(() => {
+            Feedback.getList(query).then(function (feedbacks) {
+                vm.feedbacks = feedbacks.slice(1);
+                vm.query.total = feedbacks[0];
+            }).catch(function (err) {
+                AlertService.warning(err.data);
+            });
+        }, delay);
     }
 
     function getCheckedFeedbacks() {
@@ -49,23 +53,26 @@ function FeedbackListController($q, Restangular, AlertService) {
     }
 
     function removeFeedback(feedback) {
-        feedback.remove().then(function () {
+        return feedback.remove().then(function () {
             const index = vm.feedbacks.indexOf(feedback);
             vm.feedbacks.splice(index, 1);
-        }).catch(function (err) {
-            AlertService.warning(err.data);
+            $q.resolve(true);
         });
     }
 
     function removeCheckedFeedbacks() {
         const checkedFeedbacks = getCheckedFeedbacks();
-        const proms = checkedFeedbacks.map((feedback) => {
-            return feedback.remove();
-        });
+        const proms = checkedFeedbacks.map(removeFeedback);
         $q.all(proms).then(function () {
             AlertService.success('删除成功');
         }).catch(function (err) {
             AlertService.warning(err.data);
+        });
+    }
+
+    function toggleCheckAll(checked) {
+        vm.feedbacks.forEach(fd => {
+            fd._checked = checked;
         });
     }
 }
