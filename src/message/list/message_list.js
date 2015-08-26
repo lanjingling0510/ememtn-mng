@@ -22,10 +22,40 @@ function MessageListController(Restangular, AlertService) {
     const vm = this;
     const Message = Restangular.all('messages');
     vm.query = {};
+    vm.toggleCheckAll = toggleCheckAll;
+    vm.removeCheckedMessages = removeCheckedMessages;
 
     searchMessages(vm.query);
 
     function searchMessages(query) {
         vm.messages = Message.getList(query).$object;
+    }
+
+    function removeCheckedMessages() {
+        const msgs = getCheckedMessages();
+        const proms = msgs.map(removeMessage);
+        $q.all(proms).then(() => {
+            AlertService.success('删除完成');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function removeMessage(msg) {
+        return msg.remove().then(() => {
+            const index = vm.messages.indexOf(msg);
+            vm.messages.splice(index, 1);
+            return $q.resolve(true);
+        });
+    }
+
+    function getCheckedMessages() {
+        return vm.messages.filter((msg) => msg._checked);
+    }
+
+    function toggleCheckAll(checked) {
+        vm.messages.forEach((msg) => {
+            msg._checked = checked;
+        });
     }
 }
