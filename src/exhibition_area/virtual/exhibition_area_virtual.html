@@ -1,10 +1,11 @@
-<div class="am-container exhibition-hall-setting">
-    <div class="am-u-sm-12">
-        <select ng-options="area as area.name for area in vm.areas track by area._id">
+<div class="exhibition-hall-setting">
+    <div>
+        <select class="am-form-field" ng-options="area as area.name for area in vm.areas track by area._id">
 
         </select>
-    </div>
-    <div class="am-u-sm-12" ui-view>
 
+        <div ui-view>
+
+        </div>
     </div>
 </div>

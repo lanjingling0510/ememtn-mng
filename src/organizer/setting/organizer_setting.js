@@ -64,7 +64,7 @@ function OrganizerSettingController(Restangular, UploadToTempService, AlertServi
     }
 
     function updateOrganizer(organizer) {
-        organizer.put().then(() => {
+        Organizer.one(organizer._id).doPUT(organizer).then(() => {
             organizer.pictures.forEach((pic) => pic.isNew = false);
             AlertService.success('设置成功');
         }).catch((err) => {

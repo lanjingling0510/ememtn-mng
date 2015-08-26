@@ -1,12 +1,12 @@
-<div class="container-fluid exhibition-hall">
+<div class="container-fluid exhibition-hall am-margin-bottom">
     <div class="row">
-        <div class="col-sm-3">
-            <div class="col-sm-12">
-                <select ng-model="vm.map" ng-options="map as map.JCProjectName for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
+        <div class="col-sm-3 am-form">
+            <div class="am-margin-vertical am-form-group am-form-select">
+                <select class="am-form-field" ng-model="vm.map" ng-options="map as map.JCProjectName for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
                 </select>
             </div>
 
-            <div class="col-sm-12" ui-view> </div>
+            <div ui-view> </div>
             <button ng-click="vm.clearPolygons()" class="am-btn am-btn-default">清除信标</button>
             <div>
                 {{vm.positionStr}}

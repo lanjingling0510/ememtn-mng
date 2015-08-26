@@ -1,6 +1,8 @@
-<button>批处理</button>
+<div class="am-margin-vertical">
+    <button class="am-btn am-btn-primary">批处理</button>
+</div>
 
-<ul>
+<ul class="am-list am-list-static">
     <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id" ng-click="vm.editMode(exhibitor)">{{ exhibitor.name }}</li>
 </ul>
 

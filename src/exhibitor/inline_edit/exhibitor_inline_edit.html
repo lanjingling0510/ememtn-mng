@@ -1,27 +1,27 @@
-<div class="col-sm-12">
-    <form class="form-horizontal" ng-submit="vm.updateBeacon(vm.exhibitor)">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">名称</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="vm.exhibitor.name">
-            </div>
-        </div>
+<form class="form-horizontal" ng-submit="vm.updateBeacon(vm.exhibitor)">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">名称</label>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">位置</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="vm.exhibitor.geo">
-            </div>
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.exhibitor.name">
         </div>
+    </div>
 
-        <div class="form-group">
-            <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })">信息详情</a>
-            <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品详情</a>
-        </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">位置</label>
 
-        <div class="form-group">
-            <button type="button" name="button">保存</button>
-            <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">取消</a>
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.exhibitor.geo">
         </div>
-    </form>
-</div>
+    </div>
+
+    <div class="form-group text-center">
+        <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })">信息详情</a>
+        <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品详情</a>
+    </div>
+
+    <div class="form-group text-center">
+        <button class="btn btn-primary" type="button" name="button">保存</button>
+        <a class="btn btn-default" ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">取消</a>
+    </div>
+</form>

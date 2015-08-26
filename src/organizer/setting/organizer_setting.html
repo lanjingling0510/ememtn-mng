@@ -1,10 +1,5 @@
 <div class="am-container organizer-setting">
     <div class="am-g" >
-        <ol class="am-breadcrumb" class="am-text-lg">
-            <li><a class="am-icon-star" ui-sref="organizer-setting">主办方介绍</a></li>
-            <li><a  ui-sref="organizer-custom-list">主办商品列表</a></li>
-            <li class="am-active">商品详情</li>
-        </ol>
         <hr>
 
         <div class="am-u-sm-12 am-margin-bottom">
@@ -24,9 +19,11 @@
                     <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.organizer.content"></textarea>
                 </div>
 
-                <div class="am-form-group">
-                    <label>电话</label>
-                    <input placeholder="输入文字电话" ng-model="vm.organizer.phones" />
+                <div class="am-form-inline am-margin-bottom">
+                    <div class="am-form-group">
+                        <label>电话</label>
+                        <input class="am-form-field"  placeholder="输入文字电话" ng-model="vm.organizer.phones" />
+                    </div>
                 </div>
 
                 <div class="am-form-group hidden">
@@ -49,8 +46,12 @@
                         <li class="img-wrap" ng-repeat="file in vm.organizer.pictures">
                             <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(file, $index)" ng-show="file.isNew"></span>
                             <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(file, $index)" ng-hide="file.isNew"></span>
-                            <img class="am-thumbnail" ng-src="{{ file.fileUrl }}" />
-                            <input ng-model="vm.organizer.pictures[$index].description">
+                            <div class="img-content">
+                                <div class="img am-vertical-align text-center">
+                                    <img class="am-vertical-align-middle" ng-src="{{ file.fileUrl }}" />
+                                </div>
+                            </div>
+                            <input class="am-form-field" ng-model="vm.organizer.pictures[$index].description" placeholder="描述...">
                         </li>
                     </ul>
                 </div>

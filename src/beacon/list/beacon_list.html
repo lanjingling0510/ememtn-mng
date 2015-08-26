@@ -1,11 +1,9 @@
-<div class="am-container beacon-container">
-    <div class="am-u-sm-12">
-        <ul>
+<div class="am-margin-vertical beacon-container">
+        <ul class="am-list am-list-static">
             <li ng-click="vm.editMode(beacon)" ng-repeat="beacon in vm.beacons">
                 {{ beacon.name }}
             </li>
         </ul>
-    </div>
     <ui-view/>
 
 </div>

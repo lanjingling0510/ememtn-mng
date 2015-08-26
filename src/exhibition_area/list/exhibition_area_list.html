@@ -1,6 +1,6 @@
-<div class="am-container exhibition-hall-setting">
-    <div class="am-u-sm-12">
-        <ul>
+<div class="exhibition-hall-setting">
+    <div>
+        <ul class="am-list am-list-static">
             <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id" ng-click="vm.editMode(exhibitionArea)">{{ ::exhibitionArea.name }}</li>
         </ul>
     </div>

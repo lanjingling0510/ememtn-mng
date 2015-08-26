@@ -1,6 +1,6 @@
 <div class="am-container exhibition-hall-setting" >
     <div class="am-g am-margin-bottom">
-        <div class="am-u-sm-2">
+        <div class="am-u-sm-12">
            <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '1F' })">1楼</a>
            <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '2F' })">2楼</a>
            <a class="am-btn am-btn-primary" ui-sref="exhibition-hall-setting({ floor: '3F' })">3楼</a>
@@ -22,20 +22,25 @@
                         ngf-change="vm.uploadPicture($file)"
                         ngf-select ng-model="vm.pictureFile"
                         ngf-multiple="false" ngf-accept="'image/*'"
-                        accept="image/*" ng-disabled="{{ vm.pavilion.pictures >= 0 }}"> 添加 </div>
+                        accept="image/*" ng-disabled="vm.pavilion.pictures.length >= 1"> 添加 </div>
                     <small class="text-danger">仅一张</small>
                 </div>
 
-                <div class="am-form-group" ng-repeat="picture in vm.pavilion.pictures">
-                    <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
-                    <img class="am-thumbnail" ng-src="{{ picture.fileUrl }}" />
-                    <input ng-model="vm.pavilion.pictures[$index].description">
-                </div>
+                <ul class="am-avg-sm-6 am-thumbnails">
+                    <li class="am-form-group img-wrap"  ng-repeat="picture in vm.pavilion.pictures">
+                        <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
+                        <div class="img-content">
+                            <div class="img am-vertical-align text-center">
+                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
+                            </div>
+                        </div>
+                        <input class="am-form-field" ng-model="picture.description" placeholder="描述...">
+                    </li>
+                </ul>
 
 
-
-                <div class="am-form-group am-text-right">
-                    <button type="submit" class="am-btn am-btn-primary">提交</button>
+                <div class="am-form-group">
+                        <button type="submit" class="am-btn am-btn-danger am-btn-xl">保存</button>
                 </div>
             </form>
         </div>
