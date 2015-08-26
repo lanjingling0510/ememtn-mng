@@ -1,6 +1,8 @@
 <div class="col-sm-12">
-    设施管理
     <ul>
-        <li ng-repeat="infrastructure in vm.infrastructures">{{ infrastructure.name }}</li>
+        <li ng-repeat="infrastructure in vm.infrastructures track by infrastructure._id" ng-click="vm.editMode(infrastructure)">{{ infrastructure.name }}</li>
     </ul>
+
+    <ui-view />
+    <a ui-sref="exhibition-hall-map.exhibition-area-virtual.infrastructure-list.infrastructure-inline-create">增加设施</a>
 </div>

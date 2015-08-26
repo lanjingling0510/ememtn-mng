@@ -1,8 +1,8 @@
 <div class="am-container exhibition-hall-setting">
-    展区管理
     <div class="am-u-sm-12">
-        <select ng-options="area as area.name for area in vm.areas track by area._id">
-
-        </select>
+        <ul>
+            <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id" ng-click="vm.editMode(exhibitionArea)">{{ ::exhibitionArea.name }}</li>
+        </ul>
     </div>
+    <ui-view />
 </div>

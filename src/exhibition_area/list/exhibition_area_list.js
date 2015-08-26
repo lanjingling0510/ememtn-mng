@@ -1,7 +1,6 @@
 require('./exhibition_area_list.less');
 require('../../common/service.js');
 const angular = require('angular');
-//const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.exhibition-area.list', [
     'ui.router',
@@ -19,12 +18,32 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaListController($scope, Restangular, UploadToTempService, AlertService) {
+function ExhibitionAreaListController($scope, $state, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const ExhibitionArea = Restangular.all('exhibition-areas');
-    vm.setExhibitionArea = setExhibitionArea;
+    vm.editMode = editMode;
 
     $scope.$on('floor-change', onFloorChange);
+
+    vm.exhibitionAreas = [
+        {
+            _id: 'areaid 1',
+            name: 'area 1 name',
+        },
+        {
+            _id: 'areaid 2',
+            name: 'area 2 name',
+        },
+        {
+            _id: 'areaid 3',
+            name: 'area 3 name',
+        },
+        {
+            _id: 'areaid 4',
+            name: 'area 4 name',
+        },
+    ];
+
 
     function fetchExhibitionAreas(map) {
         vm.exhibitionAreas = ExhibitionArea.getList({
@@ -38,11 +57,9 @@ function ExhibitionAreaListController($scope, Restangular, UploadToTempService, 
         fetchExhibitionAreas(vm.map);
     }
 
-    function setExhibitionArea(exhibitionArea) {
-        ExhibitionArea.doPUT(exhibitionArea, vm.map).then(() => {
-            AlertService.success('设置成功');
-        }).catch((err) => {
-            AlertService.warning(err.data);
+    function editMode(exhibitionArea) {
+        $state.go('exhibition-hall-map.exhibition-area-list.exhibition-area-inline-edit', {
+            exhibitionAreaId: exhibitionArea._id,
         });
     }
 }

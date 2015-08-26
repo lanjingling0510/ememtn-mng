@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.infrastructure.inline-edit', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.infrastructure-list.infrastructure-inline-edit', {
+    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.infrastructure-list.infrastructure-inline-edit', {
         url: '/:infrastructureId',
         template: require('./infrastructure_inline_edit.html'),
         controller: 'InfrastructureInlineEditController as vm',

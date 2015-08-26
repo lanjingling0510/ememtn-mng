@@ -1,72 +1,27 @@
 <div class="col-sm-12">
-    <div class="form-group text-center">
-        <a ui-sref="poi.beacons" class="btn btn-info">返回列表</a>
-    </div>
-</div>
-
-<div class="col-sm-12">
-    <form class="form-horizontal" ng-submit="scope.updateBeacon(scope.beacon)">
+    <form class="form-horizontal" ng-submit="vm.updateBeacon(vm.exhibitor)">
         <div class="form-group">
             <label class="col-sm-3 control-label">名称</label>
             <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.name">
+                <input class="form-control" ng-model="vm.exhibitor.name">
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label">UUID</label>
+            <label class="col-sm-3 control-label">位置</label>
             <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.uuid">
+                <input class="form-control" ng-model="vm.exhibitor.geo">
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label">Major Id</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.major">
-            </div>
+            <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })">信息详情</a>
+            <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品详情</a>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label">Minor Id</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.minor">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">信号强度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.rssi">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">经度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.latitude">
-                <span class="help-block">请用鼠标在地图上点击来确定经度、纬度及半径</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">纬度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.longitude">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">半径</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.radius">
-                <span class="help-block">单位：米</span>
-            </div>
-        </div>
-
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">保存</button>
-            <a ui-sref="poi.beacons" class="btn btn-info">取消</a>
+            <button type="button" name="button">保存</button>
+            <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">取消</a>
         </div>
     </form>
 </div>

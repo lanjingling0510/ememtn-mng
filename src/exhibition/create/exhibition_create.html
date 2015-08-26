@@ -4,7 +4,9 @@
     <div class="am-g">
         <div class="am-u-sm-6">
             <ol class="am-breadcrumb">
-                <li><a class="am-icon-star" ui-sref="exhibition-list">展会活动列表</a></li>
+                <li>
+                    <a class="am-icon-star" ui-sref="exhibition-list">展会活动列表</a>
+                </li>
                 <li class="  am-active">添加</li>
             </ol>
         </div>
@@ -19,13 +21,13 @@
             <label class="am-u-sm-offset-1 am-u-sm-2 am-form-label">活动时间</label>
 
             <div class="am-u-sm-4">
-                <input type="text" placeholder="请输入开始时间" ng-model="vm.exhibition.startAt">
+                <input ng-model="vm.exhibition.startAt" placeholder="请输入开始时间" type="text">
             </div>
             <div class="am-u-sm-1 text-center">
                 <label class="am-form-label">至</label>
             </div>
             <div class="am-u-sm-4 am-u-end">
-                <input type="text" placeholder="请输入截止时间" ng-model="vm.exhibition.endAt">
+                <input ng-model="vm.exhibition.endAt" placeholder="请输入截止时间" type="text">
             </div>
         </div>
 
@@ -40,27 +42,8 @@
     <form class="am-form">
         <div class="am-form-group">
             <label>展会内容</label>
-            <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.exhibition.content"></textarea>
+            <textarea ng-model="vm.exhibition.content" placeholder="输入文字介绍" rows="12"></textarea>
         </div>
     </form>
 
-
-    <div class="am-g">
-        <ui class="am-list am-list-static">
-            <li class="am-form-inline">
-                <input type="checkbox"/>
-                <input type="text" class="am-form-field am-margin-left" ng-model="vm.query.username" placeholder="输入用户名搜索"/>
-
-            </li>
-            <li ng-repeat="user in vm.users">
-                <input type="checkbox" ng-checked="user._checked" ng-model="vm.users[$index]._checked"/>
-                <span class="am-padding-left">{{ user.username }}</span>
-            </li>
-        </ui>
-
-    </div>
-    <ul class="am-pagination am-pagination-centered">
-        <li><a href="">上一页</a></li>
-        <li><a href="">下一页</a></li>
-    </ul>
 </div>

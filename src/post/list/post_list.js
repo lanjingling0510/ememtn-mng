@@ -28,7 +28,13 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
     searchPosts(vm.query);
 
     function searchPosts(query) {
-        vm.posts = Post.getList(query).$object;
+        // vm.posts = Post.getList(query).$object;
+        vm.posts = [
+            {
+                subject: 'post 1',
+                _id: 4567,
+            }
+        ];
     }
 
     function getCheckedPosts() {

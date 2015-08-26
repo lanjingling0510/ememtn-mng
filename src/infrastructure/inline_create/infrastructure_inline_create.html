@@ -1,72 +1,33 @@
-<div class="col-sm-12">
-    <div class="form-group text-center">
-        <a ui-sref="poi.beacons" class="btn btn-info">返回列表</a>
+<form class="form-horizontal" ng-submit="vm.createBeacon(vm.beacon)">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">名称</label>
+        <div class="col-sm-9">
+            <input class="form-control" ng-model="vm.beacon.name">
+        </div>
     </div>
-</div>
 
-<div class="col-sm-12">
-    <form class="form-horizontal" ng-submit="scope.createBeacon(scope.beacon)">
-        <div class="form-group">
-            <label class="col-sm-3 control-label">名称</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.name">
-            </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">位置</label>
+        <div class="col-sm-9">
+            <input class="form-control" ng-model="vm.beacon.geo">
         </div>
+    </div>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">UUID</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.uuid">
-            </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">设施说明</label>
+        <div class="col-sm-9">
+            <input class="form-control" ng-model="vm.beacon.description">
         </div>
+    </div>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Major Id</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.major">
-            </div>
-        </div>
+    <div class="form-group">
+        图片
+        <img src="" alt="" />
+        <button type="button" name="button">选择图片</button>
+    </div>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Minor Id</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.minor">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">信号强度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.rssi">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">经度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.latitude">
-                <span class="help-block">请用鼠标在地图上点击来确定经度、纬度及半径</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">纬度</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.longitude">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-3 control-label">半径</label>
-            <div class="col-sm-9">
-                <input class="form-control" ng-model="scope.beacon.radius">
-                <span class="help-block">单位：米</span>
-            </div>
-        </div>
-
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">创建</button>
-            <a ui-sref="poi.beacons" class="btn btn-info">取消</a>
-        </div>
-    </form>
-</div>
+    <div class="form-group text-center">
+        <button class="btn btn-primary" type="submit">创建</button>
+        <a class="btn btn-info" ui-sref="exhibition-hall-map.exhibition-area-virtual.infrastructure-list">取消</a>
+    </div>
+</form>

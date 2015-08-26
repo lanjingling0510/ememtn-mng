@@ -30,7 +30,6 @@ function moduleConfig($stateProvider) {
 
 /* @ngInject */
 function ExhibitionDistController($state, floors) {
-    console.log('==============');
     const firstFloor = floors[0];
     $state.go('exhibition-dist.detail', {
         floor: firstFloor.JCObjId + ':' + firstFloor.JCObjMask,

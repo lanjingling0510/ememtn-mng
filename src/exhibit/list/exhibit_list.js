@@ -1,23 +1,26 @@
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.organizer-custom.list', [
+module.exports = angular.module('ememtn.exhibit.list', [
     'ui.router',
     'restangular',
     'common.dropDown.directive',
 ])
     .config(moduleConfig)
-    .controller('OrganizerCustomListController', OrganizerCustomListController);
+    .controller('ExhibitListController', ExhibitListController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('organizer-custom-list', {
-        url: '/organizer-customs',
-        template: require('./organizer_custom_list.html'),
-        controller: 'OrganizerCustomListController as vm',
+    $stateProvider.state('exhibit-list', {
+        url: '/exhibits?exhibitorId',
+        template: require('./exhibit_list.html'),
+        controller: 'ExhibitListController as vm',
     });
 }
 
 /* @ngInject*/
-function OrganizerCustomListController() {
+function ExhibitListController() {
     const vm = this;
+    vm.exhibitor = {
+        _id: 'exhibitor 1111',
+    };
 }

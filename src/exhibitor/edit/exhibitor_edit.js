@@ -1,23 +1,24 @@
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.organizer-custom.create', [
+module.exports = angular.module('ememtn.exhibitor.edit', [
     'ui.router',
     'restangular',
-    'common.dropDown.directive',
-])
-    .config(moduleConfig)
-    .controller('OrganizerCustomCreateController', OrganizerCustomCreateController);
+]).config(moduleConfig)
+    .controller('ExhibitorEditController', ExhibitorEditController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('organizer-custom-create', {
-        url: '/organizer-customs/_create',
+    $stateProvider.state('exhibitor-edit', {
+        url: '/exhibitors/:exhibitorId',
         template: require('./exhibitor_edit.html'),
-        controller: 'OrganizerCustomCreateController as vm',
+        controller: 'ExhibitorEditController as vm',
     });
 }
 
 /* @ngInject*/
-function OrganizerCustomCreateController() {
+function ExhibitorEditController() {
     const vm = this;
+    vm.exhibitor = {
+        _id: 'tfvyghn',
+    };
 }

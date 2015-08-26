@@ -31,7 +31,13 @@ function TouristListController($timeout, Restangular, AlertService) {
         pageSize: 15,
         total: 0,
     };
-    fetchTourists(vm.querystring);
+    // fetchTourists(vm.querystring);
+    vm.tourists = [
+        {
+            _id: 'ygbyhunj',
+            nickname: 'ygbhunj',
+        },
+    ];
 
     function disableTourist(tourist) {
         tourist.doPUT({}, 'disablement').then(function () {
