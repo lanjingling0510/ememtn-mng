@@ -22,19 +22,14 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
     const vm = this;
     const Post = Restangular.all('posts');
 
-    vm.deleteCheckedPosts = deleteCheckedPosts;
+    vm.removeCheckedPosts = removeCheckedPosts;
+    vm.toggleCheckAll = toggleCheckAll;
     vm.query = {};
 
     searchPosts(vm.query);
 
     function searchPosts(query) {
-        // vm.posts = Post.getList(query).$object;
-        vm.posts = [
-            {
-                subject: 'post 1',
-                _id: 4567,
-            }
-        ];
+        vm.posts = Post.getList(query).$object;
     }
 
     function getCheckedPosts() {
@@ -42,16 +37,27 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
         return checkedPosts;
     }
 
-    function deleteCheckedPosts() {
+    function removeCheckedPosts() {
         const checkedPosts = getCheckedPosts();
-        const proms = checkedPosts.map(function (post) {
-            return post.remove();
+        const proms = checkedPosts.map(removePost);
+        $q.all(proms).then(() => {
+            AlertService.success('删除成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
         });
-        $q.all(proms).then(function () {
-            checkedPosts.forEach(function (post) {
-                const index = vm.posts.indexOf(post);
-                vm.posts.splice(index, 1);
-            });
+    }
+
+    function removePost(post) {
+        return post.remove().then(() => {
+            const index = vm.posts.indexOf(post);
+            vm.posts.splice(index, 1);
+            $q.resolve(true);
+        });
+    }
+
+    function toggleCheckAll(checked) {
+        vm.posts.forEach(post => {
+            post._checked = checked;
         });
     }
 }
