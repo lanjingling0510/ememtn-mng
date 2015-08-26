@@ -22,10 +22,17 @@ function ExhibitionListController(Restangular, AlertService) {
     const vm = this;
     const Exhibition = Restangular.all('exhibitions');
     vm.query = {};
+    vm.toggleCheckAll = toggleCheckAll;
 
     searchExhibitions(vm.query);
 
     function searchExhibitions(query) {
         vm.exhibitions = Exhibition.getList(query).$object;
+    }
+
+    function toggleCheckAll(checked) {
+        vm.exhibitions.forEach((exhibitions) => {
+            exhibitions.checked = checked;
+        });
     }
 }

@@ -1,7 +1,7 @@
 <div class="am-container exhibition-list">
     <div class="am-g am-margin-bottom">
         <div class="am-u-sm-1 text-center">
-            <input type="checkbox"/>
+            <input type="checkbox" ng-model="vm.exhibitions.checked" ng-checked="vm.exhibitions.checked" ng-click="vm.toggleCheckAll(vm.exhibitions.checked)"/>
         </div>
         <div class="am-u-sm-3">
             <drop-down title="操作" toggle="am-btn-danger" class="am-margin-left">

@@ -42,20 +42,20 @@ function NewsListController($q, Restangular, AlertService, $scope, commonModal, 
 
     function filter(index) {
         switch (index) {
-            case 1:
-                searchNewses(vm.query);
-                break;
-            case 2:
-                News.getList(vm.query).then((newses) => {
-                    vm.newses = $filter('filter')(newses, {visible: 1});
-                });
-                break;
-            case 3:
-                News.getList(vm.query).then((newses) => {
-                    vm.newses = $filter('filter')(newses, {visible: 0});
-                });
-                break;
-            default:
+        case 1:
+            searchNewses(vm.query);
+            break;
+        case 2:
+            News.getList(vm.query).then((newses) => {
+                vm.newses = $filter('filter')(newses, {visible: 1});
+            });
+            break;
+        case 3:
+            News.getList(vm.query).then((newses) => {
+                vm.newses = $filter('filter')(newses, {visible: 0});
+            });
+            break;
+        default:
 
         }
     }
