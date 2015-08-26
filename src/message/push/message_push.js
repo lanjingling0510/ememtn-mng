@@ -22,13 +22,11 @@ function MessagePushController(Restangular, AlertService) {
     vm.createMessage = createMessage;
 
     function pushMessage(message) {
-        return Message.one(message._id).doPOST({}, 'push');
+        return Message.one(message._id).all('push').post();
     }
 
     function createMessage(message) {
-        Message.post(message).then(function (msg) {
-            return pushMessage(msg);
-        }).then(function () {
+        Message.post(message).then(pushMessage).then(function () {
             AlertService.success('开始推送');
         }).catch(function (err) {
             AlertService.warning(err.data);
