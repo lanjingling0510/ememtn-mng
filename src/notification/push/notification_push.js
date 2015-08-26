@@ -22,7 +22,7 @@ function NotificationPushController(Restangular, AlertService) {
     vm.createNotification = createNotification;
 
     function pushNotification(notification) {
-        return Notification.one(notification._id).doPOST({}, 'push');
+        return Notification.one(notification._id).all('push').post();
     }
 
     function createNotification(notification) {
