@@ -17,13 +17,14 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function TouristListController($timeout, Restangular, AlertService) {
+function TouristListController($q, $timeout, Restangular, AlertService) {
     const vm = this;
     const Tourist = Restangular.all('tourists');
-    vm.disableTourist = disableTourist;
-    vm.enableTourist = enableTourist;
+    vm.disableCheckedTourists = disableCheckedTourists;
+    vm.enableCheckedTourists = enableCheckedTourists;
     vm.removeTourist = removeTourist;
-    vm.fetchTourists = fetchTourists;
+    vm.searchTourists = searchTourists;
+    vm.toggleCheckAll = toggleCheckAll;
     vm.querystring = {
         status: 'enabled',
         phone: '',
@@ -31,29 +32,39 @@ function TouristListController($timeout, Restangular, AlertService) {
         pageSize: 15,
         total: 0,
     };
-    // fetchTourists(vm.querystring);
-    vm.tourists = [
-        {
-            _id: 'ygbyhunj',
-            nickname: 'ygbhunj',
-        },
-    ];
+    searchTourists(vm.querystring);
 
-    function disableTourist(tourist) {
-        tourist.doPUT({}, 'disablement').then(function () {
-            tourist.status = 'disabled';
+    function disableCheckedTourists() {
+        const tourists = getCheckedTourists();
+        const proms = tourists.map(disableTourist);
+        $q.all(proms).then(function () {
             AlertService.success('冻结成功');
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
     }
 
-    function enableTourist(tourist) {
-        tourist.doPUT({}, 'enablement').then(function () {
-            tourist.status = 'enabled';
+    function enableCheckedTourists() {
+        const tourists = getCheckedTourists();
+        const proms = tourists.map(enableTourist);
+        $q.all(proms).then(function () {
             AlertService.success('解冻成功');
         }).catch(function (err) {
             AlertService.warning(err.data);
+        });
+    }
+
+    function enableTourist(tourist) {
+        return tourist.all('enablement').put().then(() => {
+            tourist.status = 'enabled';
+            return $q.resolve(true);
+        });
+    }
+
+    function disableTourist(tourist) {
+        return tourist.all('disablement').put().then(() => {
+            tourist.status = 'disabled';
+            return $q.resolve(true);
         });
     }
 
@@ -69,7 +80,7 @@ function TouristListController($timeout, Restangular, AlertService) {
     }
 
     let fetchTimer;
-    function fetchTourists(querystring = {}, delay = 0) {
+    function searchTourists(querystring = {}, delay = 0) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(function () {
             Tourist.getList(querystring).then(function (tourists) {
@@ -79,5 +90,15 @@ function TouristListController($timeout, Restangular, AlertService) {
                 AlertService.warning(err.data);
             });
         }, delay);
+    }
+
+    function toggleCheckAll(checked) {
+        vm.tourists.forEach((tour) => {
+            tour._checked = checked;
+        });
+    }
+
+    function getCheckedTourists() {
+        return vm.tourists.filter((tour) => tour._checked);
     }
 }

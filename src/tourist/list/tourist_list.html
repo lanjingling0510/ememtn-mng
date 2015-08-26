@@ -2,30 +2,20 @@
   <h1 class="page-header">App注册用户管理</h1>
 </div>
 
-<div class="col-sm-12 form-horizontal">
-  <div class="form-group">
-    <label class="col-sm-1 control-label">状态</label>
-    <div class="col-sm-3">
-      <select class="form-control" ng-model="vm.querystring.status" ng-change="vm.fetchTourists(vm.querystring)">
-        <option value="enabled">冻结用户</option>
-        <option value="disabled">非冻结用户</option>
-      </select>
-    </div>
-
-    <label class="col-sm-1 control-label">电话</label>
-    <div class="col-sm-3">
-      <input type="search" class="form-control" ng-model="vm.querystring.phone" ng-change="vm.fetchTourists(vm.querystring, 200)">
-    </div>
-  </div>
+<div class="col-md-12">
+    <input type="checkbox" ng-model="vm.tourists._checked" ng-change="vm.toggleCheckAll(vm.tourists._checked)">
+    <button ng-click="vm.enableCheckedTourists()">冻结选定</button>
+    <button ng-click="vm.disableCheckedTourists()">解冻选定</button>
 </div>
+
 <div class="col-md-12">
     <table class="table table-responsive">
       <thead>
         <tr>
           <th>用户昵称</th>
+          <th>性别</th>
           <th>电话号码</th>
-          <th>注册时间</th>
-          <th> 操作 </th>
+          <th>状态</th>
         </tr>
       </thead>
 
@@ -46,18 +36,23 @@
       </tfoot>
 
       <tbody>
-        <tr ng-repeat='tourist in vm.tourists'>
+        <tr ng-repeat='tourist in vm.tourists track by tourist._id'>
+            <td>
+                <input type="checkbox" ng-model="vm.tourists[$index]._checked">
+            </td>
           <td>
               <a ui-sref="tourist-detail({ touristId: tourist._id })">
                   {{ tourist.nickname }}
               </a>
           </td>
-          <td>{{ tourist.phone }}</td>
-          <td>{{ tourist.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
           <td>
-            <button class="btn btn-warning btn-xs" ng-click="vm.disableTourist(tourist)" ng-show="!tourist.status || tourist.status === 'enabled'">冻结用户</button>
-            <button class="btn btn-success btn-xs" ng-click="vm.enableTourist(tourist)" ng-show="tourist.status === 'disabled'">解冻用户</button>
-            <button class="btn btn-danger btn-xs" ng-click="vm.removeTourist(tourist, $index)">删除用户</button>
+              <span ng-show="tourist.gender === 'male'">男</span>
+              <span ng-show="tourist.gender === 'female'">女</span>
+          </td>
+          <td>{{ tourist.phone }}</td>
+          <td>
+              <span ng-show="tourist.status === 'enabled'">正常</span>
+              <span ng-show="tourist.status === 'disabled'">冻结</span>
           </td>
         </tr>
       </tbody>
