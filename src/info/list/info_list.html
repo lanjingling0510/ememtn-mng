@@ -16,7 +16,7 @@
                             <button class="am-btn am-btn-block" ng-click="vm.stickyCheckedInfo()">顶</button>
                             <button class="am-btn am-btn-block" ng-click="vm.showCheckedInfo()">显示</button>
                             <button class="am-btn am-btn-block" ng-click="vm.hideCheckedInfo()">隐藏</button>
-                            <button class="am-btn am-btn-block" ng-click="vm.transferCheckedInfoToInfo()">移动到资讯</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.transferCheckedInfoToInfo()">移动到新闻</button>
                             <button class="am-btn am-btn-block" ng-click="vm.removeCheckedInfo()">删除</button>
                         </drop-down>
                     </td>
@@ -39,15 +39,19 @@
                         <button class="am-btn am-btn-secondary am-btn-block">编辑时间</button>
                     </td>
                     <td>
-                        <drop-down title="全部状态" toggle="am-btn-secondary">
+                        <button class="am-btn am-btn-secondary am-btn-block">状态</button>
+                        <!-- <drop-down title="全部状态" toggle="am-btn-secondary">
                             <button class="am-btn am-btn-block">正在显示</button>
                             <button class="am-btn am-btn-block">正在隐藏</button>
-                        </drop-down>
+                        </drop-down> -->
+                    </td>
+                    <td>
+                        <button class="am-btn am-btn-secondary am-btn-block">置顶</button>
                     </td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="info in vm.infoes | orderBy: '-sticky' | orderBy: '-stickedAt'">
+                <tr ng-repeat="info in vm.infoes | orderBy: '-sticky' | orderBy: '-stickedAt' track by info._id">
                     <td><input type="checkbox" ng-checked="info.checked" ng-model="info.checked"></td>
                     <td>{{info.subject}}</td>
                     <td>{{info.content}}</td>

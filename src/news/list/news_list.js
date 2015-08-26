@@ -27,6 +27,9 @@ function NewsListController($q, Restangular, AlertService, $scope, commonModal, 
         pageSize: 30,
         count: 0,
     };
+    vm.filter = {
+        visible: 1,
+    };
     // vm.allChecked = false;
     // vm.checkList = [];
     // vm.allCheckedChange = allCheckedChange;

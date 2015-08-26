@@ -39,16 +39,20 @@
                         <button class="am-btn am-btn-secondary am-btn-block">编辑时间</button>
                     </td>
                     <td>
-                        <drop-down title="状态" toggle="am-btn-secondary">
-                            <button class="am-btn am-btn-block" ng-click="vm.filter(1)">全部</button>
-                            <button class="am-btn am-btn-block" ng-click="vm.filter(2)">正在显示</button>
-                            <button class="am-btn am-btn-block" ng-click="vm.filter(3)">正在隐藏</button>
-                        </drop-down>
+                        <button class="am-btn am-btn-secondary am-btn-block">显示状态</button>
+                        <!-- <drop-down title="状态" toggle="am-btn-secondary">
+                            <button class="am-btn am-btn-block" ng-click="vm.filter.visible = undefined">全部</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.filter.visible = 1">正在显示</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.filter.visible = 0">正在隐藏</button>
+                        </drop-down> -->
+                    </td>
+                    <td>
+                        <button class="am-btn am-btn-secondary am-btn-block">置顶</button>
                     </td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="news in vm.newses | orderBy: '-sticky' | orderBy: '-stickedAt'">
+                <tr ng-repeat="news in vm.newses | orderBy: '-sticky' | orderBy: '-stickedAt' track by news._id">
                     <td><input type="checkbox" ng-checked="news.checked" ng-model="news.checked"></td>
                     <td>{{news.subject}}</td>
                     <td>{{news.content}}</td>
