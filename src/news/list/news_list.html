@@ -39,9 +39,10 @@
                         <button class="am-btn am-btn-secondary am-btn-block">编辑时间</button>
                     </td>
                     <td>
-                        <drop-down title="全部状态" toggle="am-btn-secondary">
-                            <button class="am-btn am-btn-block">正在显示</button>
-                            <button class="am-btn am-btn-block">正在隐藏</button>
+                        <drop-down title="状态" toggle="am-btn-secondary">
+                            <button class="am-btn am-btn-block" ng-click="vm.filter(1)">全部</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.filter(2)">正在显示</button>
+                            <button class="am-btn am-btn-block" ng-click="vm.filter(3)">正在隐藏</button>
                         </drop-down>
                     </td>
                 </tr>

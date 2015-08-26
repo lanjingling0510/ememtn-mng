@@ -19,7 +19,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function NewsListController($q, Restangular, AlertService, $scope, commonModal) { // eslint-disable-line no-unused-vars
+function NewsListController($q, Restangular, AlertService, $scope, commonModal, $filter) { // eslint-disable-line no-unused-vars
     const vm = this;
     const News = Restangular.all('newses');
     vm.query = {
@@ -38,6 +38,27 @@ function NewsListController($q, Restangular, AlertService, $scope, commonModal) 
     vm.stickyCheckedNews = stickyCheckedNews;
     vm.transferCheckedNewsToInfo = transferCheckedNewsToInfo;
     vm.removeCheckedNews = removeCheckedNews;
+    vm.filter = filter;
+
+    function filter(index) {
+        switch (index) {
+        case 1:
+            searchNewses(vm.query);
+            break;
+        case 2:
+            News.getList(vm.query).then((newses) => {
+                vm.newses = $filter('filter')(newses, {visible: 1});
+            });
+            break;
+        case 3:
+            News.getList(vm.query).then((newses) => {
+                vm.newses = $filter('filter')(newses, {visible: 0});
+            });
+            break;
+        default:
+
+        }
+    }
 
     // initController();
     searchNewses(vm.query);

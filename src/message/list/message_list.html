@@ -13,14 +13,14 @@
         </div>
     </div>
 
+
     <my-collapse class="am-panel-default">
         <ul ng-repeat="message in vm.messages">
             <li><input type="checkbox" ng-model="vm.messages[$index]._checked"/></li>
             <li>{{ message.subject }}</li>
             <li>{{ message.content }}</li>
             <li>{{ message.createdAt }}</li>
-            <li class="am-icon-sort-desc"></li>
+            <li class="am-icon"></li>
         </ul>
     </my-collapse>
-
 </div>

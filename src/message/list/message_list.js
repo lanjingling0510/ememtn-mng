@@ -21,6 +21,7 @@ function moduleConfig($stateProvider) {
 function MessageListController(Restangular, AlertService) {
     const vm = this;
     const Message = Restangular.all('messages');
+
     vm.query = {};
     vm.toggleCheckAll = toggleCheckAll;
     vm.removeCheckedMessages = removeCheckedMessages;
