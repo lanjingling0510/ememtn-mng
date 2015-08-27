@@ -19,13 +19,14 @@
 
                 <ul class="am-avg-sm-6 am-thumbnails">
                     <li class="am-form-group img-wrap"  ng-repeat="picture in vm.pavilion.pictures">
-                        <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.removeNewPicture(picture, $index)" ng-show="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.removeOldPicture(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
                                 <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
-                        <input class="am-form-field" ng-model="picture.description" placeholder="描述...">
+                        <input class="am-form-field" ng-model="vm.pavilion.pictures[$index].description" placeholder="描述...">
                     </li>
                 </ul>
 
