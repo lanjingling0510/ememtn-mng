@@ -10,15 +10,15 @@ module.exports = angular.module('ememtn.exhibition-hall.setting', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-setting', {
-        url: '/exhibition-hall/:floor',
+    $stateProvider.state('exhibition-hall-virtual.exhibition-hall-setting', {
+        url: '/_setting',
         template: require('./exhibition_hall_setting.html'),
         controller: 'ExhibitionHallSettingController as vm',
     });
 }
 
 /* @ngInject */
-function ExhibitionHallSettingController($stateParams, Restangular, UploadService, AlertService) {
+function ExhibitionHallSettingController($scope, floors, $stateParams, Restangular, UploadService, AlertService) {
     const vm = this;
     const Pavilion = Restangular.all('pavilions');
     vm.fetchPavilionByFloor = fetchPavilionByFloor;
@@ -26,10 +26,15 @@ function ExhibitionHallSettingController($stateParams, Restangular, UploadServic
     vm.removePicture = removePicture;
     vm.savePavilion = savePavilion;
 
-    fetchPavilionByFloor($stateParams.floor);
+    function fetchPavilionByFloor(floor) {
+        vm.pavilion = Pavilion.one(floor).get().$object;
+    }
 
-    function fetchPavilionByFloor() {
-        vm.pavilion = Pavilion.one($stateParams.floor).get().$object;
+    $scope.$on('floor-change', onFloorChange);
+
+    function onFloorChange(event, data) {
+        vm.floor = data.floor;
+        fetchPavilionByFloor(vm.floor);
     }
 
     function uploadPicture(picture) {

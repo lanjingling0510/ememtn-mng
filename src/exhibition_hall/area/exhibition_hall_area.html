@@ -1,11 +1,4 @@
 <div class="am-container exhibition-hall-setting" >
-    <div class="am-g am-margin-bottom">
-        <div class="am-u-sm-2">
-           <a class="am-btn am-btn-primary" ng-repeat="floor in vm.floors"
-           ui-sref="exhibition-dist.detail({ floor: floor.JCObjId + ':' + floor.JCObjMask })">{{ floor.name }}</a>
-        </div>
-    </div>
-
     <div class="am-g">
         <div class="am-u-sm-12">
             <form class="am-form" ng-submit="vm.setExhibitionDist(vm.exhibitionDist)">
@@ -20,12 +13,13 @@
                         ngf-change="vm.uploadFile($file)"
                         ngf-select ng-model="vm.pictureFile"
                         ngf-multiple="false" ngf-accept="'image/*'"
-                        accept="image/*" ng-disabled="{{ vm.exhibitionDist.pictures >= 0 }}"> 添加 </div>
+                        accept="image/*" ng-disabled="vm.exhibitionDist.pictures.length >= 1"> 添加 </div>
                     <small class="text-danger">仅一张</small>
                 </div>
 
                 <div class="am-form-group" ng-repeat="picture in vm.exhibitionDist.pictures">
-                    <span class="am-icon-times img-close" ng-click="vm.removePicture($index)"></span>
+                    <span class="am-icon-times img-close" ng-click="vm.removeNewPicture(picture, $index)" ng-show="picture.isNew"></span>
+                    <span class="am-icon-times img-close" ng-click="vm.removeOldPicture(picture, $index)" ng-hide="picture.isNew"></span>
                     <img class="am-thumbnail" ng-src="{{ picture.fileUrl }}" />
                     <input ng-model="vm.exhibitionDist.pictures[$index].description">
                 </div>

@@ -1,60 +1,47 @@
 require('./exhibition_hall_area.less');
 require('../../common/service.js');
+require('../virtual/exhibition_hall_virtual.js');
+// const config = require('../../config.json');
 const angular = require('angular');
-//const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.exhibition.dist', [
     'ui.router',
     'sanya.common.services',
+    'ememtn.exhibition.virtual',
 ]).config(moduleConfig)
-    .controller('ExhibitionDistController', ExhibitionDistController)
     .controller('ExhibitionHallAreaController', ExhibitionHallAreaController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-dist', {
-        url: '/exhibition/_dist',
-        template: '<ui-view />',
-        controller: 'ExhibitionDistController as vm',
-        resolve: {
-            floors: function ($q) {
-                return $q.resolve(config.floors);
-            },
-        },
-    }).state('exhibition-dist.detail', {
-        url: '/:floor',
+    $stateProvider.state('exhibition-hall-virtual.exhibition-dist', {
+        url: '/_dist',
         template: require('./exhibition_hall_area.html'),
         controller: 'ExhibitionHallAreaController as vm',
     });
 }
 
 /* @ngInject */
-function ExhibitionDistController($state, floors) {
-    const firstFloor = floors[0];
-    $state.go('exhibition-dist.detail', {
-        floor: firstFloor.JCObjId + ':' + firstFloor.JCObjMask,
-    });
-}
-
-/* @ngInject */
-function ExhibitionHallAreaController($stateParams, floors, Restangular, UploadToTempService, AlertService) {
+function ExhibitionHallAreaController($scope, $state, floors, Restangular, UploadToTempService, AlertService) {
     const vm = this;
-    const ExhibitionDist = Restangular.one('exhibition-dists');
-    vm.floors = floors;
-    const floor = $stateParams.floor.split(':');
-    vm.exhibitionDist = {
-        JCObjId: floor.unshift(),
-        JCObjMask: floor.unshift(),
-        pictures: [],
-    };
+    const ExhibitionDist = Restangular.all('exhibition-dists');
     vm.uploadFile = uploadFile;
-    vm.deleteNewFile = deleteNewFile;
-    vm.deleteOldFile = deleteOldFile;
+    vm.removeNewPicture = removeNewPicture;
+    vm.removeOldPicture = removeOldPicture;
     vm.setExhibitionDist = setExhibitionDist;
-    fetchExhibitionDist($stateParams.floor);
+    $scope.$on('floor-change', onFloorChange);
+    vm.floor = floors[0];
+    fetchExhibitionDist(vm.floor);
 
-    function fetchExhibitionDist(floorId) {
-        vm.exhibitionDist = ExhibitionDist.one(floorId).get().$object;
+    function onFloorChange(event, data) {
+        vm.floor = data.floor;
+        fetchExhibitionDist(vm.floor);
+    }
+
+    function fetchExhibitionDist(floor) {
+        vm.exhibitionDist = ExhibitionDist.doGET('', {
+            JCObjId: floor.JCObjId,
+            JCObjMask: floor.JCObjMask,
+        }).$object;
     }
 
     function uploadFile(files) {
@@ -75,7 +62,7 @@ function ExhibitionHallAreaController($stateParams, floors, Restangular, UploadT
         });
     }
 
-    function deleteNewFile(picture, index) {
+    function removeNewPicture(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
             vm.exhibitionDist.pictures.splice(index, 1);
@@ -84,8 +71,8 @@ function ExhibitionHallAreaController($stateParams, floors, Restangular, UploadT
         });
     }
 
-    function deleteOldFile(picture, index) {
-        vm.exhibitionDist.one('pictures', index).remove().then(() => {
+    function removeOldPicture(picture, index) {
+        vm.exhibitionDist.one('pictures', picture._id).remove().then(() => {
             vm.exhibitionDist.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
@@ -93,7 +80,7 @@ function ExhibitionHallAreaController($stateParams, floors, Restangular, UploadT
     }
 
     function setExhibitionDist(exhibitionDist) {
-        ExhibitionDist.doPUT(exhibitionDist, $stateParams.floor).then(() => {
+        ExhibitionDist.one(exhibitionDist._id).doPUT(exhibitionDist).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);
