@@ -42,31 +42,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr ng-repeat="exhibit in vm.exhibits track by exhibit._id">
                         <td><input type="checkbox"></td>
                         <td>
-                            <a ui-sref="stadium_detail">展品名称</a>
+                            <a ui-sref="exhibit-edit">{{ exhibit.name }}</a>
                         </td>
-                        <td>文字描述摘要</td>
-                        <td>正在显示</td>
+                        <td>{{ exhibit.description }}</td>
                         <td>
-                            <button class="am-btn am-btn-danger am-btn-xs">顶</button>
+                            <span ng-show="exhibit.visible === 'yes'">正在显示</span>
+                            <span ng-show="exhibit.visible === 'no'">正在隐藏</span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>展品名称</td>
-                        <td>文字描述摘要</td>
-                        <td>正在显示</td>
-                        <td>
-                            <button class="am-btn am-btn-danger am-btn-xs">顶</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>展品名称</td>
-                        <td>文字描述摘要</td>
-                        <td>正在显示</td>
                         <td>
                             <button class="am-btn am-btn-danger am-btn-xs">顶</button>
                         </td>

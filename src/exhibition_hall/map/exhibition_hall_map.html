@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-3 am-form">
             <div class="am-margin-vertical am-form-group am-form-select">
-                <select class="am-form-field" ng-model="vm.map" ng-options="map as map.JCProjectName for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
+                <select class="am-form-field" ng-model="vm.map" ng-options="map as map.name for map in vm.maps" ng-change="vm.fetchMap(vm.map)">
                 </select>
             </div>
 
@@ -15,7 +15,7 @@
 
         <div class="col-sm-9 col-map">
             <div exhibition-hall-map id="mapContainer" class="map-container">
-                <canvas id="mapCanvas" width="3948" height="3000"></canvas>
+                <canvas id="mapCanvas" width="{{  }}" height="3000"></canvas>
             </div>
         </div>
     </div>

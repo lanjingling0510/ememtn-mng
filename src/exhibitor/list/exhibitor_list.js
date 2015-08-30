@@ -19,21 +19,25 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function ExhibitorListController($state, AlertService) {
+function ExhibitorListController($scope, Restangular) {
     const vm = this;
-    vm.editMode = editMode;
+    const Exhibitor = Restangular.all('exhibitors');
+    vm.query = {
+        pageSize: 10,
+    };
 
-    vm.exhibitors = [
-        { name: 'exhibitor 1', _id: 1 },
-        { name: 'exhibitor 3', _id: 3 },
-        { name: 'exhibitor 4', _id: 4 },
-        { name: 'exhibitor 2', _id: 2 },
-        { name: 'exhibitor 7', _id: 7 },
-    ];
+    $scope.$on('map-change', onFloorChange);
+    $scope.$on('get-current-map', () => {
+        $scope.$broadcast('current-map', vm.floor);
+    });
 
-    function editMode(exhibitor) {
-        $state.go('exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit', {
-            exhibitorId: exhibitor._id,
-        });
+    searchExhibitors(vm.query);
+
+    function searchExhibitors(query) {
+        vm.exhibitors = Exhibitor.getList(query).$object;
+    }
+
+    function onFloorChange(event, data) {
+        vm.floor = data;
     }
 }

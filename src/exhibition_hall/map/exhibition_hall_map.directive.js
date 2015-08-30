@@ -67,5 +67,3 @@ function mapContainer() {
         vm.positionStr = '';
     }
 }
-
-

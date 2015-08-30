@@ -18,9 +18,16 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject*/
-function ExhibitListController() {
+function ExhibitListController(Restangular, $stateParams, AlertService) {
     const vm = this;
-    vm.exhibitor = {
-        _id: 'exhibitor 1111',
+    const Exhibit = Restangular.all('exhibits');
+    vm.query = {
+        exhibitorId: $stateParams.exhibitorId,
     };
+
+    searchExhibits(vm.query);
+
+    function searchExhibits(query) {
+        vm.exhibits = Exhibit.getList(query).$object;
+    }
 }

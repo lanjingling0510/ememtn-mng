@@ -19,9 +19,7 @@ function moduleConfig($stateProvider) {
 
 
 /* @ngInject */
-function ExhibitorInlineEditController(AlertService) {
+function ExhibitorInlineEditController(Restangular, $stateParams, AlertService) {
     const vm = this;
-    vm.exhibitor = {
-        _id: 'tgyhu',
-    };
+    vm.exhibitor = Restangular.one('exhibitors', $stateParams.exhibitorId).get().$object;
 }

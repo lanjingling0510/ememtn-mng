@@ -181,8 +181,8 @@ function Point(CTX, isAddPoint) {
 Point.prototype.draw = function (x, y) {
     const self = this;
     const CTX = self.ctx;
-    x = x || self.x;
-    y = y || self.y;
+    x = x || self.x; // eslint-disable-line no-param-reassign
+    y = y || self.y; // eslint-disable-line no-param-reassign
     CTX.beginPath();
     if (self.isAddPoint) {
         CTX.strokeStyle = 'rgba(0,0,0,0.5)';
@@ -266,5 +266,3 @@ function polygons(CTX, list) {
     CTX.fill();
     CTX.closePath();
 }
-
-

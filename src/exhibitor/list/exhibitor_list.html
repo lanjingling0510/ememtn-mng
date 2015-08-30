@@ -3,7 +3,11 @@
 </div>
 
 <ul class="am-list am-list-static">
-    <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id" ng-click="vm.editMode(exhibitor)">{{ exhibitor.name }}</li>
+    <li>
+        <a ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id"
+        ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
+    </li>
 </ul>
+<a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a>
 
 <ui-view />

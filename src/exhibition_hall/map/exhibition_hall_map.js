@@ -2,6 +2,7 @@ require('./exhibition_hall_map.less');
 require('../../common/service.js');
 require('./exhibition_hall_map.service.js');
 require('./exhibition_hall_map.directive.js');
+const config = require('../../config.json');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.map', [
@@ -42,16 +43,24 @@ function getProfileId(map) {
 // }
 
 /* @ngInject */
-function ExhibitionHallMapController($q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
+function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
     const vm = this;
-    vm.maps = maps;
-    vm.map = maps[0];
+    // vm.maps = maps;
+    vm.maps = config.floors;
+    vm.map = vm.maps[0];
     vm.isSelect = false;
     fetchMap(vm.map);
     vm.fetchMap = fetchMap;
     vm.fetchLayers = fetchLayers;
     vm.fetchLayer = fetchLayer;
     vm.fetchFeatures = fetchFeatures;
+
+    $scope.$watch('vm.positionStr', function (newValue) {
+        $scope.$broadcast('draw-position-change', {
+            position: newValue,
+        });
+    });
+
     function fetchLayers(profileId) {
         MapService.MapLayer.query({
             profileId: profileId,

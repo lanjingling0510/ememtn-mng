@@ -18,48 +18,23 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaListController($scope, $state, Restangular, UploadToTempService, AlertService) {
+function ExhibitionAreaListController($scope, Restangular) {
     const vm = this;
     const ExhibitionArea = Restangular.all('exhibition-areas');
-    vm.editMode = editMode;
 
-    $scope.$on('floor-change', onFloorChange);
-
-    vm.exhibitionAreas = [
-        {
-            _id: 'areaid 1',
-            name: 'area 1 name',
-        },
-        {
-            _id: 'areaid 2',
-            name: 'area 2 name',
-        },
-        {
-            _id: 'areaid 3',
-            name: 'area 3 name',
-        },
-        {
-            _id: 'areaid 4',
-            name: 'area 4 name',
-        },
-    ];
-
-
-    function fetchExhibitionAreas(map) {
+    $scope.$on('map-change', onFloorChange);
+    $scope.$on('get-current-map', () => {
+        $scope.$broadcast('current-map', vm.floor);
+    });
+    function searchExhibitionAreas(floor) {
         vm.exhibitionAreas = ExhibitionArea.getList({
-            JCObjId: map.JCObjId,
-            JCObjMask: map.JCObjMask,
+            JCObjId: floor.JCObjId,
+            JCObjMask: floor.JCObjMask,
         }).$object;
     }
 
     function onFloorChange(event, data) {
-        vm.map = data;
-        fetchExhibitionAreas(vm.map);
-    }
-
-    function editMode(exhibitionArea) {
-        $state.go('exhibition-hall-map.exhibition-area-list.exhibition-area-inline-edit', {
-            exhibitionAreaId: exhibitionArea._id,
-        });
+        vm.floor = data;
+        searchExhibitionAreas(vm.floor);
     }
 }

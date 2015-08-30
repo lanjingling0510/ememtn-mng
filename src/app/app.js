@@ -70,10 +70,12 @@ require('../prize/exchange/prize_exchange.js');
 require('../exhibitor/list/exhibitor_list.js');
 require('../exhibitor/edit/exhibitor_edit.js');
 require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
+require('../exhibitor/inline_create/exhibitor_inline_create.js');
 // require('../exhibitor/import/exhibitor_import.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
+require('../exhibition_area/inline_create/exhibition_area_inline_create.js');
 require('../exhibition_area/inline_edit/exhibition_area_inline_edit.js');
 require('../exhibition_area/virtual/exhibition_area_virtual.js');
 
@@ -91,6 +93,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
     'ememtn.exhibition-area.list',
+    'ememtn.exhibition-area.inline-create',
     'ememtn.exhibition-area.inline-edit',
     'ememtn.attendant.list',
     'ememtn.attendant.create',
@@ -119,11 +122,12 @@ module.exports = angular.module('ememtn', [
     'ememtn.page-structure.setting',
     'ememtn.exhibitor.list',
     'ememtn.exhibitor.guide',
+    'ememtn.exhibitor.inline-create',
     'ememtn.exhibitor.inline-edit',
     'ememtn.exhibitor.edit',
     'ememtn.infrastructure.list',
-    'ememtn.infrastructure.inline-edit',
     'ememtn.infrastructure.inline-create',
+    'ememtn.infrastructure.inline-edit',
     'ememtn.exhibit.create',
     'ememtn.exhibit.list',
     'sanya.prize.exchange',

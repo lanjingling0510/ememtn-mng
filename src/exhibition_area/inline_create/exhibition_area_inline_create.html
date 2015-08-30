@@ -1,0 +1,19 @@
+<div class="am-form-group">
+    <label for="">名字</label>
+    <input class="am-form-field am-input-sm" ng-model="vm.exhibitionArea.name">
+</div>
+
+<div class="am-form-group">
+    <label for="">显示颜色</label>
+    <input type="color" class="am-form-field am-input-sm" ng-model="vm.exhibitionArea.color">
+</div>
+
+<div class="am-form-group">
+    <label for="">展区介绍</label>
+    <textarea  class="am-form-field am-input-sm" rows="8" ng-model="vm.exhibitionArea.description"></textarea>
+</div>
+
+<div class="am-form-group">
+    <button class="btn btn-primary" ng-click="vm.createExhibitionArea(vm.exhibitionArea)">保存</button>
+    <a class="btn btn-danger" ui-sref="exhibition-hall-map.exhibition-area-list">取消</a>
+</div>
