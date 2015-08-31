@@ -28,7 +28,7 @@
                     <button class="am-btn am-btn-block">显示</button>
                     <button class="am-btn am-btn-block">隐藏</button>
                     <button class="am-btn am-btn-block" ng-click="vm.stickyOrganizerCustoms()">顶</button>
-                    <button class="am-btn am-btn-block">删除</button>
+                    <button class="am-btn am-btn-block" ng-click="vm.deleteSelectedOrgCustoms()">删除</button>
                 </drop-down>
             </div>
 
@@ -47,7 +47,7 @@
                 <thead>
                     <tr>
                         <td class="table-check">
-                            <input ng-change="vm.toggleCheckAll()" ng-model="vm.organizerCustoms._checked" type="checkbox">
+                            <input ng-change="vm.toggleCheckAll(vm.organizerCustoms._checked)" ng-model="vm.organizerCustoms._checked" type="checkbox">
                         </td>
                         <td>
                             <button class="am-btn am-btn-secondary am-btn-block">名称</button>

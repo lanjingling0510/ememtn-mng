@@ -24,6 +24,7 @@ function OrganizerCustomListController(Restangular, AlertService) {
     vm.toggleCheckAll = toggleCheckAll;
     vm.stickyOrganizerCustom = stickyOrganizerCustom;
     vm.stickyOrganizerCustoms = stickyOrganizerCustoms;
+    vm.deleteSelectedOrgCustoms = deleteSelectedOrgCustoms;
 
     searchOrganizerCustoms();
 
@@ -33,12 +34,12 @@ function OrganizerCustomListController(Restangular, AlertService) {
 
     function toggleCheckAll(checked) {
         vm.organizerCustoms.forEach(function (organizerCustom) {
-            organizerCustom.checked = checked;
+            organizerCustom._checked = checked;
         });
     }
 
     function getCheckedOrganizerCustoms() {
-        return vm.organizerCustoms.filter((organizerCustom) => organizerCustom.checked);
+        return vm.organizerCustoms.filter((organizerCustom) => organizerCustom._checked);
     }
 
     function stickyOrganizerCustom(organizerCustom) {
@@ -54,5 +55,19 @@ function OrganizerCustomListController(Restangular, AlertService) {
     function stickyOrganizerCustoms() {
         const checkedNewses = getCheckedOrganizerCustoms();
         checkedNewses.forEach(stickyOrganizerCustom);
+    }
+
+    function deleteOrgCustom(orgCustom) {
+        orgCustom.remove().then(() => {
+            const index = vm.organizerCustoms.indexOf(orgCustom);
+            vm.organizerCustoms.splice(index, 1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function deleteSelectedOrgCustoms() {
+        const checkedNewses = getCheckedOrganizerCustoms();
+        checkedNewses.forEach(deleteOrgCustom);
     }
 }
