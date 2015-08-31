@@ -1,0 +1,41 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"><span
+                        aria-hidden="true"  ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">&times;</span></button>
+                <h4 class="modal-title">新建</h4>
+            </div>
+            <div class="modal-body">
+                <form class="am-form am-form-horizontal">
+                    <div class="am-form-group am-form-group-sm">
+                        <label class="am-u-sm-3 am-form-label">名称</label>
+
+                        <div class="am-u-sm-9">
+                            <input class="am-form-field" ng-model="vm.exhibitionArea.name">
+                        </div>
+                    </div>
+                    <div class="am-form-group am-form-group-sm">
+                        <label class="am-u-sm-3 am-form-label">显示颜色</label>
+
+                        <div class="am-u-sm-9">
+                            <input type="color" class="am-form-field" ng-model="vm.exhibitionArea.color">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group am-form-group-sm">
+                        <label class="am-u-sm-3 am-form-label ">展区介绍</label>
+                        <div class="am-u-sm-9">
+                            <textarea  class="am-form-field am-input-sm" rows="8" ng-model="vm.exhibitionArea.description"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary"  ng-click="vm.createExhibitionArea(vm.exhibitionArea)">创建</button>
+                <a class="btn btn-default" ng-click="vm.modal.hide()" ui-sref="exhibition-hall-map.exhibition-area-list">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+
