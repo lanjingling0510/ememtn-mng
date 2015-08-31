@@ -18,27 +18,37 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaListController($scope, Restangular) {
+function ExhibitionAreaListController($timeout, $scope, Restangular, AlertService) {
     const vm = this;
     const ExhibitionArea = Restangular.all('exhibition-areas');
+    vm.searchExhibitionAreas = searchExhibitionAreas;
+    vm.query = {
+        page: 1,
+        pageSize: 16,
+        total: 0,
+    };
 
     $scope.$on('map-change', onFloorChange);
     $scope.$on('current-map', onFloorChange);
-    // $scope.$on('get-current-map', () => {
-    //     $scope.$broadcast('current-map', vm.floor);
-    // });
-
     $scope.$emit('get-current-map');
 
-    function searchExhibitionAreas(floor) {
-        vm.exhibitionAreas = ExhibitionArea.getList({
-            JCObjId: floor.JCObjId,
-            JCObjMask: floor.JCObjMask,
-        }).$object;
+    let searchTimer;
+    function searchExhibitionAreas(query={}, delay=200) {
+        $timeout.cancel(searchTimer);
+        $timeout(() => {
+            ExhibitionArea.getList(query).then((exhibitionAreas) => {
+                vm.query.total = exhibitionAreas[0];
+                vm.exhibitionAreas = exhibitionAreas.slice(1);
+            }).catch((err) => {
+                AlertService.warning(err.data);
+            });
+        }, delay);
     }
 
     function onFloorChange(event, data) {
-        vm.floor = data;
-        searchExhibitionAreas(vm.floor);
+        const map = data.map.profile || data.map;
+        vm.query.JCObjId = map.JCObjId;
+        vm.query.JCObjMask = map.JCObjMask;
+        searchExhibitionAreas(vm.query);
     }
 }

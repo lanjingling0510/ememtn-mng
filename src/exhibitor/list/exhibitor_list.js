@@ -19,19 +19,31 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function ExhibitorListController($scope, Restangular) {
+function ExhibitorListController($timeout, $scope, Restangular) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
+    vm.searchExhibitors = searchExhibitors;
     vm.query = {
-        pageSize: 10,
+        page: 1,
+        pageSize: 12,
+        total: 0,
     };
 
     $scope.$on('map-change', onFloorChange);
 
-    searchExhibitors(vm.query);
+    searchExhibitors(vm.query, 0);
 
-    function searchExhibitors(query) {
-        vm.exhibitors = Exhibitor.getList(query).$object;
+    let searchTimer;
+    function searchExhibitors(query={}, delay=200) {
+        $timeout.cancel(searchTimer);
+        searchTimer = $timeout(() => {
+            Exhibitor.getList(query).then((exhibitors) => {
+                vm.query.total = exhibitors[0];
+                vm.exhibitors = exhibitors.slice(1);
+            }).catch((err) => {
+                AlertService.warning(err.data);
+            });
+        }, delay);
     }
 
     function onFloorChange(event, data) {

@@ -7,6 +7,19 @@
         <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
     </li>
 </ul>
+
+<div class="">
+    <pagination total-items="vm.query.total"
+                ng-model="vm.query.page"
+                items-per-page="vm.query.pageSize"
+                max-size="3"
+                class="pagination-sm"
+                boundary-links="true"
+                direction-links="true"
+                ng-change="vm.searchExhibitors(vm.query, 0)"
+    ></pagination>
+</div>
+
 <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a>
 
 <ui-view />

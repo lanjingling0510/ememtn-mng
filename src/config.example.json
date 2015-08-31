@@ -1,6 +1,10 @@
 {
     "floors": [
         {
+            "name": "全貌",
+            "JCObjId": 4294967295,
+            "JCObjMask": 0
+        }, {
             "name": "一楼",
             "JCObjId": 4294959104,
             "JCObjMask": 0

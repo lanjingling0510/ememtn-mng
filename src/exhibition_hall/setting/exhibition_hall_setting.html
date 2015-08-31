@@ -13,8 +13,8 @@
                         ngf-change="vm.uploadPicture($file)"
                         ngf-select ng-model="vm.pictureFile"
                         ngf-multiple="false" ngf-accept="'image/*'"
-                        accept="image/*" ng-disabled="vm.pavilion.pictures.length >= 1"> 添加 </div>
-                    <small class="text-danger">仅一张</small>
+                        accept="image/*" ng-disabled="vm.pavilion.pictures.length >= 6"> 添加 </div>
+                    <small class="text-danger">最多6张</small>
                 </div>
 
                 <ul class="am-avg-sm-6 am-thumbnails">
