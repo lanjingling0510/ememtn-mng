@@ -1,0 +1,20 @@
+<div class="am-margin-vertical">
+    <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">返回</a>
+</div>
+
+<div class="am-margin-vertical">
+    <button type="button" ng-click="vm.removeSelectedExhibitors()">删除</button>
+    <input type="checkbox" ng-model="vm.exhibitors._checked">
+</div>
+
+<ul class="am-list am-list-static">
+    <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
+        <label>
+            <input type="checkbox" ng-model="vm.exhibitors[$index]._checked">
+            {{ exhibitor.title }}
+        </label>
+    </li>
+</ul>
+<a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a>
+
+<ui-view />
