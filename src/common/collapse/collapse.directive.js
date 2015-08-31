@@ -26,11 +26,19 @@ function collapseDirective() {
     };
     return directive;
 
-    function link($scope, $ele) {
+    function link($scope, $ele, $attr) {
         let open = false;
         const arrow = $($ele[0].querySelector('.am-icon-sort-desc'));
+        if ($attr.scale) {
+            const panelHead = $ele[0].querySelector('.am-panel-hd ul');
+            const scaleList = $attr.scale.split(',');
+            [].forEach.call(panelHead.children, function (value, index) {
+                value.style.flex = scaleList[index] || 0;
+            });
+        }
+
         arrow.on('click', function () {
-            open = ! open;
+            open = !open;
             $($ele[0].querySelector('.am-collapse')).collapse('toggle');
             if (open) {
                 arrow.css('transform', 'rotate(180deg)');
