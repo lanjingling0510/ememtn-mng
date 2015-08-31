@@ -27,9 +27,6 @@ function ExhibitorListController($scope, Restangular) {
     };
 
     $scope.$on('map-change', onFloorChange);
-    $scope.$on('get-current-map', () => {
-        $scope.$broadcast('current-map', vm.floor);
-    });
 
     searchExhibitors(vm.query);
 

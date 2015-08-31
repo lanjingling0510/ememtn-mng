@@ -25,6 +25,8 @@ function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
     vm.onAreaChange = onAreaChange;
 
     $scope.$on('map-change', onMapChange);
+    $scope.$on('current-map', onMapChange);
+    $scope.$emit('get-current-map');
 
     function fetchExhibitionVirtualAreas(map) {
         Restangular.all('exhibition-areas').getList({

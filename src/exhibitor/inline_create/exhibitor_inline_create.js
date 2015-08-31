@@ -39,15 +39,14 @@ function ExhibitorInlineCreateController($scope, Restangular, AlertService, comm
     $scope.$emit('get-current-map');
 
     function onMapChange(event, data) {
-        if (!data || !data.map) {
-            return;
+        if (data && data.map && data.map.profile) {
+            vm.exhibitor.JCObjId = data.map.profile.JCObjId;
+            vm.exhibitor.JCObjMask = data.map.profile.JCObjMask;
+            vm.exhibitor.profileId = data.map.profile.JCObjId + ':' + data.map.profile.JCObjMask;
+            vm.exhibitor.layer = data.map.layers.filter((layer) => {
+                return layer.JCName === 'stall';
+            })[0];
         }
-        vm.exhibitor.JCObjId = data.map.profile.JCObjId;
-        vm.exhibitor.JCObjMask = data.map.profile.JCObjMask;
-        vm.exhibitor.profileId = data.map.profile.JCObjId + ':' + data.map.profile.JCObjMask;
-        vm.exhibitor.layer = data.map.layers.filter((layer) => {
-            return layer.JCName === 'stall';
-        })[0];
     }
 
     function onPositionChange(event, data) {
