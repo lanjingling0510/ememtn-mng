@@ -109,7 +109,9 @@ function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, M
         MapService.MapProfile.get({
             profileId: profileId,
         }).$promise.then(function (profile) {
-                map.profile = profile;
+                $timeout(() => {
+                    map.profile = profile;
+                }, 0);
                 return MapService.MapLayer.query({
                     profileId: profileId,
                     JCObjId: JCObjId,

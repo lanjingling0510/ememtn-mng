@@ -18,18 +18,28 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject*/
-function OrganizerCustomListController(Restangular, AlertService) {
+function OrganizerCustomListController($timeout, Restangular, AlertService) {
     const vm = this;
     const OrganizerCustom = Restangular.all('organizer-customs');
     vm.toggleCheckAll = toggleCheckAll;
     vm.stickyOrganizerCustom = stickyOrganizerCustom;
-    vm.stickyOrganizerCustoms = stickyOrganizerCustoms;
+    vm.stickySelectedOrganizerCustoms = stickySelectedOrganizerCustoms;
     vm.deleteSelectedOrgCustoms = deleteSelectedOrgCustoms;
+    vm.saveCustomTitle = saveCustomTitle;
+    vm.showSelectedOrgCustoms = showSelectedOrgCustoms;
+    vm.hideSelectedOrgCustoms = hideSelectedOrgCustoms;
+    vm.searchOrganizerCustoms = searchOrganizerCustoms;
+    vm.query = {};
 
-    searchOrganizerCustoms();
+    fetchOrganizer();
+    searchOrganizerCustoms(vm.query, 0);
 
-    function searchOrganizerCustoms(query={}) {
-        vm.organizerCustoms = OrganizerCustom.getList(query).$object;
+    let searchTimer;
+    function searchOrganizerCustoms(query={}, delay=200) {
+        $timeout.cancel(searchTimer);
+        searchTimer = $timeout(() => {
+            vm.organizerCustoms = OrganizerCustom.getList(query).$object;
+        }, delay);
     }
 
     function toggleCheckAll(checked) {
@@ -52,7 +62,7 @@ function OrganizerCustomListController(Restangular, AlertService) {
         });
     }
 
-    function stickyOrganizerCustoms() {
+    function stickySelectedOrganizerCustoms() {
         const checkedNewses = getCheckedOrganizerCustoms();
         checkedNewses.forEach(stickyOrganizerCustom);
     }
@@ -69,5 +79,47 @@ function OrganizerCustomListController(Restangular, AlertService) {
     function deleteSelectedOrgCustoms() {
         const checkedNewses = getCheckedOrganizerCustoms();
         checkedNewses.forEach(deleteOrgCustom);
+    }
+
+    function fetchOrganizer() {
+        vm.organizer = Restangular.all('organizer').doGET().$object;
+    }
+
+    function saveCustomTitle(title) {
+        vm.organizer.doPUT({
+            customSubject: title,
+        }, 'custom-subject').then(() => {
+            AlertService.success('保存成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function showOrgCustom(orgCustom) {
+        orgCustom.all('visible').doPUT({}, 'yes').then(function () {
+            orgCustom.visible = 1;
+            orgCustom.updatedAt = new Date().toISOString();
+        }).catch(function (err) {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function showSelectedOrgCustoms() {
+        const checkedOrgCustoms = getCheckedOrganizerCustoms();
+        checkedOrgCustoms.forEach(showOrgCustom);
+    }
+
+    function hideOrgCustom(orgCustom) {
+        orgCustom.all('visible').doPUT({}, 'no').then(function () {
+            orgCustom.visible = 0;
+            orgCustom.updatedAt = new Date().toISOString();
+        }).catch(function (err) {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function hideSelectedOrgCustoms() {
+        const checkedOrgCustoms = getCheckedOrganizerCustoms();
+        checkedOrgCustoms.forEach(hideOrgCustom);
     }
 }
