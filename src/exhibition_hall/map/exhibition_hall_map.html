@@ -7,16 +7,13 @@
             </div>
 
             <div ui-view> </div>
-            <!-- <button ng-click="vm.clearPolygons()" class="am-btn am-btn-default">清除信标</button>
-            <div>
-                {{vm.positionStr}}
-            </div> -->
         </div>
 
         <div class="col-sm-9 col-map">
             <div exhibition-hall-map id="mapContainer" class="map-container">
-                <canvas id="mapCanvas" width="{{ vm.map.profile.JCRight }}" height="{{ vm.map.profile.JCBottom }}"></canvas>
+                <canvas id="mapCanvas"></canvas>
             </div>
+            <button ng-click="vm.clearPolygons()" class="am-btn am-btn-default">清除信标</button>
         </div>
     </div>
 </div>

@@ -2,7 +2,9 @@ require('./exhibition_hall_map.less');
 require('../../common/service.js');
 require('./exhibition_hall_map.service.js');
 require('./exhibition_hall_map.directive.js');
+const $ = require('jquery');
 const config = require('../../config.json');
+const canvas = require('./exhibition_hall_canvas.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.map', [
@@ -155,6 +157,15 @@ function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, M
                 });
                 MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
                 floorChange(map);
+                canvas.init({
+                    map: $('#mapCanvas'),
+                    width: $('#mapContainer svg').width(),
+                    height: $('#mapContainer svg').height(),
+                    getPositionList: function (list) {
+                        vm.positionStr = list.join(',');
+                        $scope.$apply();
+                    },
+                });
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });
