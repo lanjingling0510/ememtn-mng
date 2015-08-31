@@ -21,15 +21,25 @@ function moduleConfig($stateProvider) {
 function MessageListController(Restangular, AlertService) {
     const vm = this;
     const Message = Restangular.all('messages');
+    vm.searchMessages = searchMessages;
 
-    vm.query = {};
+    vm.query = {
+        page: 1,
+        pageSize: 4,
+        total: 0,
+    };
     vm.toggleCheckAll = toggleCheckAll;
     vm.removeCheckedMessages = removeCheckedMessages;
 
     searchMessages(vm.query);
 
     function searchMessages(query) {
-        vm.messages = Message.getList(query).$object;
+        Message.getList(query).then((messages) => {
+            vm.query.total = messages[0];
+            vm.messages = messages.slice(1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 
     function removeCheckedMessages() {

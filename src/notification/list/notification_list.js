@@ -21,15 +21,25 @@ function moduleConfig($stateProvider) {
 function NotificationListController($q, Restangular, AlertService) {
     const vm = this;
     const Notification = Restangular.all('notifications');
-    vm.query = {};
+    vm.query = {
+        page: 1,
+        pageSize: 16,
+        total: 0,
+    };
     vm.repushCheckedNotifications = repushCheckedNotifications;
     vm.removeCheckedNofitications = removeCheckedNofitications;
     vm.toggleCheckAll = toggleCheckAll;
+    vm.searchNotifications = searchNotifications;
 
     searchNotifications(vm.query);
 
     function searchNotifications(query) {
-        vm.notifications = Notification.getList(query).$object;
+        Notification.getList(query).then((notifications) => {
+            vm.query.total = notifications[0];
+            vm.notifications = notifications.slice(1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 
     function repushCheckedNotifications() {

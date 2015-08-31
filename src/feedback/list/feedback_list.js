@@ -40,8 +40,8 @@ function FeedbackListController($q, $timeout, Restangular, AlertService) {
         $timeout.cancel(searchTimer);
         searchTimer = $timeout(() => {
             Feedback.getList(query).then(function (feedbacks) {
-                vm.feedbacks = feedbacks.slice(1);
                 vm.query.total = feedbacks[0];
+                vm.feedbacks = feedbacks.slice(1);
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });

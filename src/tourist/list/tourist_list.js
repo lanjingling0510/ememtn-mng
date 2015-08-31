@@ -25,14 +25,14 @@ function TouristListController($q, $timeout, Restangular, AlertService) {
     vm.removeTourist = removeTourist;
     vm.searchTourists = searchTourists;
     vm.toggleCheckAll = toggleCheckAll;
-    vm.querystring = {
+    vm.query = {
         status: 'enabled',
         phone: '',
         page: 1,
         pageSize: 15,
         total: 0,
     };
-    searchTourists(vm.querystring);
+    searchTourists(vm.query);
 
     function disableCheckedTourists() {
         const tourists = getCheckedTourists();
@@ -80,11 +80,11 @@ function TouristListController($q, $timeout, Restangular, AlertService) {
     }
 
     let fetchTimer;
-    function searchTourists(querystring = {}, delay = 0) {
+    function searchTourists(query = {}, delay = 0) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(function () {
-            Tourist.getList(querystring).then(function (tourists) {
-                vm.querystring.total = tourists[0];
+            Tourist.getList(query).then(function (tourists) {
+                vm.query.total = tourists[0];
                 vm.tourists = tourists.slice(1);
             }).catch(function (err) {
                 AlertService.warning(err.data);

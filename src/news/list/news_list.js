@@ -23,8 +23,9 @@ function NewsListController($q, Restangular, AlertService, $filter) { // eslint-
     const News = Restangular.all('newses');
     vm.query = {
         page: 1,
-        pageSize: 30,
+        pageSize: 16,
         count: 0,
+        total: 0,
     };
     vm.filter = {
         visible: 1,
@@ -32,7 +33,7 @@ function NewsListController($q, Restangular, AlertService, $filter) { // eslint-
     // vm.allChecked = false;
     // vm.checkList = [];
     // vm.allCheckedChange = allCheckedChange;
-    // vm.searchNewses = searchNewses;
+    vm.searchNewses = searchNewses;
     vm.toggleCheckAll = toggleCheckAll;
     vm.showCheckedNews = showCheckedNews;
     vm.hideCheckedNews = hideCheckedNews;
@@ -66,7 +67,12 @@ function NewsListController($q, Restangular, AlertService, $filter) { // eslint-
     searchNewses(vm.query);
 
     function searchNewses(query) {
-        vm.newses = News.getList(query).$object;
+        News.getList(query).then((newses) => {
+            vm.query.total = newses[0];
+            vm.newses = newses.slice(1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 
     function toggleCheckAll(checked) {

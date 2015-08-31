@@ -25,11 +25,12 @@ function InfoController($q, Restangular, AlertService) { // eslint-disable-line 
         page: 1,
         pageSize: 30,
         count: 0,
+        total: 0,
     };
     // vm.allChecked = false;
     // vm.checkList = [];
     // vm.allCheckedChange = allCheckedChange;
-    // vm.searchInfoes = searchInfoes;
+    vm.searchInfoes = searchInfoes;
     vm.toggleCheckAll = toggleCheckAll;
     vm.showCheckedInfo = showCheckedInfo;
     vm.hideCheckedInfo = hideCheckedInfo;
@@ -42,7 +43,12 @@ function InfoController($q, Restangular, AlertService) { // eslint-disable-line 
     searchInfoes(vm.query);
 
     function searchInfoes(query) {
-        vm.infoes = Info.getList(query).$object;
+        Info.getList(query).then((infoes) => {
+            vm.query.total = infoes[0];
+            vm.infoes = infoes.slice(1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 
     function toggleCheckAll(checked) {

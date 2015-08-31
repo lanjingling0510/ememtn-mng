@@ -21,14 +21,14 @@
       <tfoot>
           <tr>
               <td colspan="4" class="text-center">
-                  <pagination total-items="vm.querystring.total"
-                              ng-model="vm.querystring.page"
-                              items-per-page="vm.querystring.pageSize"
+                  <pagination total-items="vm.query.total"
+                              ng-model="vm.query.page"
+                              items-per-page="vm.query.pageSize"
                               max-size="7"
                               class="pagination-sm"
                               boundary-links="true"
                               direction-links="true"
-                              ng-change="vm.fetchTourists(vm.querystring)"
+                              ng-change="vm.searchAttendants(vm.query)"
                   ></pagination>
               </td>
           </tr>

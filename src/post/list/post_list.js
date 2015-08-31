@@ -25,7 +25,11 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
     vm.removeCheckedPosts = removeCheckedPosts;
     vm.toggleCheckAll = toggleCheckAll;
     vm.searchPosts = searchPosts;
-    vm.query = {};
+    vm.query = {
+        page: 1,
+        pageSize: 16,
+        total: 0,
+    };
 
     searchPosts(vm.query, 0);
 
@@ -33,7 +37,12 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
     function searchPosts(query={}, delay=200) {
         $timeout.cancel(searchTimer);
         searchTimer = $timeout(() => {
-            vm.posts = Post.getList(query).$object;
+            Post.getList(query).then((posts) => {
+                vm.query.total = posts[0];
+                vm.posts = posts.slice(1);
+            }).catch((err) => {
+                AlertService.warning(err.data);
+            });
         }, delay);
     }
 

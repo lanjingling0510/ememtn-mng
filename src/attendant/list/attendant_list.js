@@ -24,24 +24,29 @@ function AttendantListController($timeout, $scope, Restangular, AlertService) {
     vm.searchAttendants = searchAttendants;
     vm.removeCheckedAttendants = removeCheckedAttendants;
     vm.checkAll = checkAll;
-    vm.querystring = {
+    vm.query = {
         status: 'enabled',
         phone: '',
         page: 1,
-        pageSize: 15,
+        pageSize: 2,
         total: 0,
     };
-    searchAttendants(vm.querystring);
+    searchAttendants(vm.query);
 
     $scope.$on('custom.attendant.created', function () {
-        searchAttendants(vm.querystring);
+        searchAttendants(vm.query);
     });
 
     let fetchTimer;
-    function searchAttendants(querystring = {}, delay = 0) {
+    function searchAttendants(query = {}, delay = 0) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(function () {
-            vm.attendants = Attendant.getList(querystring).$object;
+            Attendant.getList(query).then((attendants) => {
+                vm.query.total = attendants[0];
+                vm.attendants = attendants.slice(1);
+            }).catch((err) => {
+                AlertService.warning(err.data);
+            });
         }, delay);
     }
 

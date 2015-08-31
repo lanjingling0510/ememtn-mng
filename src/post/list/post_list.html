@@ -31,6 +31,22 @@
                 </tr>
                 </thead>
 
+                <tfoot class="">
+                    <tr>
+                        <td colspan="6">
+                            <pagination total-items="vm.query.total"
+                                        ng-model="vm.query.page"
+                                        items-per-page="vm.query.pageSize"
+                                        max-size="7"
+                                        class="pagination-sm"
+                                        boundary-links="true"
+                                        direction-links="true"
+                                        ng-change="vm.searchPosts(vm.query, 0)"
+                            ></pagination>
+                        </td>
+                    </tr>
+                </tfoot>
+
                 <tbody>
 
                 <tr ng-repeat="post in vm.posts track by post._id">
