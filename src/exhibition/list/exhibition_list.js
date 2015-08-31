@@ -18,17 +18,29 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject*/
-function ExhibitionListController($q, Restangular, AlertService) {
+function ExhibitionListController($timeout, $q, Restangular, AlertService) {
     const vm = this;
     const Exhibition = Restangular.all('exhibitions');
-    vm.query = {};
+    vm.query = {
+        page: 1,
+        pageSize: 16,
+        total: 0,
+    };
     vm.toggleCheckAll = toggleCheckAll;
     vm.removeCheckedExhibitions = removeCheckedExhibitions;
+    vm.searchExhibitions = searchExhibitions;
 
-    searchExhibitions(vm.query);
+    searchExhibitions(vm.query, 0);
 
-    function searchExhibitions(query) {
-        vm.exhibitions = Exhibition.getList(query).$object;
+    let searchTimer;
+    function searchExhibitions(query={}, delay=200) {
+        $timeout.cancel(searchTimer);
+        $timeout(() => {
+            Exhibition.getList(query).then((exhibitions) => {
+                vm.query.total = exhibitions[0];
+                vm.exhibitions = exhibitions.slice(1);
+            });
+        }, delay);
     }
 
     function toggleCheckAll(checked) {

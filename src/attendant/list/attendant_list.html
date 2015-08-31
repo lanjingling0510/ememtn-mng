@@ -14,6 +14,7 @@
           <th><input type="checkbox" ng-model="vm.attendants._checked" ng-click="vm.checkAll()" /></th>
           <th>手机号</th>
           <th>名字</th>
+          <th>昵称</th>
         </tr>
       </thead>
 
@@ -38,6 +39,7 @@
           <td><input type="checkbox" ng-model="vm.attendants[$index]._checked"></td>
           <td>{{ attendant.phone }}</td>
           <td>{{ attendant.realname }}</td>
+          <td>{{ attendant.nickname }}</td>
         </tr>
       </tbody>
     </table>

@@ -25,4 +25,15 @@
         </ul>
     </my-collapse>
 
+    <div class="">
+        <pagination total-items="vm.query.total"
+                    ng-model="vm.query.page"
+                    items-per-page="vm.query.pageSize"
+                    max-size="7"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    direction-links="true"
+                    ng-change="vm.searchExhibitions(vm.query)"
+        ></pagination>
+    </div>
 </div>
