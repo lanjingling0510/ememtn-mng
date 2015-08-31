@@ -25,7 +25,8 @@
                 <label>缩略图</label>
                 <div class="btn btn-primary am-margin-horizontal"
                     ngf-change="vm.uploadFile($files, vm.onThunbnailUploaded)" ngf-select
-                    ngf-multiple="false" ngf-accept="'image/*'" accept="image/*" ng-disabled="vm.organizerCustom.thunbnails.length >= 1">添加</div>
+                    ngf-multiple="false" ngf-accept="'image/*'" accept="image/*"
+                    ng-disabled="vm.organizerCustom.thunbnails.length >= 1">添加</div>
                 <small class="text-danger">仅1张</small>
             </div>
 
@@ -47,7 +48,8 @@
                 <label>图片</label>
                 <div class="btn btn-primary am-margin-horizontal"
                     ngf-change="vm.uploadFile($files)" ngf-select
-                    ngf-multiple="true" ngf-accept="'image/*'" accept="image/*"  ng-disabled="vm.organizerCustom.thunbnails.length >= 6">添加</div>
+                    ngf-multiple="true" ngf-accept="'image/*'" accept="image/*"
+                    ng-disabled="vm.organizerCustom.pictures.length >= 6">添加</div>
                 <small class="text-danger">最多添加6张</small>
             </div>
 

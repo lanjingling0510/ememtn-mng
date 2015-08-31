@@ -36,7 +36,8 @@
                     <div class="btn btn-primary am-margin-horizontal"
                     ngf-change="vm.uploadFile($files)" ngf-select
                     ng-model="vm.pictureFile" ngf-multiple="true"
-                    ngf-accept="'image/*'" accept="image/*">添加</div>
+                    ngf-accept="'image/*'" accept="image/*"
+                    ng-disabled="vm.organizer.pictures.length >= 6">添加</div>
                     <small class="text-danger">最多添加6张</small>
                 </div>
 
