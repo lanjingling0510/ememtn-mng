@@ -12,6 +12,10 @@ module.exports.clearPolygons = clearPolygons;
 
 function init(options) {
     map = options.map;
+    map.attr({
+        height: options.height,
+        width: options.width,
+    });
     getPositionListCallback = options.getPositionList;
     ctx = map[0].getContext('2d');
     background();
@@ -140,7 +144,7 @@ function buildAddPoints(list) {
     let y;
     let current;
     let next;
-    for (let i = list.length; i--; ) {
+    for (let i = list.length; i--;) {
         current = list[i];
         next = i === list.length - 1 ? list[0] : list[i + 1];
         x = (current.x + next.x) / 2;

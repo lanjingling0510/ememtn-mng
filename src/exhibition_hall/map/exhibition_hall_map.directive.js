@@ -24,13 +24,6 @@ function mapContainer() {
         vm = scope.vm;
         vm.positionStr = '';
         vm.clearPolygons = clearPolygons;
-        canvas.init({
-            map: $('#mapCanvas'),
-            getPositionList: function (list) {
-                vm.positionStr = list.join(',');
-                scope.$apply();
-            },
-        });
         $(element[0]).on('mousedown', mousedown);
         $(document).on('mousemove', mousemove);
         $(document).on('mouseup', mouseup);
