@@ -10,11 +10,11 @@ let jqLite = angular.element;
  *
  */
 
-module.exports = angular.module("common.modal.service", [])
-    .factory("commonModal", commonModal);
+module.exports = angular.module('sanya.common.services')
+    .factory('commonModal', commonModal);
 
 /* @ngInject*/
-function commonModal($q, $document, $compile, $rootScope, $http) {
+function commonModal($q, $document, $compile, $rootScope) {
     return {
         fromTemplateUrl: fromTemplateUrl
     };

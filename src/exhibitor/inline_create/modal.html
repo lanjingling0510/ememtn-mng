@@ -1,0 +1,27 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新建</h4>
+            </div>
+            <div class="modal-body">
+                <form class="am-form am-form-horizontal">
+                    <div class="am-form-group">
+                        <label class="col-sm-2 am-form-label">名称</label>
+
+                        <div class="col-sm-9">
+                            <input class="am-form-field" ng-model="vm.exhibitor.title">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="vm.createExhibitor(vm.exhibitor)">创建</button>
+                <a class="btn btn-default" ng-click="vm.modal.hide()" ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list">取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+

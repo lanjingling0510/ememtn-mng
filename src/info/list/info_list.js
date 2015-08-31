@@ -4,7 +4,6 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.info.list', [
     'ui.router',
     'restangular',
-    'common.modal.service',
     'common.slideBox.directive',
 ]).config(moduleConfig)
     .controller('InfoController', InfoController);
@@ -19,7 +18,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function InfoController($q, Restangular, AlertService, $scope, commonModal) { // eslint-disable-line no-unused-vars
+function InfoController($q, Restangular, AlertService) { // eslint-disable-line no-unused-vars
     const vm = this;
     const Info = Restangular.all('infoes');
     vm.query = {

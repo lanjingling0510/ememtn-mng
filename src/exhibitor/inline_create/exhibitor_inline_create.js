@@ -2,6 +2,7 @@ require('../../common/service.js');
 require('../list/exhibitor_list.js');
 const uuid = require('node-uuid');
 const angular = require('angular');
+const modalTemplate = require('./modal.html');
 
 module.exports = angular.module('ememtn.exhibitor.inline-create', [
     'ui.router',
@@ -20,7 +21,7 @@ function moduleConfig($stateProvider) {
 
 
 /* @ngInject */
-function ExhibitorInlineCreateController($scope, Restangular, AlertService) {
+function ExhibitorInlineCreateController($scope, Restangular, AlertService, commonModal) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
     const MapFeature = Restangular.all('map-features');
@@ -28,13 +29,19 @@ function ExhibitorInlineCreateController($scope, Restangular, AlertService) {
     vm.exhibitor = {
         color: '#a69b92',
     };
+    commonModal.fromTemplateUrl(modalTemplate, {scope: $scope}).then(function (modal) {
+        vm.modal = modal;
+        vm.modal.show();
+    });
     $scope.$on('current-map', onMapChange);
     $scope.$on('map-change', onMapChange);
     $scope.$on('draw-position-change', onPositionChange);
     $scope.$emit('get-current-map');
 
     function onMapChange(event, data) {
-        if (!data || !data.map) { return; }
+        if (!data || !data.map) {
+            return;
+        }
         vm.exhibitor.JCObjId = data.map.profile.JCObjId;
         vm.exhibitor.JCObjMask = data.map.profile.JCObjMask;
         vm.exhibitor.profileId = data.map.profile.JCObjId + ':' + data.map.profile.JCObjMask;
@@ -44,7 +51,9 @@ function ExhibitorInlineCreateController($scope, Restangular, AlertService) {
     }
 
     function onPositionChange(event, data) {
-        if (!data.position) { return; }
+        if (!data.position) {
+            return;
+        }
         const points = data.position.split(',').map(parseFloat);
         vm.exhibitor.geo = [];
         for (let i = 0, len = points.length / 2; i < len; i += 1) {
