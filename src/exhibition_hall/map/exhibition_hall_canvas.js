@@ -1,7 +1,7 @@
 let map;
 let ctx;
 let isScale = false;
-const pointList = [];
+let pointList = [];
 let currentPoint;
 let isBuildComplete = false;
 let getPositionListCallback;
@@ -83,9 +83,15 @@ function mousemove(e) {
             currentPoint.x = x;
             currentPoint.y = y;
             polygons(ctx, pointList);
+            if (!currentPoint.isAddPoint) {
+                pointList = pointList.filter(function (value) {
+                    return !value.isAddPoint;
+                });
+            }
             pointList.forEach(function (value) {
                 value.draw();
             });
+            !currentPoint.isAddPoint && buildAddPoints(pointList);
             getpositionList(getPositionListCallback);
         }
     } else {        //  正在构建编辑框
@@ -263,7 +269,9 @@ function polygons(CTX, list) {
     CTX.moveTo(list[0].x, list[0].y);
     for (let i = 1, len = list.length, point; i < len; i++) {
         point = list[i];
-        CTX.lineTo(point.x, point.y);
+        if ((currentPoint && currentPoint.isAddPoint) || !point.isAddPoint) {
+            CTX.lineTo(point.x, point.y);
+        }
     }
     CTX.lineTo(list[0].x, list[0].y);
     CTX.stroke();
