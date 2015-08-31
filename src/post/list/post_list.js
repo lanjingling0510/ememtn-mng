@@ -24,12 +24,17 @@ function PostListController(Restangular, AlertService, $scope, $timeout, $q) {
 
     vm.removeCheckedPosts = removeCheckedPosts;
     vm.toggleCheckAll = toggleCheckAll;
+    vm.searchPosts = searchPosts;
     vm.query = {};
 
-    searchPosts(vm.query);
+    searchPosts(vm.query, 0);
 
-    function searchPosts(query) {
-        vm.posts = Post.getList(query).$object;
+    let searchTimer;
+    function searchPosts(query={}, delay=200) {
+        $timeout.cancel(searchTimer);
+        searchTimer = $timeout(() => {
+            vm.posts = Post.getList(query).$object;
+        }, delay);
     }
 
     function getCheckedPosts() {

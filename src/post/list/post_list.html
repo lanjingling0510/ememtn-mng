@@ -7,7 +7,9 @@
             </drop-down>
         </div>
         <div class="am-u-sm-4">
-            <input type="text" class="am-form-field"  ng-model="vm.filters.subject" id="platform-search" placeholder="请输入主题搜索帖子" ng-change="vm.searchPosts(vm.query)">
+            <input type="text" class="am-form-field"  ng-model="vm.query.subject"
+            id="platform-search" placeholder="请输入主题搜索帖子"
+            ng-change="vm.searchPosts(vm.query)">
         </div>
 
     </div>
