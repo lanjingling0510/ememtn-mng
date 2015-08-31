@@ -22,6 +22,8 @@ function moduleConfig($stateProvider) {
 /* @ngInject */
 function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
     const vm = this;
+    vm.onAreaChange = onAreaChange;
+
     $scope.$on('map-change', onMapChange);
 
     function fetchExhibitionVirtualAreas(map) {
@@ -30,9 +32,8 @@ function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
             JCObjMask: map.JCObjMask,
         }).then(function (exhibitionAreas) {
             vm.exhibitionAreas = exhibitionAreas;
-            $scope.$broadcast('area-change', {
-                exhibitionArea: exhibitionAreas[0],
-            });
+            vm.exhibitionArea = exhibitionAreas[0];
+            onAreaChange(vm.exhibitionArea);
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
@@ -41,5 +42,11 @@ function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
     function onMapChange(event, data) {
         const map = data;
         fetchExhibitionVirtualAreas(map);
+    }
+
+    function onAreaChange(exhibitionArea) {
+        $scope.$broadcast('area-change', {
+            exhibitionArea: exhibitionArea,
+        });
     }
 }

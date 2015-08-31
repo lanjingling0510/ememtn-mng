@@ -61,6 +61,12 @@ function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, M
         });
     });
 
+    $scope.$on('get-current-map', () => {
+        $scope.$broadcast('current-map', {
+            map: vm.map,
+        });
+    });
+
     function fetchLayers(profileId) {
         MapService.MapLayer.query({
             profileId: profileId,

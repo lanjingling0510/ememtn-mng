@@ -1,6 +1,8 @@
 <div class="exhibition-hall-setting">
     <div>
-        <select class="am-form-field" ng-options="area as area.name for area in vm.areas track by area._id">
+        <select class="am-form-field" ng-model="vm.exhibitionArea"
+        ng-options="exhibitionArea as exhibitionArea.name for exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id"
+        ng-change="vm.onAreaChange(vm.exhibitionArea)">
 
         </select>
 

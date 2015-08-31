@@ -23,9 +23,13 @@ function ExhibitionAreaListController($scope, Restangular) {
     const ExhibitionArea = Restangular.all('exhibition-areas');
 
     $scope.$on('map-change', onFloorChange);
-    $scope.$on('get-current-map', () => {
-        $scope.$broadcast('current-map', vm.floor);
-    });
+    $scope.$on('current-map', onFloorChange);
+    // $scope.$on('get-current-map', () => {
+    //     $scope.$broadcast('current-map', vm.floor);
+    // });
+
+    $scope.$emit('get-current-map');
+
     function searchExhibitionAreas(floor) {
         vm.exhibitionAreas = ExhibitionArea.getList({
             JCObjId: floor.JCObjId,
