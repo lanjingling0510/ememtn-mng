@@ -1,4 +1,4 @@
-<div class="am-g news-create" >
+<div class="am-g exhibitor-edit" >
     <ol class="am-breadcrumb ng-scope">
         <li><a class="am-text-lg am-icon-star" ui-sref="organizer-custom-list">参展商管理</a></li>
         <li class="am-active">参展商信息查看</li>
@@ -9,46 +9,50 @@
         <div class="am-form-inline" role="form">
             <div class="am-form-group">
                 <label class="am-form-label">展商名字</label>
-                <input type="text" ng-model="vm.news.subject" class="am-form-field" placeholder="请输入标题">
+                <input ng-model="vm.exhibitor.title" class="am-form-field" placeholder="请输入标题">
             </div>
             <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品列表</a>
         </div>
     </div>
 
-    <div class="am-u-sm-12 am-margin-bottom">
+    <!-- <div class="am-u-sm-12 am-margin-bottom">
         <div class="am-form-inline" role="form">
             <div class="am-form-group">
                 <label class="am-form-label">所属区域</label>
                 <span>{{ ::vm.exhibitor.area.name }}</span>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="am-u-sm-12">
-        <form class="am-form" ng-submit="vm.submitNews(vm.news)">
+        <form class="am-form" ng-submit="vm.submitExhibitor(vm.exhibitor)">
             <div class="am-form-group">
                 <label>文字介绍</label>
-                <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.news.content"></textarea>
+                <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.exhibitor.description"></textarea>
             </div>
 
             <div class="am-form-group">
                 <label>缩略图</label>
-                <img ng-src="{{ vm.organizerCustom.thunbnail.fileUrl }}" ngf-select ngf-multiple="false" ngf-accept="'image/*'"
-                accept="image/*" ngf-change="vm.uploadThunbnail($file);" />
+                <div class="btn btn-primary am-margin-horizontal"
+                    ngf-change="vm.uploadFile($file, vm.onThunbnailUploaded)" ngf-select
+                    ngf-multiple="false" ngf-accept="'image/*'"
+                    accept="image/*" ng-disabled="vm.exhibitor.thunbnail">添加</div>
+                <img ng-src="{{ vm.exhibitor.thunbnail.fileUrl }}" />
                 <small class="text-danger">仅1张</small>
             </div>
 
             <div class="am-form-group">
                 <label>图片</label>
                 <div class="btn btn-primary am-margin-horizontal"
-                    ngf-change="vm.uploadFile($files)" ngf-select
-                    ngf-multiple="true" ngf-accept="'image/*'" accept="image/*">添加</div>
+                    ngf-change="vm.uploadFile($files, vm.onPictureUploaded)" ngf-select
+                    ngf-multiple="true" ngf-accept="'image/*'"
+                    accept="image/*" ng-disabled="vm.exhibitor.pictures.length > 6">添加</div>
                 <small class="text-danger">最多添加6张</small>
             </div>
 
             <div class="am-form-group">
                 <ul class="am-avg-sm-6 am-thumbnails">
-                    <li class="img-wrap" ng-repeat="picture in vm.news.pictures">
+                    <li class="img-wrap" ng-repeat="picture in vm.exhibitor.pictures">
                         <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)" ng-show="picture.isNew"></span>
                         <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
@@ -56,7 +60,7 @@
                                 <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
-                        <input ng-model="vm.news.pictures[$index].description">
+                        <input ng-model="vm.exhibitor.pictures[$index].description">
                     </li>
                 </ul>
             </div>
