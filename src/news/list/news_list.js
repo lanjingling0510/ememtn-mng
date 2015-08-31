@@ -4,7 +4,6 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.news.list', [
     'ui.router',
     'restangular',
-    'common.modal.service',
     'common.slideBox.directive',
 ]).config(moduleConfig)
     .controller('NewsListController', NewsListController);
@@ -19,7 +18,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function NewsListController($q, Restangular, AlertService, $scope, commonModal, $filter) { // eslint-disable-line no-unused-vars
+function NewsListController($q, Restangular, AlertService, $filter) { // eslint-disable-line no-unused-vars
     const vm = this;
     const News = Restangular.all('newses');
     vm.query = {

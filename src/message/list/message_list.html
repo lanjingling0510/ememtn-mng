@@ -14,8 +14,8 @@
     </div>
 
 
-    <my-collapse class="am-panel-default">
-        <ul ng-repeat="message in vm.messages">
+    <my-collapse class="am-panel-default" ng-repeat="message in vm.messages">
+        <ul>
             <li><input type="checkbox" ng-model="vm.messages[$index]._checked"/></li>
             <li>{{ message.subject }}</li>
             <li>{{ message.content }}</li>
