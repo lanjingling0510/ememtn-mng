@@ -2,9 +2,9 @@ require('../../common/service.js');
 require('../../exhibition_hall/map/exhibition_hall_map.js');
 const angular = require('angular');
 
-module.exports = angular.module('sanya.area.edit', [
+module.exports = angular.module('ememtn.area.edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('AreaEditController', AreaEditController);
 

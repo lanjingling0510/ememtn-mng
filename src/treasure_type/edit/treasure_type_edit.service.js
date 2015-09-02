@@ -1,34 +1,32 @@
-'use strict';
-
-let angular = require('angular');
+const angular = require('angular');
 require('../../common/service.js');
 
-module.exports = angular.module('sanya.treasure_types_edit.service', [
-    'sanya.common.services'
+module.exports = angular.module('ememtn.treasure_types_edit.service', [
+    'ememtn.common.services',
 ]).service('TreasureTypeEditService', TreasureTypeEditService);
 
 /* @ngInject */
 function TreasureTypeEditService(UploadService, $resource) {
-    let url = '/apis/treasure-types';
-    let basicRest = $resource(url + '/:treasureTypeId', null, {
+    const url = '/apis/treasure-types';
+    const basicRest = $resource(url + '/:treasureTypeId', null, {
         update: {
             method: 'PUT',
             params: {
-                treasureTypeId: '@_id'
-            }
-        }
+                treasureTypeId: '@_id',
+            },
+        },
     });
 
 
     return {
         update: update,
-        get: get
+        get: get,
     };
 
     function update(icon, treasureType) {
         if (icon) {
             url = url + '/' + treasureType._id;
-            return UploadService(url, icon, 'icon', treasureType, 'PUT');
+            return UploadService(url, icon, 'icon', treasureType, 'PUT'); // eslint-disable-line new-cap
         }
         return basicRest.update({ treasureTypeId: treasureType._id }, treasureType).$promise;
     }

@@ -1,14 +1,12 @@
-'use strict';
-
 require('./login.less');
-let angular = require('angular');
+const angular = require('angular');
 require('./login.service.js');
 
-module.exports = angular.module('sanya.login', [
+module.exports = angular.module('ememtn.login', [
     'ui.router',
     'angular-storage',
-    'sanya.common.services',
-    'sanya.login.service'
+    'ememtn.common.services',
+    'ememtn.login.service',
 ]).config(moduleConfig)
     .controller('LoginController', LoginController);
 
@@ -17,13 +15,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('login', {
         url: '/login',
         template: require('./login.html'),
-        controller: 'LoginController as scope'
+        controller: 'LoginController as scope',
     });
 }
 
 /* @ngInject */
 function LoginController($rootScope, $location, store, LoginService, AlertService, $state) {
-    let vm = this;
+    const vm = this;
     vm.login = login;
 
     initController();
@@ -31,7 +29,7 @@ function LoginController($rootScope, $location, store, LoginService, AlertServic
     function login(admin) {
         LoginService.getToken(admin).$promise
             .then(function (res) {
-                let token = res.access_token;
+                const token = res.access_token;
                 store.set('auth.accessToken', token);
                 if (!$rootScope.auth) { $rootScope.auth = {}; }
                 $rootScope.auth.accessToken = token;
@@ -49,7 +47,7 @@ function LoginController($rootScope, $location, store, LoginService, AlertServic
     function initController() {
         vm.admin = {
             username: 'root',
-            password: 'rootroot'
+            password: 'rootroot',
         };
     }
 }

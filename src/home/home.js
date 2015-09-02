@@ -1,14 +1,10 @@
-'use strict';
-
-let angular = require('angular');
+const angular = require('angular');
 require('./home.directive.js');
-require('./app_install_directive/app_install.directive.js');
-require('./tourist_register_directive/tourist_register.directive.js');
 
-module.exports = angular.module('sanya.home', [
+module.exports = angular.module('ememtn.home', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.home.directives'
+    'ememtn.common.services',
+    'ememtn.home.directives',
 ]).config(moduleConfig)
     .controller('HomeController', HomeController);
 
@@ -17,7 +13,7 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('home', {
         url: '/',
         template: require('./home.html'),
-        controller: 'HomeController as vm'
+        controller: 'HomeController as vm',
     });
 }
 

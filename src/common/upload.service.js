@@ -1,7 +1,7 @@
 require('./common.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('sanya.common.services')
+module.exports = angular.module('ememtn.common.services')
     .factory('UploadService', UploadService)
     .factory('UploadToTempService', UploadToTempService);
 

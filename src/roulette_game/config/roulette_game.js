@@ -1,16 +1,14 @@
-'use strict';
-
 require('../../common/service.js');
 require('../../prize_type/list/prize_types.service.js');
 require('./roulette_game.service.js');
 require('../../treasure_game/config/treasury_game.less');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.roulette_game', [
+module.exports = angular.module('ememtn.roulette_game', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.prize_types.service',
-    'sanya.roulette_game.service'
+    'ememtn.common.services',
+    'ememtn.prize_types.service',
+    'ememtn.roulette_game.service',
 ]).config(moduleConfig)
     .controller('RouletteGameController', RouletteGameController);
 
@@ -19,13 +17,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('roulette_game', {
         url: '/roulette-game',
         template: require('./roulette_game.html'),
-        controller: 'RouletteGameController as scope'
+        controller: 'RouletteGameController as scope',
     });
 }
 
 /* @ngInject */
 function RouletteGameController($stateParams, PrizeTypesService, RouletteGameService, AlertService) {
-    let vm = this;
+    const vm = this;
 
     vm.setupGame = function setupGame(game) {
         RouletteGameService.save(game).$promise

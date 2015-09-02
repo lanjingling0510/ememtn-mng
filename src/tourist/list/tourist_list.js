@@ -3,7 +3,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.tourist.list', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('TouristListController', TouristListController);
 

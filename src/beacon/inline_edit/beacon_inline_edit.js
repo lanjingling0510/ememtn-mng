@@ -4,7 +4,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.beacon.inline-edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'ememtn.beacon.list',
 ]).config(moduleConfig)
     .controller('BeaconInlineEditController', BeaconInlineEditController);

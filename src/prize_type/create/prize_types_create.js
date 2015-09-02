@@ -8,7 +8,7 @@ let angular = require('angular');
 module.exports = angular.module('sanya.prize_types_create', [
     'ui.router',
     'ui.bootstrap',
-    'sanya.common.services',
+    'ememtn.common.services',
     'sanya.prize_types_create.service'
 ]).config(moduleConfig)
     .controller('PrizeTypesCreateController', PrizeTypesCreateController);

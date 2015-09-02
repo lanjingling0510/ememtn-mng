@@ -5,7 +5,7 @@ const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.exhibition.virtual', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('ExhibitionHallVirtualController', ExhibitionHallVirtualController);
 

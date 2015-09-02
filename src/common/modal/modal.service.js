@@ -1,7 +1,5 @@
-"use strict";
-
-let angular = require("angular");
-let jqLite = angular.element;
+const angular = require('angular');
+const jqLite = angular.element;
 
 /**
  * @ngdoc service
@@ -10,13 +8,13 @@ let jqLite = angular.element;
  *
  */
 
-module.exports = angular.module('sanya.common.services')
+module.exports = angular.module('ememtn.common.services')
     .factory('commonModal', commonModal);
 
 /* @ngInject*/
 function commonModal($q, $document, $compile, $rootScope) {
     return {
-        fromTemplateUrl: fromTemplateUrl
+        fromTemplateUrl: fromTemplateUrl,
     };
 
     /**
@@ -27,7 +25,7 @@ function commonModal($q, $document, $compile, $rootScope) {
      * @desc add a modal in document return a promise object
      */
     function fromTemplateUrl(url, options) {
-        var defer = $q.defer();
+        const defer = $q.defer();
         createModal(url, options, defer);
         return defer.promise;
     }
@@ -40,9 +38,9 @@ function commonModal($q, $document, $compile, $rootScope) {
      */
     function createModal(url, options, defer) {
         // Create a new scope for the modal
-        var scope = options.scope && options.scope.$new() || $rootScope.$new(true);
-        var element = $compile(url)(scope);
-        var modal = new Modal(element, scope, $document);
+        const scope = options.scope && options.scope.$new() || $rootScope.$new(true);
+        const element = $compile(url)(scope);
+        const modal = new Modal(element, scope, $document);
         defer.resolve(modal);
     }
 }
@@ -64,17 +62,17 @@ function Modal(element, scope, parent) {
 Modal.prototype = {
     _init: _init,
     show: show,
-    hide: hide
+    hide: hide,
 };
 
 function _init() {
-    var self = this;
+    const self = this;
     self.parent[0].body.appendChild(self.element[0]);
 }
 
 function show() {
-    var self = this;
-    var element = self.element;
+    const self = this;
+    const element = self.element;
     jqLite(element[0].querySelector('.modal-header .close')).on('click', function () {
         self.hide();
     });
@@ -85,11 +83,10 @@ function show() {
 }
 
 function hide() {
-    var self = this;
-    var element = self.element;
+    const self = this;
+    const element = self.element;
     element.removeClass('in');
     setTimeout(function () {
         element.css('display', 'none');
     }, 100);
 }
-

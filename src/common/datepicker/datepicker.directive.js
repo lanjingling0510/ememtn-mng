@@ -2,14 +2,14 @@ const $ = require('jquery');
 /**
  * @ngdoc directive
  * @name datePicker
- * @module 'sanya.common.services'
+ * @module 'ememtn.common.services'
  * @restrict E
  */
 (function () {
-    const jqLite = angular.element,
-        forEach = angular.forEach;
+    const jqLite = angular.element;
+    const forEach = angular.forEach;
 
-    angular.module('sanya.common.services')
+    angular.module('ememtn.common.services')
         .directive('datePicker', IndexDirective);
     //
     function IndexDirective() {

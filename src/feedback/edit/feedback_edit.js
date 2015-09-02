@@ -3,7 +3,7 @@ const angular = require('angular');
 
 module.exports = angular.module('sanya.feedback_edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'sanya.feedback_edit.service'
 ]).config(moduleConfig)
     .controller('FeedbackEditController', FeedbackEditController);

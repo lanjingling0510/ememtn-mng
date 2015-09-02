@@ -1,13 +1,11 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.roulette_game.service', [
-    'ngResource'
+module.exports = angular.module('ememtn.roulette_game.service', [
+    'ngResource',
 ]).service('RouletteGameService', RouletteGameService);
 
 /* @ngInject */
 function RouletteGameService($resource) {
-    let url = '/apis/roulette-games/:rouletteGameId';
+    const url = '/apis/roulette-games/:rouletteGameId';
     return $resource(url, null, { });
 }

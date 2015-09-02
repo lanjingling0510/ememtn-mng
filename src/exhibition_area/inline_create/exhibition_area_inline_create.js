@@ -6,7 +6,7 @@ const modalTemplate = require('./modal.html');
 
 module.exports = angular.module('ememtn.exhibition-area.inline-create', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('ExhibitionAreaInlineCreateController', ExhibitionAreaInlineCreateController);
 

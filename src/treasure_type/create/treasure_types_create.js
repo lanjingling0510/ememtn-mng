@@ -1,13 +1,11 @@
-'use strict';
-
 require('../../common/service.js');
 require('./treasure_types_create.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.treasure_types_create', [
+module.exports = angular.module('ememtn.treasure_types_create', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.treasure_types_create.service'
+    'ememtn.common.services',
+    'ememtn.treasure_types_create.service',
 ]).config(moduleConfig)
     .controller('TreasureTypesCreateController', TreasureTypesCreateController);
 
@@ -16,13 +14,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasure_types_create', {
         url: '/treasure-types/new',
         template: require('./treasure_types_create.html'),
-        controller: 'TreasureTypesCreateController as scope'
+        controller: 'TreasureTypesCreateController as scope',
     });
 }
 
 /* @ngInject */
 function TreasureTypesCreateController($stateParams, TreasureTypesCreateService, AlertService) {
-    let vm = this;
+    const vm = this;
 
     vm.createTreasureType = function createTreasureType(treasureTypeIcon, treasureType) {
         TreasureTypesCreateService.create(treasureTypeIcon, treasureType)

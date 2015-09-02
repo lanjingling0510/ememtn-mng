@@ -1,15 +1,14 @@
-'use strict';
 /* global AMap */
 
 require('../../common/service.js');
 require('../../treasure_type/list/treasure_types.service.js');
 require('./treasure_game_map_create.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.treasure_game_map_create', [
+module.exports = angular.module('ememtn.treasure_game_map_create', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.treasure_types.service',
+    'ememtn.common.services',
+    'ememtn.treasure_types.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapCreateController', TreasureGameMapCreateController);
 
@@ -19,13 +18,13 @@ function moduleConfig($stateProvider) {
         .state('treasure_game_map_create', {
             url: '/treasure-game/maps/new',
             template: require('./treasure_game_map_create.html'),
-            controller: 'TreasureGameMapCreateController as scope'
+            controller: 'TreasureGameMapCreateController as scope',
         });
 }
 
 /* @ngInject */
 function TreasureGameMapCreateController(AreasListService, TreasureTypesService, TreasureGameMapCreateService, AlertService) {
-    let vm = this;
+    const vm = this;
 
     vm.createTreasureGameMap = createTreasureGameMap;
 

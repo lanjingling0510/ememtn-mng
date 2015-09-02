@@ -1,18 +1,16 @@
-'use strict';
-
 require('../create/treasure_types_create.js');
 require('../edit/treasure_type_edit.js');
 
 require('../../common/service.js');
 require('./treasure_types.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.treasure_types', [
+module.exports = angular.module('ememtn.treasure_types', [
     'ui.router',
-    'sanya.treasure_types_create',
-    'sanya.treasure_types_edit',
-    'sanya.common.services',
-    'sanya.treasure_types.service'
+    'ememtn.treasure_types_create',
+    'ememtn.treasure_types_edit',
+    'ememtn.common.services',
+    'ememtn.treasure_types.service',
 ]).config(moduleConfig)
     .controller('TreasureTypesController', TreasureTypesController);
 
@@ -21,17 +19,17 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasure_types', {
         url: '/treasure-types',
         template: require('./treasure_types.html'),
-        controller: 'TreasureTypesController as vm'
+        controller: 'TreasureTypesController as vm',
     });
 }
 
 /* @ngInject */
 function TreasureTypesController($timeout, $stateParams, TreasureTypesService, AlertService) {
-    let vm = this;
+    const vm = this;
     Object.defineProperty(vm, 'timestamp', {
         get: function () {
             return Date.now();
-        }
+        },
     });
 
     vm.disableCouponCategory = disableTreasureType;
@@ -42,7 +40,7 @@ function TreasureTypesController($timeout, $stateParams, TreasureTypesService, A
         status: 'valid',
         page: 1,
         pageSize: 15,
-        total: 0
+        total: 0,
     };
     fetchTreasureTypes(vm.querystring, 0);
 

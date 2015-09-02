@@ -4,7 +4,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibitor.list', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'ememtn.exhibition-area.virtual',
 ]).config(moduleConfig)
     .controller('ExhibitorListController', ExhibitorListController);

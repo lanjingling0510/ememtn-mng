@@ -4,7 +4,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.area.create', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('AreaCreateController', AreaCreateController);
 
@@ -18,6 +18,6 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function AreaCreateController(AlertService) {
+function AreaCreateController() {
 
 }

@@ -6,7 +6,7 @@ let angular = require('angular');
 
 module.exports = angular.module('sanya.treasure_types_edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'sanya.treasure_types_edit.service'
 ]).config(moduleConfig)
     .controller('TreasureTypeEditController', TreasureTypeEditController);

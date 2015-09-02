@@ -1,6 +1,4 @@
-'use strict';
-
-let angular = require('angular');
+const angular = require('angular');
 
 
-module.exports = angular.module('sanya.common.directives', []);
+module.exports = angular.module('ememtn.common.directives', []);

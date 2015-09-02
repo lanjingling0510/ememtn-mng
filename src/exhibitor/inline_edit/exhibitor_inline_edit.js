@@ -5,7 +5,7 @@ const modalTemplate = require('./modal.html');
 
 module.exports = angular.module('ememtn.exhibitor.inline-edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('ExhibitorInlineEditController', ExhibitorInlineEditController);
 

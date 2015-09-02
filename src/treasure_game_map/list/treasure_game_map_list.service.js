@@ -1,9 +1,7 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.treasure_game_map_list.service', [
-    'ngResource'
+module.exports = angular.module('ememtn.treasure_game_map_list.service', [
+    'ngResource',
 ]).service('TreasureGameMapListService', TreasureGameMapListService);
 
 /* @ngInject */

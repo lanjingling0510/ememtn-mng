@@ -7,7 +7,7 @@ require('./polyline.service.js');
 require('./polygon.service.js');
 let angular = require('angular');
 
-module.exports = angular.module('sanya.common.services')
+module.exports = angular.module('ememtn.common.services')
     .factory('MapTool', MapTool);
 
 /* @ngInject */

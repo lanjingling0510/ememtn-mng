@@ -4,7 +4,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.setting', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('ExhibitionHallSettingController', ExhibitionHallSettingController);
 

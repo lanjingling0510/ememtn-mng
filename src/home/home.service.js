@@ -1,9 +1,7 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.home.service', [
-    'ngResource'
+module.exports = angular.module('ememtn.home.service', [
+    'ngResource',
 ]).service('HomeService', HomeService);
 
-function HomeService($resource) { }
+function HomeService() { }

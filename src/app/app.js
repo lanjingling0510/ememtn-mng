@@ -48,10 +48,6 @@ require('../area/list/area_list.js');
 require('../area/create/area_create.js');
 require('../area/edit/area_edit.js');
 
-require('../infrastructure/list/infrastructure_list.js');
-require('../infrastructure/inline_create/infrastructure_inline_create.js');
-require('../infrastructure/inline_edit/infrastructure_inline_edit.js');
-
 require('../info/list/info_list.js');
 require('../info/create/info_create.js');
 
@@ -88,10 +84,10 @@ module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
     'angular-storage',
-    'sanya.login',
-    'sanya.home',
-    'sanya.admins',
-    'sanya.admins.register',
+    'ememtn.login',
+    'ememtn.home',
+    'ememtn.admins',
+    'ememtn.admins.register',
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
     'ememtn.exhibition-area.list',
@@ -128,16 +124,13 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibitor.inline-create',
     'ememtn.exhibitor.inline-edit',
     'ememtn.exhibitor.edit',
-    'ememtn.infrastructure.list',
-    'ememtn.infrastructure.inline-create',
-    'ememtn.infrastructure.inline-edit',
     'ememtn.exhibit.create',
     'ememtn.exhibit.list',
-    'sanya.prize.exchange',
-    'sanya.treasury_game',
-    'sanya.treasure_game_map_list',
-    'sanya.treasure_game_map_create',
-    'sanya.roulette_game',
+    'ememtn.prize.exchange',
+    'ememtn.treasury_game',
+    'ememtn.treasure_game_map_list',
+    'ememtn.treasure_game_map_create',
+    'ememtn.roulette_game',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */

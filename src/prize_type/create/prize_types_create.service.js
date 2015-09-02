@@ -4,7 +4,7 @@ let angular = require('angular');
 require('../../common/service.js');
 
 module.exports = angular.module('sanya.prize_types_create.service', [
-    'sanya.common.services'
+    'ememtn.common.services'
 ]).service('PrizeTypesCreateService', PrizeTypesCreateService);
 
 /* @ngInject */

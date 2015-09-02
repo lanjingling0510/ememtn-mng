@@ -1,5 +1,3 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.home.directives', []);
+module.exports = angular.module('ememtn.home.directives', []);

@@ -9,7 +9,7 @@ const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-hall.map', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'ememtn.exhibition_hall.map.service',
     'ememtn.exhibition_hall.map.directive',
 ]).config(moduleConfig)

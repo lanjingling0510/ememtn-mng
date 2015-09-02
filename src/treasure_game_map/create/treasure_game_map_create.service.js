@@ -1,13 +1,11 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.treasure_game_map_create.service', [
-    'ngResource'
+module.exports = angular.module('ememtn.treasure_game_map_create.service', [
+    'ngResource',
 ]).service('TreasureGameMapCreateService', TreasureGameMapCreateService);
 
 /* @ngInject */
 function TreasureGameMapCreateService($resource) {
-    let url = '/apis/treasure-game-maps';
+    const url = '/apis/treasure-game-maps';
     return $resource(url, null, { });
 }

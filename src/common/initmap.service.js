@@ -4,7 +4,7 @@
 require('./common.service.js');
 let angular = require('angular');
 
-module.exports = angular.module('sanya.common.services')
+module.exports = angular.module('ememtn.common.services')
     .factory('InitMap', InitMap);
 
 function InitMap() {

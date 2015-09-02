@@ -4,7 +4,7 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.post.list', [
     'restangular',
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('PostListController', PostListController);
 

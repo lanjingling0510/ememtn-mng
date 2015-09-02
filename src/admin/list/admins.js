@@ -1,13 +1,11 @@
-'use strict';
-
 require('../../common/service.js');
 require('./admins.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.admins', [
+module.exports = angular.module('ememtn.admins', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.admins.service'
+    'ememtn.common.services',
+    'ememtn.admins.service',
 ]).config(moduleConfig)
     .controller('AdminsController', AdminsController);
 
@@ -16,13 +14,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('admins', {
         url: '/admins',
         template: require('./admins.html'),
-        controller: 'AdminsController as scope'
+        controller: 'AdminsController as scope',
     });
 }
 
 /* @ngInject */
 function AdminsController($stateParams, AdminService, AlertService, $timeout) {
-    let vm = this;
+    const vm = this;
     vm.disableAdmin = disableAdmin;
     vm.enableAdmin = enableAdmin;
     vm.removeAdmin = removeAdmin;
@@ -31,7 +29,7 @@ function AdminsController($stateParams, AdminService, AlertService, $timeout) {
         status: 'enabled',
         page: 1,
         pageSize: 15,
-        total: 0
+        total: 0,
     };
 
     fetchAdmin(vm.querystring);
@@ -71,7 +69,7 @@ function AdminsController($stateParams, AdminService, AlertService, $timeout) {
     let fetchTimer;
     function fetchAdmin(querystring = {}, delay = 0) {
         $timeout.cancel(fetchTimer);
-        fetchTimer = $timeout(function() {
+        fetchTimer = $timeout(function () {
             AdminService.query(querystring).$promise
                 .then(function (admins) {
                     vm.admins = admins;

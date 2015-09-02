@@ -1,27 +1,25 @@
-'use strict';
+const angular = require('angular');
 
-let angular = require('angular');
-
-module.exports = angular.module('sanya.login.service', [
-    'ngResource'
+module.exports = angular.module('ememtn.login.service', [
+    'ngResource',
 ]).service('LoginService', LoginService);
 
 /* @ngInject */
 function LoginService($resource, $rootScope, store, $state) {
-    let url = '/apis/auth';
+    const url = '/apis/auth';
 
-    let authObj = $resource(url, null, {
+    const authObj = $resource(url, null, {
         getToken: {
             url: url + '/token',
-            method: 'POST'
+            method: 'POST',
         },
         getProfile: {
             url: url + '/profile',
-            method: 'GET'
+            method: 'GET',
         },
         logout: {
-            url: url
-        }
+            url: url,
+        },
     });
     authObj.logout = logout;
     // return {

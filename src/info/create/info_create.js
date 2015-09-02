@@ -4,7 +4,7 @@ const angular = require('angular');
 module.exports = angular.module('ememtn.info.create', [
     'ui.router',
     'restangular',
-    'sanya.common.services',
+    'ememtn.common.services',
 ]).config(moduleConfig)
     .controller('InfoCreateController', InfoCreateController);
 

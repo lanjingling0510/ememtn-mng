@@ -1,18 +1,16 @@
-'use strict';
-
 require('../../common/service.js');
 require('../../prize_type/list/prize_types.service.js');
 require('../../treasure_type/list/treasure_types.service.js');
 require('./treasury_game.service.js');
 require('./treasury_game.less');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.treasury_game', [
+module.exports = angular.module('ememtn.treasury_game', [
     'ui.router',
-    'sanya.common.services',
-    'sanya.prize_types.service',
-    'sanya.treasure_types.service',
-    'sanya.treasury_game.service'
+    'ememtn.common.services',
+    'ememtn.prize_types.service',
+    'ememtn.treasure_types.service',
+    'ememtn.treasury_game.service',
 ]).config(moduleConfig)
     .controller('TreasureGameController', TreasureGameController);
 
@@ -21,13 +19,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasury_game', {
         url: '/treasury-game',
         template: require('./treasury_game.html'),
-        controller: 'TreasureGameController as scope'
+        controller: 'TreasureGameController as scope',
     });
 }
 
 /* @ngInject */
 function TreasureGameController($stateParams, PrizeTypesService, TreasureTypesService, TreasureGameService, AlertService) {
-    let vm = this;
+    const vm = this;
 
     vm.addTarget = function addTarget() {
         vm.game.gathers = vm.game.gathers || [];
@@ -58,7 +56,7 @@ function TreasureGameController($stateParams, PrizeTypesService, TreasureTypesSe
         }).then(function (treasureGames) {
             if (treasureGames.length === 0) {
                 treasureGames.push({
-                    gathers: [{}]
+                    gathers: [{}],
                 });
             }
             vm.game = treasureGames[0];

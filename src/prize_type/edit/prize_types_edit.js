@@ -6,7 +6,7 @@ let angular = require('angular');
 
 module.exports = angular.module('sanya.prize_types_edit', [
     'ui.router',
-    'sanya.common.services',
+    'ememtn.common.services',
     'sanya.prize_types_edit.service'
 ]).config(moduleConfig)
     .controller('PrizeTypesEditController', PrizeTypesEditController);

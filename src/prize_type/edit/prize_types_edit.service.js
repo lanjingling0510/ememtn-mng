@@ -5,7 +5,7 @@ require('../../common/service.js');
 
 module.exports = angular.module('sanya.prize_types_edit.service', [
     'ngResource',
-    'sanya.common.services'
+    'ememtn.common.services'
 ]).service('PrizeTypesEditService', PrizeTypesEditService);
 
 /* @ngInject */
