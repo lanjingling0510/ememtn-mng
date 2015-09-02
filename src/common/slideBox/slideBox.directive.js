@@ -3,7 +3,7 @@
 require('./slideBox.less');
 require('./cyt-turnpage2.js');
 
-let angular = require('angular');
+const angular = require('angular');
 module.exports = angular.module('common.slideBox.directive', [])
     .directive("slideBox", slideBoxDirective)
     .directive("slideBoxPage", slideDirective);

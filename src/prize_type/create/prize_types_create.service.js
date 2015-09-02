@@ -1,6 +1,6 @@
 'use strict';
 
-let angular = require('angular');
+const angular = require('angular');
 require('../../common/service.js');
 
 module.exports = angular.module('sanya.prize_types_create.service', [

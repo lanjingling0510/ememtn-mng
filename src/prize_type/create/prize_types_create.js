@@ -1,15 +1,13 @@
-'use strict';
-
 require('../../common/service.js');
 require('./prize_types_create.service.js');
 require('../../treasure_game/config/treasury_game.less');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.prize_types_create', [
+module.exports = angular.module('sanya.prize_type.create', [
     'ui.router',
     'ui.bootstrap',
     'ememtn.common.services',
-    'sanya.prize_types_create.service'
+    'sanya.prize_types_create.service',
 ]).config(moduleConfig)
     .controller('PrizeTypesCreateController', PrizeTypesCreateController);
 
@@ -18,17 +16,17 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('prize_types_create', {
         url: '/prize-types/new',
         template: require('./prize_types_create.html'),
-        controller: 'PrizeTypesCreateController as scope'
+        controller: 'PrizeTypesCreateController as scope',
     });
 }
 
 /* @ngInject */
 function PrizeTypesCreateController($stateParams, PrizeTypesCreateService, AlertService) {
-    let vm = this;
+    const vm = this;
     vm.openCalender = openCalender;
     vm.createPrizeType = createPrizeType;
     vm.prizeType = {
-        validTo: new Date()
+        validTo: new Date(),
     };
     vm.calender = {
         opened: false,
@@ -37,12 +35,12 @@ function PrizeTypesCreateController($stateParams, PrizeTypesCreateService, Alert
         format: 'yyyy-MM-dd',
         dateOptions: {
             formatYear: 'yy',
-            startingDay: 1
-        }
+            startingDay: 1,
+        },
     };
     vm.EXCHANGE = {
         EXCHANGEABLE: 'yes',
-        DISEXCHANGEABLE: 'no'
+        DISEXCHANGEABLE: 'no',
     };
 
     function openCalender() {

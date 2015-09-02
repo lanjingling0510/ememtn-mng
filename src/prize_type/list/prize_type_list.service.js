@@ -1,31 +1,31 @@
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_types.service', [
+module.exports = angular.module('ememtn.prize_type.list.service', [
     'ngResource',
-]).service('TreasureTypesService', TreasureTypesService);
+]).service('PrizeTypesService', PrizeTypesService);
 
 /* @ngInject */
-function TreasureTypesService($resource) {
-    const url = '/apis/treasure-types/:treasureTypeId';
+function PrizeTypesService($resource) {
+    const url = '/apis/prize-types/:prizeTypeId';
     return $resource(url, null, {
         update: {
             method: 'PUT',
-            param: {
-                treasureTypeId: '@_id',
+            params: {
+                prizeTypeId: '@_id',
             },
         },
         disable: {
             method: 'PUT',
             url: url + '/disablement',
             params: {
-                treasureTypeId: '@_id',
+                prizeTypeId: '@_id',
             },
         },
         enable: {
             method: 'PUT',
             url: url + '/enablement',
             params: {
-                treasureTypeId: '@_id',
+                prizeTypeId: '@_id',
             },
         },
     });

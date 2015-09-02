@@ -1,15 +1,15 @@
 require('../../common/service.js');
-require('../../prize_type/list/prize_types.service.js');
-require('../../treasure_type/list/treasure_types.service.js');
-require('./treasury_game.service.js');
-require('./treasury_game.less');
+require('../../prize_type/list/prize_type_list.service.js');
+require('../../treasure_type/list/treasure_type_list.service.js');
+require('./treasury_game_config.service.js');
+require('./treasury_game_config.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.treasury_game', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.prize_types.service',
-    'ememtn.treasure_types.service',
+    'ememtn.prize_type.list.service',
+    'ememtn.treasure_type.list.service',
     'ememtn.treasury_game.service',
 ]).config(moduleConfig)
     .controller('TreasureGameController', TreasureGameController);
@@ -18,7 +18,7 @@ module.exports = angular.module('ememtn.treasury_game', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('treasury_game', {
         url: '/treasury-game',
-        template: require('./treasury_game.html'),
+        template: require('./treasury_game_config.html'),
         controller: 'TreasureGameController as scope',
     });
 }

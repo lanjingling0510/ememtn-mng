@@ -1,13 +1,11 @@
-'use strict';
-
 require('../../common/service.js');
 require('./prize_types.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.prize_types', [
+module.exports = angular.module('ememtn.prize_type.list', [
     'ui.router',
     'ememtn.common.services',
-    'sanya.prize_types.service'
+    'ememtn.prize_type.list.service',
 ]).config(moduleConfig)
     .controller('PrizeTypesController', PrizeTypesController);
 
@@ -17,27 +15,27 @@ function moduleConfig($stateProvider) {
         .state('prize_types', {
             url: '/prize-types',
             template: require('./prize_types.html'),
-            controller: 'PrizeTypesController as vm'
+            controller: 'PrizeTypesController as vm',
         });
 }
 
 /* @ngInject */
 function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertService) {
-    let vm = this;
+    const vm = this;
     vm.disablePrizeType = disablePrizeType;
     vm.enablePrizeType = enablePrizeType;
     vm.removeCouponCategory = removeCouponCategory;
     vm.fetchPrizeTypes = fetchPrizeTypes;
     vm.EXCHANGE = {
         EXCHANGEABLE: 'yes',
-        DISEXCHANGEABLE: 'no'
+        DISEXCHANGEABLE: 'no',
     };
     vm.querystring = {
         status: 'enabled',
-        exchangeable: "__all__",
+        exchangeable: '__all__',
         page: 1,
         pageSize: 15,
-        total: 0
+        total: 0,
     };
     fetchPrizeTypes(vm.querystring, 0);
 

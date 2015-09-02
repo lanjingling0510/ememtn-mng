@@ -2,7 +2,7 @@
 
 require('../../common/service.js');
 require('./treasure_type_edit.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
 module.exports = angular.module('sanya.treasure_types_edit', [
     'ui.router',

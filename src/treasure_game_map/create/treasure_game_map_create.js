@@ -1,14 +1,14 @@
 /* global AMap */
 
 require('../../common/service.js');
-require('../../treasure_type/list/treasure_types.service.js');
+require('../../treasure_type/list/treasure_type_list.service.js');
 require('./treasure_game_map_create.service.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.treasure_game_map_create', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.treasure_types.service',
+    'ememtn.treasure_type.list.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapCreateController', TreasureGameMapCreateController);
 

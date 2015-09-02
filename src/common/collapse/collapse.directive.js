@@ -2,7 +2,7 @@
 
 
 require('./collapse.less');
-let angular = require('angular');
+const angular = require('angular');
 module.exports = angular.module('common.collapse.directive', [])
     .directive('myCollapse', collapseDirective);
 

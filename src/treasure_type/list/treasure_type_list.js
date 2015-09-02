@@ -5,12 +5,12 @@ require('../../common/service.js');
 require('./treasure_types.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_types', [
+module.exports = angular.module('ememtn.treasure_type.list', [
     'ui.router',
-    'ememtn.treasure_types_create',
-    'ememtn.treasure_types_edit',
+    'ememtn.treasure_type.create',
+    'ememtn.treasure_type.edit',
     'ememtn.common.services',
-    'ememtn.treasure_types.service',
+    'ememtn.treasure_type.list.service',
 ]).config(moduleConfig)
     .controller('TreasureTypesController', TreasureTypesController);
 

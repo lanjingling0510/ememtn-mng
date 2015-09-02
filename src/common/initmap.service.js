@@ -2,7 +2,7 @@
 
 /* global AMap*/
 require('./common.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
 module.exports = angular.module('ememtn.common.services')
     .factory('InitMap', InitMap);

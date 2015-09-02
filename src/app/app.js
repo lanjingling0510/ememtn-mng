@@ -38,8 +38,8 @@ require('../feedback/edit/feedback_edit.js');
 require('../treasure_game_map/list/treasure_game_map_list.js');
 require('../treasure_game_map/create/treasure_game_map_create.js');
 
-require('../treasure_game/config/treasury_game.js');
-require('../roulette_game/config/roulette_game.js');
+require('../treasure_game/config/treasury_game_config.js');
+require('../roulette_game/config/roulette_game_config.js');
 
 require('../beacon/list/beacon_list.js');
 require('../beacon/inline_edit/beacon_inline_edit.js');

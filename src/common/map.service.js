@@ -5,7 +5,7 @@ require('./initmap.service.js');
 require('./circle.service.js');
 require('./polyline.service.js');
 require('./polygon.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
 module.exports = angular.module('ememtn.common.services')
     .factory('MapTool', MapTool);

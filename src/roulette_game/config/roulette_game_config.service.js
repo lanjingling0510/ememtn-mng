@@ -1,6 +1,6 @@
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.roulette_game.service', [
+module.exports = angular.module('ememtn.roulette_game.config.service', [
     'ngResource',
 ]).service('RouletteGameService', RouletteGameService);
 

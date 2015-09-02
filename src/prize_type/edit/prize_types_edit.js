@@ -1,13 +1,11 @@
-'use strict';
-
 require('../../common/service.js');
 require('./prize_types_edit.service.js');
-let angular = require('angular');
+const angular = require('angular');
 
-module.exports = angular.module('sanya.prize_types_edit', [
+module.exports = angular.module('ememtn.prize_type.edit', [
     'ui.router',
     'ememtn.common.services',
-    'sanya.prize_types_edit.service'
+    'ememtn.prize_type.edit.service',
 ]).config(moduleConfig)
     .controller('PrizeTypesEditController', PrizeTypesEditController);
 
@@ -16,13 +14,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('prize_types_edit', {
         url: '/prize-types/:_id',
         template: require('./prize_types_edit.html'),
-        controller: 'PrizeTypesEditController as scope'
+        controller: 'PrizeTypesEditController as scope',
     });
 }
 
 /* @ngInject */
 function PrizeTypesEditController($stateParams, PrizeTypesEditService, AlertService) {
-    let vm = this;
+    const vm = this;
     vm.openCalender = openCalender;
     vm.updatePrizeType = updatePrizeType;
     vm.calender = {
@@ -32,8 +30,8 @@ function PrizeTypesEditController($stateParams, PrizeTypesEditService, AlertServ
         format: 'yyyy-MM-dd',
         dateOptions: {
             formatYear: 'yy',
-            startingDay: 1
-        }
+            startingDay: 1,
+        },
     };
     initController();
 
@@ -52,7 +50,7 @@ function PrizeTypesEditController($stateParams, PrizeTypesEditService, AlertServ
 
     function initController() {
         PrizeTypesEditService.get({
-            prizeTypeId: $stateParams._id
+            prizeTypeId: $stateParams._id,
         }).$promise.then(function (prizeType) {
             vm.prizeType = prizeType;
         }).catch(function (err) {

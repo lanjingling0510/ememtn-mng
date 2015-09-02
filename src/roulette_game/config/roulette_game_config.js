@@ -1,14 +1,14 @@
 require('../../common/service.js');
-require('../../prize_type/list/prize_types.service.js');
-require('./roulette_game.service.js');
-require('../../treasure_game/config/treasury_game.less');
+require('../../prize_type/list/prize_type_list.service.js');
+require('./roulette_game_config.service.js');
+require('../../treasure_game/config/treasury_game_config.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.roulette_game', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.prize_types.service',
-    'ememtn.roulette_game.service',
+    'ememtn.prize_type.list.service',
+    'ememtn.roulette_game.config.service',
 ]).config(moduleConfig)
     .controller('RouletteGameController', RouletteGameController);
 
@@ -16,7 +16,7 @@ module.exports = angular.module('ememtn.roulette_game', [
 function moduleConfig($stateProvider) {
     $stateProvider.state('roulette_game', {
         url: '/roulette-game',
-        template: require('./roulette_game.html'),
+        template: require('./roulette_game_config.html'),
         controller: 'RouletteGameController as scope',
     });
 }
