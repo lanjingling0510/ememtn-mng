@@ -23,7 +23,7 @@ function moduleConfig($stateProvider) {
 
 /* @ngInject */
 function getFloors($q) {
-    return $q.resolve(config.floors);
+    return $q.resolve(config.floors.slice(1));
 }
 
 /* @ngInject */

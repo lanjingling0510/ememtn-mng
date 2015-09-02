@@ -48,7 +48,7 @@ function getProfileId(map) {
 function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
     const vm = this;
     // vm.maps = maps;
-    vm.maps = config.floors;
+    vm.maps = config.floors.slice(1);
     vm.map = vm.maps[0];
     vm.isSelect = false;
     fetchMap(vm.map);
