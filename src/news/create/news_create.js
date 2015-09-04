@@ -23,7 +23,6 @@ function NewsCreateController(AlertService, Restangular, UploadToTempService) {
     const News = Restangular.all('newses');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
-    vm.deleteOldFile = deleteOldFile;
     vm.submitNews = submitNews;
     vm.news = {
         pictures: [],
@@ -48,14 +47,6 @@ function NewsCreateController(AlertService, Restangular, UploadToTempService) {
     function deleteNewFile(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
-            vm.news.pictures.splice(index, 1);
-        }).catch((err) => {
-            AlertService.warning(err.data);
-        });
-    }
-
-    function deleteOldFile(picture, index) {
-        vm.news.one('pictures', index).remove().then(() => {
             vm.news.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
