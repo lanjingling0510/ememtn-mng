@@ -21,6 +21,7 @@ function moduleConfig($stateProvider) {
 function ExhibitListController(Restangular, $stateParams, AlertService) {
     const vm = this;
     const Exhibit = Restangular.all('exhibits');
+    vm.saveCustomTitle = saveCustomTitle;
     vm.query = {
         exhibitorId: $stateParams.exhibitorId,
     };
@@ -29,5 +30,15 @@ function ExhibitListController(Restangular, $stateParams, AlertService) {
 
     function searchExhibits(query) {
         vm.exhibits = Exhibit.getList(query).$object;
+    }
+
+    function saveCustomTitle(title) {
+        Restangular.one('exhibitors', $stateParams.exhibitorId).doPUT({
+            customSubject: title,
+        }, 'custom-subject').then(() => {
+            AlertService.success('保存成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 }

@@ -64,6 +64,9 @@ function NewsCreateController(AlertService, Restangular, UploadToTempService) {
 
     function submitNews(news) {
         News.post(news).then(() => {
+            vm.news.pictures.forEach((pic) => {
+                pic.isNew = false;
+            });
             AlertService.success('发布成功');
         }).catch((err) => {
             AlertService.warning(err.data);

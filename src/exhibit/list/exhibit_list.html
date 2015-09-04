@@ -2,6 +2,19 @@
 
     <form class="am-form am-form-horizontal">
         <div class="am-form-group">
+            <label class="am-u-sm-2 am-form-label">版块名称</label>
+
+            <div class="am-u-sm-7">
+                <input placeholder="主办方商品列表" ng-model="vm.organizer.customSubject">
+            </div>
+            <div class="am-u-sm-3">
+                <button class="am-btn am-btn-block am-btn-danger" ng-click="vm.saveCustomTitle(vm.organizer.customSubject)">保存名称</button>
+            </div>
+        </div>
+    </form>
+
+    <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
             <div class="am-u-sm-2 text-right">
                 <drop-down title="操作" toggle="am-btn-danger">
                     <button class="am-btn am-btn-block">显示</button>
