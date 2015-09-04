@@ -1,30 +1,31 @@
-require('./info_create.less');
+require('./news_create.less');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.info.create', [
+module.exports = angular.module('ememtn.news.create', [
     'ui.router',
     'restangular',
     'ememtn.common.services',
 ]).config(moduleConfig)
-    .controller('InfoCreateController', InfoCreateController);
+    .controller('NewsCreateController', NewsCreateController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('info-create', {
-        url: '/info/create',
-        template: require('./info_create.html'),
-        controller: 'InfoCreateController as vm',
+    $stateProvider.state('news-create', {
+        url: '/news/create',
+        template: require('./news_create.html'),
+        controller: 'NewsCreateController as vm',
     });
 }
 
 /* @ngInject */
-function InfoCreateController(AlertService, Restangular, UploadToTempService) {
+function NewsCreateController(AlertService, Restangular, UploadToTempService) {
     const vm = this;
-    const Info = Restangular.all('infoes');
+    const News = Restangular.all('newses');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
-    vm.submitInfo = submitInfo;
-    vm.info = {
+    vm.deleteOldFile = deleteOldFile;
+    vm.submitNews = submitNews;
+    vm.news = {
         pictures: [],
     };
 
@@ -38,7 +39,7 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
                     isNew: true,
                 };
             });
-            vm.info.pictures = vm.info.pictures.concat(pictures);
+            vm.news.pictures = vm.news.pictures.concat(pictures);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
@@ -47,15 +48,23 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
     function deleteNewFile(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
-            vm.info.pictures.splice(index, 1);
+            vm.news.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
-    function submitInfo(info) {
-        Info.post(info).then(() => {
-            info.pictures.forEach(function (pic) {
+    function deleteOldFile(picture, index) {
+        vm.news.one('pictures', index).remove().then(() => {
+            vm.news.pictures.splice(index, 1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function submitNews(news) {
+        News.post(news).then(() => {
+            vm.news.pictures.forEach((pic) => {
                 pic.isNew = false;
             });
             AlertService.success('发布成功');

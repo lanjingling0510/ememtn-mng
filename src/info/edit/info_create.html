@@ -33,6 +33,7 @@
                 <ul class="am-avg-sm-6 am-thumbnails">
                     <li class="img-wrap" ng-repeat="picture in vm.info.pictures">
                         <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)" ng-show="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
                                 <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />

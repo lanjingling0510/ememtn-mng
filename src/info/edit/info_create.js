@@ -23,6 +23,7 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
     const Info = Restangular.all('infoes');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
+    vm.deleteOldFile = deleteOldFile;
     vm.submitInfo = submitInfo;
     vm.info = {
         pictures: [],
@@ -47,6 +48,14 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
     function deleteNewFile(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
+            vm.info.pictures.splice(index, 1);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function deleteOldFile(picture, index) {
+        vm.info.one('pictures', index).remove().then(() => {
             vm.info.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
