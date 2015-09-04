@@ -55,7 +55,7 @@
                     </li>
                     <li>{{:: info.subject }}</li>
                     <li class="am-text-truncate">{{:: info.content}}</li>
-                    <li>{{:: info.stickedAt }}</li>
+                    <li>{{:: info.createdAt | date : 'yyyy-MM-dd HH:mm:ss' }}</li>
                     <li>
                         <button class="am-btn am-text-danger am-btn-default am-btn-xs" style="background:#fff">
                             <span ng-show="info.visible">正在显示</span>
