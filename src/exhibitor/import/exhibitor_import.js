@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.beacon.create', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall.beacon-create', {
+    $stateProvider.state('pavilion.beacon-create', {
         url: '/beacons/new',
         template: require('./exhibitor_import.html'),
         controller: 'BeaconCreateController as vm',

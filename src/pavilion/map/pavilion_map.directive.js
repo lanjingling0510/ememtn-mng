@@ -2,11 +2,11 @@ const angular = require('angular');
 const $ = require('jquery');
 const canvas = require('./pavilion_canvas.js');
 module.exports = angular.module('ememtn.pavilion.map.directive', [])
-    .directive('exhibitionHallMap', mapContainer);
+    .directive('pavilionMap', PavilionMap);
 
 
 /* @ngInject*/
-function mapContainer() {
+function PavilionMap() {
     let directive;
     const point = {};
     let isMove = false;

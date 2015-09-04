@@ -11,7 +11,7 @@ module.exports = angular.module('ememtn.exhibitor.batch', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.exhibitor-batch', {
+    $stateProvider.state('pavilion-map.exhibition-area-virtual.exhibitor-batch', {
         url: '/batch_exhibitors',
         template: require('./exhibitor_batch.html'),
         controller: 'ExhibitorBatchController as vm',
