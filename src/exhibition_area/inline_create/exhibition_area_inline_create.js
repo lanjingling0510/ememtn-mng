@@ -2,7 +2,6 @@ require('./exhibition_area_inline_create.less');
 require('../../common/service.js');
 const uuid = require('node-uuid');
 const angular = require('angular');
-const modalTemplate = require('./modal.html');
 
 module.exports = angular.module('ememtn.exhibition-area.inline-create', [
     'ui.router',
@@ -20,7 +19,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService , commonModal) {
+function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService) {
     const vm = this;
     const ExhibitionArea = Restangular.all('exhibition-areas');
     const MapFeature = Restangular.all('map-features');
@@ -28,10 +27,6 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService 
     vm.exhibitionArea = {
         color: '#a62e02',
     };
-    commonModal.fromTemplateUrl(modalTemplate, {scope: $scope}).then(function (modal) {
-        vm.modal = modal;
-        vm.modal.show();
-    });
 
     $scope.$on('current-map', whenMapChange);
     $scope.$on('draw-position-change', onPositionChange);
@@ -71,7 +66,7 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService 
         exhibitionArea.feature.JCCreateTime = Date.now();
         exhibitionArea.feature.JCFeatureType = 'polygon';
         exhibitionArea.feature.JCGUID = JCGUID;
-        exhibitionArea.feature.JCGeoData = '';
+        exhibitionArea.feature.JCGeoData = exhibitionArea.geoData.map((p) => p.join(',')).join(' ');
         exhibitionArea.feature.JCGeoHash = 0;
         exhibitionArea.feature.JCLayerName = 'trade_area';
         exhibitionArea.feature.JCLeft = Math.min(...xs);
