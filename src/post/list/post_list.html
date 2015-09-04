@@ -23,7 +23,6 @@
                     <th class="table-check text-center">
                         <input type="checkbox" ng-model="vm.posts._checked" ng-change="vm.toggleCheckAll(vm.posts._checked)">
                     </th>
-                    <th>ID</th>
                     <th>主题</th>
                     <th class="table-id">正文</th>
                     <th>发帖时间</th>
@@ -53,15 +52,14 @@
                     <td class="text-center">
                         <input type="checkbox" ng-model="vm.posts[$index]._checked">
                     </td>
-                    <td>{{post._id}}</td>
                     <td>
                         <a ui-sref="post-detail({ postId: post._id })">
-                            {{post.subject}}
+                            {{:: post.subject}}
                         </a>
                     </td>
-                    <td class="am-text-truncate">{{post.content}}</td>
-                    <td class="am-hide-sm-only">{{post.createdAt}}</td>
-                    <td class="am-hide-sm-only">{{post.updatedAt}}</td>
+                    <td class="am-text-truncate">{{:: post.content}}</td>
+                    <td class="am-hide-sm-only">{{:: post.createdAt | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td class="am-hide-sm-only">{{:: post.updatedAt | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
                 </tr>
                 </tbody>
             </table>

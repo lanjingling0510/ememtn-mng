@@ -54,7 +54,7 @@
             </tfoot>
 
             <tbody>
-                <tr ng-repeat='treasureType in vm.treasureTypes'>
+                <tr ng-repeat='treasureType in vm.treasureTypes track by treasureType._id'>
                     <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="/apis/treasure-types/{{ ::treasureType._id }}/icon?bearer={{ ::auth.accessToken }}&timestamp={{ vm.timestamp }}" alt="图标" /></td>
                     <td>{{ ::treasureType.name }}</td>
                     <td>{{ ::treasureType.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>

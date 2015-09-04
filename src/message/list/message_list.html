@@ -14,12 +14,12 @@
     </div>
 
 
-    <my-collapse class="am-panel-default" ng-repeat="message in vm.messages">
+    <my-collapse class="am-panel-default" ng-repeat="message in vm.messages track by message._id">
         <ul>
             <li><input type="checkbox" ng-model="vm.messages[$index]._checked"/></li>
-            <li>{{ message.subject }}</li>
-            <li>{{ message.content }}</li>
-            <li>{{ message.createdAt }}</li>
+            <li>{{:: message.subject }}</li>
+            <li>{{:: message.content }}</li>
+            <li>{{:: message.createdAt | date : 'yyyy-MM-dd HH:mm'}}</li>
             <li class="am-icon"></li>
         </ul>
     </my-collapse>

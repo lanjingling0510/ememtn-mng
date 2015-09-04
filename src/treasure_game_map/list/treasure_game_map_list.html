@@ -16,9 +16,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat='treasureGameMap in scope.treasureGameMaps'>
-                <td>{{ treasureGameMap.name }}</td>
-                <td>{{ treasureGameMap.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
+            <tr ng-repeat='treasureGameMap in scope.treasureGameMaps track by treasureGameMap._id'>
+                <td>{{:: treasureGameMap.name }}</td>
+                <td>{{:: treasureGameMap.createdAt | date : 'yyyy-MM-dd HH:mm' }}</td>
                 <td>
                     <button class="btn btn-danger btn-xs" ng-click="scope.removeTreasureGameMap(treasureGameMap)">删除</button>
                 </td>

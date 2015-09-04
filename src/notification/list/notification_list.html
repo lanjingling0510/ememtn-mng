@@ -15,10 +15,10 @@
     </div>
 
     <my-collapse class="am-panel-default">
-        <ul ng-repeat="notification in vm.notifications">
+        <ul ng-repeat="notification in vm.notifications track by notification._id">
             <li><input type="checkbox" ng-model="vm.notifications[$index]._checked"/></li>
-            <li>{{ notification.subject }}</li>
-            <li>{{ notification.createdAt }}</li>
+            <li>{{:: notification.subject }}</li>
+            <li>{{:: notification.createdAt | date : 'yyyy-MM-dd HH:mm' }}</li>
             <li class="am-icon-sort-desc"></li>
         </ul>
     </my-collapse>

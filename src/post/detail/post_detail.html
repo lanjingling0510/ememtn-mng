@@ -5,7 +5,7 @@
 
             <ul class="am-breadcrumb">
                 <li><a class="am-icon-home" ui-sref="platform">信息中心管理</a></li>
-                <li class="am-active">{{vm.post._id}}</li>
+                <li class="am-active">{{:: vm.post._id}}</li>
             </ul>
 
         </div>
@@ -20,12 +20,12 @@
 
             <div class="am-article-bd">
                <blockquote>
-                   {{vm.post.content}}
-                   <small>来自：{{vm.post.userId}}</small>
+                   {{:: vm.post.content}}
+                   <small>来自：{{:: vm.post.userId}}</small>
                    <span class="am-text-xs text-muted pull-right">
-                       发布时间:{{vm.post.createdAt}}
+                       发布时间:{{:: vm.post.createdAt | date : 'yyyy-MM-dd HH:mm'}}
                        <br/>
-                       更新时间:{{vm.post.createdAt}}
+                       更新时间:{{:: vm.post.createdAt | date : 'yyyy-MM-dd HH:mm'}}
                    </span>
 
                </blockquote>
@@ -36,7 +36,7 @@
     <!--评价模块-->
     <div class="am-container">
         <div class="am-comments-list">
-            <article class="am-comment" ng-repeat="comment in vm.post.comments"> <!-- 评论容器 -->
+            <article class="am-comment" ng-repeat="comment in vm.post.comments track by comment._id"> <!-- 评论容器 -->
                 <a>
                     <img class="am-comment-avatar"  alt=""/> <!-- 评论者头像 -->
                 </a>
@@ -44,13 +44,13 @@
                 <div class="am-comment-main"> <!-- 评论内容容器 -->
                     <header class="am-comment-hd">
                         <div class="am-comment-meta"> <!-- 评论元数据 -->
-                            <a href="#" class="am-comment-author">{{comment._id}}</a>
+                            <a href="#" class="am-comment-author">{{:: comment._id}}</a>
                             <!-- 评论者 -->
                             评论于
-                            <time datetime="">{{comment.createdAt}}</time>
+                            <time datetime="">{{:: comment.createdAt | date : 'yyyy-MM-dd HH:mm'}}</time>
                         </div>
                     </header>
-                    <div class="am-comment-bd">{{comment.comment}}</div>
+                    <div class="am-comment-bd">{{:: comment.comment}}</div>
                     <!-- 评论内容 -->
                     <div class="am-comment-footer clearfix">
                         <span class="am-fr am-icon-trash"></span>

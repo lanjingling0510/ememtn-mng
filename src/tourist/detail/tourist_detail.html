@@ -1,15 +1,15 @@
 
 <div class="am-g">
     <label for="">用户昵称</label>
-    <span>{{ vm.tourist.nickname }}</span>
+    <span>{{:: vm.tourist.nickname }}</span>
 </div>
 <div class="am-g">
     <label for="">电话号码</label>
-    <span>{{ vm.tourist.phone }}</span>
+    <span>{{:: vm.tourist.phone }}</span>
 </div>
 <div class="am-g">
     <label for="">注册时间</label>
-    <span>{{ vm.tourist.createdAt | date : 'yyyy-MM-dd HH:mm' }}</span>
+    <span>{{:: vm.tourist.createdAt | date : 'yyyy-MM-dd HH:mm' }}</span>
 </div>
 
 <a ui-sref="tourist-list">返回</a>
