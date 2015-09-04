@@ -48,5 +48,8 @@ function ExhibitorListController($timeout, $scope, Restangular) {
 
     function onFloorChange(event, data) {
         vm.floor = data;
+        vm.query.JCObjId = data.map.profile.JCObjId;
+        vm.query.JCObjMask = data.map.profile.JCObjMask;
+        searchExhibitors(vm.query, 0);
     }
 }
