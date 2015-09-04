@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.beacon.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.beacon-list', {
+    $stateProvider.state('pavilion-map.exhibition-area-virtual.beacon-list', {
         url: '/beacons',
         template: require('./beacon_list.html'),
         controller: 'BeaconListController as vm',
@@ -37,7 +37,7 @@ function BeaconListController($state, AlertService) {
     ];
 
     function editMode(beacon) {
-        $state.go('exhibition-hall-map.exhibition-area-virtual.beacon-list.beacons-inline-edit', {
+        $state.go('pavilion-map.exhibition-area-virtual.beacon-list.beacons-inline-edit', {
             beaconId: beacon.name,
         });
     }

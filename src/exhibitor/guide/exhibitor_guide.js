@@ -1,5 +1,5 @@
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../../pavilion/map/pavilion_map.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibitor.guide', [

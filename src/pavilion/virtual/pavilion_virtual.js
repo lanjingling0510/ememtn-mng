@@ -1,20 +1,20 @@
-require('./exhibition_hall_virtual.less');
+require('./pavilion_virtual.less');
 require('../../common/service.js');
 const angular = require('angular');
 const config = require('../../config.json');
 
-module.exports = angular.module('ememtn.exhibition.virtual', [
+module.exports = angular.module('ememtn.pavilion.virtual', [
     'ui.router',
     'ememtn.common.services',
 ]).config(moduleConfig)
-    .controller('ExhibitionHallVirtualController', ExhibitionHallVirtualController);
+    .controller('PavilionVirtualController', PavilionVirtualController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-virtual', {
-        url: '/exhibition-hall',
-        template: require('./exhibition_hall_virtual.html'),
-        controller: 'ExhibitionHallVirtualController as vm',
+    $stateProvider.state('pavilion-virtual', {
+        url: '/pavilion',
+        template: require('./pavilion_virtual.html'),
+        controller: 'PavilionVirtualController as vm',
         resolve: {
             floors: getFloors,
         },
@@ -27,7 +27,7 @@ function getFloors($q) {
 }
 
 /* @ngInject */
-function ExhibitionHallVirtualController($scope, floors) {
+function PavilionVirtualController($scope, floors) {
     const vm = this;
     vm.floors = floors;
     vm.floor = floors[0];

@@ -1,26 +1,26 @@
-require('./exhibition_hall_map.less');
+require('./pavilion_map.less');
 require('../../common/service.js');
-require('./exhibition_hall_map.service.js');
-require('./exhibition_hall_map.directive.js');
+require('./pavilion_map.service.js');
+require('./pavilion_map.directive.js');
 const $ = require('jquery');
 const config = require('../../config.json');
-const canvas = require('./exhibition_hall_canvas.js');
+const canvas = require('./pavilion_canvas.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-hall.map', [
+module.exports = angular.module('ememtn.pavilion.map', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.exhibition_hall.map.service',
-    'ememtn.exhibition_hall.map.directive',
+    'ememtn.pavilion.map.service',
+    'ememtn.pavilion.map.directive',
 ]).config(moduleConfig)
-    .controller('ExhibitionHallMapController', ExhibitionHallMapController);
+    .controller('PavilionMapController', PavilionMapController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map', {
-        url: '/exhibition-hall_map',
-        template: require('./exhibition_hall_map.html'),
-        controller: 'ExhibitionHallMapController as vm',
+    $stateProvider.state('pavilion-map', {
+        url: '/pavilion_map',
+        template: require('./pavilion_map.html'),
+        controller: 'PavilionMapController as vm',
         resolve: {
             maps: fetchMapProfiles,
         },
@@ -45,7 +45,7 @@ function getProfileId(map) {
 // }
 
 /* @ngInject */
-function ExhibitionHallMapController($timeout, $q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
+function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
     const vm = this;
     // vm.maps = maps;
     vm.maps = config.floors.slice(1);

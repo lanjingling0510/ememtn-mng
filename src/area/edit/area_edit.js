@@ -1,5 +1,5 @@
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../../pavilion/map/pavilion_map.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.area.edit', [
@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.area.edit', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall.area-edit', {
+    $stateProvider.state('pavilion.area-edit', {
         url: '/areas/:areaId',
         template: require('./area_edit.html'),
         controller: 'AreaEditController as vm',

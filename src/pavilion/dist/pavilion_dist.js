@@ -1,44 +1,43 @@
-require('./exhibition_hall_area.less');
+require('./pavilion_dist.less');
 require('../../common/service.js');
-require('../virtual/exhibition_hall_virtual.js');
-// const config = require('../../config.json');
+require('../virtual/pavilion_virtual.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition.dist', [
+module.exports = angular.module('ememtn.pavilion.dist', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.exhibition.virtual',
+    'ememtn.pavilion.virtual',
 ]).config(moduleConfig)
-    .controller('ExhibitionHallAreaController', ExhibitionHallAreaController);
+    .controller('PavilionDistController', PavilionDistController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-virtual.exhibition-dist', {
+    $stateProvider.state('pavilion-virtual.pavilion-dist', {
         url: '/_dist',
-        template: require('./exhibition_hall_area.html'),
-        controller: 'ExhibitionHallAreaController as vm',
+        template: require('./pavilion_dist.html'),
+        controller: 'PavilionDistController as vm',
     });
 }
 
 /* @ngInject */
-function ExhibitionHallAreaController($scope, $state, floors, Restangular, UploadToTempService, AlertService) {
+function PavilionDistController($scope, $state, floors, Restangular, UploadToTempService, AlertService) {
     const vm = this;
-    const ExhibitionDist = Restangular.all('exhibition-dists');
+    const PavilionDist = Restangular.all('exhibition-dists');
     vm.uploadFile = uploadFile;
     vm.removeNewPicture = removeNewPicture;
     vm.removeOldPicture = removeOldPicture;
-    vm.setExhibitionDist = setExhibitionDist;
+    vm.setPavilionDist = setPavilionDist;
     $scope.$on('floor-change', onFloorChange);
     vm.floor = floors[0];
-    fetchExhibitionDist(vm.floor);
+    fetchPavilionDist(vm.floor);
 
     function onFloorChange(event, data) {
         vm.floor = data.floor;
-        fetchExhibitionDist(vm.floor);
+        fetchPavilionDist(vm.floor);
     }
 
-    function fetchExhibitionDist(floor) {
-        vm.exhibitionDist = ExhibitionDist.doGET('', {
+    function fetchPavilionDist(floor) {
+        vm.pavilionDist = PavilionDist.doGET('', {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).$object;
@@ -56,7 +55,7 @@ function ExhibitionHallAreaController($scope, $state, floors, Restangular, Uploa
                     isNew: true,
                 };
             });
-            vm.exhibitionDist.pictures = vm.exhibitionDist.pictures.concat(pictures);
+            vm.pavilionDist.pictures = vm.pavilionDist.pictures.concat(pictures);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
@@ -65,22 +64,22 @@ function ExhibitionHallAreaController($scope, $state, floors, Restangular, Uploa
     function removeNewPicture(picture, index) {
         const filename = picture.fileUrl.split('/').pop();
         UploadToTempService.remove(filename).then(() => {
-            vm.exhibitionDist.pictures.splice(index, 1);
+            vm.pavilionDist.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
     function removeOldPicture(picture, index) {
-        vm.exhibitionDist.one('pictures', picture._id).remove().then(() => {
-            vm.exhibitionDist.pictures.splice(index, 1);
+        vm.pavilionDist.one('pictures', picture._id).remove().then(() => {
+            vm.pavilionDist.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
         });
     }
 
-    function setExhibitionDist(exhibitionDist) {
-        ExhibitionDist.one(exhibitionDist._id).doPUT(exhibitionDist).then(() => {
+    function setPavilionDist(pavilionDist) {
+        PavilionDist.one(pavilionDist._id).doPUT(pavilionDist).then(() => {
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

@@ -1,18 +1,18 @@
 require('./exhibition_area_virtual.less');
 require('../../common/service.js');
-require('../../exhibition_hall/map/exhibition_hall_map.js');
+require('../../pavilion/map/pavilion_map.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.exhibition-area.virtual', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.exhibition-hall.map',
+    'ememtn.pavilion.map',
 ]).config(moduleConfig)
     .controller('ExhibitionAreaVirtualController', ExhibitionAreaVirtualController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual', {
+    $stateProvider.state('pavilion-map.exhibition-area-virtual', {
         url: '/virtual-areas',
         template: require('./exhibition_area_virtual.html'),
         controller: 'ExhibitionAreaVirtualController as vm',

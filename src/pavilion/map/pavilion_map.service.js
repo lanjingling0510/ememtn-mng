@@ -2,7 +2,7 @@ const angular = require('angular');
 const API_URL = '/apis/v1';
 
 
-module.exports = angular.module('ememtn.exhibition_hall.map.service', [
+module.exports = angular.module('ememtn.pavilion.map.service', [
     'ngResource',
 ]).factory('MapService', MapService)
     .factory('MapPreviewService', MapPreviewService);

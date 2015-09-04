@@ -1,10 +1,10 @@
 <div class="am-margin-vertical">
-    <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-batch">批处理</a>
+    <a ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-batch">批处理</a>
 </div>
 
 <ul class="am-list am-list-static">
     <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
-        <a ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
+        <a ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
     </li>
 </ul>
 
@@ -20,6 +20,6 @@
     ></pagination>
 </div>
 
-<a class="btn btn-primary" ui-sref="exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a>
+<a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a>
 
 <ui-view />

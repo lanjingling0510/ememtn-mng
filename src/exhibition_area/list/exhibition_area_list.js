@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.exhibition-area.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-list', {
+    $stateProvider.state('pavilion-map.exhibition-area-list', {
         url: '/areas',
         template: require('./exhibition_area_list.html'),
         controller: 'ExhibitionAreaListController as vm',

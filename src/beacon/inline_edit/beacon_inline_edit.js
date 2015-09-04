@@ -11,7 +11,7 @@ module.exports = angular.module('ememtn.beacon.inline-edit', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.beacon-list.beacons-inline-edit', {
+    $stateProvider.state('pavilion-map.exhibition-area-virtual.beacon-list.beacons-inline-edit', {
         url: '/:beaconId',
         template: require('./beacon_inline_edit.html'),
         controller: 'BeaconInlineEditController as vm',

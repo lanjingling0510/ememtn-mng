@@ -1,24 +1,24 @@
-require('./exhibition_hall_setting.less');
+require('./pavilion_setting.less');
 require('../../common/service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-hall.setting', [
+module.exports = angular.module('ememtn.pavilion.setting', [
     'ui.router',
     'ememtn.common.services',
 ]).config(moduleConfig)
-    .controller('ExhibitionHallSettingController', ExhibitionHallSettingController);
+    .controller('PavilionSettingController', PavilionSettingController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-virtual.exhibition-hall-setting', {
+    $stateProvider.state('pavilion-virtual.pavilion-setting', {
         url: '/_setting',
-        template: require('./exhibition_hall_setting.html'),
-        controller: 'ExhibitionHallSettingController as vm',
+        template: require('./pavilion_setting.html'),
+        controller: 'PavilionSettingController as vm',
     });
 }
 
 /* @ngInject */
-function ExhibitionHallSettingController($scope, floors, $stateParams, Restangular, UploadToTempService, AlertService) {
+function PavilionSettingController($scope, floors, $stateParams, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const Pavilion = Restangular.all('pavilions');
     vm.fetchPavilionByFloor = fetchPavilionByFloor;

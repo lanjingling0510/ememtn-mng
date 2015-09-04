@@ -1,7 +1,7 @@
 const angular = require('angular');
 const $ = require('jquery');
-const canvas = require('./exhibition_hall_canvas.js');
-module.exports = angular.module('ememtn.exhibition_hall.map.directive', [])
+const canvas = require('./pavilion_canvas.js');
+module.exports = angular.module('ememtn.pavilion.map.directive', [])
     .directive('exhibitionHallMap', mapContainer);
 
 

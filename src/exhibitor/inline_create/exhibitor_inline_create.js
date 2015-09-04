@@ -12,7 +12,7 @@ module.exports = angular.module('ememtn.exhibitor.inline-create', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('exhibition-hall-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create', {
+    $stateProvider.state('pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create', {
         url: '/_create',
         template: require('./exhibitor_inline_create.html'),
         controller: 'ExhibitorInlineCreateController as vm',

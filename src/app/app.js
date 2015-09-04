@@ -19,9 +19,9 @@ require('../tourist/detail/tourist_detail.js');
 
 require('../organizer/setting/organizer_setting.js');
 
-require('../exhibition_hall/setting/exhibition_hall_setting.js');
-require('../exhibition_hall/map/exhibition_hall_map.js');
-require('../exhibition_hall/area/exhibition_hall_area.js');
+require('../pavilion/setting/pavilion_setting.js');
+require('../pavilion/map/pavilion_map.js');
+require('../pavilion/dist/pavilion_dist.js');
 
 require('../exhibition/list/exhibition_list.js');
 require('../exhibition/create/exhibition_create.js');
@@ -97,9 +97,9 @@ module.exports = angular.module('ememtn', [
     'ememtn.attendant.create',
     'ememtn.feedback.list',
     'ememtn.organizer.setting',
-    'ememtn.exhibition-hall.setting',
+    'ememtn.pavilion.setting',
+    'ememtn.pavilion.dist',
     'ememtn.exhibition.list',
-    'ememtn.exhibition.dist',
     'ememtn.exhibition.create',
     'ememtn.post.list',
     'ememtn.post.detail',

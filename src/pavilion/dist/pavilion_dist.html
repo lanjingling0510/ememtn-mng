@@ -1,10 +1,10 @@
-<div class="am-container exhibition-hall-setting" >
+<div class="am-container pavilion-setting" >
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form" ng-submit="vm.setExhibitionDist(vm.exhibitionDist)">
+            <form class="am-form" ng-submit="vm.setPavilionDist(vm.pavilionDist)">
                 <div class="am-form-group">
                     <label>正文内容</label>
-                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.exhibitionDist.content"></textarea>
+                    <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.pavilionDist.content"></textarea>
                 </div>
 
                 <div class="am-form-group">
@@ -13,12 +13,12 @@
                         ngf-change="vm.uploadFile($file)"
                         ngf-select ng-model="vm.pictureFile"
                         ngf-multiple="false" ngf-accept="'image/*'"
-                        accept="image/*" ng-disabled="vm.exhibitionDist.pictures.length >= 6"> 添加 </div>
+                        accept="image/*" ng-disabled="vm.pavilionDist.pictures.length >= 6"> 添加 </div>
                     <small class="text-danger">最多6张</small>
                 </div>
 
                 <ul class="am-avg-sm-6 am-thumbnails">
-                    <li class="am-form-group img-wrap"  ng-repeat="picture in vm.exhibitionDist.pictures">
+                    <li class="am-form-group img-wrap"  ng-repeat="picture in vm.pavilionDist.pictures">
                         <span class="am-icon-times img-close" ng-click="vm.removeNewPicture(picture, $index)" ng-show="picture.isNew"></span>
                         <span class="am-icon-times img-close" ng-click="vm.removeOldPicture(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
@@ -26,7 +26,7 @@
                                 <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
-                        <input class="am-form-field" ng-model="vm.exhibitionDist.pictures[$index].description" placeholder="描述...">
+                        <input class="am-form-field" ng-model="vm.pavilionDist.pictures[$index].description" placeholder="描述...">
                     </li>
                 </ul>
 

@@ -1,9 +1,9 @@
-<div class="exhibition-hall-setting">
+<div class="pavilion-setting">
     <div>
         <ul class="am-list am-list-static">
             <li>
                 <a ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id"
-                ui-sref="exhibition-hall-map.exhibition-area-list.exhibition-area-inline-edit({ exhibitionAreaId: exhibitionArea._id })">{{ ::exhibitionArea.name }}</a>
+                ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-edit({ exhibitionAreaId: exhibitionArea._id })">{{ ::exhibitionArea.name }}</a>
             </li>
         </ul>
     </div>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="">
-        <a class="btn btn-primary" ui-sref="exhibition-hall-map.exhibition-area-list.exhibition-area-inline-create">新建展区</a>
+        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-create">新建展区</a>
     </div>
     <ui-view />
 </div>
