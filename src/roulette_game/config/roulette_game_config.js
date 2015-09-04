@@ -4,7 +4,7 @@ require('./roulette_game_config.service.js');
 require('../../treasure_game/config/treasury_game_config.less');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.roulette_game', [
+module.exports = angular.module('ememtn.roulette_game.config', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.prize_type.list.service',

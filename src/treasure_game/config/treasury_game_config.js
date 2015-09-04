@@ -5,12 +5,12 @@ require('./treasury_game_config.service.js');
 require('./treasury_game_config.less');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasury_game', [
+module.exports = angular.module('ememtn.treasury_game.config', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.prize_type.list.service',
     'ememtn.treasure_type.list.service',
-    'ememtn.treasury_game.service',
+    'ememtn.treasury_game.config.service',
 ]).config(moduleConfig)
     .controller('TreasureGameController', TreasureGameController);
 

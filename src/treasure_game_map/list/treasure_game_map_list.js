@@ -4,10 +4,10 @@ require('../../common/service.js');
 require('./treasure_game_map_list.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_game_map_list', [
+module.exports = angular.module('ememtn.treasure_game_map.list', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.treasure_game_map_list.service',
+    'ememtn.treasure_game_map.list.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapListController', TreasureGameMapListController);
 

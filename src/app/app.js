@@ -127,10 +127,10 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibit.create',
     'ememtn.exhibit.list',
     'ememtn.prize.exchange',
-    'ememtn.treasury_game',
-    'ememtn.treasure_game_map_list',
-    'ememtn.treasure_game_map_create',
-    'ememtn.roulette_game',
+    'ememtn.treasury_game.config',
+    'ememtn.treasure_game_map.list',
+    'ememtn.treasure_game_map.create',
+    'ememtn.roulette_game.config',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */

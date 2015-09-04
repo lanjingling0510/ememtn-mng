@@ -1,6 +1,6 @@
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_game_map_create.service', [
+module.exports = angular.module('ememtn.treasure_game_map.create.service', [
     'ngResource',
 ]).service('TreasureGameMapCreateService', TreasureGameMapCreateService);
 

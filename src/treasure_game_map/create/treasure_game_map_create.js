@@ -5,7 +5,7 @@ require('../../treasure_type/list/treasure_type_list.service.js');
 require('./treasure_game_map_create.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_game_map_create', [
+module.exports = angular.module('ememtn.treasure_game_map.create', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.treasure_type.list.service',
