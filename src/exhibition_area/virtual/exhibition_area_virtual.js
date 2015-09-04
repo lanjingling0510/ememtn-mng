@@ -33,8 +33,8 @@ function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
             JCObjId: map.JCObjId,
             JCObjMask: map.JCObjMask,
         }).then(function (exhibitionAreas) {
-            vm.exhibitionAreas = exhibitionAreas;
-            vm.exhibitionArea = exhibitionAreas[0];
+            vm.exhibitionAreas = exhibitionAreas.slice(1);
+            vm.exhibitionArea = vm.exhibitionAreas[0];
             onAreaChange(vm.exhibitionArea);
         }).catch(function (err) {
             AlertService.warning(err.data);
