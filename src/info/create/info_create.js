@@ -55,6 +55,7 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
 
     function submitInfo(info) {
         Info.post(info).then(() => {
+            info._saved = true;
             info.pictures.forEach(function (pic) {
                 pic.isNew = false;
             });

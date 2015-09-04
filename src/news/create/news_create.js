@@ -55,6 +55,7 @@ function NewsCreateController(AlertService, Restangular, UploadToTempService) {
 
     function submitNews(news) {
         News.post(news).then(() => {
+            vm.news._saved = true;
             vm.news.pictures.forEach((pic) => {
                 pic.isNew = false;
             });
