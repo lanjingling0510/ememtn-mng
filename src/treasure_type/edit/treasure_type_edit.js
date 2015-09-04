@@ -1,13 +1,11 @@
-'use strict';
-
 require('../../common/service.js');
 require('./treasure_type_edit.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('sanya.treasure_types_edit', [
+module.exports = angular.module('ememtn.treasure_type.edit', [
     'ui.router',
     'ememtn.common.services',
-    'sanya.treasure_types_edit.service'
+    'ememtn.treasure_types_edit.service',
 ]).config(moduleConfig)
     .controller('TreasureTypeEditController', TreasureTypeEditController);
 
@@ -16,13 +14,13 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasure-type-edit', {
         url: '/treasure-types/:treasureTypeId',
         template: require('./treasure_type_edit.html'),
-        controller: 'TreasureTypeEditController as scope'
+        controller: 'TreasureTypeEditController as scope',
     });
 }
 
 /* @ngInject */
 function TreasureTypeEditController($stateParams, TreasureTypeEditService, AlertService) {
-    let vm = this;
+    const vm = this;
     vm.updateTreasureType = updateTreasureType;
 
     initController();
@@ -38,7 +36,7 @@ function TreasureTypeEditController($stateParams, TreasureTypeEditService, Alert
 
     function initController() {
         TreasureTypeEditService.get({
-            treasureTypeId: $stateParams.treasureTypeId
+            treasureTypeId: $stateParams.treasureTypeId,
         }).$promise.then(function (treasureType) {
             vm.treasureType = treasureType;
         }).catch(function (err) {
