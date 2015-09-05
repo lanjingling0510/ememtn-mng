@@ -34,11 +34,12 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService)
     $scope.$emit('get-current-map');
 
     function whenMapChange(event, data) {
-        if (data && data.map && data.map.profile) {
-            vm.exhibitionArea.JCObjId = data.map.profile.JCObjId;
-            vm.exhibitionArea.JCObjMask = data.map.profile.JCObjMask;
-            vm.exhibitionArea.profileId = data.map.profile.JCObjId + ':' + data.map.profile.JCObjMask;
-            vm.exhibitionArea.layer = data.map.layers.filter((layer) => {
+        if (data && data.map) {
+            const map = data.map;
+            vm.exhibitionArea.JCObjId = map.profile.JCObjId;
+            vm.exhibitionArea.JCObjMask = map.profile.JCObjMask;
+            vm.exhibitionArea.profileId = map.profile.JCObjId + ':' + map.profile.JCObjMask;
+            vm.exhibitionArea.layer = map.layers.filter((layer) => {
                 return layer.JCName === 'trade_area';
             })[0];
         }

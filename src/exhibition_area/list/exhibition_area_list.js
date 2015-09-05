@@ -46,9 +46,11 @@ function ExhibitionAreaListController($timeout, $scope, Restangular, AlertServic
     }
 
     function onFloorChange(event, data) {
-        const map = data.map.profile || data.map;
-        vm.query.JCObjId = map.JCObjId;
-        vm.query.JCObjMask = map.JCObjMask;
-        searchExhibitionAreas(vm.query);
+        if (data && data.map) {
+            const map = data.map;
+            vm.query.JCObjId = map.profile.JCObjId;
+            vm.query.JCObjMask = map.profile.JCObjMask;
+            searchExhibitionAreas(vm.query);
+        }
     }
 }
