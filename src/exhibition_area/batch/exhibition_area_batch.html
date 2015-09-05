@@ -1,13 +1,15 @@
 <div class="pavilion-setting">
     <div class="">
-        <a ui-sref="pavilion-map.exhibition-area-batch">批处理</a>
+        <a ui-sref="pavilion-map.exhibition-area-list">返回</a>
+        <button ng-click="vm.removeSelectedExhibitionAreas()">删除</button>
     </div>
 
     <div>
         <ul class="am-list am-list-static">
-            <li>
-                <a ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id"
-                ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-edit({ exhibitionAreaId: exhibitionArea._id })">{{ ::exhibitionArea.name }}</a>
+            <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id">
+                <span>
+                    <input type="checkbox" ng-model="exhibitionArea._checked"> {{ ::exhibitionArea.name }}
+                </span>
             </li>
         </ul>
     </div>
@@ -23,9 +25,4 @@
                     ng-change="vm.searchExhibitionAreas(vm.query, 0)"
         ></pagination>
     </div>
-
-    <div class="">
-        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-create">新建展区</a>
-    </div>
-    <ui-view />
 </div>

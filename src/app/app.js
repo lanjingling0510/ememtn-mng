@@ -73,6 +73,7 @@ require('../exhibitor/inline_create/exhibitor_inline_create.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
+require('../exhibition_area/batch/exhibition_area_batch.js');
 require('../exhibition_area/inline_create/exhibition_area_inline_create.js');
 require('../exhibition_area/inline_edit/exhibition_area_inline_edit.js');
 require('../exhibition_area/virtual/exhibition_area_virtual.js');
@@ -91,6 +92,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
     'ememtn.exhibition-area.list',
+    'ememtn.exhibition-area.batch',
     'ememtn.exhibition-area.inline-create',
     'ememtn.exhibition-area.inline-edit',
     'ememtn.attendant.list',
