@@ -1,11 +1,9 @@
 require('../../common/service.js');
-require('./treasure_type_edit.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_type.edit', [
+module.exports = angular.module('ememtn.treasure-type.edit', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.treasure_types_edit.service',
 ]).config(moduleConfig)
     .controller('TreasureTypeEditController', TreasureTypeEditController);
 

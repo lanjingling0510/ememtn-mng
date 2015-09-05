@@ -1,5 +1,3 @@
-/* global AMap */
-
 require('../../common/service.js');
 require('../../treasure_type/list/treasure_type_list.service.js');
 require('./treasure_game_map_create.service.js');
@@ -9,6 +7,7 @@ module.exports = angular.module('ememtn.treasure_game_map.create', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.treasure_type.list.service',
+    'ememtn.treasure_game_map.create.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapCreateController', TreasureGameMapCreateController);
 
@@ -23,9 +22,10 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function TreasureGameMapCreateController(AreasListService, TreasureTypesService, TreasureGameMapCreateService, AlertService) {
+function TreasureGameMapCreateController(Restangular, TreasureGameMapCreateService, AlertService) {
     const vm = this;
-
+    const ExhibitionArea = Restangular.all('exhibition-areas');
+    const TreasureType = Restangular.all('treasure-types');
     vm.createTreasureGameMap = createTreasureGameMap;
 
     initController();
@@ -41,12 +41,11 @@ function TreasureGameMapCreateController(AreasListService, TreasureTypesService,
     }
 
     function initController() {
-        AreasListService.query().$promise
-        .then(function (areas) {
-            vm.areas = areas;
-            return TreasureTypesService.query().$promise;
+        ExhibitionArea.getList().then(function (areas) {
+            vm.areas = areas.slice(1);
+            return TreasureType.getList();
         }).then(function (treasureTypes) {
-            vm.treasureTypes = treasureTypes;
+            vm.treasureTypes = treasureTypes.slice(1);
         }).catch(function (err) {
             AlertService.warning(err.data);
         });

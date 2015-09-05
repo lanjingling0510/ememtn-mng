@@ -1,30 +1,27 @@
-require('../create/treasure_types_create.js');
+require('../create/treasure_type_create.js');
 require('../edit/treasure_type_edit.js');
-
 require('../../common/service.js');
-require('./treasure_types.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_type.list', [
+module.exports = angular.module('ememtn.treasure-type.list', [
     'ui.router',
-    'ememtn.treasure_type.create',
-    'ememtn.treasure_type.edit',
+    'ememtn.treasure-type.create',
+    'ememtn.treasure-type.edit',
     'ememtn.common.services',
-    'ememtn.treasure_type.list.service',
 ]).config(moduleConfig)
-    .controller('TreasureTypesController', TreasureTypesController);
+    .controller('TreasureTypeListController', TreasureTypeListController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('treasure_types', {
+    $stateProvider.state('treasure-type-list', {
         url: '/treasure-types',
-        template: require('./treasure_types.html'),
-        controller: 'TreasureTypesController as vm',
+        template: require('./treasure_type_list.html'),
+        controller: 'TreasureTypeListController as vm',
     });
 }
 
 /* @ngInject */
-function TreasureTypesController($timeout, $stateParams, TreasureTypesService, AlertService) {
+function TreasureTypeListController($timeout, $stateParams, TreasureTypesService, AlertService) {
     const vm = this;
     Object.defineProperty(vm, 'timestamp', {
         get: function () {

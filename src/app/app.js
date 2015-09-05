@@ -81,6 +81,8 @@ require('../exhibition_area/virtual/exhibition_area_virtual.js');
 require('../exhibit/create/exhibit_create.js');
 require('../exhibit/list/exhibit_list.js');
 
+require('../treasure_type/list/treasure_type_list.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -133,6 +135,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.treasure_game_map.list',
     'ememtn.treasure_game_map.create',
     'ememtn.roulette_game.config',
+    'ememtn.treasure-type.list',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
