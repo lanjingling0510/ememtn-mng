@@ -21,6 +21,10 @@ function moduleConfig($stateProvider) {
 function OrganizerCustomListController($timeout, Restangular, AlertService) {
     const vm = this;
     const OrganizerCustom = Restangular.all('organizer-customs');
+    const VISIBLE = {
+        YES: 1,
+        NO: 0,
+    };
     vm.toggleCheckAll = toggleCheckAll;
     vm.stickyOrganizerCustom = stickyOrganizerCustom;
     vm.stickySelectedOrganizerCustoms = stickySelectedOrganizerCustoms;
@@ -29,6 +33,9 @@ function OrganizerCustomListController($timeout, Restangular, AlertService) {
     vm.showSelectedOrgCustoms = showSelectedOrgCustoms;
     vm.hideSelectedOrgCustoms = hideSelectedOrgCustoms;
     vm.searchOrganizerCustoms = searchOrganizerCustoms;
+    vm.toggleShowingAndHidden = toggleShowingAndHidden;
+    vm.toggleShowing = toggleShowing;
+    vm.toggleHidden = toggleHidden;
     vm.query = {};
 
     fetchOrganizer();
@@ -121,5 +128,20 @@ function OrganizerCustomListController($timeout, Restangular, AlertService) {
     function hideSelectedOrgCustoms() {
         const checkedOrgCustoms = getCheckedOrganizerCustoms();
         checkedOrgCustoms.forEach(hideOrgCustom);
+    }
+
+    function toggleShowingAndHidden() {
+        delete vm.query.visible;
+        searchOrganizerCustoms(vm.query);
+    }
+
+    function toggleShowing() {
+        vm.query.visible = VISIBLE.YES;
+        searchOrganizerCustoms(vm.query);
+    }
+
+    function toggleHidden() {
+        vm.query.visible = VISIBLE.NO;
+        searchOrganizerCustoms(vm.query);
     }
 }
