@@ -35,7 +35,7 @@
       </tfoot>
 
       <tbody>
-        <tr ng-repeat='attendant in vm.attendants | orderBy: "-createdAt" track by attendant_id'>
+        <tr ng-repeat='attendant in vm.attendants | orderBy: "-createdAt" track by attendant._id'>
           <td><input type="checkbox" ng-model="vm.attendants[$index]._checked"></td>
           <td>{{ attendant.phone }}</td>
           <td>{{ attendant.realname }}</td>

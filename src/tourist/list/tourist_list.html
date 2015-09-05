@@ -12,6 +12,7 @@
     <table class="table table-responsive">
       <thead>
         <tr>
+            <th> </th>
           <th>用户昵称</th>
           <th>性别</th>
           <th>电话号码</th>
@@ -42,12 +43,13 @@
             </td>
           <td>
               <a ui-sref="tourist-detail({ touristId: tourist._id })">
-                  {{ tourist.nickname }}
+                  {{:: tourist.nickname || '未填写' }}
               </a>
           </td>
           <td>
               <span ng-show="tourist.gender === 'male'">男</span>
               <span ng-show="tourist.gender === 'female'">女</span>
+              <span ng-show="!tourist.gender">未知</span>
           </td>
           <td>{{ tourist.phone }}</td>
           <td>
