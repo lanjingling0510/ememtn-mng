@@ -19,7 +19,7 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function ExhibitorListController($timeout, $scope, Restangular) {
+function ExhibitorListController($timeout, $scope, Restangular, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
     vm.searchExhibitors = searchExhibitors;
