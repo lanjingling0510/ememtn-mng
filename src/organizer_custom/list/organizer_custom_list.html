@@ -8,84 +8,82 @@
     </ol>
     <hr>
 
-    <form class="am-form am-form-horizontal">
-        <div class="am-form-group">
-            <label class="am-u-sm-2 am-form-label">版块名称</label>
+    <form class="form-horizontal am-margin-bottom-xl">
+        <div class="form-group">
+            <label class="am-u-sm-2 control-label">版块名称</label>
 
             <div class="am-u-sm-7">
-                <input placeholder="主办方商品列表" ng-model="vm.organizer.customSubject">
+                <input class="form-control" placeholder="主办方商品列表" ng-model="vm.organizer.customSubject">
             </div>
             <div class="am-u-sm-3">
-                <button class="am-btn am-btn-block am-btn-danger" ng-click="vm.saveCustomTitle(vm.organizer.customSubject)">保存名称</button>
+                <button class="btn am-btn-block btn-danger" ng-click="vm.saveCustomTitle(vm.organizer.customSubject)">
+                    保存名称
+                </button>
             </div>
         </div>
     </form>
 
-    <form class="am-form am-form-horizontal">
-        <div class="am-form-group">
-            <div class="am-u-sm-2 text-right">
-                <drop-down title="操作" toggle="am-btn-danger">
-                    <button class="am-btn am-btn-block" ng-click="vm.showSelectedOrgCustoms()">显示</button>
-                    <button class="am-btn am-btn-block" ng-click="vm.hideSelectedOrgCustoms()">隐藏</button>
-                    <button class="am-btn am-btn-block" ng-click="vm.stickySelectedOrganizerCustoms()">顶</button>
-                    <button class="am-btn am-btn-block" ng-click="vm.deleteSelectedOrgCustoms()">删除</button>
-                </drop-down>
-            </div>
-
-            <div class="am-u-sm-5">
-                <input placeholder="请输入展品名搜索" ng-model="vm.query.subject"
-                ng-change="vm.searchOrganizerCustoms(vm.query, 200)" />
-            </div>
-            <div class="am-u-sm-2 am-u-end">
-                <a class="am-btn am-btn-block am-btn-secondary" ui-sref="organizer-custom-create">添加</a>
-            </div>
+    <div class="clearfix am-margin-sm">
+        <div class="am-fl">
+            <drop-down title="操作" toggle="am-btn-danger">
+                <button class="am-btn am-btn-block" ng-click="vm.showSelectedOrgCustoms()">显示</button>
+                <button class="am-btn am-btn-block" ng-click="vm.hideSelectedOrgCustoms()">隐藏</button>
+                <button class="am-btn am-btn-block" ng-click="vm.stickySelectedOrganizerCustoms()">顶</button>
+                <button class="am-btn am-btn-block" ng-click="vm.deleteSelectedOrgCustoms()">删除</button>
+            </drop-down>
         </div>
-    </form>
 
+        <div class="am-fl am-margin-left">
+            <input class="form-control" placeholder="请输入展品名搜索" ng-model="vm.query.subject"
+                   ng-change="vm.searchOrganizerCustoms(vm.query, 200)"/>
+        </div>
+
+        <div class="am-fr">
+            <a class="btn btn-info" ui-sref="organizer-custom-create">添加</a>
+        </div>
+    </div>
     <div class="am-g">
         <div class="am-u-sm-12">
             <table class="am-table am-table-striped am-table-hover text-center">
                 <thead>
-                    <tr>
-                        <td class="table-check">
-                            <input ng-change="vm.toggleCheckAll(vm.organizerCustoms._checked)" ng-model="vm.organizerCustoms._checked" type="checkbox">
-                        </td>
-                        <td>
-                            <button class="am-btn am-btn-secondary am-btn-block">名称</button>
-                        </td>
-                        <td>
-                            <button class="am-btn am-btn-secondary am-btn-block">文字描述摘要</button>
-                        </td>
+                <tr class="bg-theme">
+                    <td class="table-check">
+                        <input ng-change="vm.toggleCheckAll(vm.organizerCustoms._checked)"
+                               ng-model="vm.organizerCustoms._checked" type="checkbox">
+                    </td>
+                    <td>
+                       名称
+                    </td>
+                    <td>
+                        文字描述摘要
+                    </td>
 
-                        <td>
-                            <button class="am-btn am-btn-secondary am-btn-block">全部状态</button>
+                    <td>
+                        全部状态
 
-                            <!-- <drop-down title="全部状态" toggle="am-btn-secondary">
-                                <button class="am-btn am-btn-block" ng-click="vm.toggleShowingAndHidden()">所有</button>
-                                <button class="am-btn am-btn-block" ng-click="vm.toggleShowing()">正在显示</button>
-                                <button class="am-btn am-btn-block" ng-click="vm.toggleHidden()">正在隐藏</button>
-                            </drop-down> -->
-                        </td>
-                        <th>
-                            <button class="am-btn am-btn-secondary am-btn-block">置顶</button>
-                        </th>
-                    </tr>
+                    </td>
+                    <td>
+                        置顶
+                    </td>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="organizerCustom in vm.organizerCustoms | orderBy: '-sticky' | orderBy: '-stickedAt' track by organizerCustom._id">
-                        <td><input type="checkbox" ng-model="organizerCustom._checked"></td>
-                        <td>
-                            {{ organizerCustom.subject }}
-                        </td>
-                        <td>{{ organizerCustom.content }}</td>
-                        <td>
-                            <span ng-show="organizerCustom.visible">正在显示</span>
-                            <span ng-hide="organizerCustom.visible">隐藏</span>
-                        </td>
-                        <td>
-                            <button class="am-btn am-btn-danger am-btn-xs" ng-click="vm.stickyOrganizerCustom(organizerCustom)">顶</button>
-                        </td>
-                    </tr>
+                <tr ng-repeat="organizerCustom in vm.organizerCustoms | orderBy: '-sticky' | orderBy: '-stickedAt' track by organizerCustom._id">
+                    <td><input type="checkbox" ng-model="organizerCustom._checked"></td>
+                    <td>
+                        {{ organizerCustom.subject }}
+                    </td>
+                    <td>{{ organizerCustom.content }}</td>
+                    <td>
+                        <span ng-show="organizerCustom.visible">正在显示</span>
+                        <span ng-hide="organizerCustom.visible">隐藏</span>
+                    </td>
+                    <td>
+                        <button class="am-btn am-btn-danger am-btn-xs"
+                                ng-click="vm.stickyOrganizerCustom(organizerCustom)">顶
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
