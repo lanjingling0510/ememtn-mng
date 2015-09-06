@@ -1,48 +1,51 @@
-<div class="col-md-12">
-  <h1 class="page-header">在线客服管理</h1>
+<div class="am-container">
+    <div class="row">
+        <h1 class="page-header">在线客服管理</h1>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-danger" ng-click="vm.removeCheckedAttendants()">删除</button>
+        <a class="btn btn-primary" ui-sref="attendant-list.attendant-create">添加</a>
+    </div>
+
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="vm.attendants._checked" ng-click="vm.checkAll()" /></th>
+                <th>手机号</th>
+                <th>名字</th>
+                <th>昵称</th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <td colspan="4" class="text-center">
+                    <pagination total-items="vm.query.total"
+                                ng-model="vm.query.page"
+                                items-per-page="vm.query.pageSize"
+                                max-size="7"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                direction-links="true"
+                                ng-change="vm.searchAttendants(vm.query)"
+                            ></pagination>
+                </td>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            <tr ng-repeat='attendant in vm.attendants | orderBy: "-createdAt" track by attendant._id'>
+                <td><input type="checkbox" ng-model="vm.attendants[$index]._checked"></td>
+                <td>{{:: attendant.phone }}</td>
+                <td>{{:: attendant.realname }}</td>
+                <td>{{:: attendant.nickname }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ui-view />
 </div>
 
-<div class="row">
-    <button ng-click="vm.removeCheckedAttendants()">删除</button>
-    <a ui-sref="attendant-list.attendant-create">添加</a>
-</div>
-
-<div class="col-md-12">
-    <table class="table table-responsive">
-      <thead>
-        <tr>
-          <th><input type="checkbox" ng-model="vm.attendants._checked" ng-click="vm.checkAll()" /></th>
-          <th>手机号</th>
-          <th>名字</th>
-          <th>昵称</th>
-        </tr>
-      </thead>
-
-      <tfoot>
-          <tr>
-              <td colspan="4" class="text-center">
-                  <pagination total-items="vm.query.total"
-                              ng-model="vm.query.page"
-                              items-per-page="vm.query.pageSize"
-                              max-size="7"
-                              class="pagination-sm"
-                              boundary-links="true"
-                              direction-links="true"
-                              ng-change="vm.searchAttendants(vm.query)"
-                  ></pagination>
-              </td>
-          </tr>
-      </tfoot>
-
-      <tbody>
-        <tr ng-repeat='attendant in vm.attendants | orderBy: "-createdAt" track by attendant._id'>
-          <td><input type="checkbox" ng-model="vm.attendants[$index]._checked"></td>
-          <td>{{:: attendant.phone }}</td>
-          <td>{{:: attendant.realname }}</td>
-          <td>{{:: attendant.nickname }}</td>
-        </tr>
-      </tbody>
-    </table>
-</div>
-
-<ui-view />

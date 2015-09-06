@@ -29,7 +29,7 @@ function dropDownDirective() {
         },
         transclude: true,
         template: '<div class="am-dropdown am-block">' +
-        '<button class="am-btn am-dropdown-toggle am-btn-block am-btn-xs">{{title}} <span class="am-icon-caret-down"></span></button>' +
+        '<button class="btn btn-danger am-dropdown-toggle am-padding-horizontal-lg">{{title}} <span class="am-icon-caret-down"></span></button>' +
         '<div class="am-dropdown-content" ng-transclude>' +
         '</div>' +
         '</div>',

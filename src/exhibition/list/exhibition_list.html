@@ -1,19 +1,23 @@
 <div class="am-container exhibition-list">
-    <div class="am-g am-margin-bottom">
-        <div class="am-u-sm-1 text-center">
-            <input type="checkbox" ng-model="vm.exhibitions._checked" ng-click="vm.toggleCheckAll(vm.exhibitions._checked)"/>
-        </div>
-        <div class="am-u-sm-3">
-            <drop-down title="操作" toggle="am-btn-danger" class="am-margin-left">
-                <!-- <button class="am-btn am-btn-block">开始推送</button>
-                <button class="am-btn am-btn-block">停止推送</button> -->
-                <button class="am-btn am-btn-block" ng-click="vm.removeCheckedExhibitions()">删除</button>
-            </drop-down>
-        </div>
-        <div class="am-u-sm-2">
-            <a class="am-btn am-btn-danger am-fr" ui-sref="exhibition-create">添加活动</a>
-        </div>
-    </div>
+    <my-collapse class="am-panel-transparent">
+        <ul>
+            <li>
+                <input type="checkbox" ng-model="vm.exhibitions._checked" ng-click="vm.toggleCheckAll(vm.exhibitions._checked)"/>
+            </li>
+            <li>
+                <drop-down title="操作" toggle="am-btn-danger">
+                    <!-- <button class="am-btn am-btn-block">开始推送</button>
+                    <button class="am-btn am-btn-block">停止推送</button> -->
+                    <button class="am-btn am-btn-block" ng-click="vm.removeCheckedExhibitions()">删除</button>
+                </drop-down>
+            </li>
+            <li></li>
+            <li></li>
+            <li>
+                <a class="btn btn-danger am-fr" ui-sref="exhibition-create">添加活动</a>
+            </li>
+        </ul>
+    </my-collapse>
 
     <my-collapse class="am-panel-default" content="{{:: exhibition.content }}" ng-repeat="exhibition in vm.exhibitions track by exhibition._id">
         <ul>

@@ -1,33 +1,45 @@
-<form class="form-horizontal" ng-submit="vm.exchangePrize(vm.prize)">
-    <div class="form-group">
-        <label class="col-sm-3 control-label">兑换码</label>
-        <div class="col-sm-6">
-            <input class="form-control" autofocus ng-model="vm.exchangeCode" ng-change="vm.fetchPrizeByCode(vm.exchangeCode)" />
+<div class="am-container price">
+    <div>
+        <h1 class="page-header">兑奖系统</h1>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-centered">
+            <form class="form-horizontal" ng-submit="vm.exchangePrize(vm.prize)">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">兑换码</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" autofocus ng-model="vm.exchangeCode" ng-change="vm.fetchPrizeByCode(vm.exchangeCode)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">中奖者电话</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{ ::vm.prize.tourist.phone }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">中奖者昵称</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{ ::vm.prize.tourist.nickname }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">奖品名称</label>
+                    <div class="col-sm-6">
+                        <p class="form-control-static">{{ ::vm.prize.prizeType.name }}</p>
+                    </div>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-danger btn-lg" ng-disabled="!vm.prize">兑换</button>
+                </div>
+            </form>
+
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label class="col-sm-3 control-label">中奖者电话</label>
-        <div class="col-sm-6">
-            <p class="form-control-static">{{ ::vm.prize.tourist.phone }}</p>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <label class="col-sm-3 control-label">中奖者昵称</label>
-        <div class="col-sm-6">
-            <p class="form-control-static">{{ ::vm.prize.tourist.nickname }}</p>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-3 control-label">奖品名称</label>
-        <div class="col-sm-6">
-            <p class="form-control-static">{{ ::vm.prize.prizeType.name }}</p>
-        </div>
-    </div>
-
-    <div class="form-group text-center">
-        <button type="submit" class="btn btn-danger btn-lg" ng-disabled="!vm.prize">兑换</button>
-    </div>
-</form>

@@ -17,8 +17,8 @@
         </div>
 
     <div class="am-g">
-        <my-collapse class="am-panel-default" content="建议内容">
-            <ul ng-repeat="feedback in vm.feedbacks track by feedback._id">
+        <my-collapse class="am-panel-default" content="建议内容"  ng-repeat="feedback in vm.feedbacks track by feedback._id">
+            <ul>
                 <li><input type="checkbox" ng-model="vm.feedbacks[$index]._checked"/></li>
                 <li>{{:: feedback.phone }}</li>
                 <li>{{:: feedback.detail }}</li>

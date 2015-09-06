@@ -1,21 +1,41 @@
-<div class="am-form-group">
-    <label for="">手机号</label>
-    <input ng-model="vm.attendant.phone" />
-    <span>手机号即为登陆帐号</span>
+
+<div class="am-g">
+    <div class="am-u-sm-7 am-u-sm-centered">
+        <form class="am-form am-form-horizontal">
+            <div class="am-form-group">
+                <label class="am-form-label am-u-sm-3" for="">手机号</label>
+                <div class="am-u-sm-9">
+                    <input class="am-form-field" ng-model="vm.attendant.phone" placeholder="手机号即为登陆帐号"/>
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-form-label am-u-sm-3" for="">姓名</label>
+                <div class="am-u-sm-9">
+                    <input class="am-form-field" ng-model="vm.attendant.realname" />
+                </div>
+
+            </div>
+            <div class="am-form-group">
+                <label class="am-form-label am-u-sm-3" for="">昵称</label>
+                <div class="am-u-sm-9">
+                    <input class="am-form-field" ng-model="vm.attendant.nickname" />
+                </div>
+
+            </div>
+            <div class="am-form-group">
+                <label class="am-form-label am-u-sm-3" for="">密码</label>
+                <div class="am-u-sm-9">
+                    <input class="am-form-field" ng-model="vm.attendant.password" placeholder="不输入即为手机号后六位" />
+                </div>
+
+            </div>
+            <div class="am-form-group">
+                <div class="am-u-sm-9 am-u-sm-offset-3">
+                    <button class="btn btn-primary" ng-click="vm.createAttendant(vm.attendant)">保存</button>
+                    <a class="btn btn-danger" ui-sref="attendant-list">取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-<div class="am-form-group">
-    <label for="">姓名</label>
-    <input ng-model="vm.attendant.realname" />
-</div>
-<div class="am-form-group">
-    <label for="">昵称</label>
-    <input ng-model="vm.attendant.nickname" />
-</div>
-<div>
-    <label for="">密码</label>
-    <input ng-model="vm.attendant.password" placeholder="不输入即为手机号后六位" />
-</div>
-<div class="am-form-group">
-    <a ui-sref="attendant-list">取消</a>
-    <button ng-click="vm.createAttendant(vm.attendant)">添加</button>
-</div>
+
