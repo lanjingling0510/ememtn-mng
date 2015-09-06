@@ -1,0 +1,43 @@
+<p class="text-center">
+    <a ui-sref="pavilion-map.exhibition-area-virtual.treasure-point-list" class="btn btn-info">返回列表</a>
+</p>
+
+
+<form class="form-horizontal" ng-submit="vm.createTreasurePoint(vm.treasurePoint)">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">名称</label>
+
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.treasurePoint.name">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Major Id</label>
+
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.treasurePoint.major">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Minor Id</label>
+
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.treasurePoint.minor">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">信号强度</label>
+
+        <div class="col-sm-9">
+            <input class="form-control am-input-sm" ng-model="vm.treasurePoint.rssi">
+        </div>
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">保存</button>
+        <a ui-sref="pavilion-map.exhibition-area-virtual.treasure-point-list" class="btn btn-info">取消</a>
+    </div>
+</form>

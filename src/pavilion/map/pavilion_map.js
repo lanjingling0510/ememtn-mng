@@ -65,7 +65,7 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
 
     $scope.$on('get-current-map', () => {
         $scope.$broadcast('current-map', {
-            map: vm.map,
+            map: vm._map,
         });
     });
 
@@ -157,6 +157,7 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
                 });
                 MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
                 floorChange(map);
+                vm._map = map;
                 canvas.init({
                     map: $('#mapCanvas'),
                     width: $('#mapContainer svg').width(),
