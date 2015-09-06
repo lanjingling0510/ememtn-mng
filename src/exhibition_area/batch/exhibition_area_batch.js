@@ -48,10 +48,11 @@ function ExhibitionAreaBatchController($timeout, $scope, Restangular, AlertServi
     }
 
     function onFloorChange(event, data) {
-        const map = data.map.profile || data.map;
-        vm.query.JCObjId = map.JCObjId;
-        vm.query.JCObjMask = map.JCObjMask;
-        searchExhibitionAreas(vm.query);
+        if (data && data.map && data.map.profile) {
+            vm.query.JCObjId = data.map.profile.JCObjId;
+            vm.query.JCObjMask = data.map.profile.JCObjMask;
+            searchExhibitionAreas(vm.query);
+        }
     }
 
     function getSelectedAreas() {
@@ -59,8 +60,10 @@ function ExhibitionAreaBatchController($timeout, $scope, Restangular, AlertServi
     }
 
     function removeExhibitionArea(exhibitionArea) {
-        console.log(exhibitionArea);
-        MapFeature.remove(exhibitionArea).then(() => {
+        MapFeature.one(exhibitionArea.JCGUID).remove({
+            profileId: exhibitionArea.JCObjId + ':' + exhibitionArea.JCObjMask,
+            JCLayerName: exhibitionArea.JCLayerName,
+        }).then(() => {
             return exhibitionArea.remove();
         }).then(() => {
             const index = vm.exhibitionAreas.indexOf(exhibitionArea);
