@@ -1,0 +1,11 @@
+<div class="am-margin-vertical treasure-point-container">
+    <ul class="am-list am-list-static">
+        <li ng-repeat="treasurePoint in vm.treasurePoints">
+            {{ treasurePoint.name }}
+        </li>
+    </ul>
+
+    <a ui-sref="pavilion-map.exhibition-area-virtual.treasure-point-list.treasure-point-inline-create">新建</a>
+    <ui-view/>
+
+</div>

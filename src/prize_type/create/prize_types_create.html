@@ -59,11 +59,11 @@
         </div>
 
         <div class="form-group">
-            <label for="name" class="col-sm-3 control-label">兑换需要海螺</label>
+            <label for="name" class="col-sm-3 control-label">兑换需要宝物</label>
 
             <div class="col-sm-6">
                 <input type="text" class="form-control" ng-model="scope.prizeType.exchangeCost">
-                <span class="help-block">兑换此奖品需要的海螺数量</span>
+                <span class="help-block">兑换此奖品需要的宝物数量</span>
             </div>
         </div>
 
@@ -74,7 +74,7 @@
                 <input type="text" class="form-control" ng-model="scope.prizeType.validTo"
                     is-open="scope.calender.opened" datepicker-popup="{{ scope.calender.format }}"
                     min-date="scope.calender.minDate" max-date="scope.calender.maxDate"
-                    datepicker-options="scope.calender.dateOptions" 
+                    datepicker-options="scope.calender.dateOptions"
                     ng-required="true" close-text="Close" ng-click="scope.openCalender()" />
 
                 <!-- <div class="form-group hidden">

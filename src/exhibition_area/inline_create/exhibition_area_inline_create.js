@@ -38,6 +38,8 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService)
             const map = data.map;
             vm.exhibitionArea.JCObjId = map.profile.JCObjId;
             vm.exhibitionArea.JCObjMask = map.profile.JCObjMask;
+            vm.exhibitionArea.JCRight = map.profile.JCRight;
+            vm.exhibitionArea.JCBottom = map.profile.JCBottom;
             vm.exhibitionArea.profileId = map.profile.JCObjId + ':' + map.profile.JCObjMask;
             vm.exhibitionArea.layer = map.layers.filter((layer) => {
                 return layer.JCName === 'trade_area';

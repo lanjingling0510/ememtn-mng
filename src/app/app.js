@@ -41,8 +41,8 @@ require('../treasure_game_map/create/treasure_game_map_create.js');
 require('../treasure_game/config/treasury_game_config.js');
 require('../roulette_game/config/roulette_game_config.js');
 
-require('../beacon/list/beacon_list.js');
-require('../beacon/inline_edit/beacon_inline_edit.js');
+require('../treasure_point/list/treasure_point_list.js');
+require('../treasure_point/inline_create/treasure_point_inline_create.js');
 
 require('../area/list/area_list.js');
 require('../area/create/area_create.js');
@@ -109,8 +109,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.post.detail',
     'ememtn.news.list',
     'ememtn.news.create',
-    'ememtn.beacon.list',
-    'ememtn.beacon.inline-edit',
+    'ememtn.treasure-point.list',
+    'ememtn.treasure-point.inline-create',
     'ememtn.area.list',
     'ememtn.area.create',
     'ememtn.info.list',

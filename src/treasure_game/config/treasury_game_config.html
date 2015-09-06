@@ -34,10 +34,10 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label">每日海螺总产出数量</label>
+            <label class="col-sm-3 control-label">每日宝物总产出数量</label>
             <div class="col-sm-6">
                 <input class="form-control" ng-model="scope.game.maxTreasure" />
-                <span class="help-block">每日海螺产出的上限</span>
+                <span class="help-block">每日宝物产出的上限</span>
             </div>
         </div>
 
@@ -58,14 +58,14 @@
         </div>
 
         <div class="form-group hidden">
-            <label class="col-sm-3 control-label">海螺产出率</label>
+            <label class="col-sm-3 control-label">宝物产出率</label>
             <div class="col-sm-6">
                 <input class="form-control" ng-model="scope.game.lucky" />
                 <span class="help-block">无需输入百分号(%), 即30%只需要输入30</span>
-                <span class="help-block">这个值表示一个用户一次挖宝获得海螺的概率，
-                    实际产出的海螺数量计算公式为：海螺产出率 * 所有用户挖宝次数之和，
+                <span class="help-block">这个值表示一个用户一次挖宝获得宝物的概率，
+                    实际产出的宝物数量计算公式为：宝物产出率 * 所有用户挖宝次数之和，
                     设置此概率时建议使用以下计算公式：
-                    每日海螺最大总产出数量 ÷ (预估寻宝用户 × 预估每位用户寻宝次数) × 100%。</span>
+                    每日宝物最大总产出数量 ÷ (预估寻宝用户 × 预估每位用户寻宝次数) × 100%。</span>
             </div>
         </div>
 
