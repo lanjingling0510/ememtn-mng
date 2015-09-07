@@ -1,12 +1,12 @@
 <div class="pavilion-setting">
     <div class="">
-        <a ui-sref="pavilion-map.exhibition-area-batch">批处理</a>
+        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-batch">批处理</a>
     </div>
 
-    <div>
-        <ul class="am-list am-list-static">
-            <li>
-                <a ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id"
+    <div class="am-margin-top-sm">
+        <ul class="am-list">
+            <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id">
+                <a
                 ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-edit({ exhibitionAreaId: exhibitionArea._id })">{{ ::exhibitionArea.name }}</a>
             </li>
         </ul>

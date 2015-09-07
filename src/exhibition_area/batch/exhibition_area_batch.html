@@ -1,15 +1,15 @@
 <div class="pavilion-setting">
     <div class="">
-        <a ui-sref="pavilion-map.exhibition-area-list">返回</a>
-        <button ng-click="vm.removeSelectedExhibitionAreas()">删除</button>
+        <a class="btn btn-info" ui-sref="pavilion-map.exhibition-area-list">返回</a>
+        <button class="btn btn-danger" ng-click="vm.removeSelectedExhibitionAreas()">删除</button>
     </div>
 
-    <div>
+    <div class="am-margin-top-sm">
         <ul class="am-list am-list-static">
             <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id">
-                <span>
-                    <input type="checkbox" ng-model="exhibitionArea._checked"> {{ ::exhibitionArea.name }}
-                </span>
+                <label for="{{exhibitionArea._id}}">
+                    <input id="{{exhibitionArea._id}}" type="checkbox" ng-model="exhibitionArea._checked"> {{ ::exhibitionArea.name }}
+                </label>
             </li>
         </ul>
     </div>
