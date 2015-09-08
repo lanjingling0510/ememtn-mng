@@ -65,7 +65,6 @@ require('../page_structure/setting/page_structure_setting.js');
 require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
-require('../exhibitor/batch/exhibitor_batch.js');
 require('../exhibitor/edit/exhibitor_edit.js');
 require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
 require('../exhibitor/inline_create/exhibitor_inline_create.js');
@@ -122,7 +121,6 @@ module.exports = angular.module('ememtn', [
     'ememtn.organizer-custom.create',
     'ememtn.page-structure.setting',
     'ememtn.exhibitor.list',
-    'ememtn.exhibitor.batch',
     'ememtn.exhibitor.guide',
     'ememtn.exhibitor.inline-create',
     'ememtn.exhibitor.inline-edit',
