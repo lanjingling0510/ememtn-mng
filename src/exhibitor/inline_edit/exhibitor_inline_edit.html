@@ -1,0 +1,36 @@
+<form class="am-form am-form-horizontal">
+    <div class="am-form-group">
+        <label class="col-sm-2 am-form-label">名称</label>
+
+        <div class="col-sm-9">
+            <input class="am-form-field" ng-model="vm.exhibitor.title">
+        </div>
+    </div>
+
+    <!-- <div class="am-form-group">
+        <label class="col-sm-2 am-form-label">楼层</label>
+
+        <div class="col-sm-9">
+            <select ng-model="vm.exhibitor.JCObjId" ng-options="floor.JCObjId as floor.name for floor in vm.floors track by floor.JCObjId">
+
+            </select>
+        </div>
+    </div> -->
+
+    <div class="am-form-group">
+        <label class="col-sm-3 am-form-label">推送信标Id</label>
+        <div class="col-sm-9">
+            <input class="am-form-field" ng-model="vm.exhibitor.beaconId">
+        </div>
+    </div>
+
+    <div class="am-form-group text-center">
+        <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">信息详情</a>
+        <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">展品详情</a>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="vm.updateExhibitor(vm.exhibitor)">保存</button>
+        <a class="btn btn-default" ng-click="vm.modal.hide()" ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list">取消</a>
+    </div>
+</form>

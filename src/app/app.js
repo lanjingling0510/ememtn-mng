@@ -69,7 +69,6 @@ require('../exhibitor/batch/exhibitor_batch.js');
 require('../exhibitor/edit/exhibitor_edit.js');
 require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
 require('../exhibitor/inline_create/exhibitor_inline_create.js');
-// require('../exhibitor/import/exhibitor_import.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
