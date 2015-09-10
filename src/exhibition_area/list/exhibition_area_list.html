@@ -1,6 +1,11 @@
 <div class="pavilion-setting">
     <div class="">
-        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-batch">批处理</a>
+        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-batch">批量删除</a>
+        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-create">新建展区</a>
+    </div>
+
+    <div class="">
+        <ui-view />
     </div>
 
     <div class="am-margin-top-sm">
@@ -23,9 +28,4 @@
                     ng-change="vm.searchExhibitionAreas(vm.query, 0)"
         ></pagination>
     </div>
-
-    <div class="">
-        <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-list.exhibition-area-inline-create">新建展区</a>
-    </div>
-    <ui-view />
 </div>

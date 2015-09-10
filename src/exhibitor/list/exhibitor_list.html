@@ -2,11 +2,17 @@
     <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-batch">批量删除</a>
 </div>
 
-<ul class="am-list">
-    <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
-        <a ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
-    </li>
-</ul>
+<div class="">
+    <ui-view />
+</div>
+
+<div class="">
+    <ul class="am-list">
+        <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
+            <a ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
+        </li>
+    </ul>
+</div>
 
 <div class="">
     <pagination total-items="vm.query.total"
@@ -21,5 +27,3 @@
 </div>
 
 <!-- <a class="btn btn-primary" ui-sref="pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-create">新建</a> -->
-
-<ui-view />
