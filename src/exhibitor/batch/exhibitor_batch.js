@@ -19,7 +19,7 @@ function moduleConfig($stateProvider) {
 }
 
 /*@ngInject*/
-function ExhibitorBatchController($timeout, $scope, Restangular, AlertService) {
+function ExhibitorBatchController($timeout, $q, $scope, Restangular, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
     vm.removeSelectedExhibitors = removeSelectedExhibitors;
@@ -56,17 +56,28 @@ function ExhibitorBatchController($timeout, $scope, Restangular, AlertService) {
     }
 
     function removeExhibitor(exhibitor) {
-        exhibitor.remove().then(() => {
+        return MapFeature.one(exhibitor.JCGUID).remove({
+            profileId: exhibitor.JCObjId + ':' + exhibitor.JCObjMask,
+            JCLayerName: exhibitor.JCLayerName,
+        }).then(() => {
+            return exhibitor.remove();
+        }).then(() => {
             const index = vm.exhibitors.indexOf(exhibitor);
             vm.exhibitors.splice(index, 1);
+            return $q.resolve(exhibitor);
         }).catch((err) => {
-            AlertService.warning(err.data);
+            return $q.reject(err);
         });
     }
 
     function removeSelectedExhibitors() {
         const selectedExhibitors = getSelectedExhibitors();
-        selectedExhibitors.forEach(removeExhibitor);
+        const proms = selectedExhibitors.map(removeExhibitor);
+        $q.all(proms).then(() => {
+            searchExhibitors(vm.query);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 
     function toggleCheckAll(checked) {

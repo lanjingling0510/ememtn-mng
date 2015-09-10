@@ -18,7 +18,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ExhibitionAreaBatchController($timeout, $scope, Restangular, AlertService) {
+function ExhibitionAreaBatchController($q, $timeout, $scope, Restangular, AlertService) {
     const vm = this;
     const ExhibitionArea = Restangular.all('exhibition-areas');
     const MapFeature = Restangular.all('map-features');
@@ -60,7 +60,7 @@ function ExhibitionAreaBatchController($timeout, $scope, Restangular, AlertServi
     }
 
     function removeExhibitionArea(exhibitionArea) {
-        MapFeature.one(exhibitionArea.JCGUID).remove({
+        return MapFeature.one(exhibitionArea.JCGUID).remove({
             profileId: exhibitionArea.JCObjId + ':' + exhibitionArea.JCObjMask,
             JCLayerName: exhibitionArea.JCLayerName,
         }).then(() => {
@@ -68,13 +68,19 @@ function ExhibitionAreaBatchController($timeout, $scope, Restangular, AlertServi
         }).then(() => {
             const index = vm.exhibitionAreas.indexOf(exhibitionArea);
             vm.exhibitionAreas.splice(index, 1);
+            return $q.resolve(exhibitionArea);
         }).catch((err) => {
-            AlertService.warning(err.data);
+            return $q.reject(err);
         });
     }
 
     function removeSelectedExhibitionAreas() {
         const selectedExhibitionAreas = getSelectedAreas();
-        selectedExhibitionAreas.forEach(removeExhibitionArea);
+        const proms = selectedExhibitionAreas.map(removeExhibitionArea);
+        $q.all(proms).then(() => {
+            searchExhibitionAreas(vm.query);
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
     }
 }

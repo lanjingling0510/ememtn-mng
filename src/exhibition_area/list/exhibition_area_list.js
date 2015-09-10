@@ -30,6 +30,7 @@ function ExhibitionAreaListController($timeout, $scope, Restangular, AlertServic
 
     $scope.$on('map-change', onFloorChange);
     $scope.$on('current-map', onFloorChange);
+    $scope.$on('exhibition-area-change', onExhibitionAreaChange);
     $scope.$emit('get-current-map');
 
     let searchTimer;
@@ -52,5 +53,10 @@ function ExhibitionAreaListController($timeout, $scope, Restangular, AlertServic
             vm.query.JCObjMask = map.profile.JCObjMask;
             searchExhibitionAreas(vm.query);
         }
+    }
+
+    function onExhibitionAreaChange() {
+        console.log('=========');
+        searchExhibitionAreas(vm.query, 0);
     }
 }

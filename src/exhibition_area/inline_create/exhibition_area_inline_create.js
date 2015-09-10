@@ -90,6 +90,7 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService)
             exhibitionArea.JCGUID = JCGUID;
             return ExhibitionArea.post(exhibitionArea);
         }).then(() => {
+            $scope.$emit('exhibition-area-change');
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

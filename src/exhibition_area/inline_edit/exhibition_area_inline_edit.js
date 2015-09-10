@@ -24,6 +24,7 @@ function ExhibitionAreaInlineEditController($scope, Restangular, AlertService) {
 
     function setExhibitionArea(exhibitionArea) {
         ExhibitionArea.doPUT(exhibitionArea, vm.map).then(() => {
+            $scope.$emit('exhibition-area-change');
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

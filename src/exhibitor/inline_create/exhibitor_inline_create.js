@@ -94,6 +94,7 @@ function ExhibitorInlineCreateController($scope, Restangular, AlertService, comm
             exhibitor.JCGUID = JCGUID;
             return Exhibitor.post(exhibitor);
         }).then(() => {
+            $scope.$emit('exhibitor-change');
             AlertService.success('创建成功');
         }).catch((err) => {
             AlertService.warning(err.data);

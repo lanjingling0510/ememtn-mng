@@ -30,6 +30,7 @@ function ExhibitorListController($timeout, $scope, Restangular, AlertService) {
     };
 
     $scope.$on('map-change', onFloorChange);
+    $scope.$on('exhibitor-change', onExhibitorChange);
 
     searchExhibitors(vm.query, 0);
 
@@ -51,5 +52,9 @@ function ExhibitorListController($timeout, $scope, Restangular, AlertService) {
         vm.query.JCObjId = data.map.profile.JCObjId;
         vm.query.JCObjMask = data.map.profile.JCObjMask;
         searchExhibitors(vm.query, 0);
+    }
+
+    function onExhibitorChange() {
+        searchExhibitors(vm.query);
     }
 }

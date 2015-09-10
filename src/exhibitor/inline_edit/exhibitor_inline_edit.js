@@ -93,6 +93,7 @@ function ExhibitorInlineEditController(Restangular, $scope, $stateParams, AlertS
 
             return exhibitor.doPUT(exhibitor, 'position');
         }).then(() => {
+            $scope.$emit('exhibitor-change');
             AlertService.success('修改成功');
         }).catch((err) => {
             AlertService.warning(err.data);
