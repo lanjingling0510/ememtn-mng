@@ -69,6 +69,7 @@ require('../exhibitor/edit/exhibitor_edit.js');
 require('../exhibitor/inline_edit/exhibitor_inline_edit.js');
 require('../exhibitor/inline_create/exhibitor_inline_create.js');
 require('../exhibitor/guide/exhibitor_guide.js');
+require('../exhibitor/batch/exhibitor_batch.js');
 
 require('../exhibition_area/list/exhibition_area_list.js');
 require('../exhibition_area/batch/exhibition_area_batch.js');
@@ -125,6 +126,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibitor.inline-create',
     'ememtn.exhibitor.inline-edit',
     'ememtn.exhibitor.edit',
+    'ememtn.exhibitor.batch',
     'ememtn.exhibit.create',
     'ememtn.exhibit.list',
     'ememtn.prize.exchange',
