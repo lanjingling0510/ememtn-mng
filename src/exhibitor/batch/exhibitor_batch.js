@@ -57,13 +57,21 @@ function ExhibitorBatchController($timeout, $q, $scope, Restangular, AlertServic
     }
 
     function removeExhibitor(exhibitor) {
-        console.log(exhibitor);
-        return MapFeature.one(exhibitor.JCGUID).remove({
-            profileId: exhibitor.JCObjId + ':' + exhibitor.JCObjMask,
-            JCLayerName: exhibitor.JCLayerName,
-        }).then(() => {
-            return exhibitor.remove();
-        }).then(() => {
+        if (exhibitor.JCGUID) {
+            return MapFeature.one(exhibitor.JCGUID).remove({
+                profileId: exhibitor.JCObjId + ':' + exhibitor.JCObjMask,
+                JCLayerName: exhibitor.JCLayerName,
+            }).then(() => {
+                return exhibitor.remove();
+            }).then(() => {
+                const index = vm.exhibitors.indexOf(exhibitor);
+                vm.exhibitors.splice(index, 1);
+                return $q.resolve(exhibitor);
+            }).catch((err) => {
+                return $q.reject(err);
+            });
+        }
+        return exhibitor.remove().then(() => {
             const index = vm.exhibitors.indexOf(exhibitor);
             vm.exhibitors.splice(index, 1);
             return $q.resolve(exhibitor);
