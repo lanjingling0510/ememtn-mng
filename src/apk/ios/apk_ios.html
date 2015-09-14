@@ -3,15 +3,15 @@
         <div class="am-u-sm-12 am-u-md-7 am-u-md-centered">
             <div class="am-btn-group am-btn-group-justify">
                 <button class="am-btn am-btn-secondary">IOS</button>
-                <button class="am-btn am-btn-default" ui-sref="apk-android">Android</button>
+                <a class="am-btn am-btn-default" ui-sref="apk-android">Android</a>
             </div>
 
-            <form class="am-form am-form-horizontal am-margin-vertical">
+            <form class="am-form am-form-horizontal am-margin-vertical" ng-submit="vm.updateTheApp(vm.app)">
                 <div class="am-form-group">
                     <label for="input1" class="am-u-sm-3 am-form-label">名字</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="input1">
+                        <input type="text" id="input1" ng-model="vm.app.name">
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                     <label for="input2" class="am-u-sm-3 am-form-label">版本号</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="input2">
+                        <input type="text" id="input2" ng-model="vm.app.version">
                     </div>
                 </div>
 
@@ -27,24 +27,28 @@
                     <label for="input3" class="am-u-sm-3 am-form-label">更新日期</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="input3">
+                        <input type="text" id="input3" ng-model="vm.app.updatedAt">
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label for="input4" class="am-u-sm-3 am-form-label">更新功能</label>
+                    <label for="input4" class="am-u-sm-3 am-form-label">文字介绍</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="input4">
+                        <input type="text" id="input4" ng-model="vm.app.description">
                     </div>
                 </div>
 
                 <div class="am-form-group">
-                    <label for="input5" class="am-u-sm-3 am-form-label">功能说明</label>
+                    <label for="input5" class="am-u-sm-3 am-form-label">下载地址</label>
 
                     <div class="am-u-sm-9">
-                        <input type="text" id="input5">
+                        <input type="text" id="input5" ng-model="vm.app.url">
                     </div>
+                </div>
+
+                <div class="am-form-group">
+                    <button>保存</button>
                 </div>
             </form>
         </div>

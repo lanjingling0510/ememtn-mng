@@ -16,6 +16,22 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ApkandroidController() {
+function ApkandroidController(Restangular, AlertService) {
+    const vm = this;
+    const AndroidApp = Restangular.all('mobile-apps').one('android');
+    vm.updateTheApp = updateTheApp;
 
+    fetchTheApp();
+
+    function fetchTheApp() {
+        vm.app = AndroidApp.doGET().$object;
+    }
+
+    function updateTheApp(app) {
+        app.doPUT(app).then(() => {
+            AlertService.success('保存成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
 }

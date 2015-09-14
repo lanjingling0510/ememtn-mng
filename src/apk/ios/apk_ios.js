@@ -16,6 +16,22 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function ApkIosController() {
+function ApkIosController(Restangular, AlertService) {
+    const vm = this;
+    const iOSApp = Restangular.all('mobile-apps').one('ios');
+    vm.updateTheApp = updateTheApp;
 
+    fetchTheApp();
+
+    function fetchTheApp() {
+        vm.app = iOSApp.doGET().$object;
+    }
+
+    function updateTheApp(app) {
+        app.doPUT(app).then(() => {
+            AlertService.success('保存成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
 }
