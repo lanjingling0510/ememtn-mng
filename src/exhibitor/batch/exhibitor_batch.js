@@ -22,6 +22,7 @@ function moduleConfig($stateProvider) {
 function ExhibitorBatchController($timeout, $q, $scope, Restangular, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
+    const MapFeature = Restangular.all('map-features');
     vm.removeSelectedExhibitors = removeSelectedExhibitors;
     vm.searchExhibitors = searchExhibitors;
     vm.toggleCheckAll = toggleCheckAll;
