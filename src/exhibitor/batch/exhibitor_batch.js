@@ -57,6 +57,7 @@ function ExhibitorBatchController($timeout, $q, $scope, Restangular, AlertServic
     }
 
     function removeExhibitor(exhibitor) {
+        console.log(exhibitor);
         return MapFeature.one(exhibitor.JCGUID).remove({
             profileId: exhibitor.JCObjId + ':' + exhibitor.JCObjMask,
             JCLayerName: exhibitor.JCLayerName,
