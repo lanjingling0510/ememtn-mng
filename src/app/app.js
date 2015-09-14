@@ -82,6 +82,9 @@ require('../exhibit/list/exhibit_list.js');
 
 require('../treasure_type/list/treasure_type_list.js');
 
+require('../apk/ios/apk_ios.js');
+require('../apk/android/apk_android.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -135,6 +138,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.treasure_game_map.create',
     'ememtn.roulette_game.config',
     'ememtn.treasure-type.list',
+    'ememtn.apk.ios',
+    'ememtn.apk.android',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
