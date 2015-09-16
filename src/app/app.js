@@ -35,8 +35,8 @@ require('../post/detail/post_detail.js');
 require('../feedback/list/feedback_list.js');
 require('../feedback/edit/feedback_edit.js');
 
-require('../treasure_game_map/list/treasure_game_map_list.js');
-require('../treasure_game_map/create/treasure_game_map_create.js');
+require('../treasure_map/list/treasure_map_list.js');
+require('../treasure_map/create/treasure_map_create.js');
 
 require('../treasure_game/config/treasury_game_config.js');
 require('../roulette_game/config/roulette_game_config.js');
@@ -134,8 +134,8 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibit.list',
     'ememtn.prize.exchange',
     'ememtn.treasury_game.config',
-    'ememtn.treasure_game_map.list',
-    'ememtn.treasure_game_map.create',
+    'ememtn.treasure_map.list',
+    'ememtn.treasure_map.create',
     'ememtn.roulette_game.config',
     'ememtn.treasure-type.list',
     'ememtn.apk.ios',

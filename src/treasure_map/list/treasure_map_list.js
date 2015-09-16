@@ -1,22 +1,22 @@
 /* global AMap */
 
 require('../../common/service.js');
-require('./treasure_game_map_list.service.js');
+require('./treasure_map_list.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_game_map.list', [
+module.exports = angular.module('ememtn.treasure_map.list', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.treasure_game_map.list.service',
+    'ememtn.treasure_map.list.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapListController', TreasureGameMapListController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
     $stateProvider
-        .state('treasure_game_map_list', {
+        .state('treasure_map_list', {
             url: '^/treasure-game/maps',
-            template: require('./treasure_game_map_list.html'),
+            template: require('./treasure_map_list.html'),
             controller: 'TreasureGameMapListController as scope',
         });
 }

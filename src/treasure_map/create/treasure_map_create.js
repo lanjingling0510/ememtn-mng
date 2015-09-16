@@ -1,22 +1,22 @@
 require('../../common/service.js');
 require('../../treasure_type/list/treasure_type_list.service.js');
-require('./treasure_game_map_create.service.js');
+require('./treasure_map_create.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.treasure_game_map.create', [
+module.exports = angular.module('ememtn.treasure_map.create', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.treasure_type.list.service',
-    'ememtn.treasure_game_map.create.service',
+    'ememtn.treasure_map.create.service',
 ]).config(moduleConfig)
     .controller('TreasureGameMapCreateController', TreasureGameMapCreateController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
     $stateProvider
-        .state('treasure_game_map_create', {
+        .state('treasure_map_create', {
             url: '/treasure-game/maps/new',
-            template: require('./treasure_game_map_create.html'),
+            template: require('./treasure_map_create.html'),
             controller: 'TreasureGameMapCreateController as scope',
         });
 }
