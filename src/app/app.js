@@ -71,11 +71,11 @@ require('../exhibitor/inline_create/exhibitor_inline_create.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 require('../exhibitor/batch/exhibitor_batch.js');
 
-require('../exhibition_area/list/exhibition_area_list.js');
-require('../exhibition_area/batch/exhibition_area_batch.js');
-require('../exhibition_area/inline_create/exhibition_area_inline_create.js');
-require('../exhibition_area/inline_edit/exhibition_area_inline_edit.js');
-require('../exhibition_area/virtual/exhibition_area_virtual.js');
+require('../treasure_area/list/treasure_area_list.js');
+require('../treasure_area/batch/treasure_area_batch.js');
+require('../treasure_area/inline_create/treasure_area_inline_create.js');
+require('../treasure_area/inline_edit/treasure_area_inline_edit.js');
+require('../treasure_area/virtual/treasure_area_virtual.js');
 
 require('../exhibit/create/exhibit_create.js');
 require('../exhibit/list/exhibit_list.js');
@@ -95,10 +95,10 @@ module.exports = angular.module('ememtn', [
     'ememtn.admins.register',
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
-    'ememtn.exhibition-area.list',
-    'ememtn.exhibition-area.batch',
-    'ememtn.exhibition-area.inline-create',
-    'ememtn.exhibition-area.inline-edit',
+    'ememtn.treasure-area.list',
+    'ememtn.treasure-area.batch',
+    'ememtn.treasure-area.inline-create',
+    'ememtn.treasure-area.inline-edit',
     'ememtn.attendant.list',
     'ememtn.attendant.create',
     'ememtn.feedback.list',

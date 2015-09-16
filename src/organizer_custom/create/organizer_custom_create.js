@@ -27,7 +27,10 @@ function OrganizerCustomCreateController(Restangular, UploadToTempService, Alert
     vm.createOrganizerCustom = createOrganizerCustom;
     vm.onThunbnailUploaded = onThunbnailUploaded;
     vm.onDeleteThunbnail = onDeleteThunbnail;
-    vm.organizerCustom = {};
+    vm.organizerCustom = {
+        thunbnails: [],
+        pictures: [],
+    };
 
     function onPictureUploaded(fileUrls) {
         const pictures = fileUrls.map(function (fileUrl) {

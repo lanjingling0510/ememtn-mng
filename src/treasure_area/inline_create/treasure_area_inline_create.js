@@ -1,9 +1,9 @@
-require('./exhibition_area_inline_create.less');
+require('./treasure_area_inline_create.less');
 require('../../common/service.js');
 const uuid = require('node-uuid');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-area.inline-create', [
+module.exports = angular.module('ememtn.treasure-area.inline-create', [
     'ui.router',
     'ememtn.common.services',
 ]).config(moduleConfig)
@@ -11,9 +11,9 @@ module.exports = angular.module('ememtn.exhibition-area.inline-create', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-list.exhibition-area-inline-create', {
+    $stateProvider.state('pavilion-map.treasure-area-list.treasure-area-inline-create', {
         url: '/_create',
-        template: require('./exhibition_area_inline_create.html'),
+        template: require('./treasure_area_inline_create.html'),
         controller: 'ExhibitionAreaInlineCreateController as vm',
     });
 }
@@ -21,7 +21,7 @@ function moduleConfig($stateProvider) {
 /* @ngInject */
 function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService) {
     const vm = this;
-    const ExhibitionArea = Restangular.all('exhibition-areas');
+    const ExhibitionArea = Restangular.all('treasure-areas');
     const MapFeature = Restangular.all('map-features');
     vm.createExhibitionArea = createExhibitionArea;
     vm.exhibitionArea = {
@@ -90,7 +90,7 @@ function ExhibitionAreaInlineCreateController($scope, Restangular, AlertService)
             exhibitionArea.JCGUID = JCGUID;
             return ExhibitionArea.post(exhibitionArea);
         }).then(() => {
-            $scope.$emit('exhibition-area-change');
+            $scope.$emit('treasure-area-change');
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

@@ -1,5 +1,5 @@
 require('../../common/service.js');
-require('../../exhibition_area/virtual/exhibition_area_virtual.js');
+require('../../treasure_area/virtual/treasure_area_virtual.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.treasure-point.list', [

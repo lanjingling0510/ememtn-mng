@@ -1,15 +1,18 @@
 <div class="pavilion-setting">
     <div class="">
-        <a class="btn btn-info" ui-sref="pavilion-map.exhibition-area-list">返回</a>
-        <button class="btn btn-danger" ng-click="vm.removeSelectedExhibitionAreas()">删除</button>
+        <a class="btn btn-primary" ui-sref="pavilion-map.treasure-area-batch">批量删除</a>
+        <a class="btn btn-primary" ui-sref="pavilion-map.treasure-area-list.treasure-area-inline-create">新建展区</a>
+    </div>
+
+    <div class="">
+        <ui-view />
     </div>
 
     <div class="am-margin-top-sm">
-        <ul class="am-list am-list-static">
+        <ul class="am-list">
             <li ng-repeat="exhibitionArea in vm.exhibitionAreas track by exhibitionArea._id">
-                <label for="{{exhibitionArea._id}}">
-                    <input id="{{exhibitionArea._id}}" type="checkbox" ng-model="exhibitionArea._checked"> {{ ::exhibitionArea.name }}
-                </label>
+                <a
+                ui-sref="pavilion-map.treasure-area-list.treasure-area-inline-edit({ exhibitionAreaId: exhibitionArea._id })">{{ ::exhibitionArea.name }}</a>
             </li>
         </ul>
     </div>

@@ -24,7 +24,7 @@ function moduleConfig($stateProvider) {
 /* @ngInject */
 function TreasureGameMapCreateController(Restangular, TreasureGameMapCreateService, AlertService) {
     const vm = this;
-    const ExhibitionArea = Restangular.all('exhibition-areas');
+    const ExhibitionArea = Restangular.all('treasure-areas');
     const TreasureType = Restangular.all('treasure-types');
     vm.createTreasureGameMap = createTreasureGameMap;
 

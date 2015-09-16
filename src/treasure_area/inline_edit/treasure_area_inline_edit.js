@@ -1,8 +1,8 @@
-require('./exhibition_area_inline_edit.less');
+require('./treasure_area_inline_edit.less');
 require('../../common/service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-area.inline-edit', [
+module.exports = angular.module('ememtn.treasure-area.inline-edit', [
     'ui.router',
     'ememtn.common.services',
 ]).config(moduleConfig)
@@ -10,9 +10,9 @@ module.exports = angular.module('ememtn.exhibition-area.inline-edit', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-list.exhibition-area-inline-edit', {
+    $stateProvider.state('pavilion-map.treasure-area-list.treasure-area-inline-edit', {
         url: '/:exhibitionAreaId',
-        template: require('./exhibition_area_inline_edit.html'),
+        template: require('./treasure_area_inline_edit.html'),
         controller: 'ExhibitionAreaInlineEditController as vm',
     });
 }
@@ -24,7 +24,7 @@ function ExhibitionAreaInlineEditController($scope, Restangular, AlertService) {
 
     function setExhibitionArea(exhibitionArea) {
         ExhibitionArea.doPUT(exhibitionArea, vm.map).then(() => {
-            $scope.$emit('exhibition-area-change');
+            $scope.$emit('treasure-area-change');
             AlertService.success('设置成功');
         }).catch((err) => {
             AlertService.warning(err.data);

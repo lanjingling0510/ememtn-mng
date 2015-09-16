@@ -1,9 +1,9 @@
-require('./exhibition_area_virtual.less');
+require('./treasure_area_virtual.less');
 require('../../common/service.js');
 require('../../pavilion/map/pavilion_map.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-area.virtual', [
+module.exports = angular.module('ememtn.treasure-area.virtual', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.pavilion.map',
@@ -12,9 +12,9 @@ module.exports = angular.module('ememtn.exhibition-area.virtual', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-virtual', {
+    $stateProvider.state('pavilion-map.treasure-area-virtual', {
         url: '/virtual-areas',
-        template: require('./exhibition_area_virtual.html'),
+        template: require('./treasure_area_virtual.html'),
         controller: 'ExhibitionAreaVirtualController as vm',
     });
 }
@@ -29,7 +29,7 @@ function ExhibitionAreaVirtualController($scope, Restangular, AlertService) {
     $scope.$emit('get-current-map');
 
     function fetchExhibitionVirtualAreas(map) {
-        Restangular.all('exhibition-areas').getList({
+        Restangular.all('treasure-areas').getList({
             JCObjId: map.JCObjId,
             JCObjMask: map.JCObjMask,
         }).then(function (exhibitionAreas) {

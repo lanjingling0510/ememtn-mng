@@ -1,8 +1,8 @@
-require('./exhibition_area_batch.less');
+require('./treasure_area_batch.less');
 require('../../common/service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.exhibition-area.batch', [
+module.exports = angular.module('ememtn.treasure-area.batch', [
     'ui.router',
     'ememtn.common.services',
 ]).config(moduleConfig)
@@ -10,9 +10,9 @@ module.exports = angular.module('ememtn.exhibition-area.batch', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-batch', {
+    $stateProvider.state('pavilion-map.treasure-area-batch', {
         url: '/area_batch',
-        template: require('./exhibition_area_batch.html'),
+        template: require('./treasure_area_batch.html'),
         controller: 'ExhibitionAreaBatchController as vm',
     });
 }
@@ -20,7 +20,7 @@ function moduleConfig($stateProvider) {
 /* @ngInject */
 function ExhibitionAreaBatchController($q, $timeout, $scope, Restangular, AlertService) {
     const vm = this;
-    const ExhibitionArea = Restangular.all('exhibition-areas');
+    const ExhibitionArea = Restangular.all('treasure-areas');
     const MapFeature = Restangular.all('map-features');
     vm.searchExhibitionAreas = searchExhibitionAreas;
     vm.removeSelectedExhibitionAreas = removeSelectedExhibitionAreas;
