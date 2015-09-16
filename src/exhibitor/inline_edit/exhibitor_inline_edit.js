@@ -87,6 +87,13 @@ function ExhibitorInlineEditController(Restangular, $scope, $stateParams, AlertS
         exhibitor.feature.name = exhibitor.title;
         exhibitor.feature.type = parseInt(exhibitor.beaconId, 10);
 
+        if (exhibitor.JCGUID) {
+            MapFeature.doDELETE(exhibitor.JCGUID, {
+                JCLayerName: exhibitor.JCLayerName,
+                profileId: exhibitor.profileId,
+            });
+        }
+
         MapFeature.post(exhibitor).then((res) => {
             exhibitor.JC_Id = res.JC_Id;
             exhibitor.JCGUID = JCGUID;
