@@ -9,7 +9,7 @@ module.exports = angular.module('ememtn.treasure-point.inline-create', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-virtual.treasure-point-list.treasure-point-inline-create', {
+    $stateProvider.state('pavilion-map.treasure-point-list.treasure-point-inline-create', {
         url: '/_create',
         template: require('./treasure_point_inline_create.html'),
         controller: 'TreasurePointInlineCreateController as vm',

@@ -10,7 +10,7 @@ module.exports = angular.module('ememtn.treasure-point.list', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-virtual.treasure-point-list', {
+    $stateProvider.state('pavilion-map.treasure-point-list', {
         url: '/treasure-points',
         template: require('./treasure_point_list.html'),
         controller: 'TreasurePointListController as vm',

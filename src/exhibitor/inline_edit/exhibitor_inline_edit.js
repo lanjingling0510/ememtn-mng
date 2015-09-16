@@ -12,7 +12,7 @@ module.exports = angular.module('ememtn.exhibitor.inline-edit', [
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-map.exhibition-area-virtual.exhibitor-list.exhibitor-inline-edit', {
+    $stateProvider.state('pavilion-map.exhibitor-list.exhibitor-inline-edit', {
         url: '/:exhibitorId',
         template: require('./exhibitor_inline_edit.html'),
         controller: 'ExhibitorInlineEditController as vm',
