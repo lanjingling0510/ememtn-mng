@@ -21,12 +21,8 @@ function MessagePushController(Restangular, AlertService) {
     const Message = Restangular.all('messages');
     vm.createMessage = createMessage;
 
-    function pushMessage(message) {
-        return Message.one(message._id).all('push').post();
-    }
-
     function createMessage(message) {
-        Message.post(message).then(pushMessage).then(function () {
+        Message.post(message).then(function () {
             AlertService.success('开始推送');
         }).catch(function (err) {
             AlertService.warning(err.data);
