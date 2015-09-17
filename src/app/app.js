@@ -28,6 +28,7 @@ require('../exhibition/create/exhibition_create.js');
 
 require('../news/list/news_list.js');
 require('../news/create/news_create.js');
+require('../news/edit/news_edit.js');
 
 require('../post/list/post_list.js');
 require('../post/detail/post_detail.js');
@@ -50,6 +51,7 @@ require('../area/edit/area_edit.js');
 
 require('../info/list/info_list.js');
 require('../info/create/info_create.js');
+require('../info/edit/info_edit.js');
 
 require('../organizer_custom/list/organizer_custom_list.js');
 require('../organizer_custom/create/organizer_custom_create.js');
@@ -111,12 +113,14 @@ module.exports = angular.module('ememtn', [
     'ememtn.post.detail',
     'ememtn.news.list',
     'ememtn.news.create',
+    'ememtn.news.edit',
     'ememtn.treasure-point.list',
     'ememtn.treasure-point.inline-create',
     'ememtn.area.list',
     'ememtn.area.create',
     'ememtn.info.list',
     'ememtn.info.create',
+    'ememtn.info.edit',
     'ememtn.message.list',
     'ememtn.message.push',
     'ememtn.notification.list',

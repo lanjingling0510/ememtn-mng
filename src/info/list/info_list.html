@@ -52,7 +52,7 @@
                     <li>
                         <input type="checkbox" ng-checked="info.checked" ng-model="info.checked">
                     </li>
-                    <li>{{:: info.subject }}</li>
+                    <li><a ui-sref="info-edit({ infoId: info._id })">{{:: info.subject }}</a></li>
                     <li class="am-text-truncate">{{:: info.content}}</li>
                     <li>{{:: info.createdAt | date : 'yyyy-MM-dd HH:mm:ss' }}</li>
                     <li>

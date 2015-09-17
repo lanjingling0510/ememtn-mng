@@ -1,33 +1,43 @@
-require('./info_create.less');
+require('./info_edit.less');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.info.create', [
+module.exports = angular.module('ememtn.info.edit', [
     'ui.router',
     'restangular',
     'ememtn.common.services',
 ]).config(moduleConfig)
-    .controller('InfoCreateController', InfoCreateController);
+    .controller('InfoEditController', InfoEditController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('info-create', {
-        url: '/info/create',
-        template: require('./info_create.html'),
-        controller: 'InfoCreateController as vm',
+    $stateProvider.state('info-edit', {
+        url: '/info/:infoId',
+        template: require('./info_edit.html'),
+        controller: 'InfoEditController as vm',
     });
 }
 
 /* @ngInject */
-function InfoCreateController(AlertService, Restangular, UploadToTempService) {
+function InfoEditController(AlertService, $stateParams, Restangular, UploadToTempService) {
     const vm = this;
     const Info = Restangular.all('infoes');
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
     vm.submitInfo = submitInfo;
-    vm.info = {
-        pictures: [],
-    };
+
+    fetchInfo($stateParams.infoId);
+
+    function fetchInfo(infoId) {
+        Info.get(infoId).then((info) => {
+            vm.info = info;
+            vm.info.pictures.forEach((pic, index) => {
+                vm.info.pictures[index].isOld = true;
+            });
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
 
     function uploadFile(files) {
         if (!files || files.length === 0) { return false; }
@@ -54,8 +64,10 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
         });
     }
 
-    function deleteOldFile(picture, index) {
-        vm.info.one('pictures', index).remove().then(() => {
+    function deleteOldFile(picture) {
+        // const filename = picture.fileUrl.split('/').pop();
+        const index = vm.info.pictures.indexOf(picture);
+        vm.info.one('pictures', index).doDELETE().then(() => {
             vm.info.pictures.splice(index, 1);
         }).catch((err) => {
             AlertService.warning(err.data);
@@ -63,11 +75,13 @@ function InfoCreateController(AlertService, Restangular, UploadToTempService) {
     }
 
     function submitInfo(info) {
-        Info.post(info).then(() => {
-            info.pictures.forEach(function (pic) {
+        info.put().then(() => {
+            vm.info._saved = true;
+            vm.info.pictures.forEach((pic) => {
                 pic.isNew = false;
+                pic.isOld = false;
             });
-            AlertService.success('发布成功');
+            AlertService.success('修改成功');
         }).catch((err) => {
             AlertService.warning(err.data);
         });
