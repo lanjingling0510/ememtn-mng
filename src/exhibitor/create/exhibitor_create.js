@@ -20,6 +20,7 @@ function moduleConfig($stateProvider) {
 function ExhibitorCreateController(Restangular, UploadToTempService, $stateParams, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
+    const Profile = Restangular.all('map-profiles');
     const Feature = Restangular.all('map-features');
     vm.floors = config.floors.slice(1);
 
@@ -34,7 +35,12 @@ function ExhibitorCreateController(Restangular, UploadToTempService, $stateParam
         pictures: [],
     };
 
+    fetchProfile(vm.exhibitor.floor);
     searchFeatures(vm.exhibitor.floor);
+
+    function fetchProfile(floor) {
+        vm.exhibitor.profile = Profile.get(`${floor.JCObjId}:${floor.JCObjMask}`).$object;
+    }
 
     function searchFeatures(floor) {
         vm.features = Feature.getList({
