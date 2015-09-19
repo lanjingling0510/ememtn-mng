@@ -155,7 +155,7 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
                     layer.features = features;
                     return layer;
                 });
-                MapPreviewService.MapCanvas.init(map, $scope.$root.auth.accessToken);
+                MapPreviewService.MapCanvas.init(map);
                 floorChange(map);
                 vm._map = map;
                 canvas.init({

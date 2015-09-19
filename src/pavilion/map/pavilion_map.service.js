@@ -97,8 +97,8 @@ function MapPreviewService() {
                 this.drawTexts(layer);
             }.bind(this));
         },
-        drawBaseLayer: function drawBaseLayer(layer, token) {
-            if (!layer.features || !token) {
+        drawBaseLayer: function drawBaseLayer(layer) {
+            if (!layer.features) {
                 return false;
             }
             const layerName = layer.JCName;
