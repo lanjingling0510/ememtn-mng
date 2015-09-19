@@ -35,7 +35,7 @@ function ExhibitorCreateController(Restangular, UploadToTempService, $stateParam
         pictures: [],
     };
 
-    fetchProfile(vm.exhibitor.floor);
+    // fetchProfile(vm.exhibitor.floor);
     searchFeatures(vm.exhibitor.floor);
 
     function fetchProfile(floor) {
@@ -43,11 +43,15 @@ function ExhibitorCreateController(Restangular, UploadToTempService, $stateParam
     }
 
     function searchFeatures(floor) {
-        vm.features = Feature.getList({
+        Feature.getList({
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
             JCLayerName: 'stall',
-        }).$object;
+        }).then((features) => {
+            vm.features = features;
+        });
+
+        fetchProfile(floor);
     }
 
     function onThunbnailUploaded(fileUrls) {

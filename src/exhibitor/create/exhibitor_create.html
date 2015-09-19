@@ -16,7 +16,7 @@
                 <input ng-model="vm.exhibitor.title" class="am-form-field" placeholder="请输入标题">
             </div>
             <select ng-model="vm.exhibitor.feature" ng-options="feature as feature.name for feature in vm.features track by feature.JCGUID">
-
+                <option value="">--请选择--</option>
             </select>
             <button class="am-btn am-btn-primary" ng-click="vm.submitExhibitor(vm.exhibitor)">提交</button>
 
