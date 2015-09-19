@@ -21,6 +21,7 @@ require('../organizer/setting/organizer_setting.js');
 
 require('../pavilion/setting/pavilion_setting.js');
 require('../pavilion/map/pavilion_map.js');
+require('../pavilion/map_test/pavilion_map.js');
 require('../pavilion/dist/pavilion_dist.js');
 
 require('../exhibition/list/exhibition_list.js');
@@ -144,6 +145,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.treasure-type.list',
     'ememtn.apk.ios',
     'ememtn.apk.android',
+    'ememtn.pavilion.map-test',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
