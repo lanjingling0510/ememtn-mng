@@ -58,7 +58,7 @@
                         <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)" ng-hide="picture.isNew"></span>
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
-                                <img class="am-vertical-align-middle" ng-src="{{ picture }}" />
+                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
                         <input ng-model="vm.exhibitor.pictures[$index].description">
