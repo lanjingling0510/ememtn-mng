@@ -5,6 +5,7 @@ require('./jcmap.layer.tile.directive.js');
 require('./jcmap.feature.base.directive.js');
 require('./jcmap.feature.point.directive.js');
 require('./jcmap.feature.polygon.directive.js');
+require('./jcmap.feature.text.directive.js');
 const config = require('../../config.json');
 const angular = require('angular');
 
@@ -17,6 +18,7 @@ module.exports = angular.module('ememtn.pavilion.map-test', [
     'jcmap.feature.base.directive',
     'jcmap.feature.point.directive',
     'jcmap.feature.polygon.directive',
+    'jcmap.feature.text.directive',
 ]).config(moduleConfig)
     .controller('PavilionMapController', PavilionMapController);
 
