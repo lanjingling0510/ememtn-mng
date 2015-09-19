@@ -1,10 +1,10 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.feature.point.directive', [])
-    .directive('jcmapFeaturePoint', JCMapPoint);
+    .directive('jcmapFeaturePoint', JCMapFeaturePointDirective);
 
 
 /* @ngInject*/
-function JCMapPoint(Restangular) {
+function JCMapFeaturePointDirective(Restangular) {
     return {
         restrict: 'AE',
         scope: {
@@ -18,13 +18,13 @@ function JCMapPoint(Restangular) {
                 ng-attr-r="{{ vm.JCSize || 5 }}">
             </circle>`,
         replace: true,
-        controller: JCMapPointController,
+        controller: JCMapFeaturePointController,
         controllerAs: 'vm',
         templateNamespace: 'svg',
     };
 
     /* @ngInject */
-    function JCMapPointController($attrs) {
+    function JCMapFeaturePointController($attrs) {
         const vm = this;
         const MapLayer = Restangular.all('map-layers'); // :layerName
         const MapFeature = Restangular.all('map-features'); // :featureId

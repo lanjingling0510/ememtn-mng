@@ -1,10 +1,10 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.feature.base.directive', [])
-    .directive('jcmapFeatureBase', JCMapBase);
+    .directive('jcmapFeatureBase', JCMapFeatureBaseDirective);
 
 
 /* @ngInject*/
-function JCMapBase(Restangular) {
+function JCMapFeatureBaseDirective(Restangular) {
     return {
         restrict: 'AE',
         scope: {
@@ -20,13 +20,13 @@ function JCMapBase(Restangular) {
                 xlink:href=""
                 ng-href="{{ feature.xhref }}" />`,
         replace: true,
-        controller: JCMapBaseController,
+        controller: JCMapFeatureBaseController,
         controllerAs: 'vm',
         templateNamespace: 'svg',
     };
 
     /* @ngInject */
-    function JCMapBaseController($attrs) {
+    function JCMapFeatureBaseController($attrs) {
         const vm = this;
         const MapProfile = Restangular.all('map-profiles'); // :featureId
         const MapLayer = Restangular.all('map-layers'); // :layerName

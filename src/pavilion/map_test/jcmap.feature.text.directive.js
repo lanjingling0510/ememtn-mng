@@ -1,9 +1,9 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.feature.text.directive', [])
-    .directive('jcmapFeatureText', JCMapFeatureText);
+    .directive('jcmapFeatureText', JCMapFeatureTextDirective);
 
 /* @ngInject*/
-function JCMapFeatureText(Restangular) {
+function JCMapFeatureTextDirective(Restangular) {
     const MapLayer = Restangular.all('map-layers'); // :layerName
     const MapFeature = Restangular.all('map-features'); // :featureId
 

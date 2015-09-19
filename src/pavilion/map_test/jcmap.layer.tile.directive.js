@@ -1,10 +1,10 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.layer.tile.directive', [])
-    .directive('jcmapLayerTile', JCMap);
+    .directive('jcmapLayerTile', JCMapLayerTileDirective);
 
 
 /* @ngInject*/
-function JCMap(Restangular) {
+function JCMapLayerTileDirective(Restangular) {
     return {
         restrict: 'AE',
         scope: {
@@ -13,14 +13,14 @@ function JCMap(Restangular) {
             jcLayerName: '@',
         },
         template: `<g ng-transclude> </g>`,
-        controller: JCMapController,
+        controller: JCMapLayerTileController,
         controllerAs: 'vm',
         transclude: true,
         replace: true,
     };
 
     /* @ngInject */
-    function JCMapController($attrs) {
+    function JCMapLayerTileController($attrs) {
         const vm = this;
         const MapLayer = Restangular.all('map-layers');
         vm.getFill = vm.getFill;

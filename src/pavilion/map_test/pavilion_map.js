@@ -20,14 +20,14 @@ module.exports = angular.module('ememtn.pavilion.map-test', [
     'jcmap.feature.polygon.directive',
     'jcmap.feature.text.directive',
 ]).config(moduleConfig)
-    .controller('PavilionMapController', PavilionMapController);
+    .controller('PavilionMapTestController', PavilionMapTestController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
     $stateProvider.state('pavilion-map-test', {
         url: '/pavilion_map_test',
         template: require('./pavilion_map.html'),
-        controller: 'PavilionMapController as vm',
+        controller: 'PavilionMapTestController as vm',
     });
 }
 
@@ -44,7 +44,7 @@ function getProfileId(floor) {
 }
 
 /* @ngInject */
-function PavilionMapController($q, Restangular) {
+function PavilionMapTestController($q, Restangular) {
     const vm = this;
     const MapProfile = Restangular.all('map-profiles'); // :profileId
     const MapLayer = Restangular.all('map-layers'); // :layerName

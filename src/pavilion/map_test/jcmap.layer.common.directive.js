@@ -1,10 +1,10 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.layer.common.directive', [])
-    .directive('jcmapLayerCommon', JCMap);
+    .directive('jcmapLayerCommon', JCMapLayerCommonDirective);
 
 
 /* @ngInject*/
-function JCMap(Restangular) {
+function JCMapLayerCommonDirective(Restangular) {
     return {
         restrict: 'AE',
         scope: {
@@ -16,14 +16,14 @@ function JCMap(Restangular) {
         ng-attr-fill_opacity="{{ vm.fillOpaciity }}"
         ng-attr-r="{{ vm.JCSize }}"
         ng-transclude> </g>`,
-        controller: JCMapController,
+        controller: JCMapLayerCommonController,
         controllerAs: 'vm',
         transclude: true,
         replace: true,
     };
 
     /* @ngInject */
-    function JCMapController($attrs) {
+    function JCMapLayerCommonController($attrs) {
         const vm = this;
         const MapLayer = Restangular.all('map-layers');
         vm.getFill = vm.getFill;

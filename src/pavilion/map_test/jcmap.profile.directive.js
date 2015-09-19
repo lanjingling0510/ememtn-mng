@@ -1,10 +1,10 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.profile.directive', [])
-    .directive('jcmapProfile', JCMap);
+    .directive('jcmapProfile', JCMapProfileDirective);
 
 
 /* @ngInject*/
-function JCMap(Restangular) {
+function JCMapProfileDirective(Restangular) {
     const MapProfile = Restangular.all('map-profiles');
 
     return {
@@ -16,14 +16,14 @@ function JCMap(Restangular) {
         template: `<svg ng-attr-width="{{ vm.profile.JCRight }}"
             ng-attr-height="{{ vm.profile.JCBottom }}"
             ng-attr-view_box="0 0 {{ vm.profile.JCRight }} {{ vm.profile.JCBottom }}" ng-transclude></svg>`,
-        controller: JCMapController,
+        controller: JCMapProfileController,
         controllerAs: 'vm',
         transclude: true,
         replace: true,
     };
 
     /* @ngInject */
-    function JCMapController($attrs) {
+    function JCMapProfileController($attrs) {
         const vm = this;
         vm.profile = MapProfile.get(`${$attrs.jcObjId}:${$attrs.jcObjMask}`).$object;
     }

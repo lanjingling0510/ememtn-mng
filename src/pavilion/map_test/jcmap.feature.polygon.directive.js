@@ -1,9 +1,9 @@
 const angular = require('angular');
 module.exports = angular.module('jcmap.feature.polygon.directive', [])
-    .directive('jcmapFeaturePolygon', JCMapPolygon);
+    .directive('jcmapFeaturePolygon', JCMapFeaturePolygonDirective);
 
 /* @ngInject*/
-function JCMapPolygon(Restangular) {
+function JCMapFeaturePolygonDirective(Restangular) {
     const MapLayer = Restangular.all('map-layers'); // :layerName
     const MapFeature = Restangular.all('map-features'); // :featureId
 
@@ -18,13 +18,13 @@ function JCMapPolygon(Restangular) {
                 ng-attr-points="{{ feature.JCGeoData }}">
             </polygon>`,
         replace: true,
-        controller: JCMapPolygonController,
+        controller: JCMapFeaturePolygonController,
         controllerAs: 'vm',
         templateNamespace: 'svg',
     };
 
     /* @ngInject */
-    function JCMapPolygonController($attrs) {
+    function JCMapFeaturePolygonController($attrs) {
         const vm = this;
 
         MapLayer.one($attrs.jcLayerName).get({
