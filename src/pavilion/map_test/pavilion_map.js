@@ -1,3 +1,5 @@
+require('./pavilion_map.less');
+
 require('../../common/service.js');
 require('./jcmap.profile.directive.js');
 require('./jcmap.layer.common.directive.js');
