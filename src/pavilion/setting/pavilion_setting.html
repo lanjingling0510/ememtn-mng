@@ -1,5 +1,9 @@
 <div class="am-container pavilion-setting" >
     <div class="am-g">
+        <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.fetchPavilionByFloor"></jc-emei-floors-button-group>
+    </div>
+
+    <div class="am-g">
         <div class="am-u-sm-12">
             <form class="am-form" ng-submit="vm.savePavilion(vm.pavilion)">
                 <div class="am-form-group">

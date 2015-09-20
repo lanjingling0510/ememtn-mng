@@ -1,0 +1,3 @@
+<div class="btn-group" role="group" aria-label="">
+  <button class="btn btn-primary" ng-class="{active: floor === vm.floor}" ng-repeat="floor in vm.floors track by floor.JCObjId" ng-click="vm.changeFloor($event, floor)">{{:: floor.name}}</button>
+</div>

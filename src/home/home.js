@@ -2,11 +2,19 @@ const angular = require('angular');
 const config = require('../config.json');
 const h337 = require('../../node_modules/heatmap.js/heatmap.js');
 require('./home.directive.js');
+require('../pavilion/map_test/jcmap.profile.directive.js');
+require('../pavilion/map_test/jcmap.layer.tile.directive.js');
+require('../pavilion/map_test/jcmap.feature.base.directive.js');
+require('../directives/jc_emei_floors_button_group');
 
 module.exports = angular.module('ememtn.home', [
     'ui.router',
     'ememtn.common.services',
     'ememtn.home.directives',
+    'jcmap.profile.directive',
+    'jcmap.layer.tile.directive',
+    'jcmap.feature.base.directive',
+    'jc.emei.floors.button_group.directive',
 ]).config(moduleConfig)
     .controller('HomeController', HomeController);
 
@@ -28,9 +36,7 @@ function HomeController($timeout, $q, Restangular) {
     const COL_HEIGHT = BLOCK_WIDTH;
     const pixelRatio = config.heatmap.pixel_ratio;
     const DATA_FETCH_INTERVAL = config.heatmap.fetch_interval; // 秒
-    vm.setCurrentFloor = setCurrentFloor;
-    vm.floors = config.floors.slice(1);
-    vm.floor = vm.floors[1];
+    vm.fetchDataTimer = fetchDataTimer;
     const paintBoard = h337.create({
         container: document.getElementById('heatmapContainer'),
         // radius: radius,
@@ -44,13 +50,12 @@ function HomeController($timeout, $q, Restangular) {
         // },
     });
 
-    fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
-    fetchDataTimer();
-
-    function fetchDataTimer() {
-        $timeout(() => {
-            fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
-            fetchDataTimer();
+    let fetchTimer;
+    function fetchDataTimer(floor) {
+        $timeout.cancel(fetchTimer);
+        fetchTimer = $timeout(() => {
+            fetchData(floor, COL_WIDTH, COL_HEIGHT);
+            fetchDataTimer(floor);
         }, 1000 * DATA_FETCH_INTERVAL);
     }
 
@@ -109,29 +114,5 @@ function HomeController($timeout, $q, Restangular) {
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });
-    }
-
-    function cleanActivation($event) {
-        const nodes = Array.from($event.target.parentNode.childNodes).filter((d) => {
-            return d.type === 'button';
-        });
-        nodes.forEach((node) => {
-            const classList = node.className.split(' ').filter((c) => {
-                return c !== 'active';
-            });
-            node.className = classList.join(' ');
-        });
-    }
-
-    function setCurrentFloor($event, floor) {
-        // console.log($event);
-        cleanActivation($event);
-
-        const classList = $event.target.className.split(' ');
-        if (!~classList.indexOf('active')) {
-            classList.push('active');
-        }
-        $event.target.className = classList.join(' ');
-        vm.floor = floor;
     }
 }

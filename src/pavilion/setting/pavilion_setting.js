@@ -1,24 +1,26 @@
 require('./pavilion_setting.less');
 require('../../common/service.js');
+require('../../directives/jc_emei_floors_button_group');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.pavilion.setting', [
     'ui.router',
     'ememtn.common.services',
+    'jc.emei.floors.button_group.directive',
 ]).config(moduleConfig)
     .controller('PavilionSettingController', PavilionSettingController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-virtual.pavilion-setting', {
-        url: '/_setting',
+    $stateProvider.state('pavilion-setting', {
+        url: '/pavilions/_setting',
         template: require('./pavilion_setting.html'),
         controller: 'PavilionSettingController as vm',
     });
 }
 
 /* @ngInject */
-function PavilionSettingController($scope, floors, $stateParams, Restangular, UploadToTempService, AlertService) {
+function PavilionSettingController($scope, $stateParams, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const Pavilion = Restangular.all('pavilions');
     vm.fetchPavilionByFloor = fetchPavilionByFloor;
@@ -26,20 +28,13 @@ function PavilionSettingController($scope, floors, $stateParams, Restangular, Up
     vm.removeNewPicture = removeNewPicture;
     vm.removeOldPicture = removeOldPicture;
     vm.savePavilion = savePavilion;
-    $scope.$on('floor-change', onFloorChange);
-    vm.floor = floors[0];
-    fetchPavilionByFloor(vm.floor);
+    vm.fetchPavilionByFloor = fetchPavilionByFloor;
 
     function fetchPavilionByFloor(floor) {
         vm.pavilion = Pavilion.doGET('', {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).$object;
-    }
-
-    function onFloorChange(event, data) {
-        vm.floor = data.floor;
-        fetchPavilionByFloor(vm.floor);
     }
 
     function uploadPicture(files) {
