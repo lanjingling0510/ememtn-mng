@@ -1,4 +1,5 @@
 const angular = require('angular');
+const config = require('../config.json');
 const h337 = require('../../node_modules/heatmap.js/heatmap.js');
 require('./home.directive.js');
 
@@ -19,56 +20,93 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function HomeController(Restangular) {
+function HomeController($timeout, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
+    const BLOCK_WIDTH = 5;
+    const COL_WIDTH = BLOCK_WIDTH;
+    const COL_HEIGHT = BLOCK_WIDTH;
+    const pixelRatio = 5;
+    const DATA_FETCH_INTERVAL = 5; // 秒
     vm.floors = config.floors.slice(1);
-    vm.floor = vm.floors[0];
+    vm.floor = vm.floors[1];
 
-    fetchData(vm.floor);
+    fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
+    fetchDataTimer();
 
-    function paintHeat(data) {
-        // for (let i = 0, max = 18 * 14; i < max; i += 1) {
-        //     data.push(Math.random());
-        // }
-        const columnWidth = 50;
-        const columnCount = 14;
-        const radius = Math.sqrt(Math.pow(columnWidth, 2) * 2);
-        const dataPoints = data.map((d, i) => {
+    function fetchDataTimer() {
+        $timeout(() => {
+            fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
+            fetchDataTimer();
+        }, 1000 * DATA_FETCH_INTERVAL);
+    }
+
+    function formatData(data, colWidth, colHeight) {
+        const dataMatrix = [];
+        data.map((d) => {
             return {
-                x: i % columnCount * columnWidth,
-                y: Math.floor(i / columnCount) * columnWidth,
-                value: d,
+                x: Math.floor(d.JCX / colWidth),
+                y: Math.floor(d.JCY / colHeight),
             };
+        }).forEach((d) => {
+            dataMatrix[d.x] = dataMatrix[d.x] || [];
+            dataMatrix[d.x][d.y] = dataMatrix[d.x][d.y] || 0;
+            dataMatrix[d.x][d.y] += 1;
         });
+        let dataPoints = [];
+        dataMatrix.forEach((rowValue, row) => {
+            const formated = rowValue.map((colValue, col) => {
+                return {
+                    x: colWidth * (col + 0.5) * pixelRatio,
+                    y: colHeight * (row + 0.5) * pixelRatio,
+                    value: colValue || 0,
+                };
+            });
+            dataPoints.push(...formated);
+        });
+        dataPoints = dataPoints.filter(d => d);
+        return dataPoints;
+    }
+
+    function paintHeat(data, colWidth, colHeight) {
+        const min = Math.min(colWidth, colHeight);
+        const radius = Math.sqrt(Math.pow(min, 2) * 2) * pixelRatio;
 
         const hm = h337.create({
             container: document.getElementById('heatmapContainer'),
             radius: radius,
-            // maxOpacity: 0.5,
+            // maxOpacity: 0.3,
             // minOpacity: 0,
-            // blur: 0.75,
+            // blur: 0.9,
             // gradient: {
             //     '.5': 'blue',
             //     '.8': 'red',
             //     '.95': 'white',
             // },
         });
+        const dataPoints = formatData(data, colWidth, colHeight);
+        const values = dataPoints.map(d => d.value);
         hm.setData({
-            min: Math.min(...data),
-            max: Math.max(...data),
+            min: 0,
+            max: Math.max(...values),
             data: dataPoints,
         });
         hm.repaint();
     }
 
-    function fetchData(floor) {
+    function fetchData(floor, colWidth, colHeight) {
         HeatMap.getList({
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).then((heats) => {
+            // for (let i = 0, max = 100000; i < max; i += 1) {
+            //     heats.push({
+            //         JCX: Math.random() * 1000,
+            //         JCY: Math.random() * 1000,
+            //     });
+            // }
             vm.heats = heats;
-            paintHeat(heats);
+            paintHeat(heats, colWidth, colHeight);
         });
     }
 }
