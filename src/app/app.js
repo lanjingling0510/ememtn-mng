@@ -169,4 +169,15 @@ function moduleRun($rootScope, $location, store) {
             return null;
         }
     }
+
+    $rootScope.logout = logout;
+
+    function logout() {
+        delete $rootScope.auth;
+
+        store.remove('auth.profile');
+        store.remove('auth.accessToken');
+
+        $state.go('login');
+    }
 }

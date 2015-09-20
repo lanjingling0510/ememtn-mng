@@ -24,7 +24,12 @@ function LoginController($rootScope, $location, store, LoginService, AlertServic
     const vm = this;
     vm.login = login;
 
-    initController();
+    // initController();
+    if ($location.$$hash === 'logout') {
+        store.remove('auth.accessToken');
+        store.remove('auth.profile');
+        delete $rootScope.auth;
+    }
 
     function login(admin) {
         LoginService.getToken(admin).$promise
@@ -42,12 +47,5 @@ function LoginController($rootScope, $location, store, LoginService, AlertServic
             }).catch(function (err) {
                 AlertService.warning(err.data);
             });
-    }
-
-    function initController() {
-        vm.admin = {
-            username: 'root',
-            password: 'rootroot',
-        };
     }
 }

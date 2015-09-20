@@ -1,7 +1,7 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../../node_modules/amazeui/dist/css/amazeui.css';
 
-@header-banner-height: 5%;
+@header-banner-height: 10%;
 @left-sidebar-width: 15%;
 @footer-height: 5%;
 
@@ -101,11 +101,10 @@ table tr td {
 }
 
 aside.menu-bar {
-    margin-top: @header-banner-height;
   padding-top:1em;
   position: fixed;
   left: 0;
-  top: 0;
+  top: @header-banner-height;
   width: @left-sidebar-width;
   background-color: hsl(222, 16%, 31%);
   min-height: 100%;
@@ -129,10 +128,27 @@ aside.menu-bar {
 .header-banner {
     margin-left: 0;
     margin-right: 0;
+    height: @header-banner-height;
+    background-color: hsl(355, 100%, 45%);
+
+    .logo {
+        display: block;
+        width: 50%;
+        height: auto;
+    }
+
+    .header-title {
+        margin-top: 3%;
+        transform: translateY(-50%);
+    }
+
+    .exit-button {
+        margin-top: 5%;
+    }
 }
 
 main.hero {
-    margin-top: @header-banner-height;
+    // margin-top: @header-banner-height;
   margin-left: @left-sidebar-width;
   height: 100%;
   min-width:640px;
