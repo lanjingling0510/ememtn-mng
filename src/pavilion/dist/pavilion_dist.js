@@ -1,40 +1,33 @@
 require('./pavilion_dist.less');
 require('../../common/service.js');
-require('../virtual/pavilion_virtual.js');
+require('../../directives/jc_emei_floors_button_group');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.pavilion.dist', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.pavilion.virtual',
+    'jc.emei.floors.button_group.directive',
 ]).config(moduleConfig)
     .controller('PavilionDistController', PavilionDistController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('pavilion-virtual.pavilion-dist', {
-        url: '/_dist',
+    $stateProvider.state('pavilion-dist', {
+        url: '/pavilions/_dist',
         template: require('./pavilion_dist.html'),
         controller: 'PavilionDistController as vm',
     });
 }
 
 /* @ngInject */
-function PavilionDistController($scope, $state, floors, Restangular, UploadToTempService, AlertService) {
+function PavilionDistController($scope, $state, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const PavilionDist = Restangular.all('exhibition-dists');
     vm.uploadFile = uploadFile;
     vm.removeNewPicture = removeNewPicture;
     vm.removeOldPicture = removeOldPicture;
     vm.setPavilionDist = setPavilionDist;
-    $scope.$on('floor-change', onFloorChange);
-    vm.floor = floors[0];
-    fetchPavilionDist(vm.floor);
-
-    function onFloorChange(event, data) {
-        vm.floor = data.floor;
-        fetchPavilionDist(vm.floor);
-    }
+    vm.fetchPavilionDist = fetchPavilionDist;
 
     function fetchPavilionDist(floor) {
         vm.pavilionDist = PavilionDist.doGET('', {
