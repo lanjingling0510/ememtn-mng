@@ -6,7 +6,7 @@
 @footer-height: 5%;
 
 html, body {
-  // overflow: hidden;
+  overflow: hidden;
   overflow-x: hidden;;
   background-color: hsl(0, 0%, 94%);
   min-height: 100%;
@@ -28,8 +28,10 @@ table tr td {
 }
 
 .am-container{
-  margin-top:20px;
-  margin-bottom:50px;
+  // margin-top:20px;
+  // margin-bottom:50px;
+  margin-left: 0.5em;
+  margin-top: 0.5em;
 }
 .am-list > li{
   background-color:transparent;
@@ -130,6 +132,10 @@ aside.menu-bar {
     margin-right: 0;
     height: @header-banner-height;
     background-color: hsl(355, 100%, 45%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 
     .logo {
         display: block;
@@ -148,10 +154,11 @@ aside.menu-bar {
 }
 
 main.hero {
-    // margin-top: @header-banner-height;
+    margin-top: @header-banner-height / 1.5;
   margin-left: @left-sidebar-width;
-  height: 100%;
-  min-width:640px;
+  height: 37em;
+  max-width:100% - @left-sidebar-width;
+  overflow-y: auto;
 }
 
 input[type='color']{
