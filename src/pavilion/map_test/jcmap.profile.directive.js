@@ -5,8 +5,6 @@ module.exports = angular.module('jcmap.profile.directive', [])
 
 /* @ngInject*/
 function JCMapProfileDirective(Restangular) {
-    const MapProfile = Restangular.all('map-profiles');
-
     return {
         restrict: 'AE',
         scope: {
@@ -21,15 +19,16 @@ function JCMapProfileDirective(Restangular) {
             ng-mousemove="vm.onMouseMove($event)"
             ng-mouseup="vm.onMouseUp($event)"
             ng-transclude></svg>`,
-        controller: JCMapProfileController,
-        controllerAs: 'vm',
         transclude: true,
         replace: true,
+        link: link,
     };
 
-    /* @ngInject */
-    function JCMapProfileController($attrs) {
-        const vm = this;
+    function link(scope, elem, attrs) {
+        const vm = {};
+        scope.vm = vm;
+        const MapProfile = Restangular.all('map-profiles');
+
         const LEFT_BUTTON = 0;
         vm.onMouseDown = onMouseDown;
         vm.onMouseMove = onMouseMove;
@@ -37,7 +36,7 @@ function JCMapProfileDirective(Restangular) {
         vm.style = {};
         let isMouseHold = false;
 
-        vm.profile = MapProfile.get(`${$attrs.jcObjId}:${$attrs.jcObjMask}`).$object;
+        vm.profile = MapProfile.get(`${attrs.jcObjId}:${attrs.jcObjMask}`).$object;
 
         function onMouseDown($event) {
             if ($event.button === LEFT_BUTTON) {
