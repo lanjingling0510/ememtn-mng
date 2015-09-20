@@ -1,6 +1,6 @@
 require('./pavilion_dist.less');
 require('../../common/service.js');
-require('../../directives/jc_emei_floors_button_group');
+require('../../_directives/jc_emei_floors_button_group');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.pavilion.dist', [

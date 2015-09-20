@@ -1,0 +1,10 @@
+<div class="jc-common-photo-frame">
+    <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(vm.picture)" ng-show="vm.picture.isNew"></span>
+    <span class="jc-close-btn" ng-click="vm.deleteOldFile(vm.picture)" ng-hide="vm.picture.isNew"></span>
+    <div class="img am-vertical-align text-center">
+        <img class="am-vertical-align-middle" ng-src="{{ vm.picture.fileUrl }}" />
+    </div>
+    <div class="">
+        <input type="text" class="am-form-field" ng-model="vm.picture.description" />
+    </div>
+</div>

@@ -5,7 +5,7 @@ require('./home.directive.js');
 require('../pavilion/map_test/jcmap.profile.directive.js');
 require('../pavilion/map_test/jcmap.layer.tile.directive.js');
 require('../pavilion/map_test/jcmap.feature.base.directive.js');
-require('../directives/jc_emei_floors_button_group');
+require('../_directives/jc_emei_floors_button_group');
 
 module.exports = angular.module('ememtn.home', [
     'ui.router',
