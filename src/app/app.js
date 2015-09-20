@@ -46,10 +46,6 @@ require('../roulette_game/config/roulette_game_config.js');
 require('../treasure_point/list/treasure_point_list.js');
 require('../treasure_point/inline_create/treasure_point_inline_create.js');
 
-require('../area/list/area_list.js');
-require('../area/create/area_create.js');
-require('../area/edit/area_edit.js');
-
 require('../info/list/info_list.js');
 require('../info/create/info_create.js');
 require('../info/edit/info_edit.js');
@@ -118,8 +114,6 @@ module.exports = angular.module('ememtn', [
     'ememtn.news.edit',
     'ememtn.treasure-point.list',
     'ememtn.treasure-point.inline-create',
-    'ememtn.area.list',
-    'ememtn.area.create',
     'ememtn.info.list',
     'ememtn.info.create',
     'ememtn.info.edit',
