@@ -30,6 +30,18 @@ function HomeController($timeout, $q, Restangular) {
     const DATA_FETCH_INTERVAL = 5; // 秒
     vm.floors = config.floors.slice(1);
     vm.floor = vm.floors[1];
+    const paintBoard = h337.create({
+        container: document.getElementById('heatmapContainer'),
+        // radius: radius,
+        // maxOpacity: 0.3,
+        // minOpacity: 0,
+        // blur: 0.9,
+        // gradient: {
+        //     '.5': 'blue',
+        //     '.8': 'red',
+        //     '.95': 'white',
+        // },
+    });
 
     fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
     fetchDataTimer();
@@ -69,29 +81,17 @@ function HomeController($timeout, $q, Restangular) {
     }
 
     function paintHeat(data, colWidth, colHeight) {
-        const min = Math.min(colWidth, colHeight);
-        const radius = Math.sqrt(Math.pow(min, 2) * 2) * pixelRatio;
+        // const min = Math.min(colWidth, colHeight);
+        // const radius = Math.sqrt(Math.pow(min, 2) * 2) * pixelRatio;
 
-        const hm = h337.create({
-            container: document.getElementById('heatmapContainer'),
-            radius: radius,
-            // maxOpacity: 0.3,
-            // minOpacity: 0,
-            // blur: 0.9,
-            // gradient: {
-            //     '.5': 'blue',
-            //     '.8': 'red',
-            //     '.95': 'white',
-            // },
-        });
         const dataPoints = formatData(data, colWidth, colHeight);
         const values = dataPoints.map(d => d.value);
-        hm.setData({
+        paintBoard.setData({
             min: 0,
             max: Math.max(...values),
             data: dataPoints,
         });
-        hm.repaint();
+        paintBoard.repaint();
     }
 
     function fetchData(floor, colWidth, colHeight) {
@@ -99,12 +99,12 @@ function HomeController($timeout, $q, Restangular) {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).then((heats) => {
-            // for (let i = 0, max = 100000; i < max; i += 1) {
-            //     heats.push({
-            //         JCX: Math.random() * 1000,
-            //         JCY: Math.random() * 1000,
-            //     });
-            // }
+            for (let i = 0, max = 100000; i < max; i += 1) {
+                heats.push({
+                    JCX: Math.random() * 1000,
+                    JCY: Math.random() * 1000,
+                });
+            }
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });
