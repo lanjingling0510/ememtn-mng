@@ -23,11 +23,12 @@ function moduleConfig($stateProvider) {
 function HomeController($timeout, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
-    const BLOCK_WIDTH = 5;
+    const BLOCK_WIDTH = config.heatmap.block_width;
     const COL_WIDTH = BLOCK_WIDTH;
     const COL_HEIGHT = BLOCK_WIDTH;
-    const pixelRatio = 5;
-    const DATA_FETCH_INTERVAL = 5; // 秒
+    const pixelRatio = config.heatmap.pixel_ratio;
+    const DATA_FETCH_INTERVAL = config.heatmap.fetch_interval; // 秒
+    vm.setCurrentFloor = setCurrentFloor;
     vm.floors = config.floors.slice(1);
     vm.floor = vm.floors[1];
     const paintBoard = h337.create({
@@ -99,14 +100,38 @@ function HomeController($timeout, $q, Restangular) {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).then((heats) => {
-            for (let i = 0, max = 100000; i < max; i += 1) {
-                heats.push({
-                    JCX: Math.random() * 1000,
-                    JCY: Math.random() * 1000,
-                });
-            }
+            // for (let i = 0, max = 100000; i < max; i += 1) {
+            //     heats.push({
+            //         JCX: Math.random() * 1000,
+            //         JCY: Math.random() * 1000,
+            //     });
+            // }
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });
+    }
+
+    function cleanActivation($event) {
+        const nodes = Array.from($event.target.parentNode.childNodes).filter((d) => {
+            return d.type === 'button';
+        });
+        nodes.forEach((node) => {
+            const classList = node.className.split(' ').filter((c) => {
+                return c !== 'active';
+            });
+            node.className = classList.join(' ');
+        });
+    }
+
+    function setCurrentFloor($event, floor) {
+        // console.log($event);
+        cleanActivation($event);
+
+        const classList = $event.target.className.split(' ');
+        if (!~classList.indexOf('active')) {
+            classList.push('active');
+        }
+        $event.target.className = classList.join(' ');
+        vm.floor = floor;
     }
 }

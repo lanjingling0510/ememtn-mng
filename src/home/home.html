@@ -1,3 +1,9 @@
+<div class="text-center">
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-default" ng-class="{active: $first}" ng-repeat="floor in vm.floors" ng-click="vm.setCurrentFloor($event, floor)">{{:: floor.name}}</button>
+    </div>
+</div>
+
 <div id="heatmapContainer" style="height: 100%; min-height: 30em;">
 
 </div>

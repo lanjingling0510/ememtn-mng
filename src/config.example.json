@@ -21,5 +21,10 @@
             "JCObjId": 4294965248,
             "JCObjMask": 0
         }
-    ]
+    ],
+    "heatmap": {
+        "block_width": 5,
+        "pixel_ratio": 5,
+        "fetch_interval": 5
+    }
 }
