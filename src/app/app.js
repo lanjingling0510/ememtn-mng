@@ -1,5 +1,4 @@
 require('./app.less');
-
 const angular = require('angular');
 require('../../node_modules/amazeui/js/ui.dropdown.js');
 require('../../node_modules/amazeui/js/ui.collapse.js');

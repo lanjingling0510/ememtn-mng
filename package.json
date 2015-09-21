@@ -19,6 +19,7 @@
     "heatmap.js": "^2.0.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
+    "modernizr": "^3.0.0",
     "ng-file-upload": "^5.2.0",
     "node-uuid": "^1.4.3",
     "restangular": "^1.5.1"
