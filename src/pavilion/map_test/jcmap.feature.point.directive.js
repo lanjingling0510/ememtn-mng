@@ -18,33 +18,48 @@ function JCMapFeaturePointDirective(Restangular) {
                 ng-attr-r="{{ vm.JCSize || 5 }}">
             </circle>`,
         replace: true,
-        controller: JCMapFeaturePointController,
-        controllerAs: 'vm',
+        link: link,
         templateNamespace: 'svg',
     };
 
-    /* @ngInject */
-    function JCMapFeaturePointController($attrs) {
-        const vm = this;
+    function link(scope) {
+        const vm = scope.vm = {};
         const MapLayer = Restangular.all('map-layers'); // :layerName
         const MapFeature = Restangular.all('map-features'); // :featureId
 
-        MapLayer.one($attrs.jcLayerName).get({
-            profileId: `${$attrs.jcObjId}:${$attrs.jcObjMask}`,
-        }).then((layer) => {
-            if (!layer) {
-                console.log($attrs.JCLayerName);
-            }
-            vm.layer = layer;
-            vm.JCSize = layer.JCSize;
+        scope.$watch(() => {
+            return `${lookupAttr(scope, 'jcObjId')}${lookupAttr(scope, 'jcObjMask')}`;
+        }, loadLayer);
 
-            return MapFeature.getList({
-                JCObjId: $attrs.jcObjId,
-                JCObjMask: $attrs.jcObjMask,
-                JCLayerName: $attrs.jcLayerName,
+        function loadLayer() {
+            const JCObjId = lookupAttr(scope, 'jcObjId');
+            const JCObjMask = lookupAttr(scope, 'jcObjMask');
+            const JCLayerName = lookupAttr(scope, 'jcLayerName');
+
+            MapLayer.one(JCLayerName).get({
+                profileId: `${JCObjId}:${JCObjMask}`,
+            }).then((layer) => {
+                vm.layer = layer;
+                vm.JCSize = layer.JCSize;
+
+                return MapFeature.getList({
+                    JCObjId: JCObjId,
+                    JCObjMask: JCObjMask,
+                    JCLayerName: JCLayerName,
+                });
+            }).then((features) => {
+                vm.features = features;
             });
-        }).then((features) => {
-            vm.features = features;
-        });
+        }
+    }
+
+    function lookupAttr(scope, attrName) {
+        if (attrName === undefined) { return undefined; }
+        let _scope = scope;
+        while (_scope[attrName] === undefined && _scope.$parent) {
+            _scope = _scope.$parent;
+        }
+
+        return _scope[attrName];
     }
 }

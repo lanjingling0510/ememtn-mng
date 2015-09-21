@@ -18,27 +18,45 @@ function JCMapFeaturePolygonDirective(Restangular) {
                 ng-attr-points="{{ feature.JCGeoData }}">
             </polygon>`,
         replace: true,
-        controller: JCMapFeaturePolygonController,
-        controllerAs: 'vm',
+        link: link,
         templateNamespace: 'svg',
     };
 
-    /* @ngInject */
-    function JCMapFeaturePolygonController($attrs) {
-        const vm = this;
+    function link(scope) {
+        const vm = scope.vm = {};
 
-        MapLayer.one($attrs.jcLayerName).get({
-            profileId: `${$attrs.jcObjId}:${$attrs.jcObjMask}`,
-        }).then((layer) => {
-            vm.layer = layer;
+        scope.$watch(() => {
+            return `${lookupAttr(scope, 'jcObjId')}${lookupAttr(scope, 'jcObjMask')}`;
+        }, loadLayer);
 
-            return MapFeature.getList({
-                JCObjId: $attrs.jcObjId,
-                JCObjMask: $attrs.jcObjMask,
-                JCLayerName: $attrs.jcLayerName,
+        function loadLayer() {
+            const JCObjId = lookupAttr(scope, 'jcObjId');
+            const JCObjMask = lookupAttr(scope, 'jcObjMask');
+            const JCLayerName = lookupAttr(scope, 'jcLayerName');
+
+            MapLayer.one(JCLayerName).get({
+                profileId: `${JCObjId}:${JCObjMask}`,
+            }).then((layer) => {
+                vm.layer = layer;
+
+                return MapFeature.getList({
+                    JCObjId: JCObjId,
+                    JCObjMask: JCObjMask,
+                    JCLayerName: JCLayerName,
+                });
+            }).then((features) => {
+                vm.features = features;
             });
-        }).then((features) => {
-            vm.features = features;
-        });
+        }
+    }
+
+    function lookupAttr(scope, attrName) {
+        if (attrName === undefined) { return undefined; }
+        let _scope = scope;
+        while (_scope[attrName] === undefined && _scope.$parent) {
+            _scope = _scope.$parent;
+        }
+
+        return _scope[attrName];
     }
 }

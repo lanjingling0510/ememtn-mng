@@ -16,22 +16,21 @@ function JCMapLayerCommonDirective(Restangular) {
         ng-attr-fill_opacity="{{ vm.fillOpaciity }}"
         ng-attr-r="{{ vm.JCSize }}"
         ng-transclude> </g>`,
-        controller: JCMapLayerCommonController,
-        controllerAs: 'vm',
+        link: link,
         transclude: true,
         replace: true,
     };
 
     /* @ngInject */
-    function JCMapLayerCommonController($attrs) {
-        const vm = this;
+    function link(scope) {
+        const vm = scope.vm = {};
         const MapLayer = Restangular.all('map-layers');
         vm.getFill = vm.getFill;
         vm.layer = {};
 
 
-        MapLayer.one($attrs.jcLayerName).get({
-            profileId: `${$attrs.jcObjId}:${$attrs.jcObjMask}`,
+        MapLayer.one(scope.jcLayerName).get({
+            profileId: `${lookupAttr(scope, 'jcObjId')}:${lookupAttr(scope, 'jcObjMask')}`,
         }).then((layer) => {
             vm.layer = layer;
             vm.JCSize = layer.JCSize;
@@ -50,5 +49,15 @@ function JCMapLayerCommonDirective(Restangular) {
         function getFillOpacity(layer) {
             return parseInt(layer.JCARGB / 0x1000000, 10) / 0xFF;
         }
+    }
+
+    function lookupAttr(scope, attrName) {
+        if (attrName === undefined) { return undefined; }
+        let _scope = scope;
+        while (_scope[attrName] === undefined && _scope.$parent) {
+            _scope = _scope.$parent;
+        }
+
+        return _scope[attrName];
     }
 }

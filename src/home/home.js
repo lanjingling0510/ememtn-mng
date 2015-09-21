@@ -41,7 +41,6 @@ function HomeController($timeout, $q, Restangular) {
     vm.pixelHeight = CONTAINER.clientHeight;
 
     vm.containerStyle = {};
-    vm.pixelRatio = config.heatmap.pixel_ratio;
     vm.onFloorChange = onFloorChange;
     let fetchTimer;
 
@@ -139,12 +138,12 @@ function HomeController($timeout, $q, Restangular) {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).then((heats) => {
-            // for (let i = 0, max = 100000; i < max; i += 1) {
-            //     heats.push({
-            //         JCX: Math.random() * 1000,
-            //         JCY: Math.random() * 1000,
-            //     });
-            // }
+            for (let i = 0, max = 100000; i < max; i += 1) {
+                heats.push({
+                    JCX: Math.random() * 1000,
+                    JCY: Math.random() * 1000,
+                });
+            }
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });

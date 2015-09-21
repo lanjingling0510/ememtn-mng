@@ -13,22 +13,21 @@ function JCMapLayerTileDirective(Restangular) {
             jcLayerName: '@',
         },
         template: `<g ng-transclude> </g>`,
-        controller: JCMapLayerTileController,
-        controllerAs: 'vm',
+        link: link,
         transclude: true,
         replace: true,
     };
 
     /* @ngInject */
-    function JCMapLayerTileController($attrs) {
-        const vm = this;
+    function link(scope) {
+        const vm = scope.vm = {};
         const MapLayer = Restangular.all('map-layers');
         vm.getFill = vm.getFill;
         vm.layer = {};
 
 
-        MapLayer.one($attrs.jcLayerName).get({
-            profileId: `${$attrs.jcObjId}:${$attrs.jcObjMask}`,
+        MapLayer.one(scope.jcLayerName).get({
+            profileId: `${lookupAttr(scope, 'jcObjId')}:${lookupAttr(scope, 'jcObjMask')}`,
         }).then((layer) => {
             vm.layer = layer;
             vm.JCSize = layer.JCSize;
@@ -47,5 +46,15 @@ function JCMapLayerTileDirective(Restangular) {
         function getFillOpacity(layer) {
             return parseInt(layer.JCARGB / 0x1000000, 10) / 0xFF;
         }
+    }
+
+    function lookupAttr(scope, attrName) {
+        if (attrName === undefined) { return undefined; }
+        let _scope = scope;
+        while (_scope[attrName] === undefined && _scope.$parent) {
+            _scope = _scope.$parent;
+        }
+
+        return _scope[attrName];
     }
 }

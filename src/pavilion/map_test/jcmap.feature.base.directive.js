@@ -20,38 +20,56 @@ function JCMapFeatureBaseDirective(Restangular) {
                 xlink:href=""
                 ng-href="{{ feature.xhref }}" />`,
         replace: true,
-        controller: JCMapFeatureBaseController,
-        controllerAs: 'vm',
+        link: link,
         templateNamespace: 'svg',
     };
 
-    /* @ngInject */
-    function JCMapFeatureBaseController($attrs) {
-        const vm = this;
+    function link(scope) {
+        const vm = scope.vm = {};
         const MapProfile = Restangular.all('map-profiles'); // :featureId
         const MapLayer = Restangular.all('map-layers'); // :layerName
         const MapFeature = Restangular.all('map-features'); // :featureId
 
-        MapProfile.get(`${$attrs.jcObjId}:${$attrs.jcObjMask}`).then((profile) => {
-            vm.profile = profile;
+        scope.$watch(() => {
+            return `${lookupAttr(scope, 'jcObjId')}${lookupAttr(scope, 'jcObjMask')}`;
+        }, loadLayer);
 
-            return MapLayer.one($attrs.jcLayerName).get({
-                profileId: `${$attrs.jcObjId}:${$attrs.jcObjMask}`,
-            });
-        }).then((layer) => {
-            vm.layer = layer;
+        function loadLayer() {
+            const JCObjId = lookupAttr(scope, 'jcObjId');
+            const JCObjMask = lookupAttr(scope, 'jcObjMask');
+            const JCLayerName = lookupAttr(scope, 'jcLayerName');
 
-            return MapFeature.getList({
-                JCObjId: $attrs.jcObjId,
-                JCObjMask: $attrs.jcObjMask,
-                JCLayerName: $attrs.jcLayerName,
-            });
-        }).then((features) => {
-            features.forEach((feature) => {
-                feature.xhref = `http://map-warehouse.jcbel.com/v1/maps/${feature.JCImage}`;
-            });
+            MapProfile.get(`${JCObjId}:${JCObjMask}`).then((profile) => {
+                vm.profile = profile;
 
-            vm.features = features;
-        });
+                return MapLayer.one(JCLayerName).get({
+                    profileId: `${JCObjId}:${JCObjMask}`,
+                });
+            }).then((layer) => {
+                vm.layer = layer;
+
+                return MapFeature.getList({
+                    JCObjId: JCObjId,
+                    JCObjMask: JCObjMask,
+                    JCLayerName: JCLayerName,
+                });
+            }).then((features) => {
+                features.forEach((feature) => {
+                    feature.xhref = `http://map-warehouse.jcbel.com/v1/maps/${feature.JCImage}`;
+                });
+
+                vm.features = features;
+            });
+        }
+    }
+
+    function lookupAttr(scope, attrName) {
+        if (attrName === undefined) { return undefined; }
+        let _scope = scope;
+        while (_scope[attrName] === undefined && _scope.$parent) {
+            _scope = _scope.$parent;
+        }
+
+        return _scope[attrName];
     }
 }
