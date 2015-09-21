@@ -23,7 +23,7 @@
         <ul>
             <li><input type="checkbox" ng-model="vm.exhibitions[$index]._checked"/></li>
             <li>{{:: exhibition.subject }}</li>
-            <li>{{:: exhibition.content }}</li>
+            <li class="am-text-truncate">{{:: exhibition.content }}</li>
             <li>{{:: exhibition.createdAt | date : 'yyyy-MM-dd HH:mm' }}</li>
             <li class="am-icon-sort-desc"></li>
         </ul>
