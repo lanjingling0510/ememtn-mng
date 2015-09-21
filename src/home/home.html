@@ -1,13 +1,13 @@
 <div class="text-center">
-    <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.fetchDataTimer"></jc-emei-floors-button-group>
+    <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.onFloorChange"></jc-emei-floors-button-group>
 </div>
 
-<div id="heatmapContainer" style="height: 100%; min-height: 30em;">
+<div id="heatmapContainer" ng-style="vm.containerStyle">
 
 </div>
 
-<jcmap-profile jc-obj-id="{{ vm.floor.JCObjId }}" jc-obj-mask="{{ vm.floor.JCObjMask }}">
+<!-- <jcmap-profile jc-obj-id="{{ vm.floor.JCObjId }}" jc-obj-mask="{{ vm.floor.JCObjMask }}">
     <jcmap-layer-tile jc-layer-name="base">
         <jcmap-feature-base jc-obj-id="{{ vm.floor.JCObjId }}" jc-obj-mask="{{ vm.floor.JCObjMask }}" jc-layer-name="base" />
     </jcmap-layer-tile>
-</jcmap-profile>
+</jcmap-profile> -->

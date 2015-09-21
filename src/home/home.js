@@ -1,7 +1,6 @@
 const angular = require('angular');
 const config = require('../config.json');
 const h337 = require('../../node_modules/heatmap.js/heatmap.js');
-require('./home.directive.js');
 require('../pavilion/map_test/jcmap.profile.directive.js');
 require('../pavilion/map_test/jcmap.layer.tile.directive.js');
 require('../pavilion/map_test/jcmap.feature.base.directive.js');
@@ -10,7 +9,6 @@ require('../_directives/jc_emei_floors_button_group');
 module.exports = angular.module('ememtn.home', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.home.directives',
     'jcmap.profile.directive',
     'jcmap.layer.tile.directive',
     'jcmap.feature.base.directive',
@@ -31,14 +29,54 @@ function moduleConfig($stateProvider) {
 function HomeController($timeout, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
+    const Pavilion = Restangular.all('pavilions');
+    const MapProfile = Restangular.all('map-profiles');
+
     const BLOCK_WIDTH = config.heatmap.block_width;
     const COL_WIDTH = BLOCK_WIDTH;
     const COL_HEIGHT = BLOCK_WIDTH;
-    const pixelRatio = config.heatmap.pixel_ratio;
     const DATA_FETCH_INTERVAL = config.heatmap.fetch_interval; // 秒
-    vm.fetchDataTimer = fetchDataTimer;
+    const CONTAINER = document.getElementById('heatmapContainer');
+    vm.pixelWidth = CONTAINER.clientWidth;
+    vm.pixelHeight = CONTAINER.clientHeight;
+
+    vm.containerStyle = {};
+    vm.pixelRatio = config.heatmap.pixel_ratio;
+    vm.onFloorChange = onFloorChange;
+    let fetchTimer;
+
+    function onFloorChange(floor) {
+        fetchPavilionByFloor(floor);
+        fetchDataTimer(floor);
+    }
+
+    function fetchPavilionByFloor(floor) {
+        MapProfile.get(`${floor.JCObjId}:${floor.JCObjMask}`).then((profile) => {
+            vm.containerStyle.width = `100%`;
+            const widthScaleTo = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
+            vm.containerStyle.height = `${widthScaleTo}px`;
+
+            vm.realWidth = profile.JCRight * profile.JCScaleX;
+            vm.realHeight = profile.JCBottom * profile.JCScaleY;
+            vm.pixelRatioX = vm.pixelWidth / vm.realWidth;
+            vm.pixelRatioY = vm.pixelHeight / vm.realHeight;
+
+            return Pavilion.doGET('', {
+                JCObjId: floor.JCObjId,
+                JCObjMask: floor.JCObjMask,
+            });
+        }).then((pavilion) => {
+            vm.pavilion = pavilion;
+            if (vm.pavilion.pictures[0]) {
+                vm.containerStyle['background-image'] = `url(${vm.pavilion.pictures[0].fileUrl})`;
+                vm.containerStyle['background-repeat'] = 'no-repeat';
+                vm.containerStyle['background-size'] = 'contain';
+            }
+        });
+    }
+
     const paintBoard = h337.create({
-        container: document.getElementById('heatmapContainer'),
+        container: CONTAINER,
         // radius: radius,
         // maxOpacity: 0.3,
         // minOpacity: 0,
@@ -50,7 +88,6 @@ function HomeController($timeout, $q, Restangular) {
         // },
     });
 
-    let fetchTimer;
     function fetchDataTimer(floor) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(() => {
@@ -75,8 +112,8 @@ function HomeController($timeout, $q, Restangular) {
         dataMatrix.forEach((rowValue, row) => {
             const formated = rowValue.map((colValue, col) => {
                 return {
-                    x: colWidth * (col + 0.5) * pixelRatio,
-                    y: colHeight * (row + 0.5) * pixelRatio,
+                    x: colWidth * (col + 0.5) * vm.pixelRatioX,
+                    y: colHeight * (row + 0.5) * vm.pixelRatioY,
                     value: colValue || 0,
                 };
             });
@@ -87,9 +124,6 @@ function HomeController($timeout, $q, Restangular) {
     }
 
     function paintHeat(data, colWidth, colHeight) {
-        // const min = Math.min(colWidth, colHeight);
-        // const radius = Math.sqrt(Math.pow(min, 2) * 2) * pixelRatio;
-
         const dataPoints = formatData(data, colWidth, colHeight);
         const values = dataPoints.map(d => d.value);
         paintBoard.setData({
