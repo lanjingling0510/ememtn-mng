@@ -18,7 +18,8 @@ function moduleConfig($stateProvider) {
 /* @ngInject*/
 function ExhibitorEditController(Restangular, UploadToTempService, $stateParams, AlertService) {
     const vm = this;
-    vm.exhibitor = Restangular.all('exhibitors').get($stateParams.exhibitorId).$object;
+    const Exhibitor = Restangular.all('exhibitors');
+    vm.exhibitor = Exhibitor.get($stateParams.exhibitorId).$object;
 
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
@@ -62,7 +63,7 @@ function ExhibitorEditController(Restangular, UploadToTempService, $stateParams,
     }
 
     function submitExhibitor(exhibitor) {
-        exhibitor.put().then(() => {
+        Exhibitor.one(exhibitor._id).doPUT(exhibitor).then(() => {
             AlertService.success('修改成功');
         }).catch((err) => {
             AlertService.warning(err.data);
