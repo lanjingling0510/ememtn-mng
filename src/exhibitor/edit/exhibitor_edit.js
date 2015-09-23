@@ -24,25 +24,7 @@ function ExhibitorEditController(Restangular, UploadToTempService, $stateParams,
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
     vm.submitExhibitor = submitExhibitor;
-    vm.onThunbnailUploaded = onThunbnailUploaded;
     vm.onPictureUploaded = onPictureUploaded;
-    // vm.exhibitor = {
-    //     pictures: [],
-    // };
-
-    function onThunbnailUploaded(fileUrls) {
-        // const thunbnails = fileUrls.map(function (fileUrl) {
-        //     return {
-        //         fileUrl: flileUrl,
-        //         isNew: true,
-        //     };
-        // });
-        // vm.exhibitor.thunbnails = vm.exhibitor.thunbnails.concat(thunbnails);
-        vm.exhibitor.thunbnail = {
-            fileUrl: fileUrls[0],
-            isNew: true,
-        };
-    }
 
     function onPictureUploaded(fileUrls) {
         const pictures = fileUrls.map(function (fileUrl) {
