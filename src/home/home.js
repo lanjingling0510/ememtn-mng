@@ -58,6 +58,19 @@ function HomeController($timeout, $q, Restangular) {
             vm.container = document.getElementById('heatmapContainer');
             vm.pixelHeight = vm.container.clientHeight;
 
+            vm.paintBoard = vm.paintBoard || h337.create({
+                container: document.getElementById('heatmapContainer'),
+                // radius: radius,
+                // maxOpacity: 0.3,
+                // minOpacity: 0,
+                // blur: 0.9,
+                // gradient: {
+                //     '.5': 'blue',
+                //     '.8': 'red',
+                //     '.95': 'white',
+                // },
+            });
+
             vm.realWidth = profile.JCRight * profile.JCScaleX;
             vm.realHeight = profile.JCBottom * profile.JCScaleY;
             vm.pixelRatioX = vm.pixelWidth / vm.realWidth;
@@ -76,19 +89,6 @@ function HomeController($timeout, $q, Restangular) {
             }
         });
     }
-
-    const paintBoard = h337.create({
-        container: document.getElementById('heatmapContainer'),
-        // radius: radius,
-        // maxOpacity: 0.3,
-        // minOpacity: 0,
-        // blur: 0.9,
-        // gradient: {
-        //     '.5': 'blue',
-        //     '.8': 'red',
-        //     '.95': 'white',
-        // },
-    });
 
     function fetchDataTimer(floor) {
         $timeout.cancel(fetchTimer);
@@ -128,12 +128,12 @@ function HomeController($timeout, $q, Restangular) {
     function paintHeat(data, colWidth, colHeight) {
         const dataPoints = formatData(data, colWidth, colHeight);
         const values = dataPoints.map(d => d.value);
-        paintBoard.setData({
+        vm.paintBoard.setData({
             min: 0,
             max: Math.max(...values),
             data: dataPoints,
         });
-        paintBoard.repaint();
+        vm.paintBoard.repaint();
     }
 
     function fetchData(floor, colWidth, colHeight) {
