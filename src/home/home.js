@@ -36,9 +36,6 @@ function HomeController($timeout, $q, Restangular) {
     const COL_WIDTH = BLOCK_WIDTH;
     const COL_HEIGHT = BLOCK_WIDTH;
     const DATA_FETCH_INTERVAL = config.heatmap.fetch_interval; // 秒
-    const CONTAINER = document.getElementById('heatmapContainer');
-    vm.pixelWidth = CONTAINER.clientWidth;
-    vm.pixelHeight = CONTAINER.clientHeight;
 
     vm.containerStyle = {};
     vm.onFloorChange = onFloorChange;
@@ -54,6 +51,10 @@ function HomeController($timeout, $q, Restangular) {
             vm.containerStyle.width = `100%`;
             const widthScaleTo = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
             vm.containerStyle.height = `${widthScaleTo}px`;
+
+            vm.container = document.getElementById('heatmapContainer');
+            vm.pixelWidth = vm.container.clientWidth;
+            vm.pixelHeight = vm.container.clientHeight;
 
             vm.realWidth = profile.JCRight * profile.JCScaleX;
             vm.realHeight = profile.JCBottom * profile.JCScaleY;
@@ -75,7 +76,7 @@ function HomeController($timeout, $q, Restangular) {
     }
 
     const paintBoard = h337.create({
-        container: CONTAINER,
+        container: vm.container,
         // radius: radius,
         // maxOpacity: 0.3,
         // minOpacity: 0,
