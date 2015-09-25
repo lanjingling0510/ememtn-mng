@@ -145,12 +145,12 @@ function HomeController($timeout, $q, Restangular) {
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
         }).then((heats) => {
-            for (let i = 0, max = 100000; i < max; i += 1) {
-                heats.push({
-                    JCX: Math.random() * 1000,
-                    JCY: Math.random() * 1000,
-                });
-            }
+            // for (let i = 0, max = 100000; i < max; i += 1) {
+            //     heats.push({
+            //         JCX: Math.random() * 1000,
+            //         JCY: Math.random() * 1000,
+            //     });
+            // }
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });
