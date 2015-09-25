@@ -55,21 +55,25 @@ function HomeController($timeout, $q, Restangular) {
             const widthScaleTo = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
             vm.containerStyle.height = `${widthScaleTo}px`;
 
-            vm.container = document.getElementById('heatmapContainer');
-            vm.pixelHeight = vm.container.clientHeight;
+            $timeout(() => {
+                vm.container = document.getElementById('heatmapContainer');
+                vm.pixelHeight = vm.container.clientHeight;
+            }, 500);
 
-            vm.paintBoard = vm.paintBoard || h337.create({
-                container: document.getElementById('heatmapContainer'),
-                // radius: radius,
-                // maxOpacity: 0.3,
-                // minOpacity: 0,
-                // blur: 0.9,
-                // gradient: {
-                //     '.5': 'blue',
-                //     '.8': 'red',
-                //     '.95': 'white',
-                // },
-            });
+            $timeout(() => {
+                vm.paintBoard = vm.paintBoard || h337.create({
+                    container: document.getElementById('heatmapContainer'),
+                    // radius: radius,
+                    // maxOpacity: 0.3,
+                    // minOpacity: 0,
+                    // blur: 0.9,
+                    // gradient: {
+                    //     '.5': 'blue',
+                    //     '.8': 'red',
+                    //     '.95': 'white',
+                    // },
+                });
+            }, 1000);
 
             vm.realWidth = profile.JCRight * profile.JCScaleX;
             vm.realHeight = profile.JCBottom * profile.JCScaleY;
