@@ -49,11 +49,13 @@ function HomeController($timeout, $q, Restangular) {
     function fetchPavilionByFloor(floor) {
         MapProfile.get(`${floor.JCObjId}:${floor.JCObjMask}`).then((profile) => {
             vm.containerStyle.width = `100%`;
+            vm.container = document.getElementById('heatmapContainer');
+            vm.pixelWidth = vm.container.clientWidth;
+
             const widthScaleTo = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
             vm.containerStyle.height = `${widthScaleTo}px`;
 
             vm.container = document.getElementById('heatmapContainer');
-            vm.pixelWidth = vm.container.clientWidth;
             vm.pixelHeight = vm.container.clientHeight;
 
             vm.realWidth = profile.JCRight * profile.JCScaleX;
@@ -76,7 +78,7 @@ function HomeController($timeout, $q, Restangular) {
     }
 
     const paintBoard = h337.create({
-        container: vm.container,
+        container: document.getElementById('heatmapContainer'),
         // radius: radius,
         // maxOpacity: 0.3,
         // minOpacity: 0,
