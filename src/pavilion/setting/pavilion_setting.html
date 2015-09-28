@@ -1,47 +1,55 @@
-<div class="am-container pavilion-setting" >
+<div class="am-container pavilion-setting">
     <div class="am-g">
-        <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.fetchPavilionByFloor"></jc-emei-floors-button-group>
+        <div class="am-u-sm-12">
+            <jc-emei-floors-button-group ngModel="vm.floor"
+                                         on-floor-change="vm.fetchPavilionByFloor"></jc-emei-floors-button-group>
+            <a class="am-fr am-btn am-btn-warning am-btn-sm" ng-click="vm.savePavilion(vm.pavilion)">保存</a>
+        </div>
     </div>
 
     <div class="am-g">
         <div class="am-u-sm-12">
-            <form class="am-form" ng-submit="vm.savePavilion(vm.pavilion)">
+            <form class="am-form">
                 <div class="am-form-group">
                     <label>正文内容</label>
                     <textarea placeholder="输入文字介绍" rows="12" ng-model="vm.pavilion.description"></textarea>
                 </div>
 
                 <div class="am-form-group">
-                    <label>图片</label>
-                    <div class="btn btn-primary am-margin-horizontal"
-                        ngf-change="vm.uploadPicture($file)"
-                        ngf-select ng-model="vm.pictureFile"
-                        ngf-multiple="false" ngf-accept="'image/*'"
-                        accept="image/*" ng-disabled="vm.pavilion.pictures.length >= 6"> 添加 </div>
-                    <small class="text-danger">最多6张</small>
+                    <label>图片</label>&nbsp;&nbsp;<small class="text-danger">(点击添加图片,最多6张)</small>
                 </div>
 
                 <ul class="am-avg-sm-6 am-thumbnails">
-                    <li class="am-form-group img-wrap"  ng-repeat="picture in vm.pavilion.pictures">
-                        <span class="am-icon-times img-close" ng-click="vm.removeNewPicture(picture, $index)" ng-show="picture.isNew"></span>
-                        <span class="am-icon-times img-close" ng-click="vm.removeOldPicture(picture, $index)" ng-hide="picture.isNew"></span>
+                    <li class="am-form-group img-wrap" ng-repeat="picture in vm.pavilion.pictures">
+                        <span class="am-icon-times img-close" ng-click="vm.removeNewPicture(picture, $index)"
+                              ng-show="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.removeOldPicture(picture, $index)"
+                              ng-hide="picture.isNew"></span>
+
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
-                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
+                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}"/>
                             </div>
                         </div>
-                        <input class="am-form-field" ng-model="vm.pavilion.pictures[$index].description" placeholder="描述...">
+                        <input class="am-form-field" ng-model="vm.pavilion.pictures[$index].description"
+                               placeholder="描述...">
                     </li>
+
+
+                    <li class="am-form-group img-wrap"
+                        ngf-change="vm.uploadPicture($file)"
+                        ngf-select ng-model="vm.pictureFile"
+                        ngf-multiple="false" ngf-accept="'image/*'"
+                        accept="image/*" ng-disabled="vm.pavilion.pictures.length >= 6">
+                        <div class="img-content add-btn">
+                            <img src="../../app/images/add-button.png" alt=""/>
+                        </div>
+                    </li>
+
                 </ul>
-
-
-                <div class="am-form-group">
-                        <button type="submit" class="am-btn am-btn-danger am-btn-xl">保存</button>
-                </div>
             </form>
         </div>
     </div>
-
 
 
 </div>

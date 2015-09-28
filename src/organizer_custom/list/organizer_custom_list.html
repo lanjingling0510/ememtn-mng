@@ -8,7 +8,7 @@
     </ol>
     <hr>
 
-    <form class="form-horizontal am-margin-bottom-xl">
+    <form class="form-horizontal am-margin-bottom">
         <div class="form-group">
             <label class="am-u-sm-2 control-label">版块名称</label>
 
@@ -16,7 +16,7 @@
                 <input class="form-control" placeholder="主办方商品列表" ng-model="vm.organizer.customSubject">
             </div>
             <div class="am-u-sm-3">
-                <button class="btn am-btn-block btn-danger" ng-click="vm.saveCustomTitle(vm.organizer.customSubject)">
+                <button class="am-btn am-btn-sm am-btn-warning" ng-click="vm.saveCustomTitle(vm.organizer.customSubject)">
                     保存名称
                 </button>
             </div>
@@ -33,18 +33,18 @@
             </drop-down>
         </div>
 
-        <div class="am-fl am-margin-left">
+        <div class="am-fl am-margin-left" style="width: 500px">
             <input class="form-control" placeholder="请输入展品名搜索" ng-model="vm.query.subject"
                    ng-change="vm.searchOrganizerCustoms(vm.query, 200)"/>
         </div>
 
-        <div class="am-fr">
-            <a class="btn btn-info" ui-sref="organizer-custom-create">添加</a>
+        <div class="am-fl am-margin-left">
+            <a class="am-btn am-btn-sm am-btn-success" ui-sref="organizer-custom-create">添加</a>
         </div>
     </div>
     <div class="am-g">
         <div class="am-u-sm-12">
-            <table class="am-table am-table-striped am-table-hover text-center">
+            <table class="am-table text-center am-table-bordered">
                 <thead>
                 <tr class="bg-theme">
                     <td class="table-check">
@@ -79,7 +79,7 @@
                         <span ng-hide="organizerCustom.visible">隐藏</span>
                     </td>
                     <td>
-                        <button class="am-btn am-btn-danger am-btn-xs"
+                        <button class="am-btn am-btn-success am-btn-xs"
                                 ng-click="vm.stickyOrganizerCustom(organizerCustom)">顶
                         </button>
                     </td>
