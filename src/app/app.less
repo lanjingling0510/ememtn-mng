@@ -23,37 +23,48 @@ table tr td {
   max-width: 200px;
 }
 
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: transparent;
+}
+
 .am-breadcrumb > li [class*="am-icon-"]:before {
   color: #ffbe40;
 }
 
-.am-container{
+.am-container {
   // margin-top:20px;
   // margin-bottom:50px;
   margin-left: 0.5em;
   margin-top: 0.5em;
 }
-.am-list > li{
-  background-color:transparent;
+
+.am-list > li {
+  background-color: transparent;
 }
-.bg-theme{
-  background-color:rgb(66,74,92);
-  color:#fff;
+
+.bg-theme {
+  background-color: rgb(66, 74, 92);
+  color: #fff;
 }
-.am-panel-transparent{
-  background-color:transparent;
-  border:none;
-  box-shadow:none;
+
+.am-panel-transparent {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
-.am-panel-default{border-color:transparent;  margin-bottom:0; }
+
+.am-panel-default {
+  border-color: transparent;
+  margin-bottom: 0;
+}
 
 .ion-thumbnail {
   height: 100px;
-  width:  100px;
+  width: 100px;
   position: relative;
   border: 1px solid #dddddd;
   padding: 2px;
-  background-color:#fff;
+  background-color: #fff;
   &:after {
     position: absolute;
     bottom: 0;
@@ -95,6 +106,18 @@ table tr td {
       background-color: #fff;
     }
   }
+
+  .img-content.add-btn {
+    text-align: center;
+    background-color: #ccc;
+    background-clip: content-box;
+    padding: 0 1em 0 1em;
+
+    img{
+      margin: 30%;
+      width: 40%;
+    }
+  }
 }
 
 
@@ -103,7 +126,7 @@ table tr td {
 }
 
 aside.menu-bar {
-  padding-top:1em;
+  padding-top: 1em;
   position: fixed;
   left: 0;
   top: @header-banner-height;
@@ -111,72 +134,154 @@ aside.menu-bar {
   background-color: hsl(222, 16%, 31%);
   min-height: 100%;
 
-  .panel-body {
-    div {
-      padding: 0.5em 0;
+  .panel {
+    border: none;
+    position:relative;
+    &:after{
+      content: '';
+      position: absolute;
+      width: 17px;
+      height: 20px;
+      background-size: 17px;
+      background-repeat: no-repeat;
+      top: 10px;
+      left: -6px;
+    }
 
-      .menu-link {
-        background-color: hsla(100, 100%, 99%, 0.85);
-        color: hsla(0, 0%, 0%, 0.8);
+    &:nth-child(2):after{ background-image:url('./images/nav-1-1.png')}
+    &:nth-child(3):after{ background-image:url('./images/nav-2-1.png')}
+    &:nth-child(4):after{ background-image:url('./images/nav-3-1.png')}
+    &:nth-child(5):after{ background-image:url('./images/nav-4-1.png')}
+    &:nth-child(6):after{ background-image:url('./images/nav-5-1.png')}
+    &:nth-child(7):after{ background-image:url('./images/nav-6-1.png')}
+    &:nth-child(8):after{ background-image:url('./images/nav-7-1.png');width: 13px;background-size: 13px;top:8px}
+    &:nth-child(9):after{ background-image:url('./images/nav-8-1.png')}
 
-        &:hover {
-          text-decoration: none;
+
+    .panel-heading {
+      padding-left:26px;
+      background-color: #424A5C;
+      position: relative;
+      color: #969696;
+
+      &:after{
+        content: '\f105';
+        position: absolute;
+        right: 0;
+        top: 6px;
+      }
+    }
+
+    .accordion-toggle {
+      color: #969696;
+      &:hover, &:focus {
+        text-decoration: none;
+        outline: none;
+      }
+    }
+
+    .panel-body {
+      background-color: rgb(30, 31, 35);
+      padding: 0;
+      margin: 0 -15px;
+
+      div {
+        padding: 0.5em 0 0.5em 2em;
+        .menu-link {
+          color: #969696;
+
+          &:hover, &:focus {
+            text-decoration: none;
+          }
+        }
+      }
+
+      div.active {
+        background: #4EBBE0;
+        .menu-link {
+          color: #fff;
+          &:hover, &:focus {
+            text-decoration: none;
+          }
         }
       }
     }
+
   }
+
+  .panel.panel-open {
+    .panel-heading {
+      color: #fff;
+      &:after{
+        content: '\f107';
+      }
+      .accordion-toggle{
+        color:#fff;
+      }
+    }
+
+    &:nth-child(2):after{ background-image:url('./images/nav-1-2.png')}
+    &:nth-child(3):after{ background-image:url('./images/nav-2-2.png')}
+    &:nth-child(4):after{ background-image:url('./images/nav-3-2.png')}
+    &:nth-child(5):after{ background-image:url('./images/nav-4-2.png')}
+    &:nth-child(6):after{ background-image:url('./images/nav-5-2.png')}
+    &:nth-child(7):after{ background-image:url('./images/nav-6-2.png')}
+    &:nth-child(8):after{ background-image:url('./images/nav-7-2.png')}
+    &:nth-child(9):after{ background-image:url('./images/nav-8-2.png')}
+  }
+
 }
 
 .header-banner {
-    margin-left: 0;
-    margin-right: 0;
-    height: @header-banner-height;
-    background-color: hsl(207, 56%, 46%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    font-size: 1.6em;
-    color: hsl(0, 0%, 100%);
-    display:flex;
-    justify-content:center;
-    align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  height: @header-banner-height;
+  background-color: hsl(207, 56%, 46%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 1.6em;
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    h1 {
-        margin-bottom: 0;
-    }
+  h1 {
+    margin-bottom: 0;
+  }
 
-    .logo {
-        // display: block;
-        // width: 50%;
-        // height: auto;
-    }
+  .logo {
+    // display: block;
+    // width: 50%;
+    // height: auto;
+  }
 
-    .logo-title {
-        // display: inline-block;
-        // margin-top: 5%;
-    }
+  .logo-title {
+    // display: inline-block;
+    // margin-top: 5%;
+  }
 
-    .header-title {
-        // display: inline-block;
-        // margin-top: 1%;
-    }
+  .header-title {
+    // display: inline-block;
+    // margin-top: 1%;
+  }
 
-    .exit-button {
-        // display: inline-block;
-        // margin-top: 5%;
-        background-color: hsl(102, 56%, 46%);
-    }
+  .exit-button {
+    // display: inline-block;
+    // margin-top: 5%;
+    background-color: hsl(102, 56%, 46%);
+  }
 }
 
 main.hero {
-    margin-top: @header-banner-height / 1.5;
+  margin-top: @header-banner-height / 1.5;
   margin-left: @left-sidebar-width;
   height: 37em;
-  max-width:100% - @left-sidebar-width;
+  max-width: 100% - @left-sidebar-width;
   overflow: auto;
 }
 
-input[type='color']{
+input[type='color'] {
   height: 2.5em;
 }
