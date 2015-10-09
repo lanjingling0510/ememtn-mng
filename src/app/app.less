@@ -6,12 +6,16 @@
 @footer-height: 5%;
 
 html, body {
-  overflow: hidden;
-  overflow-x: hidden;;
   background-color: hsl(0, 0%, 94%);
   min-height: 100%;
   height: 100%;
+  display:flex;
+  flex-direction: column;
+  overflow:hidden;
 }
+
+
+
 
 ul, li {
   list-style-type: none;
@@ -126,13 +130,9 @@ table tr td {
 }
 
 aside.menu-bar {
-  padding-top: 1em;
-  position: fixed;
-  left: 0;
-  top: @header-banner-height;
-  width: @left-sidebar-width;
+  padding: 16px;
+   width: 230px;
   background-color: hsl(222, 16%, 31%);
-  min-height: 100%;
 
   .panel {
     border: none;
@@ -237,10 +237,6 @@ aside.menu-bar {
   margin-right: 0;
   height: @header-banner-height;
   background-color: hsl(207, 56%, 46%);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   font-size: 1.6em;
   color: hsl(0, 0%, 100%);
   display: flex;
@@ -274,12 +270,15 @@ aside.menu-bar {
   }
 }
 
+.content-banner{
+  flex:1;
+  display:flex;
+}
+
 main.hero {
-  margin-top: @header-banner-height / 1.5;
-  margin-left: @left-sidebar-width;
-  height: 37em;
-  max-width: 100% - @left-sidebar-width;
-  overflow: auto;
+  flex:1;
+  overflow:hidden;
+  overflow-y: auto;
 }
 
 input[type='color'] {
