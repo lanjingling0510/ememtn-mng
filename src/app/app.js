@@ -5,7 +5,7 @@ require('../../node_modules/amazeui/js/ui.collapse.js');
 require('../../node_modules/amazeui/js/ui.datepicker.js');
 require('../common/service.js');
 require('../login/login.js');
-require('../home/home.js');
+require('../heat_map/show/heat_map_show.js');
 
 require('../admin/list/admins.js');
 require('../admin/register/register.js');
@@ -89,7 +89,7 @@ module.exports = angular.module('ememtn', [
     'ui.bootstrap',
     'angular-storage',
     'ememtn.login',
-    'ememtn.home',
+    'ememtn.heat-map.show',
     'ememtn.admins',
     'ememtn.admins.register',
     'ememtn.tourist.list',

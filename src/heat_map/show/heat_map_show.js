@@ -1,12 +1,12 @@
 const angular = require('angular');
-const config = require('../config.json');
-const h337 = require('../../node_modules/heatmap.js/heatmap.js');
-require('../pavilion/map_test/jcmap.profile.directive.js');
-require('../pavilion/map_test/jcmap.layer.tile.directive.js');
-require('../pavilion/map_test/jcmap.feature.base.directive.js');
-require('../_directives/jc_emei_floors_button_group');
+const config = require('../../config.json');
+const h337 = require('../../../node_modules/heatmap.js/heatmap.js');
+require('../../pavilion/map_test/jcmap.profile.directive.js');
+require('../../pavilion/map_test/jcmap.layer.tile.directive.js');
+require('../../pavilion/map_test/jcmap.feature.base.directive.js');
+require('../../_directives/jc_emei_floors_button_group');
 
-module.exports = angular.module('ememtn.home', [
+module.exports = angular.module('ememtn.heat-map.show', [
     'ui.router',
     'ememtn.common.services',
     'jcmap.profile.directive',
@@ -14,19 +14,23 @@ module.exports = angular.module('ememtn.home', [
     'jcmap.feature.base.directive',
     'jc.emei.floors.button_group.directive',
 ]).config(moduleConfig)
-    .controller('HomeController', HomeController);
+    .controller('HeatMapController', HeatMapController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('home', {
+    $stateProvider.state('heat-map-show', {
+        url: '/heat-map',
+        template: require('./heat_map_show.html'),
+        controller: 'HeatMapController as vm',
+    }).state('home', {
         url: '/',
-        template: require('./home.html'),
-        controller: 'HomeController as vm',
+        template: require('./heat_map_show.html'),
+        controller: 'HeatMapController as vm',
     });
 }
 
 /* @ngInject */
-function HomeController($timeout, $q, Restangular) {
+function HeatMapController($rootScope, $timeout, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
     const Pavilion = Restangular.all('pavilions');
@@ -39,7 +43,6 @@ function HomeController($timeout, $q, Restangular) {
 
     vm.containerStyle = {};
     vm.onFloorChange = onFloorChange;
-    let fetchTimer;
 
     function onFloorChange(floor) {
         fetchPavilionByFloor(floor);
@@ -94,6 +97,7 @@ function HomeController($timeout, $q, Restangular) {
         });
     }
 
+    let fetchTimer;
     function fetchDataTimer(floor) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(() => {
@@ -155,4 +159,8 @@ function HomeController($timeout, $q, Restangular) {
             paintHeat(heats, colWidth, colHeight);
         });
     }
+
+    $rootScope.$on('$stateChangeStart', () => {
+        $timeout.cancel(fetchTimer); // cancel timer when state change
+    });
 }
