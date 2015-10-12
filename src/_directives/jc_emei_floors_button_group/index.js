@@ -33,7 +33,7 @@ function JCEmeiFloorsButtonGroupDirective() {
         }
 
         function cleanActivation($event) {
-            const nodes = Array.from($event.target.parentNode.childNodes).filter((d) => {
+            const nodes = Array.prototype.slice.call($event.target.parentNode.childNodes).filter((d) => {
                 return d.type === 'button';
             });
             nodes.forEach((node) => {

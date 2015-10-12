@@ -30,7 +30,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function HeatMapController($rootScope, $timeout, $q, Restangular) {
+function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
     const Pavilion = Restangular.all('pavilions');
@@ -43,10 +43,27 @@ function HeatMapController($rootScope, $timeout, $q, Restangular) {
 
     vm.containerStyle = {};
     vm.onFloorChange = onFloorChange;
+    vm.showHistoryData = showHistoryData;
+    vm.showCurrentData = showCurrentData;
+    vm.stopDateSettingTimer = stopDateSettingTimer;
+
+    let dateSettingTimer;
+    function stopDateSettingTimer() {
+        $interval.cancel(dateSettingTimer);
+    }
+
+    function startDateSettingTimer() {
+        stopDateSettingTimer();
+        dateSettingTimer = $interval(() => {
+            setTime(new Date());
+        }, 1000 * 1);
+    }
 
     function onFloorChange(floor) {
+        vm.floor = floor;
         fetchPavilionByFloor(floor);
-        fetchDataTimer(floor);
+        startDateSettingTimer();
+        startDataFetchTimer(floor);
     }
 
     function fetchPavilionByFloor(floor) {
@@ -97,12 +114,15 @@ function HeatMapController($rootScope, $timeout, $q, Restangular) {
         });
     }
 
-    let fetchTimer;
-    function fetchDataTimer(floor) {
-        $timeout.cancel(fetchTimer);
-        fetchTimer = $timeout(() => {
+    let dataFetchTimer;
+    function stopDataFetchTimer() {
+        $interval.cancel(dataFetchTimer); // cancel timer when state change
+    }
+
+    function startDataFetchTimer(floor) {
+        stopDataFetchTimer();
+        dataFetchTimer = $interval(() => {
             fetchData(floor, COL_WIDTH, COL_HEIGHT);
-            fetchDataTimer(floor);
         }, 1000 * DATA_FETCH_INTERVAL);
     }
 
@@ -148,6 +168,7 @@ function HeatMapController($rootScope, $timeout, $q, Restangular) {
         HeatMap.getList({
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
+            time: vm.time.value,
         }).then((heats) => {
             // for (let i = 0, max = 100000; i < max; i += 1) {
             //     heats.push({
@@ -160,7 +181,29 @@ function HeatMapController($rootScope, $timeout, $q, Restangular) {
         });
     }
 
+    function setTime(time) {
+        time = new Date(time); // eslint-disable-line no-param-reassign
+        vm.time = {
+            value: time.valueOf(),
+            year: time.getFullYear(),
+            month: time.getMonth(),
+            day: time.getDate(),
+            hour: time.getHours(),
+            minute: time.getMinutes(),
+            second: time.getSeconds(),
+        };
+    }
+
+    function showHistoryData() {
+        stopDateSettingTimer();
+    }
+
+    function showCurrentData() {
+        startDateSettingTimer();
+    }
+
     $rootScope.$on('$stateChangeStart', () => {
-        $timeout.cancel(fetchTimer); // cancel timer when state change
+        stopDateSettingTimer();
+        stopDataFetchTimer();
     });
 }
