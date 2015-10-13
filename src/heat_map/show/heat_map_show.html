@@ -9,11 +9,11 @@
 
     <div class="col-sm-7">
         时间：
-        <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.year" style="max-width: 4em;">年
-        <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.month" style="max-width: 2em;">月
-        <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.day" style="max-width: 2em;">日
-        <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.hour" style="max-width: 2em;">时
-        <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.minute" style="max-width: 2em;">分
+        <input type="number" min="1997" max="2016" ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.year" style="max-width: 4em;">年
+        <input type="number" min="1" max="12" ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.month" style="max-width: 3em;">月
+        <input type="number" min="1" max="31" ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.day" style="max-width: 3em;">日
+        <input type="number" min="0" max="24" ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.hour" style="max-width: 3em;">时
+        <input type="number" min="0" max="60" ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.minute" style="max-width: 3em;">分
         <!-- <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.second" style="max-width: 2em;">分 -->
     </div>
 
