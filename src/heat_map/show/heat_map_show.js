@@ -46,6 +46,7 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     vm.showHistoryData = showHistoryData;
     vm.showCurrentData = showCurrentData;
     vm.stopDateSettingTimer = stopDateSettingTimer;
+    vm.changeTime = changeTime;
 
     let dateSettingTimer;
     function stopDateSettingTimer() {
@@ -186,7 +187,7 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
         vm.time = {
             value: time.valueOf(),
             year: time.getFullYear(),
-            month: time.getMonth(),
+            month: time.getMonth() + 1,
             day: time.getDate(),
             hour: time.getHours(),
             minute: time.getMinutes(),
@@ -200,6 +201,11 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
 
     function showCurrentData() {
         startDateSettingTimer();
+    }
+
+    function changeTime() {
+        const time = new Date(vm.time.year, vm.time.month - 1, vm.time.day, vm.time.hour, vm.time.minute);
+        setTime(time);
     }
 
     $rootScope.$on('$stateChangeStart', () => {
