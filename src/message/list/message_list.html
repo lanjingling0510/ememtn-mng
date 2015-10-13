@@ -1,4 +1,4 @@
-<div class="am-container message-list">
+<div class="container-fluid message-list">
     <div class="am-g am-margin-bottom">
         <div class="am-u-sm-1 text-center">
             <input type="checkbox" ng-model="vm.messages._checked" ng-click="vm.toggleCheckAll(vm.messages._checked)"/>
@@ -25,7 +25,7 @@
     </my-collapse>
 
     <div class="">
-        <pagination total-items="vm.query.total"
+        <pagination class="center-block" style="width: 400px" total-items="vm.query.total"
                     ng-model="vm.query.page"
                     items-per-page="vm.query.pageSize"
                     max-size="7"

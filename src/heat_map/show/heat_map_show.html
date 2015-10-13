@@ -1,30 +1,34 @@
-<div class="text-center">
-    <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.onFloorChange"></jc-emei-floors-button-group>
-</div>
-
-<div class="row">
-    <div class="col-sm-2">
-        人数：{{ vm.heats.length || 0 }}
+<div class="container-fluid">
+    <div class="text-center">
+        <jc-emei-floors-button-group ngModel="vm.floor" on-floor-change="vm.onFloorChange"></jc-emei-floors-button-group>
     </div>
 
-    <div class="col-sm-7">
-        时间：
-        <input type="number" min="2015" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.year" style="max-width: 4em;">年
-        <input type="number" min="1" max="12" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.month" style="max-width: 3em;">月
-        <input type="number" min="1" max="31" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.day" style="max-width: 3em;">日
-        <input type="number" min="0" max="23" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.hour" style="max-width: 3em;">时
-        <input type="number" min="0" max="59" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.minute" style="max-width: 3em;">分
-        <!-- <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.second" style="max-width: 2em;">分 -->
+    <div class="row am-margin-vertical">
+        <div class="col-sm-2">
+            人数：{{ vm.heats.length || 0 }}
+        </div>
+
+        <div class="col-sm-7">
+            时间：
+            <input type="number" min="2015" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.year" style="max-width: 4em;">年
+            <input type="number" min="1" max="12" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.month" style="max-width: 3em;">月
+            <input type="number" min="1" max="31" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.day" style="max-width: 3em;">日
+            <input type="number" min="0" max="23" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.hour" style="max-width: 3em;">时
+            <input type="number" min="0" max="59" ng-focus="vm.stopDateSettingTimer()" ng-change="vm.changeTime()" ng-model="vm.time.minute" style="max-width: 3em;">分
+            <!-- <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.second" style="max-width: 2em;">分 -->
+        </div>
+
+        <div class="col-sm-3">
+            <button class="btn btn-sm btn-primary" ng-click="vm.showCurrentData()">实时数据</button>
+        </div>
     </div>
 
-    <div class="col-sm-3">
-        <button class="btn btn-sm btn-primary" ng-click="vm.showCurrentData()">实时数据</button>
+    <div id="heatmapContainer" ng-style="vm.containerStyle">
+
     </div>
 </div>
 
-<div id="heatmapContainer" ng-style="vm.containerStyle">
 
-</div>
 
 <!-- <jcmap-profile jc-obj-id="{{ vm.floor.JCObjId }}" jc-obj-mask="{{ vm.floor.JCObjMask }}">
     <jcmap-layer-tile jc-layer-name="base">

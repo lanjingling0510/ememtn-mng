@@ -1,4 +1,4 @@
-<div class="am-container notification-list">
+<div class="container-fluid notification-list">
     <div class="am-g am-margin-bottom">
         <div class="am-u-sm-1 text-center">
             <input type="checkbox" ng-model="vm.notifications._checked" ng-click="vm.toggleCheckAll(vm.notifications._checked)"/>
@@ -14,8 +14,8 @@
         </div>
     </div>
 
-    <my-collapse class="am-panel-default">
-        <ul ng-repeat="notification in vm.notifications track by notification._id">
+    <my-collapse class="am-panel-default" ng-repeat="notification in vm.notifications track by notification._id">
+        <ul>
             <li><input type="checkbox" ng-model="vm.notifications[$index]._checked"/></li>
             <li>{{:: notification.subject }}</li>
             <li>{{:: notification.createdAt | date : 'yyyy-MM-dd HH:mm' }}</li>
@@ -24,7 +24,7 @@
     </my-collapse>
 
     <div class="">
-        <pagination total-items="vm.query.total"
+        <pagination class="center-block" style="width: 300px" total-items="vm.query.total"
                     ng-model="vm.query.page"
                     items-per-page="vm.query.pageSize"
                     max-size="7"

@@ -12,7 +12,6 @@
                 <input ng-model="vm.exhibitor.title" class="am-form-field" placeholder="请输入标题">
             </div>
             <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品列表</a>
-            <button class="am-btn am-btn-primary" ng-click="vm.submitExhibitor(vm.exhibitor)">提交</button>
         </div>
     </div>
 
@@ -61,7 +60,7 @@
                                 <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
                             </div>
                         </div>
-                        <input ng-model="vm.exhibitor.pictures[$index].description">
+                        <input class="am-form-field " ng-model="vm.exhibitor.pictures[$index].description">
                     </li>
                 </ul>
             </div>

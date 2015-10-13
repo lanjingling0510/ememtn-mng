@@ -1,8 +1,9 @@
-<div class="am-container pavilion-setting">
+<div class="container-fluid pavilion-setting">
     <div class="am-g">
         <div class="am-u-sm-12">
-            <jc-emei-floors-button-group ngModel="vm.floor"
-                                         on-floor-change="vm.fetchPavilionByFloor"></jc-emei-floors-button-group>
+            <jc-emei-floors-button-group class="center-block" ngModel="vm.floor"
+                                         on-floor-change="vm.fetchPavilionByFloor" style="width: 300px"></jc-emei-floors-button-group>
+
             <a class="am-fr am-btn am-btn-warning am-btn-sm" ng-click="vm.savePavilion(vm.pavilion)">保存</a>
         </div>
     </div>
