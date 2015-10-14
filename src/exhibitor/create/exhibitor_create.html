@@ -1,22 +1,26 @@
-<div class="am-g exhibitor-edit" >
+<div class="am-g exhibitor-edit">
     <ol class="am-breadcrumb ng-scope">
         <li><a class="am-text-lg am-icon-star" ui-sref="pavilion-map.exhibitor-list">参展商管理</a></li>
         <li class="am-active">创建展商</li>
     </ol>
     <hr>
 
-    <div class="am-u-sm-12 am-margin-bottom">
-        <div class="am-form-inline" role="form">
-            <select ng-model="vm.exhibitor.floor" ng-options="floor as floor.name for floor in vm.floors track by floor.JCObjId" ng-change="vm.searchFeatures(vm.exhibitor.floor)">
+    <div class="am-margin-bottom">
+        <div style="display:flex" role="form">
+                <label class="am-form-label am-padding-horizontal-sm">楼层</label>
+                <select ng-model="vm.exhibitor.floor"
+                        ng-options="floor as floor.name for floor in vm.floors track by floor.JCObjId"
+                        ng-change="vm.searchFeatures(vm.exhibitor.floor)">
+                </select>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <label class="am-form-label am-padding-horizontal-sm">展商名字</label>
+                <input ng-model="vm.exhibitor.title"  placeholder="请输入标题">
 
-            </select>
 
-            <div class="am-form-group">
-                <label class="am-form-label">展商名字</label>
-                <input ng-model="vm.exhibitor.title" class="am-form-field" placeholder="请输入标题">
-            </div>
             <!--<select ng-model="vm.exhibitor.feature" ng-options="feature as feature.name for feature in vm.features track by feature.JCGUID">-->
-                <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
             <!--</select>-->
 
 
@@ -52,21 +56,26 @@
 
             <div class="am-form-group">
                 <label>图片</label>
+
                 <div class="btn btn-primary am-margin-horizontal"
-                    ngf-change="vm.uploadFile($files, vm.onPictureUploaded)" ngf-select
-                    ngf-multiple="true" ngf-accept="'image/*'"
-                    accept="image/*" ng-disabled="vm.exhibitor.pictures.length > 6">添加</div>
+                     ngf-change="vm.uploadFile($files, vm.onPictureUploaded)" ngf-select
+                     ngf-multiple="true" ngf-accept="'image/*'"
+                     accept="image/*" ng-disabled="vm.exhibitor.pictures.length > 6">添加
+                </div>
                 <small class="text-danger">最多添加6张</small>
             </div>
 
             <div class="am-form-group">
                 <ul class="am-avg-sm-6 am-thumbnails">
                     <li class="img-wrap" ng-repeat="picture in vm.exhibitor.pictures">
-                        <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)" ng-show="picture.isNew"></span>
-                        <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)" ng-hide="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)"
+                              ng-show="picture.isNew"></span>
+                        <span class="am-icon-times img-close" ng-click="vm.deleteOldFile(picture, $index)"
+                              ng-hide="picture.isNew"></span>
+
                         <div class="img-content">
                             <div class="img am-vertical-align text-center">
-                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
+                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}"/>
                             </div>
                         </div>
                         <input ng-model="vm.exhibitor.pictures[$index].description">
