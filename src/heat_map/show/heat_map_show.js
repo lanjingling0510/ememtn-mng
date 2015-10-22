@@ -33,8 +33,8 @@ function moduleConfig($stateProvider) {
 function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
-    const Pavilion = Restangular.all('pavilions');
     const MapProfile = Restangular.all('map-profiles');
+    const PavilionMap = Restangular.all('pavilion_maps.app');
 
     const BLOCK_WIDTH = config.heatmap.block_width;
     const COL_WIDTH = BLOCK_WIDTH;
@@ -46,40 +46,41 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     vm.showHistoryData = showHistoryData;
     vm.showCurrentData = showCurrentData;
     vm.stopDateSettingTimer = stopDateSettingTimer;
-    vm.changeTime = changeTime;
+    vm.changeYear = changeYear;
+    vm.changeMonth = changeMonth;
+    vm.changeDate = changeDate;
+    vm.changeHour = changeHour;
+    vm.changeMinute = changeMinute;
 
-    let dateSettingTimer;
+    vm.clock = new Date();
+    startDateSettingTimer();
+
     function stopDateSettingTimer() {
-        $interval.cancel(dateSettingTimer);
+        $interval.cancel(vm.dateSettingTimer);
+        vm.dateSettingTimer = undefined;
     }
 
     function startDateSettingTimer() {
         stopDateSettingTimer();
-        dateSettingTimer = $interval(() => {
-            setTime(new Date());
-        }, 1000 * 1);
+        vm.dateSettingTimer = $interval(() => {
+            vm.clock.setSeconds(vm.clock.getSeconds() + 1);
+            setTime(vm.clock);
+        }, 1000 * 1, 0, false);
     }
 
     function onFloorChange(floor) {
         vm.floor = floor;
         fetchPavilionByFloor(floor);
-        startDateSettingTimer();
+        // startDateSettingTimer();
         startDataFetchTimer(floor);
     }
 
     function fetchPavilionByFloor(floor) {
         MapProfile.get(`${floor.JCObjId}:${floor.JCObjMask}`).then((profile) => {
             vm.containerStyle.width = `100%`;
-            vm.container = document.getElementById('heatmapContainer');
-            vm.pixelWidth = vm.container.clientWidth;
-
-            const widthScaleTo = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
-            vm.containerStyle.height = `${widthScaleTo}px`;
-
-            $timeout(() => {
-                vm.container = document.getElementById('heatmapContainer');
-                vm.pixelHeight = vm.container.clientHeight;
-            }, 500);
+            vm.pixelWidth = document.getElementById('heatmapContainer').clientWidth;
+            vm.pixelHeight = profile.JCBottom * (vm.pixelWidth / profile.JCRight);
+            vm.containerStyle.height = `${vm.pixelHeight}px`;
 
             $timeout(() => {
                 vm.paintBoard = vm.paintBoard || h337.create({
@@ -101,28 +102,28 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
             vm.pixelRatioX = vm.pixelWidth / vm.realWidth;
             vm.pixelRatioY = vm.pixelHeight / vm.realHeight;
 
-            return Pavilion.doGET('', {
+            return PavilionMap.doGET('', {
                 JCObjId: floor.JCObjId,
                 JCObjMask: floor.JCObjMask,
             });
-        }).then((pavilion) => {
-            vm.pavilion = pavilion;
-            if (vm.pavilion.pictures[0]) {
-                vm.containerStyle['background-image'] = `url(${vm.pavilion.pictures[0].fileUrl})`;
+        }).then((resp) => {
+            vm.pavilionMap = resp.data;
+            if (vm.pavilionMap.mapFile) {
+                vm.containerStyle['background-image'] = `url(${vm.pavilionMap.mapFile})`;
                 vm.containerStyle['background-repeat'] = 'no-repeat';
                 vm.containerStyle['background-size'] = 'contain';
             }
         });
     }
 
-    let dataFetchTimer;
     function stopDataFetchTimer() {
-        $interval.cancel(dataFetchTimer); // cancel timer when state change
+        $interval.cancel(vm.dataFetchTimer); // cancel timer when state change
+        vm.dataFetchTimer = undefined;
     }
 
     function startDataFetchTimer(floor) {
         stopDataFetchTimer();
-        dataFetchTimer = $interval(() => {
+        vm.dataFetchTimer = $interval(() => {
             fetchData(floor, COL_WIDTH, COL_HEIGHT);
         }, 1000 * DATA_FETCH_INTERVAL);
     }
@@ -169,30 +170,21 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
         HeatMap.getList({
             JCObjId: floor.JCObjId,
             JCObjMask: floor.JCObjMask,
-            time: vm.time.value,
+            time: vm.clock.valueOf(),
         }).then((heats) => {
-            // for (let i = 0, max = 100000; i < max; i += 1) {
-            //     heats.push({
-            //         JCX: Math.random() * 1000,
-            //         JCY: Math.random() * 1000,
-            //     });
-            // }
             vm.heats = heats;
             paintHeat(heats, colWidth, colHeight);
         });
     }
 
-    function setTime(time) {
-        time = new Date(time); // eslint-disable-line no-param-reassign
-        vm.time = {
-            value: time.valueOf(),
-            year: time.getFullYear(),
-            month: time.getMonth() + 1,
-            day: time.getDate(),
-            hour: time.getHours(),
-            minute: time.getMinutes(),
-            second: time.getSeconds(),
-        };
+    function setTime(clock) {
+        vm.time = vm.time || {};
+        vm.time.year = clock.getFullYear();
+        vm.time.month = clock.getMonth() + 1;
+        vm.time.day = clock.getDate();
+        vm.time.hour = clock.getHours();
+        vm.time.minute = clock.getMinutes();
+        vm.time.second = clock.getSeconds();
     }
 
     function showHistoryData() {
@@ -200,12 +192,29 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     }
 
     function showCurrentData() {
+        vm.clock = new Date();
+        setTime(vm.clock);
         startDateSettingTimer();
     }
 
-    function changeTime() {
-        const time = new Date(vm.time.year, vm.time.month - 1, vm.time.day, vm.time.hour, vm.time.minute);
-        setTime(time);
+    function changeYear(year) {
+        vm.clock.setFullYear(year);
+    }
+
+    function changeMonth(month) {
+        vm.clock.setMonth(month);
+    }
+
+    function changeDate(day) {
+        vm.clock.setDate(day);
+    }
+
+    function changeHour(hour) {
+        vm.clock.setHours(hour);
+    }
+
+    function changeMinute(minute) {
+        vm.clock.setMinutes(minute);
     }
 
     $rootScope.$on('$stateChangeStart', () => {
