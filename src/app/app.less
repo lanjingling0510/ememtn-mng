@@ -14,7 +14,9 @@ html, body {
   overflow:hidden;
 }
 
-
+input[type="text"], select{
+  min-width: 170px;
+}
 
 
 ul, li {
@@ -132,7 +134,7 @@ table tr td {
 
 aside.menu-bar {
   padding: 16px;
-   width: 230px;
+  flex: 250px 0 0;
   background-color: hsl(222, 16%, 31%);
 
   .panel {
@@ -248,6 +250,7 @@ aside.menu-bar {
     margin-bottom: 0;
   }
 
+
   .logo {
     // display: block;
     // width: 50%;
@@ -277,7 +280,7 @@ aside.menu-bar {
 }
 
 main.hero {
-  flex:1;
+  flex: 800px 1 0;
   overflow:hidden;
   overflow-y: auto;
 }
