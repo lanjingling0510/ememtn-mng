@@ -9,6 +9,7 @@ require('../heat_map/show/heat_map_show.js');
 
 require('../admin/list/admins.js');
 require('../admin/register/register.js');
+require('../admin/password_change/admin_password_change.js');
 
 require('../attendant/list/attendant_list.js');
 require('../attendant/create/attendant_create.js');
@@ -92,6 +93,7 @@ module.exports = angular.module('ememtn', [
     'ememtn.heat-map.show',
     'ememtn.admins',
     'ememtn.admins.register',
+    'ememtn.admins.password-change',
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
     'ememtn.treasure-area.list',
