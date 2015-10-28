@@ -34,7 +34,7 @@ function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertSe
         status: 'enabled',
         exchangeable: '__all__',
         page: 1,
-        pageSize: 15,
+        pageSize: 16,
         total: 0,
     };
     fetchPrizeTypes(vm.querystring, 0);

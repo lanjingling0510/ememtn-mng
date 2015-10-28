@@ -36,7 +36,7 @@ function TreasureTypeListController($timeout, $stateParams, TreasureTypesService
     vm.querystring = {
         status: 'valid',
         page: 1,
-        pageSize: 15,
+        pageSize: 16,
         total: 0,
     };
     fetchTreasureTypes(vm.querystring, 0);

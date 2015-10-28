@@ -25,7 +25,7 @@ function ExhibitorListController($timeout, $scope, Restangular, AlertService) {
     vm.searchExhibitors = searchExhibitors;
     vm.query = {
         page: 1,
-        pageSize: 12,
+        pageSize: 16,
         total: 0,
     };
 

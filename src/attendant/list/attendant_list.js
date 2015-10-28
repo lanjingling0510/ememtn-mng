@@ -28,7 +28,7 @@ function AttendantListController($timeout, $scope, Restangular, AlertService) {
         status: 'enabled',
         phone: '',
         page: 1,
-        pageSize: 2,
+        pageSize: 16,
         total: 0,
     };
     searchAttendants(vm.query);

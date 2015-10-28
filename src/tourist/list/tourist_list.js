@@ -29,7 +29,7 @@ function TouristListController($q, $timeout, Restangular, AlertService) {
         status: 'enabled',
         phone: '',
         page: 1,
-        pageSize: 15,
+        pageSize: 16,
         total: 0,
     };
     searchTourists(vm.query);

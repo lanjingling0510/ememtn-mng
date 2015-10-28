@@ -29,7 +29,7 @@ function FeedbackListController($q, $timeout, Restangular, AlertService) {
     vm.query = {
         status: 'opening',
         page: 1,
-        pageSize: 15,
+        pageSize: 16,
         total: 0,
     };
 

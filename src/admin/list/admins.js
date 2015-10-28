@@ -28,7 +28,7 @@ function AdminsController($stateParams, AdminService, AlertService, $timeout) {
     vm.querystring = {
         status: 'enabled',
         page: 1,
-        pageSize: 15,
+        pageSize: 16,
         total: 0,
     };
 

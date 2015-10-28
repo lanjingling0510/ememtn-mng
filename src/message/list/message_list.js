@@ -25,7 +25,7 @@ function MessageListController(Restangular, AlertService) {
 
     vm.query = {
         page: 1,
-        pageSize: 4,
+        pageSize: 16,
         total: 0,
     };
     vm.toggleCheckAll = toggleCheckAll;

@@ -28,7 +28,7 @@ function ExhibitorBatchController($timeout, $q, $scope, Restangular, AlertServic
     vm.toggleCheckAll = toggleCheckAll;
     vm.query = {
         page: 1,
-        pageSize: 10,
+        pageSize: 16,
         total: 0,
     };
 

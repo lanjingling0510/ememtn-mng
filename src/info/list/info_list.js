@@ -23,7 +23,7 @@ function InfoController($q, Restangular, AlertService) { // eslint-disable-line 
     const Info = Restangular.all('infoes');
     vm.query = {
         page: 1,
-        pageSize: 30,
+        pageSize: 16,
         count: 0,
         total: 0,
     };
