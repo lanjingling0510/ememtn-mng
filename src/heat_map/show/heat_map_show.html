@@ -10,13 +10,9 @@
 
         <div class="col-sm-7">
             时间：
-            <input type="number" min="2015" ng-focus="vm.showHistoryData()" ng-change="vm.changeYear(vm.time.year)" ng-model="vm.time.year" style="max-width: 4em;">年
-            <input type="number" min="1" max="12" ng-focus="vm.showHistoryData()" ng-change="vm.changeMonth(vm.time.month - 1)" ng-model="vm.time.month" style="max-width: 3em;">月
-            <input type="number" min="1" max="31" ng-focus="vm.showHistoryData()" ng-change="vm.changeDate(vm.time.day)" ng-model="vm.time.day" style="max-width: 3em;">日
-            <input type="number" min="0" max="23" ng-focus="vm.showHistoryData()" ng-change="vm.changeHour(vm.time.hour)" ng-model="vm.time.hour" style="max-width: 3em;">时
-            <input type="number" min="0" max="59" ng-focus="vm.showHistoryData()" ng-change="vm.changeMinute(vm.time.minute)" ng-model="vm.time.minute" style="max-width: 3em;">分
-            <!-- <input ng-focus="vm.stopDateSettingTimer()" ng-model="vm.time.second" style="max-width: 2em;">分 -->
+            <input ng-model="vm.rawClock" ng-keypress="vm.stopClock()" style="max-width: 10em;">
 
+            <button class="btn btn-sm btn-primary am-margin-left" ng-click="vm.showHistoryData()">获取</button>
             <button class="btn btn-sm btn-primary am-margin-left" ng-click="vm.showCurrentData()">现在</button>
         </div>
 

@@ -6,6 +6,7 @@ require('../../pavilion/map_test/jcmap.profile.directive.js');
 require('../../pavilion/map_test/jcmap.layer.tile.directive.js');
 require('../../pavilion/map_test/jcmap.feature.base.directive.js');
 require('../../_directives/jc_emei_floors_button_group');
+const moment = require('moment');
 
 module.exports = angular.module('ememtn.heat-map.show', [
     'ui.router',
@@ -31,7 +32,7 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
+function HeatMapController($rootScope, $timeout, $interval, $q, Restangular, AlertService) {
     const vm = this;
     const HeatMap = Restangular.all('heat-maps');
     const MapProfile = Restangular.all('map-profiles');
@@ -46,34 +47,30 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     vm.onFloorChange = onFloorChange;
     vm.showHistoryData = showHistoryData;
     vm.showCurrentData = showCurrentData;
-    vm.stopDateSettingTimer = stopDateSettingTimer;
-    vm.changeYear = changeYear;
-    vm.changeMonth = changeMonth;
-    vm.changeDate = changeDate;
-    vm.changeHour = changeHour;
-    vm.changeMinute = changeMinute;
+    vm.startClock = startClock;
+    vm.stopClock = stopClock;
 
-    vm.clock = new Date();
-    startDateSettingTimer();
-
-    function stopDateSettingTimer() {
-        $interval.cancel(vm.dateSettingTimer);
-        vm.dateSettingTimer = undefined;
+    function stopClock() {
+        $interval.cancel(vm.clockTimer);
+        vm.clockTimer = undefined;
     }
 
-    function startDateSettingTimer() {
-        stopDateSettingTimer();
-        vm.dateSettingTimer = $interval(() => {
+    function startClock() {
+        stopClock();
+        vm.clockTimer = $interval(() => {
             vm.clock.setSeconds(vm.clock.getSeconds() + 1);
-            setTime(vm.clock);
+            $timeout(() => {
+                vm.rawClock = moment(vm.clock).format('YYYY-MM-DD HH:mm');
+            }, 0);
         }, 1000 * 1, 0, false);
     }
 
     function onFloorChange(floor) {
         vm.floor = floor;
         fetchPavilionByFloor(floor);
-        // startDateSettingTimer();
-        startDataFetchTimer(floor);
+        // startClock();
+        // startDataFetchTimer(floor);
+        showCurrentData();
     }
 
     function fetchPavilionByFloor(floor) {
@@ -179,48 +176,24 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
         });
     }
 
-    function setTime(clock) {
-        vm.time = vm.time || {};
-        vm.time.year = clock.getFullYear();
-        vm.time.month = clock.getMonth() + 1;
-        vm.time.day = clock.getDate();
-        vm.time.hour = clock.getHours();
-        vm.time.minute = clock.getMinutes();
-        vm.time.second = clock.getSeconds();
-    }
-
     function showHistoryData() {
-        stopDateSettingTimer();
+        stopClock();
+        vm.clock = new Date(vm.rawClock);
+        if (isNaN(vm.clock.valueOf())) {
+            return AlertService.warning('不是有效的时间格式');
+        }
+        startDataFetchTimer(vm.floor);
     }
 
     function showCurrentData() {
         vm.clock = new Date();
-        setTime(vm.clock);
-        startDateSettingTimer();
-    }
-
-    function changeYear(year) {
-        vm.clock.setFullYear(year);
-    }
-
-    function changeMonth(month) {
-        vm.clock.setMonth(month);
-    }
-
-    function changeDate(day) {
-        vm.clock.setDate(day);
-    }
-
-    function changeHour(hour) {
-        vm.clock.setHours(hour);
-    }
-
-    function changeMinute(minute) {
-        vm.clock.setMinutes(minute);
+        vm.rawClock = moment(vm.clock).format('YYYY-MM-DD HH:mm');
+        startClock();
+        startDataFetchTimer(vm.floor);
     }
 
     $rootScope.$on('$stateChangeStart', () => {
-        stopDateSettingTimer();
+        stopClock();
         stopDataFetchTimer();
     });
 }
