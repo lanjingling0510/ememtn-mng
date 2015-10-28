@@ -178,11 +178,12 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular, Ale
 
     function showHistoryData() {
         stopClock();
+        stopDataFetchTimer();
         vm.clock = new Date(vm.rawClock);
         if (isNaN(vm.clock.valueOf())) {
             return AlertService.warning('不是有效的时间格式');
         }
-        startDataFetchTimer(vm.floor);
+        fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
     }
 
     function showCurrentData() {
