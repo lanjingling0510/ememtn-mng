@@ -189,6 +189,7 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular, Ale
     function showCurrentData() {
         vm.clock = new Date();
         vm.rawClock = moment(vm.clock).format('YYYY-MM-DD HH:mm');
+        fetchData(vm.floor, COL_WIDTH, COL_HEIGHT);
         startClock();
         startDataFetchTimer(vm.floor);
     }
