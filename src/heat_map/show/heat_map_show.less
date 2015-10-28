@@ -1,0 +1,26 @@
+.color-container {
+  display: flex;
+  flex-direction: row;
+
+  .color-label {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .color-graph {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 9;
+
+    .color-scale {
+      height: 2em;
+      background: linear-gradient(to right, #FFF, #D8D5FD, #B0FFA4, #FFFC8E, #FF6666);
+    }
+
+    .color-stops {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

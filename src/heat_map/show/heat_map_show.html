@@ -19,6 +19,24 @@
 
             <button class="btn btn-sm btn-primary am-margin-left" ng-click="vm.showCurrentData()">现在</button>
         </div>
+
+        <div class="col-sm-3">
+          <div class="color-container">
+            <div class="color-label">
+              <span>标尺：</span>
+            </div>
+            <div class="color-graph">
+              <div class="color-scale"> </div>
+              <div class="color-stops">
+                <span>0</span>
+                <span>{{ vm.maxValue * 0.25 || 0 }}</span>
+                <span>{{ vm.maxValue * 0.5 || 0 }}</span>
+                <span>{{ vm.maxValue * 0.75 || 0 }}</span>
+                <span>{{ vm.maxValue || 0 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
     <div id="heatmapContainer" ng-style="vm.containerStyle">

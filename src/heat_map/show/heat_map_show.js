@@ -1,3 +1,4 @@
+require('./heat_map_show.less');
 const angular = require('angular');
 const config = require('../../config.json');
 const h337 = require('../../../node_modules/heatmap.js/heatmap.js');
@@ -158,9 +159,10 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular) {
     function paintHeat(data, colWidth, colHeight) {
         const dataPoints = formatData(data, colWidth, colHeight);
         const values = dataPoints.map(d => d.value);
+        vm.maxValue = Math.max(0, ...values);
         vm.paintBoard.setData({
             min: 0,
-            max: Math.max(...values),
+            max: vm.maxValue,
             data: dataPoints,
         });
         vm.paintBoard.repaint();
