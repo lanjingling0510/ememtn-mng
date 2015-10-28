@@ -33,13 +33,16 @@
         <div class="content-banner">
           <aside class="menu-bar">
             <accordion close-others="true">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a class="" ui-sref="home">首页</a>
-                    </h4>
-                  </div>
-                </div>
+                <!--<div class="panel panel-default">-->
+                  <!--<div class="panel-heading">-->
+                    <!--<h4 class="panel-title">-->
+                      <!--<a class="" ui-sref="home">人口热力图</a>-->
+                    <!--</h4>-->
+                  <!--</div>-->
+                <!--</div>-->
+
+                <accordion-group heading="人口热力图"  ui-sref="home" is-open="true">
+                </accordion-group>
 
                 <accordion-group heading="场馆介绍">
                   <div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-setting">场馆介绍</a></div>
@@ -49,7 +52,7 @@
                 <accordion-group heading="展会指南管理">
                     <div ui-sref-active="active"><a class="menu-link" ui-sref="exhibitor-guide">展商信息</a></div>
                     <div ui-sref-active="active"><a class="menu-link" ui-sref="exhibition-list">展会活动</a></div>
-                    <div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-dist">展会分布</a></div>
+                    <div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-dist">展区分布</a></div>
                 </accordion-group>
 
                 <accordion-group heading="展区导航管理">
@@ -81,7 +84,7 @@
                   <div ui-sref-active="active"><a class="menu-link" ui-sref="treasure-type-list">宝物设置</a></div>
                   <!-- <div ui-sref-active="active"><a class="menu-link" ui-sref="prize-exchange">兑奖系统</a></div> -->
                   <div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-map.treasure-area-list">寻宝区管理</a></div>
-                  <div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-map.treasure-point-list">寻宝点设置</a></div>
+                  <!--<div ui-sref-active="active"><a class="menu-link" ui-sref="pavilion-map.treasure-point-list">寻宝点设置</a></div>-->
                 </accordion-group>
 
                 <accordion-group heading="其它">

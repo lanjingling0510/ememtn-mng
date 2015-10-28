@@ -21,13 +21,31 @@ function ExhibitionCreateController(Restangular, AlertService) {
     const Exhibition = Restangular.all('exhibitions');
     vm.query = {};
     vm.exhibition = {
-        startAt: new Date(),
-        endAt: new Date(),
+        startAt: convertDate(new Date(), 'YYYY-MM-DD h:m'),
+        endAt: convertDate(new Date(), 'YYYY-MM-DD h:m'),
     };
     vm.createExhibition = createExhibition;
 
     function pushExhibition(exhibition) {
         return Exhibition.one(exhibition._id).doPOST({}, 'push');
+    }
+
+    function convertDate(date, formate) {
+        var year = date.getFullYear(),
+            month = date.getMonth() + 1,
+            day = date.getDate(),
+            hour = date.getHours(),
+            minute = date.getMinutes(),
+            second = date.getSeconds();
+
+
+        return formate
+            .replace(/Y+/, year)
+            .replace(/M+/, month)
+            .replace(/D+/, day)
+            .replace(/h+/, hour)
+            .replace(/m+/, minute)
+            .replace(/s+/, second);
     }
 
     function createExhibition(exhibition) {

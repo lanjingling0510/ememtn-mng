@@ -1,4 +1,3 @@
-require('./news_create.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.news.create', [

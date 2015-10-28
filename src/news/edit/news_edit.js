@@ -1,4 +1,4 @@
-require('./news_edit.less');
+//require('./news_edit.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.news.edit', [

@@ -1,4 +1,4 @@
-<div class="am-g info-create" >
+<div class="container-fluid info-create">
     <ol class="am-breadcrumb ng-scope">
         <li><a class="am-icon-star" ui-sref="info-list">资讯管理</a></li>
         <li class="am-active">添加资讯</li>
@@ -32,29 +32,38 @@
 
             <div class="am-form-group">
                 <label>图片</label>
-                <div class="btn btn-primary am-margin-horizontal"
-                    ngf-change="vm.uploadFile($files)" ngf-select
-                    ngf-multiple="true" ngf-accept="'image/*'" accept="image/*"
-                    ng-disabled="vm.info._saved">添加</div>
                 <small class="text-danger">最多添加6张</small>
             </div>
 
-            <div class="am-form-group">
-                <ul class="am-avg-sm-6 am-thumbnails">
-                    <li class="img-wrap" ng-repeat="picture in vm.info.pictures">
-                        <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)" ng-show="picture.isNew"></span>
-                        <div class="img-content">
-                            <div class="img am-vertical-align text-center">
-                                <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}" />
-                            </div>
-                        </div>
-                        <input ng-model="vm.info.pictures[$index].description">
-                    </li>
-                </ul>
-            </div>
+            <ul class="am-avg-sm-6 am-thumbnails">
+                <li class="img-wrap" ng-repeat="picture in vm.info.pictures">
+                    <span class="am-icon-times img-close" ng-click="vm.deleteNewFile(picture, $index)"
+                          ng-show="picture.isNew"></span>
 
-            <div class="am-form-group am-text-right">
-                <button class="am-btn am-btn-primary" ng-disabled="vm.info._saved">提交</button>
+                    <div class="img-content">
+                        <div class="img am-vertical-align text-center">
+                            <img class="am-vertical-align-middle" ng-src="{{ picture.fileUrl }}"/>
+                        </div>
+                    </div>
+                    <input class="am-form-field" ng-model="vm.info.pictures[$index].description">
+                </li>
+
+                <li class="am-form-group img-wrap"
+                    ngf-change="vm.uploadFile($files)" ngf-select
+                    ng-model="vm.pictureFile" ngf-multiple="true"
+                    ngf-accept="'image/*'" accept="image/*"
+                    ng-disabled="vm.info.pictures.length >= 6">
+                    <div class="img-content add-btn">
+                        <img src="../../app/images/add-button.png" alt=""/>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="am-g">
+                <div class="am-u-sm-2">
+                    <button class="am-btn am-btn-block am-btn-warning am-btn-xl" ng-disabled="vm.info._saved">提交
+                    </button>
+                </div>
             </div>
         </form>
     </div>

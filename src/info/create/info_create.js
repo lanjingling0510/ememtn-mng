@@ -1,4 +1,4 @@
-require('./info_create.less');
+//require('./info_create.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.info.create', [

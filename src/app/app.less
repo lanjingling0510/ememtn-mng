@@ -30,7 +30,7 @@ table tr td {
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: transparent;
+  border: none;
 }
 
 .am-breadcrumb > li [class*="am-icon-"]:before {
@@ -151,6 +151,10 @@ aside.menu-bar {
       left: -6px;
     }
 
+    &:first-child .panel-heading:after {
+      content:'';
+    }
+
     &:nth-child(2):after{ background-image:url('./images/nav-1-1.png')}
     &:nth-child(3):after{ background-image:url('./images/nav-2-1.png')}
     &:nth-child(4):after{ background-image:url('./images/nav-3-1.png')}
@@ -187,6 +191,7 @@ aside.menu-bar {
       background-color: rgb(30, 31, 35);
       padding: 0;
       margin: 0 -15px;
+      border:none;
 
       div {
         padding: 0.5em 0 0.5em 2em;
@@ -221,6 +226,10 @@ aside.menu-bar {
       .accordion-toggle{
         color:#fff;
       }
+    }
+
+    &:first-child .panel-heading:after {
+      content:'';
     }
 
     &:nth-child(2):after{ background-image:url('./images/nav-1-2.png')}
