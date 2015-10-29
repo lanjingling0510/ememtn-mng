@@ -1,4 +1,5 @@
 const angular = require('angular');
+const moment = require('moment');
 
 module.exports = angular.module('ememtn.apk.android', [
     'ui.router',
@@ -24,7 +25,10 @@ function ApkandroidController(Restangular, AlertService) {
     fetchTheApp();
 
     function fetchTheApp() {
-        vm.app = AndroidApp.doGET().$object;
+        AndroidApp.doGET().then((android) => {
+            android.updatedAt = moment(android.updatedAt).format('YYYY-MM-DD HH:mm');
+            vm.app = android;
+        });
     }
 
     function updateTheApp(app) {

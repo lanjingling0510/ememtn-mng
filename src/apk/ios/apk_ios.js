@@ -1,4 +1,5 @@
 const angular = require('angular');
+const moment = require('moment');
 
 module.exports = angular.module('ememtn.apk.ios', [
     'ui.router',
@@ -24,7 +25,10 @@ function ApkIosController(Restangular, AlertService) {
     fetchTheApp();
 
     function fetchTheApp() {
-        vm.app = iOSApp.doGET().$object;
+        iOSApp.doGET().then((ios) => {
+            ios.updatedAt = moment(ios.updatedAt).format('YYYY-MM-DD HH:mm');
+            vm.app = ios;
+        });
     }
 
     function updateTheApp(app) {
