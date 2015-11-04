@@ -1,12 +1,15 @@
 require('./pavilion_setting.less');
 require('../../common/service.js');
 require('../../_directives/jc_emei_floors_button_group');
+require('../../_directives/floor_button_group');
 const angular = require('angular');
+const config = require('../../config.json');
 
 module.exports = angular.module('ememtn.pavilion.setting', [
     'ui.router',
     'ememtn.common.services',
     'jc.emei.floors.button_group.directive',
+    'jc.directive.floor-button-group',
 ]).config(moduleConfig)
     .controller('PavilionSettingController', PavilionSettingController);
 
@@ -23,6 +26,10 @@ function moduleConfig($stateProvider) {
 function PavilionSettingController($scope, $stateParams, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const Pavilion = Restangular.all('pavilions');
+    vm.floors = config.floors.slice(1);
+    vm.floor = vm.floors[0];
+
+    fetchPavilionByFloor(vm.floor);
     vm.fetchPavilionByFloor = fetchPavilionByFloor;
     vm.uploadPicture = uploadPicture;
     vm.removeNewPicture = removeNewPicture;
