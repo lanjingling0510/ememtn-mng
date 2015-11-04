@@ -1,7 +1,8 @@
 <div class="container-fluid pavilion-setting" >
     <div class="am-g">
-        <div class="am-u-sm-12">
-            <jc-emei-floors-button-group style="width: 300px" class="center-block" ngModel="vm.floor" on-floor-change="vm.fetchPavilionDist"></jc-emei-floors-button-group>
+        <div class="am-u-sm-12 text-center">
+            <!-- <jc-emei-floors-button-group style="width: 300px" class="center-block" ngModel="vm.floor" on-floor-change="vm.fetchPavilionDist"></jc-emei-floors-button-group> -->
+            <jc-floor-button-group floors="vm.floors" on-floor-change="vm.fetchPavilionDist" />
         </div>
     </div>
 

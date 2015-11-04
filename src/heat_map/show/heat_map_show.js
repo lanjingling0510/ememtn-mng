@@ -5,7 +5,7 @@ const h337 = require('../../../node_modules/heatmap.js/heatmap.js');
 require('../../pavilion/map_test/jcmap.profile.directive.js');
 require('../../pavilion/map_test/jcmap.layer.tile.directive.js');
 require('../../pavilion/map_test/jcmap.feature.base.directive.js');
-require('../../_directives/jc_emei_floors_button_group');
+require('../../_directives/floor_button_group');
 const moment = require('moment');
 
 module.exports = angular.module('ememtn.heat-map.show', [
@@ -14,7 +14,7 @@ module.exports = angular.module('ememtn.heat-map.show', [
     'jcmap.profile.directive',
     'jcmap.layer.tile.directive',
     'jcmap.feature.base.directive',
-    'jc.emei.floors.button_group.directive',
+    'jc.directive.floor-button-group',
 ]).config(moduleConfig)
     .controller('HeatMapController', HeatMapController);
 
@@ -37,6 +37,9 @@ function HeatMapController($rootScope, $timeout, $interval, $q, Restangular, Ale
     const HeatMap = Restangular.all('heat-maps');
     const MapProfile = Restangular.all('map-profiles');
     const PavilionMap = Restangular.all('pavilion_maps.app');
+
+    vm.floors = config.floors.slice(1);
+    vm.floor = vm.floors[0];
 
     const BLOCK_WIDTH = config.heatmap.block_width;
     const COL_WIDTH = BLOCK_WIDTH;

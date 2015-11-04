@@ -1,12 +1,13 @@
 require('./pavilion_dist.less');
 require('../../common/service.js');
-require('../../_directives/jc_emei_floors_button_group');
+require('../../_directives/floor_button_group');
+const config = require('../../config.json');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.pavilion.dist', [
     'ui.router',
     'ememtn.common.services',
-    'jc.emei.floors.button_group.directive',
+    'jc.directive.floor-button-group',
 ]).config(moduleConfig)
     .controller('PavilionDistController', PavilionDistController);
 
@@ -23,6 +24,8 @@ function moduleConfig($stateProvider) {
 function PavilionDistController($scope, $state, Restangular, UploadToTempService, AlertService) {
     const vm = this;
     const PavilionDist = Restangular.all('exhibition-dists');
+    vm.floors = config.floors.slice(1);
+    vm.floor = vm.floors[0];
     vm.uploadFile = uploadFile;
     vm.removeNewPicture = removeNewPicture;
     vm.removeOldPicture = removeOldPicture;
