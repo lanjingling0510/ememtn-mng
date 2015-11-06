@@ -1,42 +1,36 @@
-<form class="am-form am-form-horizontal">
-    <div class="am-form-group">
-        <label class="col-sm-2 am-form-label">名称</label>
+<div class="col-sm-3">
+    <div class="">
+        <form class="am-form am-form-horizontal">
+            <div class="am-form-group">
+                <label class="col-sm-2 am-form-label">名称</label>
 
-        <div class="col-sm-9">
-            <input class="am-form-field" ng-model="vm.exhibitor.title" readonly="">
-        </div>
+                <div class="col-sm-9">
+                    <input class="am-form-field" ng-model="vm.exhibitor.title" readonly="">
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <p>
+                    使用鼠标在右方地图上点击可以选择展商位置，点击“保存”按钮可以保存选择.
+                </p>
+                <p>
+                    如果区域尚不存在，可以点击“绘制多边形”按钮标记展商位置。
+                </p>
+            </div>
+
+            <div class="am-form-group text-center">
+                <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">信息详情</a>
+                <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">展品详情</a>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="vm.updateExhibitor(vm.exhibitor)">保存</button>
+                <a class="btn btn-default" ng-click="vm.modal.hide()" ui-sref="exhibitor-list">取消</a>
+            </div>
+        </form>
     </div>
-
-    <!-- <div class="am-form-group">
-        <label class="col-sm-2 am-form-label">楼层</label>
-
-        <div class="col-sm-9">
-            <select ng-model="vm.exhibitor.JCObjId" ng-options="floor.JCObjId as floor.name for floor in vm.floors track by floor.JCObjId">
-
-            </select>
-        </div>
-    </div> -->
-
-    <!-- <div class="am-form-group">
-        <label class="col-sm-3 am-form-label">推送信标Id</label>
-        <div class="col-sm-9">
-            <input class="am-form-field" ng-model="vm.exhibitor.beaconId">
-        </div>
-    </div> -->
-
-    <div class="am-form-group">
-        <p>
-            使用鼠标在右方地图上点击可以框选区域，选择完成后点击右键结束，点击“保存”按钮可以保存位置.
-        </p>
-    </div>
-
-    <div class="am-form-group text-center">
-        <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">信息详情</a>
-        <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">展品详情</a>
-    </div>
-
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="vm.updateExhibitor(vm.exhibitor)">保存</button>
-        <a class="btn btn-default" ng-click="vm.modal.hide()" ui-sref="pavilion-map.exhibitor-list">取消</a>
-    </div>
-</form>
+</div>
+<div class="col-sm-9" style="padding-top: 3em; height: 100%; border: 1px solid grey;">
+    <jc-emei-map floor="vm.exhibitor" on-draw-end="vm.onDrawEnd"
+        select-layer="'stall'" on-selected="vm.onSelectStall" />
+</div>

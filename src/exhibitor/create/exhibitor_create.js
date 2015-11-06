@@ -20,48 +20,18 @@ function moduleConfig($stateProvider) {
 function ExhibitorCreateController(Restangular, UploadToTempService, $stateParams, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
-    const Profile = Restangular.all('map-profiles');
-    const Feature = Restangular.all('map-features');
     vm.floors = config.floors.slice(1);
-
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.submitExhibitor = submitExhibitor;
     vm.onThunbnailUploaded = onThunbnailUploaded;
     vm.onPictureUploaded = onPictureUploaded;
-    vm.searchFeatures = searchFeatures;
     vm.exhibitor = {
         floor: vm.floors[0],
         pictures: [],
     };
 
-    // fetchProfile(vm.exhibitor.floor);
-    searchFeatures(vm.exhibitor.floor);
-
-    function fetchProfile(floor) {
-        vm.exhibitor.profile = Profile.get(`${floor.JCObjId}:${floor.JCObjMask}`).$object;
-    }
-
-    function searchFeatures(floor) {
-        Feature.getList({
-            JCObjId: floor.JCObjId,
-            JCObjMask: floor.JCObjMask,
-            JCLayerName: 'stall',
-        }).then((features) => {
-            vm.features = features;
-        });
-
-        fetchProfile(floor);
-    }
-
     function onThunbnailUploaded(fileUrls) {
-        // const thunbnails = fileUrls.map(function (fileUrl) {
-        //     return {
-        //         fileUrl: flileUrl,
-        //         isNew: true,
-        //     };
-        // });
-        // vm.exhibitor.thunbnails = vm.exhibitor.thunbnails.concat(thunbnails);
         vm.exhibitor.thunbnail = {
             fileUrl: fileUrls[0],
             isNew: true,

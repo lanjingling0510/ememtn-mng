@@ -1,58 +1,35 @@
 <div class="am-g exhibitor-edit">
     <ol class="am-breadcrumb ng-scope">
-        <li><a class="am-text-lg am-icon-star" ui-sref="pavilion-map.exhibitor-list">参展商管理</a></li>
+        <li><a class="am-text-lg am-icon-star" ui-sref="exhibitor-list">参展商管理</a></li>
         <li class="am-active">创建展商</li>
     </ol>
     <hr>
 
     <div class="am-margin-bottom">
         <div style="display:flex" role="form">
-                <label class="am-form-label am-padding-horizontal-sm">楼层</label>
-                <select ng-model="vm.exhibitor.floor"
-                        ng-options="floor as floor.name for floor in vm.floors track by floor.JCObjId"
-                        ng-change="vm.searchFeatures(vm.exhibitor.floor)">
-                </select>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <label class="am-form-label am-padding-horizontal-sm">展商名字</label>
-                <input ng-model="vm.exhibitor.title"  placeholder="请输入标题">
-
-
-            <!--<select ng-model="vm.exhibitor.feature" ng-options="feature as feature.name for feature in vm.features track by feature.JCGUID">-->
-            <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-            <!--</select>-->
-
 
             <!-- <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })">展品列表</a> -->
         </div>
     </div>
 
-    <!-- <div class="am-u-sm-12 am-margin-bottom">
-        <div class="am-form-inline" role="form">
-            <div class="am-form-group">
-                <label class="am-form-label">所属区域</label>
-                <span>{{ ::vm.exhibitor.area.name }}</span>
-            </div>
-        </div>
-    </div> -->
-
     <div class="am-u-sm-12">
         <form class="am-form">
+            <div class="am-form-group">
+                <label class="col-sm-1">楼层</label>
+                <div class="col-sm-4">
+                    <jc-floor-dropdown floors="vm.floors" ng-model="vm.exhibitor.floor" />
+                </div>
+            </div>
+
+            <div class="am-form-group">
+                <label class="">展商名字</label>
+                <input ng-model="vm.exhibitor.title"  placeholder="请输入标题">
+            </div>
+
             <div class="am-form-group">
                 <label>文字介绍</label>
                 <textarea placeholder="输入文字介绍" rows="6" ng-model="vm.exhibitor.description"></textarea>
             </div>
-
-            <!-- <div class="am-form-group">
-                <label>缩略图</label>
-                <div class="btn btn-primary am-margin-horizontal"
-                    ngf-change="vm.uploadFile($file, vm.onThunbnailUploaded)" ngf-select
-                    ngf-multiple="false" ngf-accept="'image/*'"
-                    accept="image/*" ng-disabled="vm.exhibitor.thunbnail">添加</div>
-                <img ng-src="{{ vm.exhibitor.thunbnail.fileUrl }}" />
-                <small class="text-danger">仅1张</small>
-            </div> -->
 
             <div class="am-form-group">
                 <label>图片</label>

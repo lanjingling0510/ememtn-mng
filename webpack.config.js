@@ -17,6 +17,7 @@ module.exports = {
             'restangular',
             'ng-file-upload',
             'd3',
+            'openlayers',
         ],
     },
     output: {

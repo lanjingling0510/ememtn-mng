@@ -2,6 +2,7 @@ require('./pavilion_map.less');
 require('../../common/service.js');
 require('./pavilion_map.service.js');
 require('./pavilion_map.directive.js');
+require('../../_directives/floor_dropdown');
 const $ = require('jquery');
 const config = require('../../config.json');
 const canvas = require('./pavilion_canvas.js');
@@ -12,6 +13,7 @@ module.exports = angular.module('ememtn.pavilion.map', [
     'ememtn.common.services',
     'ememtn.pavilion.map.service',
     'ememtn.pavilion.map.directive',
+    'jc.directive.floor-dropdown',
 ]).config(moduleConfig)
     .controller('PavilionMapController', PavilionMapController);
 
@@ -48,6 +50,8 @@ function getProfileId(map) {
 function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapService, MapPreviewService, Restangular, AlertService) {
     const vm = this;
     // vm.maps = maps;
+    vm.floors = config.floors.slice(1);
+    vm.floor = vm.floors[0];
     vm.maps = config.floors.slice(1);
     vm.map = vm.maps[0];
     vm.isSelect = false;
@@ -73,10 +77,10 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
         MapService.MapLayer.query({
             profileId: profileId,
         }).$promise.then(function (layers) {
-                $scope.map.layers = layers;
-            }).catch(function (err) {
-                AlertService.warning(err.data || err.statusText);
-            });
+            $scope.map.layers = layers;
+        }).catch(function (err) {
+            AlertService.warning(err.data || err.statusText);
+        });
     }
 
     function fetchLayer(JCLayerName) {
@@ -84,10 +88,10 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
             profileId: vm.params.profileId,
             JCLayerName: JCLayerName,
         }).$promise.then(function (layer) {
-                $scope.map.layers[layer.JCLayerName] = layer;
-            }).catch(function (err) {
-                AlertService.warning(err.data || err.statusText);
-            });
+            $scope.map.layers[layer.JCLayerName] = layer;
+        }).catch(function (err) {
+            AlertService.warning(err.data || err.statusText);
+        });
     }
 
     function fetchFeatures(profileId, JCLayerName) {
@@ -95,10 +99,10 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
             profileId: profileId,
             JCLayerName: JCLayerName,
         }).$promise.then(function (features) {
-                $scope.map.layers[JCLayerName].features = features;
-            }).catch(function (err) {
-                AlertService.warning(err.data || err.statusText);
-            });
+            $scope.map.layers[JCLayerName].features = features;
+        }).catch(function (err) {
+            AlertService.warning(err.data || err.statusText);
+        });
     }
 
     function fetchMap(mapProfile) {
@@ -111,65 +115,65 @@ function PavilionMapController($timeout, $q, $stateParams, $scope, maps, MapServ
         MapService.MapProfile.get({
             profileId: profileId,
         }).$promise.then(function (profile) {
-                $timeout(() => {
-                    map.profile = profile;
-                }, 0);
-                return MapService.MapLayer.query({
+            $timeout(() => {
+                map.profile = profile;
+            }, 0);
+            return MapService.MapLayer.query({
+                profileId: profileId,
+                JCObjId: JCObjId,
+                JCObjMask: JCObjMask,
+            }).$promise;
+        }).then(function (layers) {
+            layers.forEach(function (layer) {
+                const JCLayerName = layer.JCName;
+
+                layer.BKFields = layer.JCFields.split(' ').map(function (field) {
+                    const pats = field.split(',');
+                    return {
+                        name: pats[0],
+                        type: pats[1],
+                    };
+                });
+
+                layers[JCLayerName] = layer;
+            });
+            map.layers = layers;
+
+            const fetchFeaturesArray = layers.map(function (layer) {
+                return MapService.MapFeature.query({
                     profileId: profileId,
                     JCObjId: JCObjId,
                     JCObjMask: JCObjMask,
+                    JCLayerName: layer.JCName,
                 }).$promise;
-            }).then(function (layers) {
-                layers.forEach(function (layer) {
-                    const JCLayerName = layer.JCName;
-
-                    layer.BKFields = layer.JCFields.split(' ').map(function (field) {
-                        const pats = field.split(',');
-                        return {
-                            name: pats[0],
-                            type: pats[1],
-                        };
-                    });
-
-                    layers[JCLayerName] = layer;
-                });
-                map.layers = layers;
-
-                const fetchFeaturesArray = layers.map(function (layer) {
-                    return MapService.MapFeature.query({
-                        profileId: profileId,
-                        JCObjId: JCObjId,
-                        JCObjMask: JCObjMask,
-                        JCLayerName: layer.JCName,
-                    }).$promise;
-                });
-
-                return $q.all(fetchFeaturesArray);
-            }).then(function (featuresArray) {
-                map.layers = map.layers.map(function (layer, index) {
-                    const features = featuresArray[index];
-                    features.forEach(function (feature) {
-                        features[feature.JCGUID] = feature;
-                    });
-
-                    layer.features = features;
-                    return layer;
-                });
-                MapPreviewService.MapCanvas.init(map);
-                floorChange(map);
-                vm._map = map;
-                canvas.init({
-                    map: $('#mapCanvas'),
-                    width: $('#mapContainer svg').width(),
-                    height: $('#mapContainer svg').height(),
-                    getPositionList: function (list) {
-                        vm.positionStr = list.join(',');
-                        $scope.$apply();
-                    },
-                });
-            }).catch(function (err) {
-                AlertService.warning(err.data);
             });
+
+            return $q.all(fetchFeaturesArray);
+        }).then(function (featuresArray) {
+            map.layers = map.layers.map(function (layer, index) {
+                const features = featuresArray[index];
+                features.forEach(function (feature) {
+                    features[feature.JCGUID] = feature;
+                });
+
+                layer.features = features;
+                return layer;
+            });
+            MapPreviewService.MapCanvas.init(map);
+            floorChange(map);
+            vm._map = map;
+            canvas.init({
+                map: $('#mapCanvas'),
+                width: $('#mapContainer svg').width(),
+                height: $('#mapContainer svg').height(),
+                getPositionList: function (list) {
+                    vm.positionStr = list.join(',');
+                    $scope.$apply();
+                },
+            });
+        }).catch(function (err) {
+            AlertService.warning(err.data);
+        });
     }
 
     function floorChange(map) {

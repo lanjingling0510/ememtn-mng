@@ -23,6 +23,7 @@
     "moment": "^2.10.6",
     "ng-file-upload": "^5.2.0",
     "node-uuid": "^1.4.3",
+    "openlayers": "^3.10.1",
     "restangular": "^1.5.1"
   },
   "devDependencies": {

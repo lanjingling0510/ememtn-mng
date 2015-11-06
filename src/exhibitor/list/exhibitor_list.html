@@ -1,31 +1,37 @@
-<div class="am-margin-vertical">
-    <a class="btn btn-primary" ui-sref="pavilion-map.exhibitor-batch">批量删除</a>
-    <a class="btn btn-primary" ui-sref="exhibitor-create">新建</a>
-</div>
+<div class="col-sm-3">
+    <div class="row">
+        <!-- <jc-floor-button-group floors="vm.floors" on-floor-change="vm.onFloorChange" /> -->
+        <jc-floor-dropdown floors="vm.floors" on-floor-change="vm.onFloorChange" />
+    </div>
+    <div class="am-margin-vertical">
+        <a class="btn btn-primary" ui-sref="pavilion-map.exhibitor-batch">批量删除</a>
+        <a class="btn btn-primary" ui-sref="exhibitor-create">新建</a>
+    </div>
 
-<div class="">
-    <ui-view />
-</div>
+    <div class="">
+        <ui-view />
+    </div>
 
-<div class="">
-    <ul class="am-list">
-        <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
-            <a ui-sref="pavilion-map.exhibitor-list.exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
-        </li>
-    </ul>
-</div>
+    <div class="">
+        <ul class="am-list">
+            <li ng-repeat="exhibitor in vm.exhibitors track by exhibitor._id">
+                <a ui-sref="exhibitor-inline-edit({ exhibitorId: exhibitor._id })">{{ exhibitor.title }}</a>
+            </li>
+        </ul>
+    </div>
 
-<div class="">
-    <pagination total-items="vm.query.total"
-                ng-model="vm.query.page"
-                items-per-page="vm.query.pageSize"
-                max-size="3"
-                class="pagination-sm"
-                boundary-links="true"
-                direction-links="true"
-                ng-change="vm.searchExhibitors(vm.query, 0)"
-    ></pagination>
+    <div class="">
+        <pagination total-items="vm.query.total"
+                    ng-model="vm.query.page"
+                    items-per-page="vm.query.pageSize"
+                    max-size="3"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    direction-links="true"
+                    ng-change="vm.searchExhibitors(vm.query, 0)"
+        ></pagination>
+    </div>
 </div>
-
-<!-- <a class="btn btn-primary" ui-sref="pavilion-map.exhibitor-list.exhibitor-inline-create">新建</a> -->
-<!-- <a class="btn btn-primary" ui-sref="exhibitor-create">新建</a> -->
+<div class="col-sm-9" style="padding-top: 3em; height: 100%; border: 1px solid grey;">
+    <jc-emei-map floor="vm.floor" on-draw-end="vm.onDrawEnd" />
+</div>

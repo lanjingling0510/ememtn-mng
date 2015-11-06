@@ -1,0 +1,8 @@
+<div class="map-container">
+    <div class="map-toolbar">
+        <button ng-click="drawPoint()">绘制点</button>
+        <button ng-click="drawPolygon()">绘制多边形</button>
+        <button ng-click="removeSelected(_selectedFeature, _selectedLayer)" ng-disabled="!_selectedFeature">删除所选</button>
+    </div>
+    <div id="map-canvas" class="map-canvas"></div>
+</div>
