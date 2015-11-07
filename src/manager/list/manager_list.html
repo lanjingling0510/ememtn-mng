@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="page-header">后台管理员</h1>
+    </div>
+
+    <div class="row">
+        <button class="btn btn-danger" ng-click="vm.removeCheckedAttendants()">删除</button>
+        <a class="btn btn-primary" ui-sref="manager-create">添加</a>
+    </div>
+
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="vm.managers._checked" ng-click="vm.checkAll()" /></th>
+                <th>手机号</th>
+                <th>名字</th>
+                <th>昵称</th>
+                <th>权限</th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <td colspan="5" class="text-center">
+                    <pagination total-items="vm.query.total"
+                                ng-model="vm.query.page"
+                                items-per-page="vm.query.pageSize"
+                                max-size="7"
+                                class="pagination-sm"
+                                boundary-links="true"
+                                direction-links="true"
+                                ng-change="vm.searchAttendants(vm.query)"
+                            ></pagination>
+                </td>
+            </tr>
+            </tfoot>
+
+            <tbody>
+            <tr ng-repeat='manager in vm.managers | orderBy: "-createdAt" track by manager._id'>
+                <td><input type="checkbox" ng-model="vm.managers[$index]._checked"></td>
+                <td>
+                    <a ui-sref="manager-edit({managerId: manager._id})">
+                        {{:: manager.phone }}
+                    </a>
+                </td>
+                <td>{{:: manager.realname }}</td>
+                <td>{{:: manager.nickname }}</td>
+                <td>
+                    <span class="bg-info" ng-show="manager.scope.indexOf('news_editor') >= 0">新闻采写人员</span>
+                    <span class="bg-info" ng-show="manager.scope.indexOf('censor') >= 0">新闻审察人员</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

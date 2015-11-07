@@ -30,6 +30,11 @@ function BearerInterceptor($rootScope, $q, $injector) {
             if (rejection.status === 401) {
                 return $state.go('login');
             }
+            if (rejection.status === 403) {
+                return $q.reject({
+                    data: '权限不足',
+                });
+            }
             if (rejection.status === 404) {
                 return $q.reject({
                     data: '未找到此项目',

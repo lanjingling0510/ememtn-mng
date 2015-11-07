@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row text-center">
+        <h1>修改后台管理帐号</h1>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-7 am-u-sm-centered">
+            <form class="am-form am-form-horizontal">
+                <div class="am-form-group">
+                    <label class="am-form-label am-u-sm-3" for="">手机号</label>
+                    <div class="am-u-sm-9">
+                        <input class="am-form-field" ng-model="vm.manager.phone" placeholder="手机号即为登陆帐号"/>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label am-u-sm-3" for="">姓名</label>
+                    <div class="am-u-sm-9">
+                        <input class="am-form-field" ng-model="vm.manager.realname" />
+                    </div>
+
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label am-u-sm-3" for="">昵称</label>
+                    <div class="am-u-sm-9">
+                        <input class="am-form-field" ng-model="vm.manager.nickname" />
+                    </div>
+
+                </div>
+                <div class="am-form-group">
+                    <label class="am-form-label am-u-sm-3" for="">权限</label>
+                    <div class="am-u-sm-9">
+                        <label for="">
+                            <input type="checkbox" ng-model="vm.manager._scope.news_editor" />
+                            新闻采写人员
+                        </label>
+                        <label for="">
+                            <input type="checkbox" ng-model="vm.manager._scope.news_censor" />
+                            新闻审察人员
+                        </label>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-9 am-u-sm-offset-3">
+                        <button class="btn btn-primary" ng-click="vm.updateManager(vm.manager)">保存</button>
+                        <a class="btn btn-danger" ui-sref="manager-list">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

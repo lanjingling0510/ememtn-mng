@@ -85,6 +85,10 @@ require('../treasure_type/list/treasure_type_list.js');
 require('../apk/ios/apk_ios.js');
 require('../apk/android/apk_android.js');
 
+require('../manager/create/manager_create.js');
+require('../manager/list/manager_list.js');
+require('../manager/edit/manager_edit.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -143,6 +147,9 @@ module.exports = angular.module('ememtn', [
     'ememtn.apk.ios',
     'ememtn.apk.android',
     'ememtn.pavilion.map-test',
+    'ememtn.manager.create',
+    'ememtn.manager.list',
+    'ememtn.manager.edit',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */
