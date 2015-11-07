@@ -1,7 +1,7 @@
 <div class="am-g news-create" >
     <ol class="am-breadcrumb">
         <li><a class="am-icon-star" ui-sref="news-list">新闻管理</a></li>
-        <li class="  am-active">添加新闻</li>
+        <li class="  am-active">编辑新闻</li>
     </ol>
     <hr>
 
@@ -54,8 +54,10 @@
                 </ul>
             </div>
 
-            <div class="am-form-group am-text-right">
+            <div class="am-form-group am-text-left">
                 <button class="am-btn am-btn-primary" ng-disabled="vm.news._saved">提交</button>
+                <span class="am-btn am-btn-warning" ng-hide="vm.news.censored" ng-click="vm.allowNews(vm.news)">允许发布</span>
+                <a class="am-btn am-btn-secondary" ui-sref="news-list">返回</a>
             </div>
         </form>
     </div>

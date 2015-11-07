@@ -1,4 +1,3 @@
-//require('./info_edit.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.info.edit', [
@@ -24,6 +23,7 @@ function InfoEditController(AlertService, $stateParams, Restangular, UploadToTem
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
+    vm.allowInfo = allowInfo;
     vm.submitInfo = submitInfo;
 
     fetchInfo($stateParams.infoId);
@@ -82,6 +82,14 @@ function InfoEditController(AlertService, $stateParams, Restangular, UploadToTem
                 pic.isOld = false;
             });
             AlertService.success('修改成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function allowInfo(info) {
+        info.one('actions', 'allow').put().then(() => {
+            AlertService.success('操作成功');
         }).catch((err) => {
             AlertService.warning(err.data);
         });

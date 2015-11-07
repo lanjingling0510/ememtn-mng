@@ -1,4 +1,3 @@
-//require('./news_edit.less');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.news.edit', [
@@ -24,6 +23,7 @@ function NewsEditController(AlertService, $stateParams, Restangular, UploadToTem
     vm.uploadFile = uploadFile;
     vm.deleteNewFile = deleteNewFile;
     vm.deleteOldFile = deleteOldFile;
+    vm.allowNews = allowNews;
     vm.submitNews = submitNews;
 
     fetchNews($stateParams.newsId);
@@ -82,6 +82,14 @@ function NewsEditController(AlertService, $stateParams, Restangular, UploadToTem
                 pic.isOld = false;
             });
             AlertService.success('修改成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function allowNews(news) {
+        news.one('actions', 'allow').put().then(() => {
+            AlertService.success('操作成功');
         }).catch((err) => {
             AlertService.warning(err.data);
         });

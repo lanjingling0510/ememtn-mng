@@ -42,6 +42,9 @@
                         置顶
                     </li>
                     <li>
+                        审察状态
+                    </li>
+                    <li>
 
                     </li>
                 </ul>
@@ -66,6 +69,10 @@
                         <button class="am-btn am-text-warning am-btn-default am-btn-xs" style="background:#fff"
                                 ng-click="vm.stickyInfo(info)">顶
                         </button>
+                    </li>
+                    <li>
+                        <span ng-show="info.censored">已审察</span>
+                        <span ng-hide="info.censored">未审察</span>
                     </li>
                     <li class="am-icon-sort-desc"></li>
                 </ul>
