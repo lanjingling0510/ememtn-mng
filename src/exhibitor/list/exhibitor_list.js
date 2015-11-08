@@ -1,3 +1,4 @@
+require('./exhibitor_list.less');
 require('../../common/service.js');
 require('../../treasure_area/virtual/treasure_area_virtual.js');
 require('../../_directives/emei_map');
@@ -67,6 +68,6 @@ function ExhibitorListController($timeout, $scope, Restangular, AlertService) {
     }
 
     function onDrawEnd(coordinates) {
-        console.log(coordinates);
+        console.log(coordinates); // eslint-disable-line
     }
 }

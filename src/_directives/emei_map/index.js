@@ -1,3 +1,4 @@
+require('./style.less');
 const angular = require('angular');
 const ol = require('openlayers');
 module.exports = angular.module('jc.emei.map.directive', [])
@@ -223,13 +224,12 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 };
                 const rgba = `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha})`;
                 const baseURL = '/apis/map-feature-geo.app';
-                const layer = new ol.layer.Vector({
-                    source: new ol.source.Vector({
-                        url: `${baseURL}?JCObjId=${floor.JCObjId}&JCObjMask=${floor.JCObjMask}&JCLayerName=${vectorLayerName}`,
-                        format: new ol.format.GeoJSON(),
-                    }),
-                    zIndex: zIndex,
-                    style: new ol.style.Style({
+                const source = new ol.source.Vector({
+                    url: `${baseURL}?JCObjId=${floor.JCObjId}&JCObjMask=${floor.JCObjMask}&JCLayerName=${vectorLayerName}`,
+                    format: new ol.format.GeoJSON(),
+                });
+                const styles = (function () {
+                    const style = new ol.style.Style({
                         fill: new ol.style.Fill({
                             color: rgba,
                         }),
@@ -243,7 +243,22 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                                 color: rgba,
                             }),
                         }),
-                    }),
+                        text: new ol.style.Text({
+                            text: '',
+                        }),
+                    });
+                    const _styles = [style];
+                    return function (feature) {
+                        if (feature.get('JCLayerName') === 'stall') {
+                            style.getText().setText(feature.get('name'));
+                        }
+                        return _styles;
+                    };
+                })();
+                const layer = new ol.layer.Vector({
+                    source: source,
+                    zIndex: zIndex,
+                    style: styles,
                 });
                 map.addLayer(layer);
 
