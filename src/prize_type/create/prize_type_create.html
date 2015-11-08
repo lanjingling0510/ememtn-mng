@@ -1,0 +1,102 @@
+<div class="col-lg-12">
+    <h1 class="page-header">新增奖品类型</h1>
+</div>
+
+<div class="col-lg-12">
+    <form class="form-horizontal" role="form" ng-submit="vm.createPrizeType(vm.prizeType)">
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">名称</label>
+
+            <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="vm.prizeType.name">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">详情</label>
+
+            <div class="col-sm-6">
+                <textarea class="form-control" row="6" ng-model="vm.prizeType.description"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">图标</label>
+
+            <div class="col-sm-6">
+                <button class="btn btn-info"
+                    ngf-change="vm.uploadFile($files)" ngf-select
+                    ng-model="vm.prizeTypeIcons"
+                    ngf-accept="'image/*'" accept="image/*"
+                    ngf-keep="false"
+                    ngf-keep-distinct="true"
+                    ngf-reset-on-click="true"
+                    ngf-reset-model-on-click="true">选择图标</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">图标预览</label>
+
+            <div class="col-sm-6">
+                <img style="height: 64px; width: 64px;"
+                     ngf-src="vm.prizeTypeIcons[0]"
+                     ngf-default-src="/common/coupon_placeholder.png">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">是否可以兑换</label>
+
+            <div class="col-sm-6">
+                <label class="toggle">
+                    <input type="checkbox" ng-true-value="'yes'" ng-false-value="'no'" ng-model="vm.prizeType.exchangeable">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">兑换需要宝藏数量</label>
+
+            <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="vm.prizeType.exchangeCost">
+                <span class="help-block">兑换此奖品需要的宝藏数量</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">有效期截至</label>
+
+            <div class="col-sm-6">
+                <input type="text" class="form-control" ng-model="vm.prizeType.validTo"
+                    is-open="vm.calender.opened" datepicker-popup="{{ vm.calender.format }}"
+                    min-date="vm.calender.minDate" max-date="vm.calender.maxDate"
+                    datepicker-options="vm.calender.dateOptions"
+                    ng-required="true" close-text="Close" ng-click="vm.openCalender()" />
+
+                <!-- <div class="form-group hidden">
+                    <input type="text" class="form-control" ng-model="vm.prizeType.validTo"
+                        is-open="vm.calender.opened" datepicker-popup="{{ vm.calender.format }}"
+                        min-date="vm.calender.minDate" max-date="vm.calender.maxDate"
+                        datepicker-options="vm.calender.dateOptions" on-open-focus="vm.calener.onOpenFocus"
+                        ng-required="true" close-text="Close" ng-click="vm.openCalender()" />
+                    <span class="input-group-btn hidden">
+                        <span class="btn btn-default" ng-click="vm.openCalender()">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </span>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-7 text-right">
+                <button type="submit" class="btn btn-primary">保存</button>
+                <a class="btn btn-info" ui-sref="prize-type-list">取消</a>
+            </div>
+        </div>
+    </form>
+</div>

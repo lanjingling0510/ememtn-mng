@@ -1,30 +1,30 @@
 require('../../common/service.js');
-require('./prize_types_create.service.js');
-require('../../treasure_game/config/treasury_game.less');
+require('../../treasure_game/list/treasury_game_list.less');
 const angular = require('angular');
 
-module.exports = angular.module('sanya.prize_type.create', [
+module.exports = angular.module('ememtn.prize-type.create', [
     'ui.router',
     'ui.bootstrap',
     'ememtn.common.services',
-    'sanya.prize_types_create.service',
 ]).config(moduleConfig)
-    .controller('PrizeTypesCreateController', PrizeTypesCreateController);
+    .controller('PrizeTypeCreateController', PrizeTypeCreateController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider.state('prize_types_create', {
-        url: '/prize-types/new',
-        template: require('./prize_types_create.html'),
-        controller: 'PrizeTypesCreateController as scope',
+    $stateProvider.state('prize-types-create', {
+        url: '/prize-types/_create',
+        template: require('./prize_type_create.html'),
+        controller: 'PrizeTypeCreateController as vm',
     });
 }
 
 /* @ngInject */
-function PrizeTypesCreateController($stateParams, PrizeTypesCreateService, AlertService) {
+function PrizeTypeCreateController($stateParams, Restangular, UploadToTempService, AlertService) {
     const vm = this;
+    const PrizeType = Restangular.all('prize-types');
     vm.openCalender = openCalender;
     vm.createPrizeType = createPrizeType;
+    vm.uploadFile = uploadFile;
     vm.prizeType = {
         validTo: new Date(),
     };
@@ -47,11 +47,20 @@ function PrizeTypesCreateController($stateParams, PrizeTypesCreateService, Alert
         vm.calender.opened = true;
     }
 
-    function createPrizeType(prizeTypeIcon, prizeType) {
-        PrizeTypesCreateService.create(prizeTypeIcon, prizeType)
+    function createPrizeType(prizeType) {
+        PrizeType.post(prizeType)
         .then(function () {
             AlertService.success('创建成功');
         }).catch(function (err) {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function uploadFile(files) {
+        if (!files || files.length === 0) { return false; }
+        UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
+            vm.prizeType.icon = fileUrls[0];
+        }).catch((err) => {
             AlertService.warning(err.data);
         });
     }

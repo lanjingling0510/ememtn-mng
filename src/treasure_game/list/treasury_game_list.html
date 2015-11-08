@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <h1 class="page-header">寻宝活动配置 </h1>
+</div>
+
+<div class="col-md-12">
+    <a class="btn btn-info" ui-sref="treasure_game_map_list">设置寻宝点</a>
+    <a class="btn btn-info" ui-sref="treasury-game-create">创建新游戏</a>
+</div>
+
+<div class="col-md-12">
+    <form class="form-horizontal" role="form">
+        <h2 class="text-center">当前寻宝游戏</h2>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">活动名称</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="vm.runningGame.name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">活动介绍</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" ng-model="vm.runningGame.description"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">每日宝藏总产出数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="vm.runningGame.maxTreasures" />
+                <span class="help-block">每日宝藏产出的上限</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">寻获宝藏几率的百分比</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="vm.runningGame.lucky" />
+                <span class="help-block">单次寻宝寻获宝藏的几率, 如87%则输入87, 范围为0-100</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">单人最大寻获宝藏数量</label>
+            <div class="col-sm-6">
+                <input class="form-control" ng-model="vm.runningGame.treasuresPerTourist" />
+                <span class="help-block">每位游客在此次活动中最多可以寻获的宝藏数量</span>
+            </div>
+        </div>
+
+        <div class="form-group text-center">
+            <span type="submit" class="btn btn-primary" ng-click="vm.updateGame(vm.runningGame)" ng-disabled="!vm.runningGame">修改游戏</span>
+            <span type="submit" class="btn btn-danger" ng-click="vm.endGame(vm.runningGame)" ng-disabled="!vm.runningGame">结束游戏</span>
+        </div>
+    </form>
+</div>
+
+<div class="col-md-12">
+    <h2 class="text-center">历史寻宝游戏</h2>
+    <ul>
+        <li ng-repeat="endedGame in vm.endedGames track by endedGame._id">{{::endedGame.name}}</li>
+    </ul>
+</div>

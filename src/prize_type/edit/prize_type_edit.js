@@ -1,28 +1,28 @@
 require('../../common/service.js');
-require('./prize_types_edit.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.prize_type.edit', [
+module.exports = angular.module('ememtn.prize-type.edit', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.prize_type.edit.service',
 ]).config(moduleConfig)
-    .controller('PrizeTypesEditController', PrizeTypesEditController);
+    .controller('PrizeTypeEditController', PrizeTypeEditController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
     $stateProvider.state('prize_types_edit', {
         url: '/prize-types/:_id',
-        template: require('./prize_types_edit.html'),
-        controller: 'PrizeTypesEditController as scope',
+        template: require('./prize_type_edit.html'),
+        controller: 'PrizeTypeEditController as vm',
     });
 }
 
 /* @ngInject */
-function PrizeTypesEditController($stateParams, PrizeTypesEditService, AlertService) {
+function PrizeTypeEditController($stateParams, UploadToTempService, Restangular, AlertService) {
     const vm = this;
+    const PrizeType = Restangular.all('prize-types');
     vm.openCalender = openCalender;
     vm.updatePrizeType = updatePrizeType;
+    vm.uploadFile = uploadFile;
     vm.calender = {
         opened: false,
         minDate: new Date(),
@@ -39,19 +39,26 @@ function PrizeTypesEditController($stateParams, PrizeTypesEditService, AlertServ
         vm.calender.opened = true;
     }
 
-    function updatePrizeType(prizeTypeIcon, prizeType) {
-        PrizeTypesEditService.update(prizeTypeIcon, prizeType)
-        .then(function () {
+    function updatePrizeType(prizeType) {
+        prizeType.put().then(function () {
             AlertService.success('更新成功');
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
     }
 
+    function uploadFile(files) {
+        if (!files || files.length === 0) { return false; }
+        UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
+            vm.prizeType.icon = fileUrls[0];
+            vm.prizeType._newIcon = true;
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
     function initController() {
-        PrizeTypesEditService.get({
-            prizeTypeId: $stateParams._id,
-        }).$promise.then(function (prizeType) {
+        PrizeType.get($stateParams._id).then(function (prizeType) {
             vm.prizeType = prizeType;
         }).catch(function (err) {
             AlertService.warning(err.data);

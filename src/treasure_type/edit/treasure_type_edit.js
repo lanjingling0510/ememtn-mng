@@ -12,33 +12,40 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasure-type-edit', {
         url: '/treasure-types/:treasureTypeId',
         template: require('./treasure_type_edit.html'),
-        controller: 'TreasureTypeEditController as scope',
+        controller: 'TreasureTypeEditController as vm',
     });
 }
 
 /* @ngInject */
-function TreasureTypeEditController($stateParams, TreasureTypeEditService, AlertService) {
+function TreasureTypeEditController($stateParams, UploadToTempService, Restangular, AlertService) {
     const vm = this;
+    const TreasureType = Restangular.all('treasure-types');
     vm.updateTreasureType = updateTreasureType;
+    vm.uploadFile = uploadFile;
 
-    initController();
+    function uploadFile(files) {
+        if (!files || files.length === 0) { return false; }
+        UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
+            vm.treasureType.icon = fileUrls[0];
+            vm.treasureType._newIcon = true;
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
 
-    function updateTreasureType(treasureTypeIcon, treasureType) {
-        TreasureTypeEditService.update(treasureTypeIcon, treasureType)
-        .then(function () {
+    function updateTreasureType(treasureType) {
+        treasureType.put().then(function () {
             AlertService.success('更新成功');
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
     }
 
-    function initController() {
-        TreasureTypeEditService.get({
-            treasureTypeId: $stateParams.treasureTypeId,
-        }).$promise.then(function (treasureType) {
+    (function initController() {
+        TreasureType.get($stateParams.treasureTypeId).then(function (treasureType) {
             vm.treasureType = treasureType;
         }).catch(function (err) {
             AlertService.warning(err.data);
         });
-    }
+    })();
 }

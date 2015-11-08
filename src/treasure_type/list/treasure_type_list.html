@@ -55,13 +55,13 @@
 
             <tbody>
                 <tr ng-repeat='treasureType in vm.treasureTypes track by treasureType._id'>
-                    <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="/apis/treasure-types/{{ ::treasureType._id }}/icon?bearer={{ ::auth.accessToken }}&timestamp={{ vm.timestamp }}" alt="图标" /></td>
+                    <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="{{treasureType.icon}}" alt="图标" /></td>
                     <td>{{ ::treasureType.name }}</td>
                     <td>{{ ::treasureType.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
                     <td>
                         <a class="btn btn-info btn-xs" ui-sref="treasure-type-edit({ treasureTypeId: treasureType._id })">编辑</a>
                         <button class="btn btn-warning btn-xs" ng-click="vm.disableCouponCategory(treasureType)" ng-show="treasureType.status === 'valid'">禁用此分类</button>
-                        <button class="btn btn-warning btn-xs" ng-click="vm.enableCouponCategory(treasureType)" ng-show="treasureType.status === 'invalid'">启用此分类</button>
+                        <button class="btn btn-info btn-xs" ng-click="vm.enableCouponCategory(treasureType)" ng-show="treasureType.status === 'invalid'">启用此分类</button>
                     </td>
                 </tr>
             </tbody>

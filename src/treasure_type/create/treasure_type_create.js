@@ -1,11 +1,9 @@
 require('../../common/service.js');
-require('./treasure_type_create.service.js');
 const angular = require('angular');
 
 module.exports = angular.module('ememtn.treasure-type.create', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.treasure_types_create.service',
 ]).config(moduleConfig)
     .controller('TreasureTypeCreateController', TreasureTypeCreateController);
 
@@ -14,25 +12,34 @@ function moduleConfig($stateProvider) {
     $stateProvider.state('treasure-type-create', {
         url: '/treasure-types/_create',
         template: require('./treasure_type_create.html'),
-        controller: 'TreasureTypeCreateController as scope',
+        controller: 'TreasureTypeCreateController as vm',
     });
 }
 
 /* @ngInject */
-function TreasureTypeCreateController($stateParams, TreasureTypesCreateService, AlertService) {
+function TreasureTypeCreateController($stateParams, Restangular, UploadToTempService, AlertService) {
     const vm = this;
+    const TreasureType = Restangular.all('treasure-types');
+    vm.uploadFile = uploadFile;
 
-    vm.createTreasureType = function createTreasureType(treasureTypeIcon, treasureType) {
-        TreasureTypesCreateService.create(treasureTypeIcon, treasureType)
-        .then(function () {
+    function uploadFile(files) {
+        if (!files || files.length === 0) { return false; }
+        UploadToTempService.upload(files).then((fileUrls) => { // eslint-disable-line new-cap
+            vm.treasureType.icon = fileUrls[0];
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    vm.createTreasureType = function createTreasureType(treasureType) {
+        TreasureType.post(treasureType).then(() => {
             AlertService.success('创建成功');
-        }).catch(function (err) {
+        }).catch((err) => {
             AlertService.warning(err.data);
         });
     };
-    initController();
 
-    function initController() {
+    (function initController() {
         vm.treasureType = {};
-    }
+    })();
 }

@@ -37,11 +37,11 @@ require('../post/detail/post_detail.js');
 require('../feedback/list/feedback_list.js');
 require('../feedback/edit/feedback_edit.js');
 
-require('../treasure_map/list/treasure_map_list.js');
-require('../treasure_map/create/treasure_map_create.js');
+// require('../treasure_map/list/treasure_map_list.js');
+// require('../treasure_map/create/treasure_map_create.js');
 
-require('../treasure_game/config/treasury_game_config.js');
-require('../roulette_game/config/roulette_game_config.js');
+require('../treasure_game/list/treasury_game_list.js');
+require('../roulette_game/config/roulette_game.js');
 
 require('../treasure_point/list/treasure_point_list.js');
 require('../treasure_point/inline_create/treasure_point_inline_create.js');
@@ -61,7 +61,7 @@ require('../notification/push/notification_push.js');
 
 require('../page_structure/setting/page_structure_setting.js');
 
-require('../prize/exchange/prize_exchange.js');
+// require('../prize/exchange/prize_exchange.js');
 
 require('../exhibitor/list/exhibitor_list.js');
 require('../exhibitor/create/exhibitor_create.js');
@@ -71,16 +71,22 @@ require('../exhibitor/inline_create/exhibitor_inline_create.js');
 require('../exhibitor/guide/exhibitor_guide.js');
 require('../exhibitor/batch/exhibitor_batch.js');
 
-require('../treasure_area/list/treasure_area_list.js');
-require('../treasure_area/batch/treasure_area_batch.js');
-require('../treasure_area/inline_create/treasure_area_inline_create.js');
-require('../treasure_area/inline_edit/treasure_area_inline_edit.js');
-require('../treasure_area/virtual/treasure_area_virtual.js');
+// require('../treasure_area/list/treasure_area_list.js');
+// require('../treasure_area/batch/treasure_area_batch.js');
+// require('../treasure_area/inline_create/treasure_area_inline_create.js');
+// require('../treasure_area/inline_edit/treasure_area_inline_edit.js');
+// require('../treasure_area/virtual/treasure_area_virtual.js');
+
+require('../prize_type/create/prize_type_create.js');
+require('../prize_type/list/prize_type_list.js');
+require('../prize_type/edit/prize_type_edit.js');
 
 require('../exhibit/create/exhibit_create.js');
 require('../exhibit/list/exhibit_list.js');
 
+require('../treasure_type/create/treasure_type_create.js');
 require('../treasure_type/list/treasure_type_list.js');
+require('../treasure_type/edit/treasure_type_edit.js');
 
 require('../apk/ios/apk_ios.js');
 require('../apk/android/apk_android.js');
@@ -100,10 +106,10 @@ module.exports = angular.module('ememtn', [
     'ememtn.admins.password-change',
     'ememtn.tourist.list',
     'ememtn.tourist.detail',
-    'ememtn.treasure-area.list',
-    'ememtn.treasure-area.batch',
-    'ememtn.treasure-area.inline-create',
-    'ememtn.treasure-area.inline-edit',
+    // 'ememtn.treasure-area.list',
+    // 'ememtn.treasure-area.batch',
+    // 'ememtn.treasure-area.inline-create',
+    // 'ememtn.treasure-area.inline-edit',
     'ememtn.attendant.list',
     'ememtn.attendant.create',
     'ememtn.feedback.list',
@@ -138,11 +144,11 @@ module.exports = angular.module('ememtn', [
     'ememtn.exhibitor.batch',
     'ememtn.exhibit.create',
     'ememtn.exhibit.list',
-    'ememtn.prize.exchange',
-    'ememtn.treasury_game.config',
-    'ememtn.treasure_map.list',
-    'ememtn.treasure_map.create',
-    'ememtn.roulette_game.config',
+    // 'ememtn.prize.exchange',
+    'ememtn.treasury-game.list',
+    // 'ememtn.treasure_map.list',
+    // 'ememtn.treasure_map.create',
+    'ememtn.roulette-game.config',
     'ememtn.treasure-type.list',
     'ememtn.apk.ios',
     'ememtn.apk.android',
@@ -150,6 +156,9 @@ module.exports = angular.module('ememtn', [
     'ememtn.manager.create',
     'ememtn.manager.list',
     'ememtn.manager.edit',
+    'ememtn.prize-type.create',
+    'ememtn.prize-type.list',
+    'ememtn.prize-type.edit',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */

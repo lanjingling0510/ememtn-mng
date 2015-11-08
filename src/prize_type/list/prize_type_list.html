@@ -3,7 +3,7 @@
 </div>
 
 <div class="col-sm-12">
-    <a class="btn btn-success btn-sm" ui-sref="prize_types_create">创建分类</a>
+    <a class="btn btn-success btn-sm" ui-sref="prize-types-create">创建分类</a>
 </div>
 
 <div class="col-sm-12 form-horizontal well">
@@ -62,8 +62,8 @@
         </tfoot>
 
         <tbody>
-            <tr ng-repeat='prizeType in vm.prizeTypes track by prizeType._id'>
-                <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="/apis/prize-types/{{ prizeType._id }}/icon?bearer={{ auth.accessToken }}" alt="图标" /></td>
+            <tr ng-repeat='prizeType in vm.prizeTypes'>
+                <td><img class="img-responsive" style="height: 48px; width: 48px;" ng-src="{{prizeType.icon}}" alt="图标" /></td>
                 <td>{{ ::prizeType.name }}</td>
                 <td>
                     <span ng-show="prizeType.exchangeable === vm.EXCHANGE.EXCHANGEABLE">可以兑换</span>

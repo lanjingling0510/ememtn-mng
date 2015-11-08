@@ -1,0 +1,70 @@
+/*toggle 样式*/
+
+.toggle {
+    display: inline-block;
+    pointer-events: auto;
+    margin: -5px;
+    padding: 5px;
+
+}
+.toggle input {
+    display: none;
+}
+
+.toggle .track {
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: background-color, border;
+    transition-property: background-color, border;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 62px;
+    height: 31px;
+    border: solid 2px #e6e6e6;
+    border-radius: 20px;
+    background-color: #fff;
+    cursor: pointer;
+    pointer-events: none;
+    position:relative;
+}
+
+.toggle .track:after{
+    content: '开';
+    top: 3px;
+    left: 10px;
+}
+.toggle .track:before{
+    content: '关';
+    top: 3px;
+    right: 8px;
+}
+.toggle .track:before,.toggle .track:after{
+    display: block;
+    position: absolute;
+}
+.toggle .handle {
+    -webkit-transition: 0.3s cubic-bezier(0, 1.1, 1, 1.1);
+    transition: 0.3s cubic-bezier(0, 1.1, 1, 1.1);
+    -webkit-transition-property: background-color, transform;
+    transition-property: background-color, transform;
+    position: absolute;
+    display: block;
+    width: 27px;
+    height: 27px;
+    border-radius: 27px;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    background-color: #fff;
+}
+
+.toggle input:checked + .track .handle {
+    -webkit-transform: translate3d(30px, 0, 0);
+    transform: translate3d(30px, 0, 0);
+}
+.toggle input:checked + .track {
+    background-color: rgba(39, 179, 190, 0.65);
+}

@@ -21,14 +21,9 @@ function moduleConfig($stateProvider) {
 }
 
 /* @ngInject */
-function TreasureTypeListController($timeout, $stateParams, TreasureTypesService, AlertService) {
+function TreasureTypeListController($timeout, $stateParams, Restangular, AlertService) {
     const vm = this;
-    Object.defineProperty(vm, 'timestamp', {
-        get: function () {
-            return Date.now();
-        },
-    });
-
+    const TreasureType = Restangular.all('treasure-types');
     vm.disableCouponCategory = disableTreasureType;
     vm.enableCouponCategory = enableTreasureType;
     vm.removeCouponCategory = removeTreasureType;
@@ -36,14 +31,13 @@ function TreasureTypeListController($timeout, $stateParams, TreasureTypesService
     vm.querystring = {
         status: 'valid',
         page: 1,
-        pageSize: 16,
+        pageSize: 15,
         total: 0,
     };
     fetchTreasureTypes(vm.querystring, 0);
 
     function disableTreasureType(treasureType) {
-        TreasureTypesService.disable({ _id: treasureType._id }).$promise
-        .then(function () {
+        TreasureType.doPUT({ _id: treasureType._id }, 'disable').then(function () {
             treasureType.status = 'invalid';
             AlertService.success('禁用成功');
         }).catch(function (err) {
@@ -52,8 +46,7 @@ function TreasureTypeListController($timeout, $stateParams, TreasureTypesService
     }
 
     function enableTreasureType(treasureType) {
-        TreasureTypesService.enable({ _id: treasureType._id }).$promise
-        .then(function () {
+        TreasureType.doPUT({ _id: treasureType._id }, 'enable').then(function () {
             treasureType.status = 'valid';
             AlertService.success('启用成功');
         }).catch(function (err) {
@@ -62,8 +55,7 @@ function TreasureTypeListController($timeout, $stateParams, TreasureTypesService
     }
 
     function removeTreasureType(treasureType) {
-        TreasureTypesService.remove({ _id: treasureType._id }).$promise
-        .then(function () {
+        treasureType.remove().then(function () {
             let couponCategoryIndex = -1;
             vm.treasureTypes.forEach(function (item, index) {
                 if (item._id === treasureType._id) {
@@ -81,7 +73,7 @@ function TreasureTypeListController($timeout, $stateParams, TreasureTypesService
     function fetchTreasureTypes(querystring, delay = 200) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(function () {
-            TreasureTypesService.query(querystring).$promise.then(function (treasureTypes) {
+            TreasureType.getList(querystring).then(function (treasureTypes) {
                 vm.querystring.total = treasureTypes[0];
                 vm.treasureTypes = treasureTypes.slice(1);
             }).catch(function (err) {

@@ -1,27 +1,25 @@
 require('../../common/service.js');
-require('./prize_types.service.js');
 const angular = require('angular');
 
-module.exports = angular.module('ememtn.prize_type.list', [
+module.exports = angular.module('ememtn.prize-type.list', [
     'ui.router',
     'ememtn.common.services',
-    'ememtn.prize_type.list.service',
 ]).config(moduleConfig)
-    .controller('PrizeTypesController', PrizeTypesController);
+    .controller('PrizeTypeListController', PrizeTypeListController);
 
 /* @ngInject */
 function moduleConfig($stateProvider) {
-    $stateProvider
-        .state('prize_types', {
-            url: '/prize-types',
-            template: require('./prize_types.html'),
-            controller: 'PrizeTypesController as vm',
-        });
+    $stateProvider.state('prize-type-list', {
+        url: '/prize-types',
+        template: require('./prize_type_list.html'),
+        controller: 'PrizeTypeListController as vm',
+    });
 }
 
 /* @ngInject */
-function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertService) {
+function PrizeTypeListController($timeout, $stateParams, Restangular, AlertService) {
     const vm = this;
+    const PrizeType = Restangular.all('prize-types');
     vm.disablePrizeType = disablePrizeType;
     vm.enablePrizeType = enablePrizeType;
     vm.removeCouponCategory = removeCouponCategory;
@@ -34,7 +32,7 @@ function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertSe
         status: 'enabled',
         exchangeable: '__all__',
         page: 1,
-        pageSize: 16,
+        pageSize: 15,
         total: 0,
     };
     fetchPrizeTypes(vm.querystring, 0);
@@ -50,8 +48,7 @@ function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertSe
     }
 
     function enablePrizeType(prizeType) {
-        PrizeTypesService.enable({ _id: prizeType._id }).$promise
-        .then(function () {
+        prizeType.doPUT(prizeType, 'enable').then(function () {
             prizeType.status = 'enabled';
             AlertService.success('启用成功');
         }).catch(function (err) {
@@ -60,8 +57,7 @@ function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertSe
     }
 
     function removeCouponCategory(prizeType) {
-        PrizeTypesService.remove({ _id: prizeType._id }).$promise
-        .then(function () {
+        prizeType.remove().then(function () {
             let prizeTypeIndex = -1;
             vm.prizeTypes.forEach(function (item, index) {
                 if (item._id === prizeType._id) {
@@ -79,7 +75,7 @@ function PrizeTypesController($timeout, $stateParams, PrizeTypesService, AlertSe
     function fetchPrizeTypes(filters, delay = 200) {
         $timeout.cancel(fetchTimer);
         fetchTimer = $timeout(function () {
-            PrizeTypesService.query(filters).$promise.then(function (prizeTypes) {
+            PrizeType.getList(filters).then(function (prizeTypes) {
                 vm.querystring.total = prizeTypes[0];
                 vm.prizeTypes = prizeTypes.slice(1);
             }).catch(function (err) {
