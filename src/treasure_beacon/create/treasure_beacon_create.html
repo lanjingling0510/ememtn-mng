@@ -1,0 +1,35 @@
+<div class="treasure-beacon-create">
+    <div class="col-sm-3">
+        <div class="row">
+            <jc-floor-dropdown floors="vm.floors" on-floor-change="vm.onFloorChange"/>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary" ng-click="vm.createTreasureBeacon(vm.treasureBeacon)">保存</button>
+            <a class="btn btn-primary" ui-sref="treasure-beacon-list">返回</a>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">名称</label>
+                <div class="col-sm-9">
+                    <input class="form-control"ng-model="vm.treasureBeacon.name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Major</label>
+                <div class="col-sm-9">
+                    <input class="form-control" ng-model="vm.treasureBeacon.major">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Minor</label>
+                <div class="col-sm-9">
+                    <input class="form-control" ng-model="vm.treasureBeacon.minor">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9 treasure-beacon-map">
+        <jc-emei-map floor="vm.floor" on-draw-end="vm.onDrawEnd"/>
+    </div>
+</div>

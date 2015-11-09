@@ -95,6 +95,11 @@ require('../manager/create/manager_create.js');
 require('../manager/list/manager_list.js');
 require('../manager/edit/manager_edit.js');
 
+require('../treasure_beacon/list/treasure_beacon_list.js');
+require('../treasure_beacon/create/treasure_beacon_create.js');
+require('../treasure_beacon/batch/treasure_beacon_batch.js');
+require('../treasure_beacon/edit/treasure_beacon_edit.js');
+
 module.exports = angular.module('ememtn', [
     'ui.router',
     'ui.bootstrap',
@@ -159,6 +164,10 @@ module.exports = angular.module('ememtn', [
     'ememtn.prize-type.create',
     'ememtn.prize-type.list',
     'ememtn.prize-type.edit',
+    'ememtn.treasure-beacon.list',
+    'ememtn.treasure-beacon.create',
+    'ememtn.treasure-beacon.batch',
+    'ememtn.treasure-beacon.edit',
 ]).config(moduleConfig).run(moduleRun);
 
 /* @ngInject */

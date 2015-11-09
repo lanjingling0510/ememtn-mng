@@ -9,6 +9,7 @@ function JCFloorDropdownDirective() {
         restrict: 'E',
         scope: {
             floors: '=',
+            floor: '=',
             onFloorChange: '&',
         },
         template: require('./template.html'),
@@ -17,10 +18,10 @@ function JCFloorDropdownDirective() {
     };
 
     function link(scope) {
-        scope.ngModel = scope.floors[0];
+        scope.floor = scope.floor || scope.floors[0];
         scope._onFloorChange = function _onFloorChange() {
             const func = scope.onFloorChange() || angular.noop;
-            func(scope.ngModel);
+            func(scope.floor);
         };
     }
 }
