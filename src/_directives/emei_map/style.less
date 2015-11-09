@@ -1,69 +1,66 @@
 .map-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-    .map-toolbar {
-        flex: 1;
-        align-items: center;
-        padding-bottom: 1em;
-    }
+  .map-toolbar {
 
-    .map-canvas {
+  }
 
-        .ol-overlaycontainer-stopevent {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
+  .map-canvas {
+     flex: 1;
+    .ol-overlaycontainer-stopevent {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
 
-            .ol-control {
-                position: absolute;
-                background-color: #eee;
-                background-color: rgba(255, 255, 255, .4);
-                border-radius: 4px;
-                padding: 2px
-            }
+      .ol-control {
+        position: absolute;
+        background-color: #eee;
+        background-color: rgba(255, 255, 255, .4);
+        border-radius: 4px;
+        padding: 2px
+      }
 
-            .ol-control-button {
-                display: block;
-                margin: 1px;
-                padding: 0;
-                color: #fff;
-                font-size: 1.14em;
-                font-weight: 700;
-                text-decoration: none;
-                text-align: center;
-                height: 1.375em;
-                width: 1.375em;
-                line-height: .4em;
-                background-color: #7b98bc;
-                background-color: rgba(0, 60, 136, .5);
-                border: none;
-                border-radius: 2px
-            }
+      .ol-control-button {
+        display: block;
+        margin: 1px;
+        padding: 0;
+        color: #fff;
+        font-size: 1.14em;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        height: 1.375em;
+        width: 1.375em;
+        line-height: .4em;
+        background-color: #7b98bc;
+        background-color: rgba(0, 60, 136, .5);
+        border: none;
+        border-radius: 2px
+      }
 
-            .ol-zoom {
-                .ol-control();
-                top: .5em;
-                left: .5em;
+      .ol-zoom {
+        .ol-control();
+        top: .5em;
+        left: .5em;
 
-                .ol-zoom-in {
-                    .ol-control-button();
-                    border-radius: 2px 2px 0 0;
-                }
-
-                .ol-zoom-out {
-                    .ol-control-button();
-                    border-radius: 0 0 2px 2px;
-                }
-            }
+        .ol-zoom-in {
+          .ol-control-button();
+          border-radius: 2px 2px 0 0;
         }
-    }
 
-    .status-bar {
-        flex: 1;
+        .ol-zoom-out {
+          .ol-control-button();
+          border-radius: 0 0 2px 2px;
+        }
+      }
     }
+  }
+
+  .status-bar {
+
+  }
 }

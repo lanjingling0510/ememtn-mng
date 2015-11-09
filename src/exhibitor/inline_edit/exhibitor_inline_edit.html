@@ -1,10 +1,10 @@
-<div class="col-sm-3">
-    <div class="">
+<div class="exhibitor-list">
+    <div class="exhibitor-navbar">
         <form class="am-form am-form-horizontal">
             <div class="am-form-group">
-                <label class="col-sm-2 am-form-label">名称</label>
+                <label class="col-xs-3 am-form-label">名称</label>
 
-                <div class="col-sm-9">
+                <div class="col-xs-9">
                     <input class="am-form-field" ng-model="vm.exhibitor.title" readonly="">
                 </div>
             </div>
@@ -13,14 +13,15 @@
                 <p>
                     使用鼠标在右方地图上点击可以选择展商位置，点击“保存”按钮可以保存选择.
                 </p>
+
                 <p>
                     如果区域尚不存在，可以点击“绘制多边形”按钮标记展商位置。
                 </p>
             </div>
 
             <div class="am-form-group text-center">
-                <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">信息详情</a>
-                <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })"  ng-click="vm.modal.hide()">展品详情</a>
+                <a ui-sref="exhibitor-edit({ exhibitorId: vm.exhibitor._id })" ng-click="vm.modal.hide()">信息详情</a>
+                <a ui-sref="exhibit-list({ exhibitorId: vm.exhibitor._id })" ng-click="vm.modal.hide()">展品详情</a>
             </div>
 
             <div class="modal-footer">
@@ -29,8 +30,9 @@
             </div>
         </form>
     </div>
+    <div class="exhibitor-map">
+        <jc-emei-map floor="vm.exhibitor" on-draw-end="vm.onDrawEnd"
+                     select-layer="'stall'" on-selected="vm.onSelectStall"/>
+    </div>
 </div>
-<div class="col-sm-9" style="padding-top: 3em; height: 100%; border: 1px solid grey;">
-    <jc-emei-map floor="vm.exhibitor" on-draw-end="vm.onDrawEnd"
-        select-layer="'stall'" on-selected="vm.onSelectStall" />
-</div>
+

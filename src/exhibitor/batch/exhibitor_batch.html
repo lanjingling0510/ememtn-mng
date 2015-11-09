@@ -1,10 +1,10 @@
 <div class="am-margin-vertical">
-    <a ui-sref="exhibitor-list">返回</a>
+    <a ui-sref="exhibitor-list" class="btn btn-primary">返回</a>
 </div>
 
 <div class="am-margin-vertical">
     <input type="checkbox" ng-model="vm.exhibitors._checked" ng-change="vm.toggleCheckAll(vm.exhibitors._checked)">
-    <button type="button" ng-click="vm.removeSelectedExhibitors()">删除</button>
+    <a type="button" ng-click="vm.removeSelectedExhibitors()">删除</a>
 </div>
 
 <ul class="am-list am-list-static">
@@ -28,6 +28,6 @@
     ></pagination>
 </div>
 
-<a ui-sref="exhibitor-list.exhibitor-inline-create">新建</a>
+<a ui-sref="exhibitor-list.exhibitor-inline-create"  class="btn btn-primary">新建</a>
 
 <ui-view />

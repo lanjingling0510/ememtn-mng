@@ -8,6 +8,7 @@ module.exports = angular.module('jc.emei.map.directive', [])
 function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
     return {
         restrict: 'E',
+        replace: true,
         scope: {
             onDrawEnd: '&',
             floor: '=',
