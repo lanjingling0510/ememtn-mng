@@ -35,7 +35,7 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
         const projection = new ol.proj.Projection({
             code: 'JCMap',
             units: 'pixels',
-            extent: [0, 0, 3940, 3000],
+            extent: [0, 0, 4000, 4000],
         });
 
         ol.proj.addProjection(projection);
@@ -57,7 +57,12 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 maxZoom: 5,
                 zoom: 3,
             }),
-            controls: [ ],
+            controls: [
+                new ol.control.Zoom(),
+                // new ol.control.FullScreen(),
+                // new ol.control.ScaleLine(),
+                // new ol.control.Rotate(),
+            ],
         });
 
         function drawPoint() {
@@ -171,6 +176,7 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
         function prepareMap(floor) {
             MapProfile.one(`${floor.JCObjId}:${floor.JCObjMask}`).get().then((mapProfile) => {
                 projection.setExtent([0, 0, mapProfile.JCRight, mapProfile.JCBottom]);
+                // projection.setExtent([0, 0, 4000, 4000]);
             }).catch((err) => {
                 AlertService.warning(err.data);
             });
