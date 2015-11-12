@@ -160,16 +160,16 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
             prepareMap(floor);
             cleanLayers();
             appendLayers(floor, 'base', [
-                'obs',
+                // 'obs',
                 'stall',
                 'beacon',
-                'port',
-                'area',
+                // 'port',
+                // 'area',
                 // 'navigate',
-                'serv_desk',
-                'rest_area',
-                'smoking_area',
-                'stairway',
+                // 'serv_desk',
+                // 'rest_area',
+                // 'smoking_area',
+                // 'stairway',
                 // 'trade_area',
             ]);
         }
