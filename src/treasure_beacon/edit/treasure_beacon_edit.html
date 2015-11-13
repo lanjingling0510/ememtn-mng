@@ -30,6 +30,13 @@
         </div>
     </div>
     <div class="exhibitor-map">
-        <jc-emei-map floor="vm.floor" on-draw-end="vm.onDrawEnd"/>
+        <div class="row">
+            <div class="interaction-buttons text-center">
+                <button class="am-btn am-btn-primary am-radius" ng-click="vm.addDrawPointInteraction()">指定寻宝点</button>
+            </div>
+        </div>
+        <div class="row">
+            <jc-emei-map floor="vm.floor" on-map-created="vm.onMapCreated" />
+        </div>
     </div>
 </div>

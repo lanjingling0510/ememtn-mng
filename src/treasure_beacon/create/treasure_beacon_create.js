@@ -39,7 +39,7 @@ function TreasureBeaconCreateController(Restangular, AlertService) {
 
     function createTreasureBeacon(treasureBeacon) {
         if (vm.treasureBeacon.x === undefined || vm.treasureBeacon.y === undefined) {
-            return AlertService.warning('尚未指定位置，请使用有方“绘制点”功能指定位置');
+            return AlertService.warning('尚未指定位置，请使用右方“指定寻宝点”功能指定位置');
         }
         TreasureBeacon.post(treasureBeacon).then(() => {
             AlertService.success('创建成功');
@@ -75,7 +75,7 @@ function TreasureBeaconCreateController(Restangular, AlertService) {
                 image: new ol.style.Circle({
                     radius: 7,
                     fill: new ol.style.Fill({
-                        color: '#ffcc33',
+                        color: '#00ff00',
                     }),
                 }),
             }),
