@@ -10,10 +10,12 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
         restrict: 'E',
         replace: true,
         scope: {
-            onDrawEnd: '&',
+            // onDrawEnd: '&',
             floor: '=',
-            selectLayer: '=',
-            onSelected: '&',
+            // selectLayer: '=',
+            // onSelected: '&',
+            onMapCreated: '&',
+            onAddLayer: '&',
         },
         template: require('./template.html'),
         // replace: true,
@@ -27,11 +29,13 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
 
         scope.$watch('floor.JCObjId + floor.JCObjMask', onFloorChange);
 
-        scope.drawPoint = drawPoint;
-        scope.drawPolygon = drawPolygon;
-        scope.removeSelected = removeSelected;
-        scope._onDrawEnd = scope.onDrawEnd() || angular.noop;
-        scope._onSelect = scope.onSelected() || angular.noop;
+        // scope.drawPoint = drawPoint;
+        // scope.drawPolygon = drawPolygon;
+        // scope.removeSelected = removeSelected;
+        // scope._onDrawEnd = scope.onDrawEnd() || angular.noop;
+        // scope._onSelect = scope.onSelected() || angular.noop;
+        scope._onMapCreated = scope.onMapCreated() || angular.noop;
+        scope._onAddLayer = scope.onAddLayer() || angular.noop;
 
         const projection = new ol.proj.Projection({
             code: 'JCMap',
@@ -65,91 +69,92 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 // new ol.control.Rotate(),
             ],
         });
+        map.getLayers().on('add', scope._onAddLayer);
 
-        function drawPoint() {
-            const features = new ol.Collection();
+        // function drawPoint() {
+        //     const features = new ol.Collection();
+        //
+        //     const featureOverlay = new ol.layer.Vector({
+        //         source: new ol.source.Vector({ features: features }),
+        //         style: new ol.style.Style({
+        //             fill: new ol.style.Fill({
+        //                 color: 'rgba(255, 255, 255, 0.2)',
+        //             }),
+        //             stroke: new ol.style.Stroke({
+        //                 color: '#ffcc33',
+        //                 width: 2,
+        //             }),
+        //             image: new ol.style.Circle({
+        //                 radius: 7,
+        //                 fill: new ol.style.Fill({
+        //                     color: '#ffcc33',
+        //                 }),
+        //             }),
+        //         }),
+        //         zIndex: 99,
+        //     });
+        //
+        //     const interaction = new ol.interaction.Draw({
+        //         features: features,
+        //         type: 'Point',
+        //     });
+        //
+        //     interaction.on('drawend', (event) => {
+        //         const feature = event.feature;
+        //         const geometry = feature.getGeometry();
+        //         const coordinates = ol.proj.transform(geometry.getCoordinates(), 'EPSG:4326', 'JCMap');
+        //         map.removeInteraction(interaction);
+        //         scope._onDrawEnd(coordinates);
+        //     });
+        //
+        //     map.addLayer(featureOverlay);
+        //     map.addInteraction(interaction);
+        // }
 
-            const featureOverlay = new ol.layer.Vector({
-                source: new ol.source.Vector({ features: features }),
-                style: new ol.style.Style({
-                    fill: new ol.style.Fill({
-                        color: 'rgba(255, 255, 255, 0.2)',
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: '#ffcc33',
-                        width: 2,
-                    }),
-                    image: new ol.style.Circle({
-                        radius: 7,
-                        fill: new ol.style.Fill({
-                            color: '#ffcc33',
-                        }),
-                    }),
-                }),
-                zIndex: 99,
-            });
-
-            const interaction = new ol.interaction.Draw({
-                features: features,
-                type: 'Point',
-            });
-
-            interaction.on('drawend', (event) => {
-                const feature = event.feature;
-                const geometry = feature.getGeometry();
-                const coordinates = ol.proj.transform(geometry.getCoordinates(), 'EPSG:4326', 'JCMap');
-                map.removeInteraction(interaction);
-                scope._onDrawEnd(coordinates);
-            });
-
-            map.addLayer(featureOverlay);
-            map.addInteraction(interaction);
-        }
-
-        function drawPolygon() {
-            const features = new ol.Collection();
-
-            const featureOverlay = new ol.layer.Vector({
-                source: new ol.source.Vector({ features: features }),
-                style: new ol.style.Style({
-                    fill: new ol.style.Fill({
-                        // color: 'rgba(255, 255, 255, 0.8)',
-                        // color: '#96A395',
-                        color: '#eebb33',
-                    }),
-                    stroke: new ol.style.Stroke({
-                        color: '#ffcc33',
-                        width: 2,
-                    }),
-                    image: new ol.style.Circle({
-                        radius: 7,
-                        fill: new ol.style.Fill({
-                            color: '#ffcc33',
-                        }),
-                    }),
-                }),
-                zIndex: 99,
-            });
-
-            const interaction = new ol.interaction.Draw({
-                features: features,
-                type: 'Polygon',
-            });
-
-            interaction.on('drawend', (event) => {
-                const feature = event.feature;
-                const geometry = feature.getGeometry();
-                const coordinates = geometry.getCoordinates()[0].map((coord) => {
-                    return ol.proj.transform(coord, 'EPSG:4326', 'JCMap');
-                });
-
-                map.removeInteraction(interaction);
-                scope._onDrawEnd(coordinates);
-            });
-
-            map.addLayer(featureOverlay);
-            map.addInteraction(interaction);
-        }
+        // function drawPolygon() {
+        //     const features = new ol.Collection();
+        //
+        //     const featureOverlay = new ol.layer.Vector({
+        //         source: new ol.source.Vector({ features: features }),
+        //         style: new ol.style.Style({
+        //             fill: new ol.style.Fill({
+        //                 // color: 'rgba(255, 255, 255, 0.8)',
+        //                 // color: '#96A395',
+        //                 color: '#eebb33',
+        //             }),
+        //             stroke: new ol.style.Stroke({
+        //                 color: '#ffcc33',
+        //                 width: 2,
+        //             }),
+        //             image: new ol.style.Circle({
+        //                 radius: 7,
+        //                 fill: new ol.style.Fill({
+        //                     color: '#ffcc33',
+        //                 }),
+        //             }),
+        //         }),
+        //         zIndex: 99,
+        //     });
+        //
+        //     const interaction = new ol.interaction.Draw({
+        //         features: features,
+        //         type: 'Polygon',
+        //     });
+        //
+        //     interaction.on('drawend', (event) => {
+        //         const feature = event.feature;
+        //         const geometry = feature.getGeometry();
+        //         const coordinates = geometry.getCoordinates()[0].map((coord) => {
+        //             return ol.proj.transform(coord, 'EPSG:4326', 'JCMap');
+        //         });
+        //
+        //         map.removeInteraction(interaction);
+        //         scope._onDrawEnd(coordinates);
+        //     });
+        //
+        //     map.addLayer(featureOverlay);
+        //     map.addInteraction(interaction);
+        // }
 
         function onFloorChange() {
             if (!scope.floor || scope.floor.JCObjId === undefined || scope.floor.JCObjMask === undefined) { return; }
@@ -172,6 +177,7 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 // 'stairway',
                 // 'trade_area',
             ]);
+            scope._onMapCreated(map);
         }
 
         function prepareMap(floor) {
@@ -232,6 +238,9 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 const rgba = `rgba(${color.red}, ${color.green}, ${color.blue}, ${color.alpha})`;
                 const baseURL = '/apis/map-feature-geo.app';
                 const source = new ol.source.Vector({
+                    attributions: [
+                        { layerName: vectorLayerName },
+                    ],
                     url: `${baseURL}?JCObjId=${floor.JCObjId}&JCObjMask=${floor.JCObjMask}&JCLayerName=${vectorLayerName}`,
                     format: new ol.format.GeoJSON(),
                 });
@@ -269,43 +278,43 @@ function JCEmeiMapDirective($q, $timeout, Restangular, AlertService) {
                 });
                 map.addLayer(layer);
 
-                addSelectInteraction(vectorLayerName, layer);
+                // addSelectInteraction(vectorLayerName, layer);
             });
         }
 
-        function addSelectInteraction(name, layer) {
-            if (!scope.selectLayer || name !== scope.selectLayer) { return; }
+        // function addSelectInteraction(name, layer) {
+        //     if (!scope.selectLayer || name !== scope.selectLayer) { return; }
+        //
+        //     const interaction = new ol.interaction.Select({
+        //         features: layer,
+        //     });
+        //
+        //     interaction.on('select', (event) => {
+        //         if (event.selected[0]) {
+        //             const feature = event.selected[0];
+        //             $timeout(() => {
+        //                 scope._selectedLayer = layer;
+        //                 scope._selectedFeature = feature;
+        //             }, 0);
+        //             scope._onSelect(feature);
+        //         }
+        //     });
+        //
+        //     map.addInteraction(interaction);
+        // }
 
-            const interaction = new ol.interaction.Select({
-                features: layer,
-            });
-
-            interaction.on('select', (event) => {
-                if (event.selected[0]) {
-                    const feature = event.selected[0];
-                    $timeout(() => {
-                        scope._selectedLayer = layer;
-                        scope._selectedFeature = feature;
-                    }, 0);
-                    scope._onSelect(feature);
-                }
-            });
-
-            map.addInteraction(interaction);
-        }
-
-        function removeSelected(feature, layer) {
-            layer.getSource().removeFeature(feature);
-
-            const properties = feature.getProperties();
-            MapFeature.one(properties.JCGUID).remove({
-                profileId: `${properties.JCObjId}:${properties.JCObjMask}`,
-                JCLayerName: properties.JCLayerName,
-            }).then(() => {
-                AlertService.success('删除成功');
-            }).catch((err) => {
-                AlertService.warning(err.data);
-            });
-        }
+        // function removeSelected(feature, layer) {
+        //     layer.getSource().removeFeature(feature);
+        //
+        //     const properties = feature.getProperties();
+        //     MapFeature.one(properties.JCGUID).remove({
+        //         profileId: `${properties.JCObjId}:${properties.JCObjMask}`,
+        //         JCLayerName: properties.JCLayerName,
+        //     }).then(() => {
+        //         AlertService.success('删除成功');
+        //     }).catch((err) => {
+        //         AlertService.warning(err.data);
+        //     });
+        // }
     }
 }

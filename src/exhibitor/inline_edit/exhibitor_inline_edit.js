@@ -3,6 +3,7 @@ require('../list/exhibitor_list.js');
 const config = require('../../config.json');
 const angular = require('angular');
 const uuid = require('node-uuid');
+const ol = require('openlayers');
 
 module.exports = angular.module('ememtn.exhibitor.inline-edit', [
     'ui.router',
@@ -21,7 +22,7 @@ function moduleConfig($stateProvider) {
 
 
 /* @ngInject */
-function ExhibitorInlineEditController($q, Restangular, $scope, $stateParams, AlertService) {
+function ExhibitorInlineEditController($q, Restangular, $timeout, $stateParams, AlertService) {
     const vm = this;
     const Exhibitor = Restangular.all('exhibitors');
     const MapFeature = Restangular.all('map-features');
@@ -30,6 +31,10 @@ function ExhibitorInlineEditController($q, Restangular, $scope, $stateParams, Al
     vm.updateExhibitor = updateExhibitor;
     vm.onDrawEnd = onDrawEnd;
     vm.onSelectStall = onSelectStall;
+    vm.onMapCreated = onMapCreated;
+    vm.addDrawExhibitorInteraction = addDrawExhibitorInteraction;
+    vm.removeSelectedExhibitorArea = removeSelectedExhibitorArea;
+    vm.onLayerChange = onLayerChange;
     vm.exhibitor = Exhibitor.get($stateParams.exhibitorId).$object;
 
     function onSelectStall(stall) {
@@ -89,5 +94,109 @@ function ExhibitorInlineEditController($q, Restangular, $scope, $stateParams, Al
         MapFeature.post(feature).catch((err) => {
             AlertService.warning(err.data);
         });
+    }
+
+    function onMapCreated(map) {
+        vm._map = map;
+        _addSelectInteraction(map);
+    }
+
+    function addDrawExhibitorInteraction() {
+        if (!vm._map) {
+            return AlertService.warning('地图尚未初始化，请稍后再试');
+        }
+        drawExhibitorInteraction(vm._map);
+    }
+
+    function drawExhibitorInteraction(map) {
+        const features = new ol.Collection();
+
+        const featureOverlay = new ol.layer.Vector({
+            source: new ol.source.Vector({ features: features }),
+            style: new ol.style.Style({
+                fill: new ol.style.Fill({
+                    // color: 'rgba(255, 255, 255, 0.8)',
+                    // color: '#96A395',
+                    color: '#eebb33',
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#ffcc33',
+                    width: 2,
+                }),
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#ffcc33',
+                    }),
+                }),
+            }),
+            zIndex: 110,
+        });
+
+        const interaction = new ol.interaction.Draw({
+            features: features,
+            type: 'Polygon',
+        });
+
+        interaction.on('drawend', (event) => {
+            const feature = event.feature;
+            const geometry = feature.getGeometry();
+            const coordinates = geometry.getCoordinates()[0].map((coord) => {
+                return ol.proj.transform(coord, 'EPSG:4326', 'JCMap');
+            });
+
+            map.removeInteraction(interaction);
+            onDrawEnd(coordinates);
+        });
+
+        map.addLayer(featureOverlay);
+        map.addInteraction(interaction);
+    }
+
+    function _addSelectInteraction(map, layer) {
+        const interaction = new ol.interaction.Select({
+            features: layer,
+        });
+
+        interaction.on('select', (event) => {
+            if (event.selected[0]) {
+                const feature = event.selected[0];
+                $timeout(() => {
+                    vm._selectedExhibitorLayer = layer;
+                    vm._selectedExhibitorArea = feature;
+                }, 0);
+                onSelectStall(feature);
+            }
+        });
+
+        map.addInteraction(interaction);
+    }
+
+    function removeSelectedExhibitorArea() {
+        if (!vm._selectedExhibitorArea) { return AlertService.warning('尚未选择任何区域'); }
+        const layer = vm._selectedExhibitorLayer;
+        const feature = vm._selectedExhibitorArea;
+        layer.getSource().removeFeature(feature);
+
+        const properties = feature.getProperties();
+        MapFeature.one(properties.JCGUID).remove({
+            profileId: `${properties.JCObjId}:${properties.JCObjMask}`,
+            JCLayerName: properties.JCLayerName,
+        }).then(() => {
+            AlertService.success('删除成功');
+        }).catch((err) => {
+            AlertService.warning(err.data);
+        });
+    }
+
+    function onLayerChange(event) {
+        const attributions = event.element.getSource().getAttributions();
+        if (!attributions) { return; }
+        const isStallLayer = attributions.some((attr) => {
+            return attr.layerName === 'stall';
+        });
+        if (isStallLayer) {
+            _addSelectInteraction(vm._map, event.element);
+        }
     }
 }

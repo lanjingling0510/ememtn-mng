@@ -31,8 +31,14 @@
         </form>
     </div>
     <div class="exhibitor-map">
-        <jc-emei-map floor="vm.exhibitor" on-draw-end="vm.onDrawEnd"
-                     select-layer="'stall'" on-selected="vm.onSelectStall"/>
+        <div class="row text-center">
+            <button class="am-btn am-btn-primary am-radius" ng-click="vm.addDrawExhibitorInteraction()">绘制展商区域</button>
+            <button class="am-btn am-btn-primary am-radius" ng-click="vm.removeSelectedExhibitorArea()" ng-disabled="!vm._selectedExhibitorArea">删除展商区域</button>
+        </div>
+        <div class="row">
+            <jc-emei-map floor="vm.exhibitor" on-draw-end="vm.onDrawEnd"
+                         select-layer="'stall'" on-selected="vm.onSelectStall"
+                         on-map-created="vm.onMapCreated" on-add-layer="vm.onLayerChange" />
+        </div>
     </div>
 </div>
-
