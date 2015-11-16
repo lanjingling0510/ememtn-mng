@@ -38,24 +38,34 @@ function ExhibitorInlineEditController($q, Restangular, $timeout, $stateParams, 
     vm.exhibitor = Exhibitor.get($stateParams.exhibitorId).$object;
 
     function onSelectStall(stall) {
-        vm.stall = stall;
+        vm._selectedExhibitorArea = stall;
+    }
+
+    function updateFeature(feature) {
+        delete feature.geometry;
+        return MapFeature.doPUT(feature, feature.JCGUID);
     }
 
     function updateExhibitor(exhibitor) {
-        if (!vm.stall) { return AlertService.warning('未选择展商位置'); }
-        if (vm.stall.getProperties().JCGUID === exhibitor.JCGUID) { return AlertService.success('保存成功'); }
+        if (!vm._selectedExhibitorArea) { return AlertService.warning('未选择展商位置'); }
+        if (vm._selectedExhibitorArea.getProperties().JCGUID === exhibitor.JCGUID) { return AlertService.success('保存成功'); }
 
-        const feature = vm.stall.getProperties();
-        const geoData = vm.stall.getGeometry().getCoordinates()[0];
+        const feature = vm._selectedExhibitorArea;
+        const geoData = vm._selectedExhibitorArea.getGeometry().getCoordinates()[0];
+        const attachedFeature = _getFeatureById(exhibitor.JCGUID);
 
-        const _exhibitor = exhibitor.plain();
-        _exhibitor.JCGUID = feature.JCGUID;
-        _exhibitor.geoData = geoData;
-
-        exhibitor.JCGUID = feature.JCGUID;
+        exhibitor.JCGUID = feature.getProperties().JCGUID;
         exhibitor.geoData = geoData;
 
         exhibitor.doPUT(exhibitor, 'position').then(() => {
+            feature.setProperties({ name: exhibitor.title });
+            const featureProperties = feature.getProperties();
+            return updateFeature(featureProperties);
+        }).then(() => {
+            attachedFeature.setProperties({ name: '' });
+            const attachedFeatureProperties = attachedFeature.getProperties();
+            return updateFeature(attachedFeatureProperties);
+        }).then(() => {
             AlertService.success('保存成功');
         }).catch((err) => {
             AlertService.warning(err.data);
@@ -98,7 +108,7 @@ function ExhibitorInlineEditController($q, Restangular, $timeout, $stateParams, 
 
     function onMapCreated(map) {
         vm._map = map;
-        _addSelectInteraction(map);
+        // _addSelectInteraction(map);
     }
 
     function addDrawExhibitorInteraction() {
@@ -164,8 +174,8 @@ function ExhibitorInlineEditController($q, Restangular, $timeout, $stateParams, 
                 $timeout(() => {
                     vm._selectedExhibitorLayer = layer;
                     vm._selectedExhibitorArea = feature;
+                    onSelectStall(feature);
                 }, 0);
-                onSelectStall(feature);
             }
         });
 
@@ -198,5 +208,25 @@ function ExhibitorInlineEditController($q, Restangular, $timeout, $stateParams, 
         if (isStallLayer) {
             _addSelectInteraction(vm._map, event.element);
         }
+    }
+
+    function _getStallLayer() {
+        if (vm._selectedExhibitorLayer) { return vm._selectedExhibitorLayer; }
+        const map = vm._map;
+        const layer = map.getLayers().getArray().find((_layer) => {
+            const attrs = _layer.getSource().getAttributions || [];
+            return attrs.some((_attr) => {
+                return _attr.layerName === 'stall';
+            });
+        });
+        return layer;
+    }
+
+    function _getFeatureById(featureId) {
+        const layer = _getStallLayer();
+        const feature = layer.getSource().getFeatures().find((_feature) => {
+            return _feature.getProperties().JCGUID === featureId;
+        });
+        return feature;
     }
 }
